@@ -1,6 +1,6 @@
 ﻿(function () {
   'use strict';
-  const KEYS = { seen: 'scrollforge.seen_card_ids', read: 'scrollforge.read_comment_ids', repo: 'scrollforge.repo_slug', token: 'scrollforge.github_token', pending: 'scrollforge.pending_comments' };
+  const KEYS = { seen: 'scrollforge.seen_card_ids', seenSources: 'scrollforge.seen_source_urls', read: 'scrollforge.read_comment_ids', repo: 'scrollforge.repo_slug', token: 'scrollforge.github_token', pending: 'scrollforge.pending_comments' };
   const categories = {
     SPORTS: ['SPORTS / NFL', '#FB4F14'], NEWS: ['NEWS / SIGNAL', '#FB4F14'], STORY: ['FIELD STORY', '#38BDF8'],
     CHALLENGE_CURRENT: ['CURRENT CHALLENGE', '#E5A93C'], CHALLENGE_PAST: ['PAST CHALLENGE', '#E5A93C'], DEEP_CUT: ['ENGINEERING DEEP CUT', '#38BDF8']
@@ -12,7 +12,32 @@
   const challenge = card => /^CHALLENGE_/.test(card.category || '');
   const shuffle = list => { const a = list.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
-  // Stable export for lightweight browser/Node contract checks.
+  function freshCard(card, now = Date.now()) {
+    const days = card.category === 'SPORTS' || card.category === 'NEWS' ? 7 : card.category === 'STORY' ? 30 : null;
+    if (days === null) return true;
+    const created = Date.parse(card.created_at);
+    return Number.isFinite(created) && created >= now - days * 86400000;
+  }
+  function sourceKey(card) {
+    if (!card) return null;
+    if (!['SPORTS', 'NEWS', 'STORY'].includes(card.category) || !card.source_url) return null;
+    try {
+      const url = new URL(card.source_url);
+      url.hash = '';
+      for (const key of [...url.searchParams.keys()]) if (/^(utm_|fbclid$|gclid$)/i.test(key)) url.searchParams.delete(key);
+      url.pathname = url.pathname.replace(/\/$/, '');
+      return url.href;
+    } catch (_) { return null; }
+  }
+  function eligibleCards(cards, now = Date.now()) {
+    const ids = new Set(), sources = new Set();
+    return cards.filter(card => card && card.id).slice().sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at)).filter(card => {
+      const source = sourceKey(card);
+      if (!card || !card.id || ids.has(card.id) || !freshCard(card, now) || (source && sources.has(source))) return false;
+      ids.add(card.id); if (source) sources.add(source); return true;
+    });
+  }
+  // News and stories are consumed once. Only evergreen engineering notes may act as a repeat spacer.
   function interleaveCards(cards, seenIds = [], mode = 'BASELINE', boundaryCards = []) {
     const seen = new Set(seenIds);
     const weightSets = {
@@ -22,71 +47,42 @@
       EXAM_DAY: { sports: 50, story: 35, current: 15, past: 0 }
     };
     const weights = weightSets[mode] || weightSets.BASELINE;
-    const unseen = shuffle(cards.filter(c => c && c.id && !seen.has(c.id)));
-    const leisure = card => !challenge(card);
-    const typeOf = card => {
-      if (card.category === 'SPORTS' || card.category === 'NEWS') return 'sports';
-      if (card.category === 'CHALLENGE_CURRENT') return 'current';
-      if (card.category === 'CHALLENGE_PAST') return 'past';
-      return 'story'; // STORY and DEEP_CUT share the leisure/story allocation.
-    };
-    const pools = {
-      sports: shuffle(unseen.filter(c => typeOf(c) === 'sports')),
-      story: shuffle(unseen.filter(c => typeOf(c) === 'story')),
-      current: shuffle(unseen.filter(c => typeOf(c) === 'current')),
-      past: shuffle(unseen.filter(c => typeOf(c) === 'past'))
-    };
-    const repeatableLeisure = shuffle(cards.filter(c => c && c.id && seen.has(c.id) && leisure(c)));
-    let leisureRepeatIndex = 0;
+    const typeOf = card => card.category === 'SPORTS' || card.category === 'NEWS' ? 'sports' :
+      card.category === 'CHALLENGE_CURRENT' ? 'current' : card.category === 'CHALLENGE_PAST' ? 'past' : 'story';
+    const unique = cards.filter((card, i) => card && card.id && cards.findIndex(item => item.id === card.id) === i);
+    const pools = {sports: [], story: [], current: [], past: []};
+    for (const card of shuffle(unique.filter(card => !seen.has(card.id)))) pools[typeOf(card)].push(card);
+    const spacers = shuffle(unique.filter(card => card.category === 'DEEP_CUT'));
     const mixed = [];
-    const prior = Array.isArray(boundaryCards) ? boundaryCards : (boundaryCards ? [boundaryCards] : []);
-    let run = 0;
+    let spacerCursor = 0, run = 0;
+    const prior = Array.isArray(boundaryCards) ? boundaryCards : [boundaryCards].filter(Boolean);
     for (let i = prior.length - 1; i >= 0 && challenge(prior[i]); i--) run++;
     while (Object.values(pools).some(pool => pool.length)) {
-      const leisureAvailable = pools.sports.length + pools.story.length > 0;
-      if (run >= 2 && (leisureAvailable || repeatableLeisure.length)) {
-        let card;
-        if (leisureAvailable) {
-          const pool = pools.sports.length ? pools.sports : pools.story;
-          card = pool.shift();
-        } else {
-          // A repeated seen leisure card is an explicit spacer when challenges outlast leisure.
-          card = repeatableLeisure[leisureRepeatIndex++ % repeatableLeisure.length];
+      if (run >= 2) {
+        const leisure = pools.sports.length ? pools.sports : pools.story;
+        if (leisure.length || spacers.length) {
+          mixed.push(leisure.length ? leisure.shift() : spacers[spacerCursor++ % spacers.length]);
+          run = 0; continue;
         }
-        mixed.push(card);
-        if (!repeatableLeisure.some(item => item.id === card.id)) repeatableLeisure.push(card);
-        run = 0;
-        continue;
       }
       const active = Object.keys(pools).filter(key => pools[key].length);
-      let total = active.reduce((sum, key) => sum + weights[key], 0);
-      const equalWeights = total === 0;
-      if (equalWeights) total = active.length;
-      let roll = Math.random() * total;
-      let selected = active[0];
-      for (const key of active) {
-        roll -= equalWeights ? 1 : weights[key];
-        if (roll < 0) { selected = key; break; }
-      }
-      const card = pools[selected].shift();
-      mixed.push(card);
-      if (leisure(card) && !repeatableLeisure.some(item => item.id === card.id)) repeatableLeisure.push(card);
-      run = challenge(card) ? run + 1 : 0;
+      const total = active.reduce((sum, key) => sum + weights[key], 0);
+      let roll = Math.random() * (total || active.length), selected = active[0];
+      for (const key of active) { roll -= total ? weights[key] : 1; if (roll < 0) { selected = key; break; } }
+      const card = pools[selected].shift(); mixed.push(card); run = challenge(card) ? run + 1 : 0;
     }
     return mixed;
   }
-  if (typeof window !== 'undefined') {
-    window.ScrollForge = window.ScrollForge || {};
-    window.ScrollForge.interleaveCards = interleaveCards;
-  }
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { interleaveCards };
-    return;
-  }
+  if (typeof window !== 'undefined') window.ScrollForge = {interleaveCards, eligibleCards, freshCard};
+  if (typeof module !== 'undefined' && module.exports) { module.exports = {interleaveCards, eligibleCards, freshCard}; return; }
 
   let feed = null;
   let ordered = [];
   let cursor = 0;
+  let viewObserver = null;
+  let scrollFrame = null;
+  let replyPollTimer = null;
+  let replyPollInFlight = false;
   let settingsReturnFocus = null;
   const localPending = readStore(KEYS.pending, {});
   const readIds = new Set(readStore(KEYS.read, []));
@@ -166,7 +162,7 @@
   function renderComment(comment) {
     const isCodex = comment.author === 'CODEX';
     const pending = comment.pending === true;
-    return '<article class="comment-item ' + (isCodex ? 'codex' : '') + '" data-comment-id="' + esc(comment.id) + '"><div class="comment-meta">' + (isCodex ? 'CODEX REPLY' : 'YOU') + (pending ? '<span class="pending-tag">QUEUED FOR NEXT RUN</span>' : '') + ' · ' + esc(dateLabel(comment.created_at)) + '</div><div class="comment-body">' + renderMarkdown(comment.body_markdown) + '</div></article>';
+    return '<article class="comment-item ' + (isCodex ? 'codex' : '') + '" data-comment-id="' + esc(comment.id) + '"><div class="comment-meta">' + (isCodex ? 'CODEX REPLY' : 'YOU') + (pending ? '<span class="pending-tag">QUEUED FOR LOCAL CODEX</span>' : '') + ' · ' + esc(dateLabel(comment.created_at)) + '</div><div class="comment-body">' + renderMarkdown(comment.body_markdown) + '</div></article>';
   }
   function cardTemplate(card, index) {
     const [label, accent] = categories[card.category] || ['FIELD SIGNAL', '#38BDF8'];
@@ -181,7 +177,7 @@
     const bodyContent = bodyWords > 75
       ? '<div class="body-preview">' + renderMarkdown(bodyTokens.slice(0, 75).join(' ')) + '…</div><div class="body-full" hidden>' + renderMarkdown(bodyText) + '</div><button type="button" class="body-expand" data-expand-label="' + (card.category === 'STORY' ? '＋ EXPAND STORY' : '＋ READ FULL SIGNAL') + '" data-collapse-label="' + (card.category === 'STORY' ? '− COLLAPSE STORY' : '− COLLAPSE SIGNAL') + '">' + (card.category === 'STORY' ? '＋ EXPAND STORY' : '＋ READ FULL SIGNAL') + '</button>'
       : renderMarkdown(bodyText);
-    return '<article class="feed-card" data-card-id="' + esc(card.id) + '" style="--accent:' + accent + '">' +
+    return '<article class="feed-card" tabindex="-1" data-card-index="' + index + '" data-card-id="' + esc(card.id) + '" style="--accent:' + accent + '">' +
       '<div class="card-topline"><span class="category-chip">' + label + '</span><span class="card-course">' + esc(card.course_tag || 'OPEN CHANNEL') + '</span><span class="card-time">' + esc(dateLabel(card.created_at)) + '</span></div>' +
       (sample ? '<div class="sample-marker">SAMPLE FEED · DEMONSTRATION CARD</div>' : '') +
       '<h2 class="card-title">' + esc(title) + '</h2><div class="card-body">' + bodyContent + '</div>' +
@@ -194,58 +190,68 @@
       '<form class="comment-form"><textarea name="comment" maxlength="2000" aria-label="Your comment" placeholder="Ask a follow-up or leave a note…" required></textarea><button type="submit">SEND ↗</button><div class="comment-feedback" role="status"></div></form></section>' +
       '<span hidden data-word-count="' + bodyWords + '"></span></article>';
   }
-  function renderCurrent() {
-    const stage = $('#cardStage');
-    if (!ordered.length) {
-      stage.innerHTML = '<div class="empty-card"><span class="loader-mark">SF</span><p>NO UNSEEN SIGNALS</p><span>YOU HAVE REACHED THE END OF THE FEED.</span>' + (feed && feed.cards.length ? '<button class="solution-toggle replay-feed" type="button">↻ REPLAY FEED</button>' : '') + '</div>';
-      $('#cardPosition').textContent = '00 / 00'; $('#progressBar').style.width = '100%';
-      $('#prevButton').disabled = !feed || feed.cards.length < 1; $('#nextButton').disabled = true;
-      return;
+  function endTemplate() {
+    return '<section class="feed-end"><div class="eyebrow">END OF CURRENT FEED</div><h2>You\'re caught up.</h2>' +
+      '<p>Fresh headlines appear after the next refresh. Engineering is here whenever you want another pass.</p>' +
+      '<div class="end-actions"><button class="solution-toggle refresh-feed" type="button">REFRESH FEED</button>' +
+      '<button class="solution-toggle review-engineering" type="button">REVIEW ENGINEERING</button></div></section>';
+  }
+  function syncPosition() {
+    const nodes = $$('.feed-card', $('#cardStage'));
+    if (!nodes.length) { $('#cardPosition').textContent = '00 / 00'; $('#progressBar').style.width = '100%'; return; }
+    const target = Math.min(window.innerHeight * .45, 350);
+    let closest = null, distance = Infinity;
+    for (const node of nodes) {
+      const rect = node.getBoundingClientRect();
+      const score = rect.top <= target && rect.bottom >= target ? 0 : Math.min(Math.abs(rect.top - target), Math.abs(rect.bottom - target));
+      if (score < distance) { closest = node; distance = score; }
     }
-    cursor = Math.max(0, Math.min(cursor, ordered.length - 1));
-    const card = ordered[cursor];
-    stage.innerHTML = cardTemplate(card, cursor);
-    hydrateMath(stage);
+    if (closest) cursor = Number(closest.dataset.cardIndex);
+    for (const node of nodes) node.toggleAttribute('data-active', Number(node.dataset.cardIndex) === cursor);
     $('#cardPosition').textContent = String(cursor + 1).padStart(2, '0') + ' / ' + String(ordered.length).padStart(2, '0');
     $('#progressBar').style.width = ((cursor + 1) / ordered.length * 100) + '%';
-    $('#prevButton').disabled = cursor <= 0;
-    $('#nextButton').disabled = false;
-    const seen = new Set(readStore(KEYS.seen, [])); seen.add(card.id); writeStore(KEYS.seen, Array.from(seen));
-    $('#nextButton').textContent = cursor >= ordered.length - 1 ? 'REPLAY FEED  ↻' : 'NEXT SIGNAL  →';
-    $('#nextButton').setAttribute('aria-label', cursor >= ordered.length - 1 ? 'Replay feed' : 'Next card');
   }
+  function observeCards() {
+    if (viewObserver) viewObserver.disconnect();
+    viewObserver = new IntersectionObserver(entries => {
+      const seen = new Set(readStore(KEYS.seen, []));
+      const seenSources = new Set(readStore(KEYS.seenSources, []));
+      for (const entry of entries) {
+        if (entry.target.isConnected && entry.isIntersecting && entry.intersectionRect.height >= Math.min(entry.boundingClientRect.height * .5, innerHeight * .35)) {
+          seen.add(entry.target.dataset.cardId);
+          const key = sourceKey(ordered[Number(entry.target.dataset.cardIndex)]);
+          if (key) seenSources.add(key);
+        }
+      }
+      writeStore(KEYS.seen, [...seen]); writeStore(KEYS.seenSources, [...seenSources]); syncPosition();
+    }, {threshold: [0, .1, .25, .5, .75, 1], rootMargin: '-64px 0px 0px 0px'});
+    for (const node of $$('.feed-card', $('#cardStage'))) viewObserver.observe(node);
+    syncPosition();
+  }
+  function renderFeed() {
+    const stage = $('#cardStage');
+    stage.innerHTML = ordered.map(cardTemplate).join('') + endTemplate();
+    if (!ordered.length) stage.insertAdjacentHTML('afterbegin', '<div class="empty-card"><div class="eyebrow">NO UNSEEN SIGNALS</div><p>All current cards have been viewed.</p></div>');
+    hydrateMath(stage); observeCards();
+  }
+  function activeCardElement() { return $$('.feed-card', $('#cardStage')).find(node => Number(node.dataset.cardIndex) === cursor); }
   function navigate(delta) {
     if (!ordered.length) return;
-    const next = cursor + delta;
-    if (next < 0) {
-      const seen = new Set(readStore(KEYS.seen, []));
-      const previous = interleaveCards(feed.cards, Array.from(seen)).find(c => c.id !== ordered[cursor].id);
-      if (!previous) return;
-      const original = ordered; ordered = [previous].concat(original); cursor = 0;
-    } else if (next >= ordered.length) {
-      // Pull fresh unseen cards as the user reaches the current queue's end.
-      const seen = new Set(readStore(KEYS.seen, []));
-      const extra = interleaveCards(feed.cards, Array.from(seen), feed.calendar_mode || 'BASELINE', ordered.slice(Math.max(0, cursor - 1), cursor + 1));
-      if (!extra.length) { replayFeed(); return; }
-      ordered = ordered.concat(extra); cursor = ordered.length - extra.length;
-    } else cursor = next;
-    renderCurrent();
+    cursor = Math.max(0, Math.min(ordered.length - 1, cursor + delta));
+    const node = activeCardElement(); if (node) node.scrollIntoView({block: 'start', behavior: 'auto'});
+    syncPosition();
   }
-  function replayFeed() {
+  function reviewEngineering() {
     if (!feed) return;
-    writeStore(KEYS.seen, []);
-    ordered = interleaveCards(feed.cards, [], feed.calendar_mode || 'BASELINE');
-    cursor = 0;
-    renderCurrent();
+    ordered = interleaveCards(feed.cards.filter(card => challenge(card) || card.category === 'DEEP_CUT'), [], feed.calendar_mode || 'BASELINE');
+    cursor = 0; renderFeed(); $('#cardStage').scrollIntoView({block: 'start'});
   }
   function setNetwork(mode, message) {
     const el = $('#networkStatus'); el.className = 'network-status' + (mode ? ' ' + mode : ''); $('#networkText').textContent = message;
   }
-  function applyFeed(data) {
-    if (!data || !Array.isArray(data.cards)) throw new Error('Feed format is not recognized.');
-    feed = data;
+  function reconcilePendingComments(cards) {
     let reconciled = false;
-    for (const card of feed.cards) {
+    for (const card of cards) {
       const pending = localPending[card.id] || [];
       const officialIds = new Set((card.comments || []).map(comment => comment.id));
       const remaining = pending.filter(comment => !officialIds.has(comment.id));
@@ -254,13 +260,21 @@
       else delete localPending[card.id];
     }
     if (reconciled) writeStore(KEYS.pending, localPending);
+  }
+  function applyFeed(data) {
+    if (!data || !Array.isArray(data.cards)) throw new Error('Feed format is not recognized.');
+    feed = data;
+    reconcilePendingComments(feed.cards);
+    $('#newSignalsButton').hidden = true;
     const seen = readStore(KEYS.seen, []);
-    ordered = interleaveCards(feed.cards, seen, feed.calendar_mode || 'BASELINE');
+    const seenSources = new Set(readStore(KEYS.seenSources, []));
+    for (const card of feed.cards) if (seenSources.has(sourceKey(card))) seen.push(card.id);
+    ordered = interleaveCards(eligibleCards(feed.cards), seen, feed.calendar_mode || 'BASELINE');
     cursor = 0;
     $('#feedMode').textContent = String(feed.calendar_mode || 'FIELD MODE').replaceAll('_', ' ');
     const updated = new Date(feed.last_updated);
     $('#updatedAt').textContent = Number.isNaN(+updated) ? 'LOCAL FEED' : 'UPDATED ' + new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit' }).format(updated).toUpperCase();
-    renderCurrent(); updateInboxCount(); renderInbox();
+    renderFeed(); updateInboxCount(); renderInbox();
   }
   async function loadFeed() {
     try {
@@ -274,6 +288,53 @@
       const retry = $('#retryFeed'); if (retry) retry.addEventListener('click', loadFeed);
     }
   }
+  async function refreshReplies() {
+    if (!feed || replyPollInFlight || document.hidden || !navigator.onLine) return false;
+    replyPollInFlight = true;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    try {
+      const response = await fetch('./data/feed.json', {cache: 'no-cache', signal: controller.signal});
+      if (!response.ok) return false;
+      const next = await response.json();
+      if (!next || !Array.isArray(next.cards) || Date.parse(next.last_updated) < Date.parse(feed.last_updated)) return false;
+      const previousComments = new Map(feed.cards.map(card => [card.id, JSON.stringify(getComments(card))]));
+      const latestById = new Map(next.cards.map(card => [card.id, card]));
+      reconcilePendingComments(next.cards);
+      // Keep displayed cards and their DOM in place; only thread contents change in the background.
+      feed = next;
+      ordered = ordered.map(card => latestById.get(card.id) || card);
+      for (const node of $$('.feed-card', $('#cardStage'))) {
+        const card = latestById.get(node.dataset.cardId);
+        if (!card || previousComments.get(card.id) === JSON.stringify(getComments(card))) continue;
+        const comments = getComments(card);
+        $('.comment-list', node).innerHTML = comments.length ? comments.map(renderComment).join('') : '<div class="source-missing">No comments yet.</div>';
+        const replies = comments.filter(comment => comment.author === 'CODEX').length;
+        $('.reply-count', node).textContent = comments.length + (replies ? ' · ' + replies + ' REPLIES' : '');
+        hydrateMath($('.comment-list', node));
+      }
+      updateInboxCount(); renderInbox();
+      const seen = new Set(readStore(KEYS.seen, []));
+      const seenSources = new Set(readStore(KEYS.seenSources, []));
+      const displayed = new Set(ordered.map(card => card.id));
+      const additions = eligibleCards(next.cards).filter(card => !displayed.has(card.id) && !seen.has(card.id) && !seenSources.has(sourceKey(card))).length;
+      const notice = $('#newSignalsButton');
+      notice.hidden = additions === 0;
+      notice.textContent = additions + ' NEW SIGNAL' + (additions === 1 ? '' : 'S') + ' - REFRESH';
+      return true;
+    } catch (_) {
+      return false; // Keep the cached feed usable during a temporary network failure.
+    } finally {
+      clearTimeout(timeout); replyPollInFlight = false;
+    }
+  }
+  function scheduleReplyPolling(refreshNow = false) {
+    if (replyPollTimer !== null) { clearInterval(replyPollTimer); replyPollTimer = null; }
+    if (document.hidden || !navigator.onLine) return;
+    if (refreshNow) void refreshReplies();
+    replyPollTimer = setInterval(refreshReplies, 60000);
+  }
+  window.ScrollForge.refreshReplies = refreshReplies;
   function renderInbox() {
     const root = $('#inboxList'); if (!feed) return;
     const entries = [];
@@ -285,17 +346,19 @@
     }).join('') : '<div class="inbox-empty">No Codex replies in this feed yet. When a reply lands, it will appear here.</div>';
   }
   function openThread(cardId, commentId) {
-    const index = ordered.findIndex(c => c.id === cardId);
-    if (index >= 0) cursor = index;
-    else {
-      const card = feed.cards.find(c => c.id === cardId);
-      if (card) { ordered = [card].concat(ordered.filter(c => c.id !== cardId)); cursor = 0; }
+    let node = $$('.feed-card', $('#cardStage')).find(card => card.dataset.cardId === cardId);
+    if (!node) {
+      const card = feed.cards.find(card => card.id === cardId); if (!card) return;
+      const index = ordered.push(card) - 1;
+      $('.feed-end', $('#cardStage')).insertAdjacentHTML('beforebegin', cardTemplate(card, index));
+      node = $$('.feed-card', $('#cardStage')).find(card => card.dataset.cardId === cardId);
+      hydrateMath(node); observeCards();
     }
-    renderCurrent();
-    const button = $('.comment-toggle', $('#cardStage'));
-    if (button) { toggleThread(button, true); }
-    if (commentId) setTimeout(() => { const item = $$('.comment-item', $('#cardStage')).find(el => el.dataset.commentId === commentId); if (item) item.scrollIntoView({ block: 'center' }); }, 50);
     closePanel();
+    cursor = Number(node.dataset.cardIndex);
+    toggleThread($('.comment-toggle', node), true);
+    node.scrollIntoView({block: 'start', behavior: 'auto'}); node.focus({preventScroll: true});
+    syncPosition();
   }
   function toggleThread(button, forceOpen) {
     const cardEl = button.closest('.feed-card'); const panel = $('.card-comments', cardEl);
@@ -329,6 +392,7 @@
     $('#repoSlug').focus();
   }
   function openInbox() {
+    renderInbox();
     settingsReturnFocus = document.activeElement;
     $('#appShell').inert = true;
     $('#scrim').hidden = false;
@@ -363,12 +427,14 @@
       localPending[card.id] = localPending[card.id].filter(c => c.id !== comment.id).concat(comment);
       writeStore(KEYS.pending, localPending);
       textarea.value = '';
-      const receipt = 'QUEUED FOR NEXT CODEX RUN · ISSUE #' + number;
+      const receipt = 'QUEUED FOR LOCAL CODEX RUN · ISSUE #' + number;
       feedback.textContent = receipt; feedback.className = 'comment-feedback success';
-      renderCurrent();
-      const threadButton = $('.comment-toggle', $('#cardStage')); if (threadButton) toggleThread(threadButton, true);
-      const freshFeedback = $('.comment-feedback', $('#cardStage'));
-      if (freshFeedback) { freshFeedback.textContent = receipt; freshFeedback.className = 'comment-feedback success'; }
+      for (const node of $$('.feed-card', $('#cardStage')).filter(node => node.dataset.cardId === card.id)) {
+        $('.comment-list', node).innerHTML = getComments(card).map(renderComment).join('');
+        const comments = getComments(card);
+        $('.reply-count', node).textContent = comments.length + (comments.some(c => c.author === 'CODEX') ? ' · ' + comments.filter(c => c.author === 'CODEX').length + ' REPLIES' : '');
+        hydrateMath($('.comment-list', node));
+      }
     } catch (error) {
       feedback.textContent = 'SEND FAILED: ' + error.message + ' Your draft is still here; retry when ready.'; feedback.className = 'comment-feedback error';
     } finally { button.disabled = false; }
@@ -386,9 +452,8 @@
     button.textContent = expanding ? button.dataset.collapseLabel : button.dataset.expandLabel;
   }
 
-  $('#nextButton').addEventListener('click', () => navigate(1));
-  $('#prevButton').addEventListener('click', () => navigate(-1));
   $('#settingsButton').addEventListener('click', openSettings);
+  $('#newSignalsButton').addEventListener('click', () => loadFeed().then(() => window.scrollTo({top: 0})));
   $('#inboxButton').addEventListener('click', openInbox);
   $('#scrim').addEventListener('click', closePanel);
   $$('[data-close-panel]').forEach(b => b.addEventListener('click', closePanel));
@@ -405,8 +470,8 @@
   $('#cardStage').addEventListener('click', event => {
     const bodyExpand = event.target.closest('.body-expand');
     if (bodyExpand) { toggleBody(bodyExpand); return; }
-    const replay = event.target.closest('.replay-feed');
-    if (replay) { replayFeed(); return; }
+    if (event.target.closest('.review-engineering')) { reviewEngineering(); return; }
+    if (event.target.closest('.refresh-feed')) { loadFeed().then(() => window.scrollTo({top: 0})); return; }
     const solution = event.target.closest('.solution-toggle');
     if (solution && $('.solution-panel', solution.closest('.feed-card'))) { toggleSolution(solution); return; }
     const thread = event.target.closest('.comment-toggle'); if (thread) { toggleThread(thread); return; }
@@ -435,31 +500,19 @@
     else if (event.key === ' ') {
       event.preventDefault();
       const card = ordered[cursor];
-      const solution = card && card.solution_markdown && challenge(card) ? $('.solution-toggle', $('#cardStage')) : null;
+      const solution = card && card.solution_markdown && challenge(card) ? $('.solution-toggle', activeCardElement()) : null;
       if (solution) toggleSolution(solution); else navigate(1);
     }
     else if (event.key === 'k' || event.key === 'ArrowUp') { event.preventDefault(); navigate(-1); }
-    else if (event.key.toLowerCase() === 'c') { event.preventDefault(); const b = $('.comment-toggle', $('#cardStage')); if (b) toggleThread(b); }
+    else if (event.key.toLowerCase() === 'c') { event.preventDefault(); const node = activeCardElement(); const b = node && $('.comment-toggle', node); if (b) { toggleThread(b, true); $('textarea', node).focus({preventScroll: true}); } }
   });
-  let touchX = null, touchY = null;
-  $('#cardStage').addEventListener('touchstart', event => {
-    const target = event.target;
-    const expandedText = target.closest('.comment-list, .comment-form, .body-full:not([hidden]), .solution-panel.open');
-    const inputTarget = target.closest('input, textarea, select, [contenteditable="true"]');
-    const modalOpen = !$('#settingsModal').hidden || $('#inboxDrawer').classList.contains('open');
-    if (event.touches.length !== 1 || inputTarget || expandedText || modalOpen) { touchX = touchY = null; return; }
-    touchX = event.touches[0].clientX; touchY = event.touches[0].clientY;
-  }, { passive: true });
-  $('#cardStage').addEventListener('touchend', event => {
-    if (touchX == null || !event.changedTouches.length) return;
-    const dx = event.changedTouches[0].clientX - touchX, dy = event.changedTouches[0].clientY - touchY;
-    touchX = touchY = null;
-    const modalOpen = !$('#settingsModal').hidden || $('#inboxDrawer').classList.contains('open');
-    if (modalOpen) return;
-    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.2) navigate(dx < 0 ? 1 : -1);
-    else if (Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx) * 1.2) navigate(dy < 0 ? 1 : -1);
-  }, { passive: true });
-  window.addEventListener('online', () => { setNetwork('', 'CONNECTION RESTORED · FIELD UNIT READY'); if (!feed) loadFeed(); });
-  window.addEventListener('offline', () => setNetwork('offline', feed ? 'OFFLINE · CACHED FEED READY' : 'OFFLINE · NO CACHED FEED AVAILABLE'));
-  loadFeed();
+  // Keep touch and wheel scrolling entirely native; keyboard navigation only moves the viewport.
+  window.addEventListener('scroll', () => {
+    if (scrollFrame !== null) return;
+    scrollFrame = requestAnimationFrame(() => { scrollFrame = null; syncPosition(); });
+  }, {passive: true});
+  document.addEventListener('visibilitychange', () => scheduleReplyPolling(true));
+  window.addEventListener('online', () => { setNetwork('', 'CONNECTION RESTORED · FIELD UNIT READY'); if (!feed) loadFeed(); scheduleReplyPolling(true); });
+  window.addEventListener('offline', () => { scheduleReplyPolling(); setNetwork('offline', feed ? 'OFFLINE · CACHED FEED READY' : 'OFFLINE · NO CACHED FEED AVAILABLE'); });
+  loadFeed().then(() => scheduleReplyPolling());
 }());

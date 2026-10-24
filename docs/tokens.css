@@ -177,3 +177,30 @@ h2 { margin: 5px 0 0; font-size: 22px; letter-spacing: -.03em; }
   .card-body { font-size: 13px; }
   .sample-marker { margin-top: 11px; }
 }
+
+/* A real document feed: wheel and touch scroll through persistent cards. */
+html { scroll-padding-top: 82px; }
+.topbar { position: sticky; top: 0; z-index: 5; background: var(--canvas); }
+.main-area { justify-content: flex-start; flex: 1 0 auto; }
+.card-stage { display: grid; gap: 18px; min-height: 0; }
+.feed-card { min-height: 390px; scroll-margin-top: 82px; animation: none; }
+.feed-card:focus { outline: 1px solid var(--line); outline-offset: 2px; }
+.feed-card .card-footer { margin-top: auto; }
+.feed-end { border: 1px solid var(--line); border-left: 3px solid var(--green); padding: 24px; background: var(--surface); }
+.feed-end h2 { margin: 9px 0; }
+.feed-end p { color: var(--muted); font-size: 13px; line-height: 1.6; }
+.end-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 17px; }
+.scroll-help { margin: 14px 0 0; color: var(--muted); font: 10px var(--mono); }
+.scroll-help span { float: right; font-size: 9px; color: var(--muted-dim); }
+.body-full { overflow-wrap: anywhere; }
+.new-signals { position: fixed; z-index: 6; top: 74px; left: 50%; transform: translateX(-50%); border: 1px solid #255744; background: var(--surface); color: var(--green); padding: 10px 14px; max-width: calc(100% - 28px); cursor: pointer; font: 500 10px var(--mono); letter-spacing: .06em; box-shadow: 0 3px 12px #0006; }
+.new-signals[hidden] { display: none; }
+.comment-list { max-height: 280px; }
+@media (min-width: 800px) { .feed-card, .card-stage { min-height: 0; } .feed-card { min-height: 390px; } }
+@media (max-width: 600px) {
+  html { scroll-padding-top: 70px; }
+  .card-stage { display: grid; flex: none; gap: 14px; }
+  .feed-card { min-height: min(610px, calc(100svh - 190px)); scroll-margin-top: 70px; }
+  .scroll-help span { display: none; }
+  .feed-end { padding: 19px; }
+}

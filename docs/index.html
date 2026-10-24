@@ -35,20 +35,17 @@
       </section>
       <div class="feed-progress" aria-hidden="true"><span id="progressBar"></span></div>
 
-      <section class="card-stage" id="cardStage" aria-live="polite" aria-atomic="true">
+      <section class="card-stage" id="cardStage" aria-label="Scrolling card feed">
         <div class="loading-card"><span class="loader-mark">SF</span><p>LOADING FIELD FEED</p><span class="loading-line"></span></div>
       </section>
 
-      <nav class="feed-controls" aria-label="Feed navigation">
-        <button class="nav-button secondary" id="prevButton" type="button"><span>←</span><span class="nav-copy">PREVIOUS</span></button>
-        <div class="swipe-hint"><span class="keycap">J</span><span class="keycap">K</span><span class="hint-text">MOVE THROUGH FEED</span></div>
-        <button class="nav-button primary" id="nextButton" type="button"><span class="nav-copy">NEXT SIGNAL</span><span>→</span></button>
-      </nav>
+      <p class="scroll-help">SCROLL TO EXPLORE <span>J / K move · SPACE reveals · C comments</span></p>
       <div class="network-status" id="networkStatus" role="status"><span class="status-led"></span><span id="networkText">CONNECTING TO FEED</span></div>
     </main>
-    <footer class="site-footer"><span>ENGINEERING <span class="muted">/</span> STORIES <span class="muted">/</span> BRONCOS</span><span class="footer-shortcut">SPACE REVEALS / ADVANCES</span></footer>
+    <footer class="site-footer"><span>ENGINEERING <span class="muted">/</span> STORIES <span class="muted">/</span> BRONCOS</span><span class="footer-shortcut">SCROLL FREELY · J / K TO MOVE</span></footer>
   </div>
 
+  <button class="new-signals" id="newSignalsButton" type="button" hidden>NEW SIGNALS - REFRESH</button>
   <div class="scrim" id="scrim" hidden></div>
   <aside class="drawer" id="inboxDrawer" role="dialog" aria-modal="true" aria-labelledby="inboxTitle" aria-hidden="true" inert>
     <div class="panel-head"><div><div class="eyebrow">MESSAGE RELAY</div><h2 id="inboxTitle">Reply inbox</h2></div><button class="close-button" data-close-panel aria-label="Close inbox">×</button></div>
@@ -59,7 +56,7 @@
 
   <section class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-hidden="true" hidden>
     <div class="modal-head"><div><div class="eyebrow">LOCAL CONFIGURATION</div><h2 id="settingsTitle">Settings</h2></div><button class="close-button" data-close-panel aria-label="Close settings">×</button></div>
-    <p class="panel-intro">Connect this feed to a GitHub repository to leave questions for the next run.</p>
+    <p class="panel-intro">Questions are queued in GitHub and answered by the Codex loop on your computer.</p>
     <form id="settingsForm" class="settings-form">
       <label for="repoSlug">Repository <span>OWNER / REPO</span></label>
       <input id="repoSlug" name="repoSlug" type="text" placeholder="owner/repository" autocomplete="off" spellcheck="false" required pattern="[^/\s]+/[^/\s]+">

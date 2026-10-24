@@ -32,7 +32,7 @@ def sanitize_text(value: Any, limit: int = 12000) -> str:
     return re.sub(r"\s+", " ", raw).strip()[:limit]
 
 
-def _entry_timestamp(entry: Any) -> str:
+def _entry_timestamp(entry: Any) -> str | None:
     struct = entry.get("published_parsed") or entry.get("updated_parsed")
     if struct:
         return datetime.fromtimestamp(timegm(struct), timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
@@ -46,12 +46,14 @@ def _entry_timestamp(entry: Any) -> str:
             return parsed.isoformat(timespec="seconds").replace("+00:00", "Z")
         except (TypeError, ValueError, OverflowError):
             continue
-    return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    # Unknown publication age must not masquerade as fresh on every refresh.
+    return None
 
 
 def normalize_entry(entry: Any, source: dict[str, str]) -> dict[str, Any] | None:
     title = sanitize_text(entry.get("title", ""), 160)
-    if not title:
+    published = _entry_timestamp(entry)
+    if not title or published is None:
         return None
     link = str(entry.get("link") or "").strip()
     if not link.startswith(("http://", "https://")):
@@ -65,7 +67,7 @@ def normalize_entry(entry: Any, source: dict[str, str]) -> dict[str, Any] | None
     stable = hashlib.sha256("\0".join(stable_parts).encode("utf-8")).hexdigest()[:18]
     return {
         "id": f"rss_{source['name']}_{stable}",
-        "created_at": _entry_timestamp(entry),
+        "created_at": published,
         "category": source["category"],
         "course_tag": None,
         "title": title,

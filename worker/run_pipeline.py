@@ -1,6 +1,6 @@
 """ScrollForge pipeline entry point.
 
-Normal mode collects RSS/calendar/model input and atomically writes a validated
+Normal mode collects RSS/calendar input and atomically writes a validated
 feed. ``--dry-run`` reads only local files and never calls the network. Run
 ``--resolve-only`` after publishing the feed commit to GitHub Pages.
 """
@@ -21,10 +21,12 @@ try:  # Support both `python -m worker.run_pipeline` and script invocation.
     from .calendar_weights import get_calendar_state, target_card_counts
     from .generate_batch import generate_batch, _github_headers
     from .ingest_rss import ingest_all
+    from .retention import retain_cards
 except ImportError:  # pragma: no cover - exercised by command-line workflow
     from calendar_weights import get_calendar_state, target_card_counts
     from generate_batch import generate_batch, _github_headers
     from ingest_rss import ingest_all
+    from retention import retain_cards
 
 ROOT = Path(__file__).resolve().parents[1]
 FEED_PATH = ROOT / "docs" / "data" / "feed.json"
@@ -98,6 +100,8 @@ def merge_feed(existing: dict[str, Any], *, new_cards: list[dict[str, Any]],
         else:
             merged = dict(old)
             merged.update({key: value for key, value in card.items() if key != "comments"})
+            merged["created_at"] = min(old["created_at"], card["created_at"],
+                                       key=lambda value: datetime.fromisoformat(value.replace("Z", "+00:00")))
             merged["comments"] = _merge_comments(old.get("comments", []), card.get("comments", []))
             by_id[card["id"]] = merged
     issues_by_number = {issue.get("issue_number"): issue for issue in issues}
@@ -119,7 +123,10 @@ def merge_feed(existing: dict[str, Any], *, new_cards: list[dict[str, Any]],
              "unread": True, "issue_number": number},
         ]
         card["comments"] = _merge_comments(card.get("comments", []), comments)
-    cards = sorted(by_id.values(), key=lambda card: (_activity_timestamp(card), card["created_at"], card["id"]),
+    protected = {issue.get("card_id") for issue in issues}
+    protected.update(card.get("parent_card_id") for card in by_id.values() if card.get("parent_card_id"))
+    retained = retain_cards(list(by_id.values()), now=now, protected_ids=protected)
+    cards = sorted(retained, key=lambda card: (card["id"] in protected, _activity_timestamp(card), card["created_at"], card["id"]),
                    reverse=True)[:cap]
     feed = {"last_updated": now or utc_now(),
             "calendar_mode": calendar.get("calendar_mode", "BASELINE"),
@@ -148,8 +155,11 @@ def atomic_write(path: Path, value: dict[str, Any]) -> None:
 
 
 def run(*, feed_path: str | Path = FEED_PATH, dry_run: bool = False,
-        output_path: str | Path | None = None, offline: bool | None = None) -> dict[str, Any]:
+        output_path: str | Path | None = None, offline: bool | None = None,
+        generator: str = "none") -> dict[str, Any]:
     """Run pipeline. Dry-run is strictly offline and does not mutate feed_path."""
+    if generator not in {"none", "codex"}:
+        raise ValueError("generator must be 'none' or 'codex'")
     feed_path = Path(feed_path)
     existing = _load_feed(feed_path)
     if dry_run:
@@ -168,14 +178,26 @@ def run(*, feed_path: str | Path = FEED_PATH, dry_run: bool = False,
             print(f"RSS source {source_name} unavailable: {status['error']}", file=sys.stderr)
     # New RSS IDs and generated IDs are merged without mutating/replacing comments.
     try:
-        result = generate_batch(calendar=calendar, target_course=calendar.get("active_exam_course"),
-                               existing_cards=existing["cards"])
+        result = (generate_batch(calendar=calendar, target_course=calendar.get("active_exam_course"),
+                                 existing_cards=existing["cards"]) if generator == "codex" else
+                  {"comment_replies": [], "new_cards": [], "_issues": []})
     except Exception as exc:
         # Do not lose successfully ingested RSS just because an LLM request or
         # response validation failed. No automatic retry is made.
         print(f"structured generation unavailable: {type(exc).__name__}", file=sys.stderr)
         result = {"comment_replies": [], "new_cards": [], "_issues": []}
     issues = result.pop("_issues", [])
+    if generator == "none" and os.getenv("GITHUB_TOKEN") and os.getenv("GITHUB_REPOSITORY"):
+        # Protect queued question parents while the desktop runner is asleep.
+        try:
+            try:
+                from .generate_batch import fetch_pending_issues
+            except ImportError:
+                from generate_batch import fetch_pending_issues
+            issues = fetch_pending_issues()
+        except Exception:
+            print("Pending-question check unavailable; retaining existing cards this run", file=sys.stderr)
+            issues = [{"card_id": card["id"]} for card in existing["cards"]]
     counts = target_card_counts(calendar.get("weights"))
     sports_quota = counts["sports_news"]
     story_quota = counts["reddit_stories"]
@@ -267,6 +289,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--dry-run", action="store_true", help="offline preview; no feeds, calendar, LLM, or GitHub calls")
     parser.add_argument("--resolve-only", action="store_true", help="post/close replies already embedded in the remote feed")
     parser.add_argument("--output", type=Path, help="write generated/preview feed to a separate path")
+    parser.add_argument("--generator", choices=["none", "codex"], default="none",
+                        help="RSS only by default; codex uses the local ChatGPT CLI login")
     parser.add_argument("--feed", type=Path, default=FEED_PATH, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     if args.resolve_only and args.dry_run:
@@ -276,7 +300,7 @@ def main(argv: list[str] | None = None) -> int:
             parser.error("--output cannot be used with --resolve-only")
         result = resolve_only(feed_path=args.feed)
     else:
-        result = run(feed_path=args.feed, dry_run=args.dry_run, output_path=args.output)
+        result = run(feed_path=args.feed, dry_run=args.dry_run, output_path=args.output, generator=args.generator)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
 

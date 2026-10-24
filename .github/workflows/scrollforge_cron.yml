@@ -16,7 +16,7 @@ on:
 
 permissions:
   contents: write
-  issues: write
+  issues: read
 
 concurrency:
   group: scrollforge-feed-update
@@ -41,14 +41,12 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Slice course notes
         run: python scripts/slice_notes.py
-      - name: Generate feed
+      - name: Refresh RSS headlines and expire old content
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
           ICS_CALENDAR_URL: ${{ secrets.ICS_CALENDAR_URL }}
-        run: python -m worker.run_pipeline
+        run: python -m worker.run_pipeline --generator none
       - name: Commit and push generated data
         id: publish
         shell: bash
@@ -63,8 +61,3 @@ jobs:
           git commit -m "Refresh ScrollForge feed"
           git push origin HEAD:main
           echo "changed=true" >> "$GITHUB_OUTPUT"
-      - name: Resolve replies represented by the published feed
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python -m worker.run_pipeline --resolve-only

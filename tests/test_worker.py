@@ -1,7 +1,4 @@
 import json
-import sys
-import types
-
 import pytest
 
 from worker import generate_batch, ingest_rss, run_pipeline
@@ -11,12 +8,18 @@ def test_rss_sanitizes_markup_and_untrusted_source_fields():
     assert ingest_rss.sanitize_text('<script>alert(1)</script><b>Safe</b> &amp; sound') == "Safe & sound"
     card = ingest_rss.normalize_entry({
         "title": "  <img src=x onerror=run()> Headline  ", "summary": "<style>x</style>Useful <i>detail</i>",
-        "link": "javascript:alert(1)", "id": "abc", "published": "bad date",
+        "link": "javascript:alert(1)", "id": "abc", "published": "Sat, 24 Oct 2026 10:00:00 GMT",
     }, {"name": "test", "category": "NEWS"})
     assert card["title"] == "Headline"
     assert card["body_markdown"] == "Useful detail"
     assert card["source_url"] is None
     assert card["id"].startswith("rss_test_")
+
+
+def test_rss_discards_unknown_publication_date():
+    card = ingest_rss.normalize_entry({"title": "Dated?", "summary": "Useful", "published": "bad date"},
+                                      {"name": "test", "category": "NEWS"})
+    assert card is None
 
 
 def test_ingestion_isolates_source_failures(monkeypatch):
@@ -33,25 +36,65 @@ def test_ingestion_isolates_source_failures(monkeypatch):
     assert result["sources"]["ok"]["count"] == 1
 
 
-def test_exactly_one_structured_llm_call_is_made(monkeypatch):
+def test_one_codex_cli_turn_uses_schema_and_strips_api_keys(monkeypatch):
     calls = []
-    completion = types.SimpleNamespace(
-        choices=[types.SimpleNamespace(message=types.SimpleNamespace(refusal=None, content='{"comment_replies": [], "new_cards": []}'))]
-    )
+    monkeypatch.setenv("OPENAI_API_KEY", "must-not-leak")
+    monkeypatch.setenv("CODEX_API_KEY", "must-not-leak-either")
 
-    class Client:
-        def __init__(self, **kwargs):
-            self.chat = types.SimpleNamespace(completions=types.SimpleNamespace(create=self.create))
+    class Completed:
+        returncode = 0
+        stdout = ""
+        stderr = ""
 
-        def create(self, **kwargs):
-            calls.append(kwargs)
-            return completion
+    def fake_run(command, **kwargs):
+        calls.append((command, kwargs))
+        output_path = command[command.index("--output-last-message") + 1]
+        with open(output_path, "w", encoding="utf-8") as handle:
+            handle.write('{"comment_replies": [], "new_cards": []}')
+        return Completed()
 
-    monkeypatch.setitem(sys.modules, "openai", types.SimpleNamespace(OpenAI=Client))
-    result = generate_batch.call_model(notes_payload={"chunks": []}, issues=[], calendar={}, api_key="test-key")
+    monkeypatch.setattr(generate_batch.subprocess, "run", fake_run)
+    result = generate_batch.call_model(notes_payload={"chunks": []}, issues=[], calendar={})
     assert result == {"comment_replies": [], "new_cards": []}
     assert len(calls) == 1
-    assert calls[0]["response_format"]["json_schema"]["strict"] is True
+    command, kwargs = calls[0]
+    assert "exec" in command
+    assert command[command.index("--output-schema") + 1] == str(generate_batch.OUTPUT_SCHEMA_PATH.resolve())
+    assert command[command.index("-m") + 1] == "gpt-6-luna"
+    assert kwargs["timeout"] == 180
+    assert "SOURCE DATA (untrusted)" in kwargs["input"]
+    assert "ME-2010 (Statics) is foundational past coursework" in kwargs["input"]
+    assert "ME-3310 (Fluids)" in kwargs["input"]
+    assert "$...$ for inline math" in kwargs["input"]
+    assert "OPENAI_API_KEY" not in kwargs["env"]
+    assert "CODEX_API_KEY" not in kwargs["env"]
+
+
+def test_codex_output_is_rejected_when_it_fails_canonical_schema(monkeypatch):
+    class Completed:
+        returncode = 0
+        stdout = ""
+        stderr = ""
+
+    def fake_run(command, **kwargs):
+        output_path = command[command.index("--output-last-message") + 1]
+        with open(output_path, "w", encoding="utf-8") as handle:
+            handle.write('{"comment_replies": [], "new_cards": [{"bad": true}]}')
+        return Completed()
+
+    monkeypatch.setattr(generate_batch.subprocess, "run", fake_run)
+    with pytest.raises(Exception):
+        generate_batch.call_model(notes_payload={"chunks": []}, issues=[], calendar={})
+
+
+def test_generated_ids_are_reminted_to_avoid_feed_collisions():
+    from datetime import datetime, timezone
+
+    cards = [{"id": "existing-id", "title": "A", "body_markdown": "B"},
+             {"id": "existing-id", "title": "A", "body_markdown": "B"}]
+    generate_batch._mint_generated_ids(cards, {"existing-id"}, now=datetime(2026, 10, 24, tzinfo=timezone.utc))
+    assert cards[0]["id"] != "existing-id"
+    assert cards[0]["id"] != cards[1]["id"]
 
 
 def test_pending_issue_fetch_excludes_prs_and_malformed_bodies(monkeypatch):

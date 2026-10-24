@@ -55,7 +55,8 @@ def test_dry_run_cli_is_offline_and_does_not_mutate_committed_feed(tmp_path):
         [sys.executable, "-m", "worker.run_pipeline", "--dry-run", "--output", str(tmp_path / "preview.json")],
         cwd=ROOT, env=env, text=True, encoding="utf-8", capture_output=True, timeout=15, check=True,
     )
-    expected = {card["id"]: card for card in read_feed()["cards"]}
+    from worker.retention import retain_cards
+    expected = {card["id"]: card for card in retain_cards(read_feed()["cards"])}
     assert {card["id"]: card for card in json.loads(result.stdout)["cards"]} == expected
     assert {card["id"]: card for card in json.loads((tmp_path / "preview.json").read_text(encoding="utf-8"))["cards"]} == expected
     assert FEED_PATH.read_bytes() == before
