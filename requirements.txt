@@ -1,0 +1,8 @@
+# Runtime dependencies for the scheduled worker and local note indexer.
+feedparser>=6.0.14,<7
+icalendar>=7.3,<8
+recurring-ical-events>=3.8,<4
+openai>=3.37,<4
+PyMuPDF>=1.26,<2
+requests>=2.34,<3
+jsonschema>=4.26,<5

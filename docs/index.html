@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0D0F12">
+  <meta name="description" content="A mixed feed of engineering challenges, sports, and stories.">
+  <title>ScrollForge — Field Feed</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="stylesheet" href="./tokens.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="ScrollForge home"><span class="brand-mark">SF</span><span>SCROLLFORGE</span></a>
+      <div class="top-actions">
+        <button class="icon-button inbox-trigger" id="inboxButton" type="button" aria-label="Open replies inbox"><span class="button-glyph">◉</span><span class="desktop-label">INBOX</span><span class="count-badge" id="inboxCount" hidden>0</span></button>
+        <button class="icon-button" id="settingsButton" type="button" aria-label="Settings"><span class="button-glyph">⚙</span><span class="desktop-label">SETTINGS</span></button>
+      </div>
+    </header>
+
+    <main class="main-area">
+      <section class="feed-heading" aria-label="Feed status">
+        <div><div class="eyebrow"><span class="live-dot"></span> FIELD FEED <span class="slash">/</span> <span id="feedMode">SYNCING</span></div><h1>Signal, mixed.</h1></div>
+        <div class="feed-meta"><span id="cardPosition">-- / --</span><span class="meta-divider"></span><span id="updatedAt">OFFLINE READY</span></div>
+      </section>
+      <div class="feed-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+      <section class="card-stage" id="cardStage" aria-live="polite" aria-atomic="true">
+        <div class="loading-card"><span class="loader-mark">SF</span><p>LOADING FIELD FEED</p><span class="loading-line"></span></div>
+      </section>
+
+      <nav class="feed-controls" aria-label="Feed navigation">
+        <button class="nav-button secondary" id="prevButton" type="button"><span>←</span><span class="nav-copy">PREVIOUS</span></button>
+        <div class="swipe-hint"><span class="keycap">J</span><span class="keycap">K</span><span class="hint-text">MOVE THROUGH FEED</span></div>
+        <button class="nav-button primary" id="nextButton" type="button"><span class="nav-copy">NEXT SIGNAL</span><span>→</span></button>
+      </nav>
+      <div class="network-status" id="networkStatus" role="status"><span class="status-led"></span><span id="networkText">CONNECTING TO FEED</span></div>
+    </main>
+    <footer class="site-footer"><span>ENGINEERING <span class="muted">/</span> STORIES <span class="muted">/</span> BRONCOS</span><span class="footer-shortcut">SPACE REVEALS / ADVANCES</span></footer>
+  </div>
+
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="inboxDrawer" role="dialog" aria-modal="true" aria-labelledby="inboxTitle" aria-hidden="true" inert>
+    <div class="panel-head"><div><div class="eyebrow">MESSAGE RELAY</div><h2 id="inboxTitle">Reply inbox</h2></div><button class="close-button" data-close-panel aria-label="Close inbox">×</button></div>
+    <p class="panel-intro">Codex replies from your feed, grouped by card.</p>
+    <div class="inbox-list" id="inboxList"></div>
+    <div class="panel-foot">THREADS ARE MARKED READ WHEN OPENED</div>
+  </aside>
+
+  <section class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-hidden="true" hidden>
+    <div class="modal-head"><div><div class="eyebrow">LOCAL CONFIGURATION</div><h2 id="settingsTitle">Settings</h2></div><button class="close-button" data-close-panel aria-label="Close settings">×</button></div>
+    <p class="panel-intro">Connect this feed to a GitHub repository to leave questions for the next run.</p>
+    <form id="settingsForm" class="settings-form">
+      <label for="repoSlug">Repository <span>OWNER / REPO</span></label>
+      <input id="repoSlug" name="repoSlug" type="text" placeholder="owner/repository" autocomplete="off" spellcheck="false" required pattern="[^/\s]+/[^/\s]+">
+      <label for="repoToken">Fine-grained access token <span>STORED ON THIS DEVICE</span></label>
+      <input id="repoToken" name="repoToken" type="password" placeholder="github_pat_…" autocomplete="new-password">
+      <p class="field-note">Use a token scoped to this repository’s Issues. The token stays in this browser’s local storage.</p>
+      <button class="submit-button" type="submit">SAVE CONFIGURATION <span>↗</span></button>
+      <button class="text-button" id="clearSettings" type="button">CLEAR SAVED SETTINGS</button>
+      <div class="form-feedback" id="settingsFeedback" role="status"></div>
+    </form>
+  </section>
+
+  <script>
+    window.addEventListener('load', function () {
+      if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('./sw.js').catch(function () {});
+    });
+  </script>
+</body>
+</html>

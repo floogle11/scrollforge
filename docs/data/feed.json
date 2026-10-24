@@ -1,0 +1,204 @@
+{
+  "last_updated": "2026-10-24T17:00:00Z",
+  "calendar_mode": "BASELINE",
+  "active_exam_course": null,
+  "cards": [
+    {
+      "id": "sample_broncos_sb50",
+      "created_at": "2016-02-08T00:00:00Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Sample / Archive: Denver closes Super Bowl 50, 24\u201310",
+      "body_markdown": "**Historical sample.** Denver defeated Carolina 24-10 in Super Bowl 50 on February 7, 2016.",
+      "solution_markdown": null,
+      "source_url": "https://www.denverbroncos.com/news/this-date-in-broncos-history-broncos-win-super-bowl-50-20344514",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_broncos_von_miller",
+      "created_at": "2016-02-08T00:01:00Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Sample / Archive: Von Miller's Super Bowl stat line",
+      "body_markdown": "**Historical sample.** Von Miller recorded 2.5 sacks in Super Bowl 50 and was named the game's MVP.",
+      "solution_markdown": null,
+      "source_url": "https://www.denverbroncos.com/news/broncos-24-panthers-10-three-keys-to-super-bowl-50-unlocked-16799647",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_broncos_stadium_altitude",
+      "created_at": "2016-02-08T00:02:00Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Sample / Archive: Mile High sits at 5,280 ft",
+      "body_markdown": "**Historical sample.** Empower Field at Mile High is listed at 5,280 feet above sea level.",
+      "solution_markdown": null,
+      "source_url": "https://www.empowerfieldatmilehigh.com/stadium/about-us",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_webb_first_images",
+      "created_at": "2022-07-12T14:00:00Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Sample / Archive: Webb releases its first images",
+      "body_markdown": "**Historical science sample.** NASA released Webb's first full-color images and spectra in July 2022, including a deep field, a galaxy group, a nebula, and an exoplanet spectrum.",
+      "solution_markdown": null,
+      "source_url": "https://science.nasa.gov/mission/webb/webbs-first-images/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_webb_deep_field",
+      "created_at": "2022-07-12T14:05:00Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Sample / Archive: A deep field in infrared",
+      "body_markdown": "**Historical science sample.** Webb's first deep-field image showed thousands of galaxies in a patch of sky about the size of a grain of sand held at arm's length.",
+      "solution_markdown": null,
+      "source_url": "https://science.nasa.gov/mission/webb/webbs-first-images/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_story_late_lab",
+      "created_at": "2026-10-24T16:00:00Z",
+      "category": "STORY",
+      "course_tag": null,
+      "title": "Sample narrative: the lab team and the missing zero",
+      "body_markdown": "**Original fictional Reddit-style sample narrative; not a real post.** A student team's test stand gave readings ten times smaller than expected. They checked the sensors, then the wiring, then discovered one teammate had changed a display scale while cleaning up the interface. The useful lesson was to log units and configuration alongside every run.",
+      "solution_markdown": null,
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_story_shop_tolerance",
+      "created_at": "2026-10-24T16:01:00Z",
+      "category": "STORY",
+      "course_tag": null,
+      "title": "Sample narrative: a bracket that fit only on paper",
+      "body_markdown": "**Original fictional Reddit-style sample narrative; not a real post.** A CAD assembly looked perfect until the prototype reached the shop. Two holes were dimensioned from different datums, so their tolerance stack pushed the fasteners out of alignment. The team revised the drawing to share a datum and added a quick fit check before the next print.",
+      "solution_markdown": null,
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_story_pump_noise",
+      "created_at": "2026-10-24T16:02:00Z",
+      "category": "STORY",
+      "course_tag": null,
+      "title": "Sample narrative: the pump that got louder after the fix",
+      "body_markdown": "**Original fictional Reddit-style sample narrative; not a real post.** A small pump still vibrated after its mount was tightened. The team had accidentally constrained thermal expansion with a second rigid support. Replacing that support with a sliding guide reduced the stress path and the noise. The surprise came from the boundary condition, not the pump itself.",
+      "solution_markdown": null,
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_fluids_pipe_diameter",
+      "created_at": "2026-10-24T16:10:00Z",
+      "category": "CHALLENGE_CURRENT",
+      "course_tag": "ME-3310",
+      "title": "Fluids sample: double the pipe diameter",
+      "body_markdown": "**Sample challenge.** For steady incompressible flow at fixed volume flow rate $Q$, a circular pipe's diameter doubles. What happens to average velocity $V$? Assume the full flow passes through both sections.",
+      "solution_markdown": "**Area:** $A\\propto D^2$, so doubling $D$ makes area four times larger.\n\n**Continuity:** $Q=AV$ at fixed $Q$ gives $V_2=V_1/4$.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [
+        {
+          "id": "sample_thread_user",
+          "author": "USER",
+          "body_markdown": "Would this also make the laminar pressure drop one quarter?",
+          "created_at": "2026-10-24T16:20:00Z",
+          "unread": false,
+          "issue_number": null
+        },
+        {
+          "id": "sample_thread_codex",
+          "author": "CODEX",
+          "body_markdown": "Not with diameter as the only change. At fixed $Q$ and length, laminar pipe pressure drop scales as $D^{-4}$, so doubling $D$ gives $1/16$ the drop. Continuity alone gives the velocity scaling; the resistance relation supplies the pressure result.",
+          "created_at": "2026-10-24T16:21:00Z",
+          "unread": true,
+          "issue_number": null
+        }
+      ]
+    },
+    {
+      "id": "sample_thermo_first_law",
+      "created_at": "2026-10-24T16:11:00Z",
+      "category": "CHALLENGE_CURRENT",
+      "course_tag": "ENGR-2300",
+      "title": "Thermo sample: paddle wheel in a rigid tank",
+      "body_markdown": "**Sample challenge.** A closed, rigid, insulated tank is stirred by a paddle wheel. With negligible kinetic and potential energy changes, does the gas internal energy change? Use $\\Delta U=Q-W$ with work positive when done by the system.",
+      "solution_markdown": "Insulation gives $Q=0$; rigidity removes boundary work.\n\nPaddle work is done on the gas, so system work is negative. Therefore $\\Delta U=-W>0$.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_fluids_friction_factor",
+      "created_at": "2026-10-24T16:12:00Z",
+      "category": "CHALLENGE_CURRENT",
+      "course_tag": "ME-3310",
+      "title": "Fluids sample: fully rough friction factor",
+      "body_markdown": "**Sample challenge.** In fully rough turbulent pipe flow, double velocity while holding geometry, roughness, and fluid fixed. Does Darcy friction factor $f$ change? What happens to Darcy-Weisbach head loss $h_L=f(L/D)V^2/(2g)$?",
+      "solution_markdown": "In the fully rough limit, $f$ is independent of Reynolds number and stays approximately constant.\n\nSince $h_L\\propto V^2$, doubling $V$ makes head loss four times larger.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_thermo_carnot",
+      "created_at": "2026-10-24T16:13:00Z",
+      "category": "CHALLENGE_CURRENT",
+      "course_tag": "ENGR-2300",
+      "title": "Thermo sample: Carnot ceiling",
+      "body_markdown": "**Sample challenge.** A reversible engine operates between reservoirs at $600\\,K$ and $300\\,K$. What is its maximum thermal efficiency? Use absolute temperatures and $\\eta_{max}=1-T_C/T_H$.",
+      "solution_markdown": "$$\\eta_{max}=1-\\frac{300}{600}=0.50$$\n\nThe maximum efficiency is **50%**; a real engine between the same reservoirs must be less efficient.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_statics_truss",
+      "created_at": "2026-10-24T16:14:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "ME-2010",
+      "title": "Statics sample: two-force member check",
+      "body_markdown": "**Sample refresher.** A pin-connected bar has forces only at its two ends and no applied couple. What must be true about the two forces for equilibrium?",
+      "solution_markdown": "For equilibrium, the forces must be equal in magnitude and opposite in direction.\n\nTheir lines of action must also be collinear with the member.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_statics_moment",
+      "created_at": "2026-10-24T16:15:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "ME-2010",
+      "title": "Statics sample: moment arm gut check",
+      "body_markdown": "**Sample refresher.** A 10 N force acts perpendicular to a wrench handle 0.20 m from the bolt. What is the moment magnitude about the bolt?",
+      "solution_markdown": "$$M=rF\\sin 90^\\circ=(0.20)(10)=2.0\\,N\\cdot m$$\n\nThe moment magnitude is **2.0 N m**; the perpendicular distance is the moment arm.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "sample_deepcut_aircraft",
+      "created_at": "2026-10-24T16:16:00Z",
+      "category": "DEEP_CUT",
+      "course_tag": "AERODYNAMICS",
+      "title": "Deep cut sample: why a stall is not a speed switch",
+      "body_markdown": "**Sample engineering note.** A wing stalls when its local flow separates after the angle of attack exceeds the airfoil's usable range. A lower speed often raises the angle needed for lift, but stall depends on angle of attack and configuration\u2014not one universal airspeed.",
+      "solution_markdown": "The useful control variable is angle of attack. A stall warning is about approaching separation; reducing angle of attack restores attached flow when conditions permit.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": []
+    }
+  ]
+}

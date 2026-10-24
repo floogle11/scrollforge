@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+.env.*
+!.env.example
+test-results/
+.cache/
+# Existing course library is local source material, not a deployable asset.
+notes raw/

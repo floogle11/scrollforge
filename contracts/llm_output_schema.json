@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScrollForge single-shot output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "comment_replies",
+    "new_cards"
+  ],
+  "properties": {
+    "comment_replies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "issue_number",
+          "card_id",
+          "body_markdown"
+        ],
+        "properties": {
+          "issue_number": {
+            "type": "integer"
+          },
+          "card_id": {
+            "type": "string"
+          },
+          "body_markdown": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "new_cards": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "$ref": "#/$defs/card"
+      }
+    }
+  },
+  "$defs": {
+    "comment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "author",
+        "body_markdown",
+        "created_at",
+        "unread",
+        "issue_number"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "author": {
+          "enum": [
+            "USER",
+            "CODEX"
+          ]
+        },
+        "body_markdown": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "unread": {
+          "type": "boolean"
+        },
+        "issue_number": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "card": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "created_at",
+        "category",
+        "course_tag",
+        "title",
+        "body_markdown",
+        "solution_markdown",
+        "source_url",
+        "parent_card_id",
+        "comments"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "category": {
+          "enum": [
+            "SPORTS",
+            "NEWS",
+            "STORY",
+            "CHALLENGE_CURRENT",
+            "CHALLENGE_PAST",
+            "DEEP_CUT"
+          ]
+        },
+        "course_tag": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "body_markdown": {
+          "type": "string",
+          "minLength": 1
+        },
+        "solution_markdown": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^https?://"
+        },
+        "parent_card_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/comment"
+          }
+        }
+      }
+    }
+  }
+}

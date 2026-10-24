@@ -1,0 +1,5 @@
+-r requirements.txt
+
+pytest>=9.1,<10
+playwright>=1.64,<2
+PyYAML>=6,<7
