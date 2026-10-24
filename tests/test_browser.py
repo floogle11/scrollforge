@@ -233,3 +233,29 @@ def test_service_worker_serves_seeded_shell_and_feed_offline(browser, site_url):
         assert page.locator(".card-title").inner_text().strip()
     finally:
         context.close()
+
+
+def test_delayed_repository_default_preserves_typed_settings(browser, site_url):
+    context = browser.new_context(service_workers="block")
+    page = context.new_page()
+    delayed = []
+    page.route("**/data/repo.json", lambda route: delayed.append(route))
+    page.route("https://fonts.googleapis.com/**", lambda route: route.abort())
+    page.route("https://fonts.gstatic.com/**", lambda route: route.abort())
+    page.route("https://cdn.jsdelivr.net/**", lambda route: route.abort())
+    try:
+        page.goto(site_url, wait_until="domcontentloaded")
+        page.locator(".feed-card").wait_for()
+        page.locator("#settingsButton").click()
+        page.locator("#repoSlug").fill("owner/custom-feed")
+        page.wait_for_timeout(100)
+        assert delayed
+        for route in delayed:
+            route.fulfill(status=200, content_type="application/json",
+                          body=json.dumps({"repository": "floogle11/scrollforge"}))
+        page.wait_for_timeout(100)
+        assert page.locator("#repoSlug").input_value() == "owner/custom-feed"
+        page.locator("#settingsForm button[type=submit]").click()
+        assert page.evaluate("localStorage.getItem('scrollforge.repo_slug')") == "owner/custom-feed"
+    finally:
+        context.close()

@@ -311,7 +311,10 @@
     try {
       const response = fetch('./data/repo.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(d => {
         const repository = d && (typeof d.repository === 'string' ? d.repository : d.repo);
-        if (typeof repository === 'string' && !localStorage.getItem(KEYS.repo)) { localStorage.setItem(KEYS.repo, repository); $('#repoSlug').value = repository; }
+        if (typeof repository === 'string' && !localStorage.getItem(KEYS.repo) && !$('#repoSlug').value.trim()) {
+          localStorage.setItem(KEYS.repo, repository);
+          $('#repoSlug').value = repository;
+        }
       }).catch(() => {});
       void response;
     } catch (_) {}
