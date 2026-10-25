@@ -1,8 +1,32 @@
 {
-  "last_updated": "2026-10-24T18:26:58Z",
+  "last_updated": "2026-10-25T01:59:03Z",
   "calendar_mode": "BASELINE",
   "active_exam_course": null,
   "cards": [
+    {
+      "id": "rss_broncos_81749017b08aa51bb6",
+      "created_at": "2026-10-24T21:08:44Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Game Preview: Broncos focused on 'ascending, improving' entering Week 7 matchup vs. Cardinals",
+      "body_markdown": "With a win in Arizona, the Broncos would cap a 3-1 mark against the NFC West, and they would earn their 12th win over an NFC opponent in their last 13 tries.",
+      "solution_markdown": null,
+      "source_url": "https://www.denverbroncos.com/news/game-preview-broncos-focused-on-ascending-improving-entering-week-7-matchup-vs-cardinals",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_broncos_10f2fd20fc1cf4cb99",
+      "created_at": "2026-10-24T20:32:32Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Broncos activate RB Jonah Coleman and OLB Jonathon Cooper, place RB Tyler Badie and OLB Jonah Elliss on IR",
+      "body_markdown": "Denver has regained a pair of players ahead of Sunday’s game against the Cardinals.",
+      "solution_markdown": null,
+      "source_url": "https://www.denverbroncos.com/news/broncos-activate-rb-jonah-coleman-and-olb-jonathon-cooper-place-rb-tyler-badie-and-olb-jonah-elliss-on-ir",
+      "parent_card_id": null,
+      "comments": []
+    },
     {
       "id": "sample_fluids_pipe_diameter",
       "created_at": "2026-10-24T16:10:00Z",
