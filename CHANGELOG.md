@@ -4,7 +4,7 @@ Dates below use America/Denver. The evening releases on October 24, 2026 corresp
 
 ## 2026-10-25 — Mental-review choices, corrected diagrams and 60 new questions
 
-Prepared and locally verified; deployment evidence is recorded after publication.
+Feature commit **`93ac88a`**, followed by automatic refresh **`dc885e2`**. Both Pages deployments and independent GitHub checks succeeded; the live mobile site was verified.
 
 - Replaced decimal exponentials, logarithms, π-based results and difficult roots with exact choices. The integration-by-parts example now offers `e² + 1`, `e² − 1`, `2e²`, and `3e² − 1`; evaluating the lower bound correctly selects `e² + 1`. Foundation distractors reflect chain-rule, sign, boundary, arithmetic and setup mistakes. Estimation questions retain approximations.
 - Added 60 distinct questions, five for each of twelve subjects, bringing the reproducible bank to 452 quizzes and 20 topic posts. Topics include implicit differentiation, telescoping series, Green's theorem, rank/nullity, forced IVPs, friction, Gauss's law, buoyancy, entropy, tipping, buckling and damped frequency. Stable IDs and merge behavior preserve conversations.
@@ -13,6 +13,7 @@ Prepared and locally verified; deployment evidence is recorded after publication
 - Saved-answer signatures now include question text and the correct index as well as options, preventing stale feedback after content corrections. Bumped the offline shell to v9 and cached the separate diagram renderer.
 - Local validation: 132 tests passed, including all 368 numerical variants, equivalent-distractor checks, exact integration choices, all figure labels fitting their canvases, saved-answer invalidation and existing feed/browser/worker behavior. A real mobile preview rendered 2,164 math expressions with no KaTeX errors and no page errors. Reviewed figure galleries; JavaScript syntax and publication budgets passed.
 - Merged automatic refreshes through `fd9ef07` without losing either existing conversation comment. Prepublication snapshot: 848 posts, 452 quizzes; feed 684,070 bytes and total published files 816,018 bytes, within the 5 MiB feed and 20 MiB site budgets. Counts change with public-source refreshes.
+- Final [GitHub checks](https://github.com/floogle11/scrollforge/actions/runs/40216856160) passed 133 tests, including the additional contract test allowing a diagram to be omitted. [Feature deployment](https://github.com/floogle11/scrollforge/actions/runs/40216856179), [content refresh](https://github.com/floogle11/scrollforge/actions/runs/40216856217), and [post-refresh deployment](https://github.com/floogle11/scrollforge/actions/runs/40216886871) succeeded. Live snapshot at `2026-10-25T17:31:25Z`: 867 posts, 452 quizzes, 60 added questions; 696,083-byte feed, 827,193 total published bytes. Live mobile math, corrected plots, quiz feedback/retry, overflow and page-error checks passed; feed and marker agree.
 
 ## 2026-10-24 — Feed diversity, learned interests, foundational review and hosting budgets
 

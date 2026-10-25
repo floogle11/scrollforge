@@ -4,7 +4,7 @@ Last recorded: **2026-10-25, America/Denver**.
 
 This file is the handoff for future conversations. Read it together with `CHANGELOG.md` and `README.md`. Counts and deployment identifiers below are dated snapshots; inspect the current repository and feed before treating them as live values.
 
-**October 25 update prepared and locally verified:** exact mental-review answer choices, reviewed diagrams and 60 new questions bring the bank to 452 quizzes plus 20 topic posts. Publication evidence will be recorded after pushing. Prior deployed feature `98dc01c` added feed diversity, browser-local preferences, foundational review and publication budgets; automatic refreshes continued through `fd9ef07` before this update.
+**October 25 update deployed and verified:** feature commit `93ac88a` adds exact mental-review answer choices, reviewed diagrams and 60 new questions, bringing the bank to 452 quizzes plus 20 topic posts. Automatic refresh `dc885e2` followed it. Both Pages deployments and independent GitHub checks succeeded; a real live mobile preview verified rendered math, diagrams and quiz retry with no page errors. Prior feature `98dc01c` added feed diversity, browser-local preferences and publication budgets.
 
 ## User intent and preferences
 
@@ -84,6 +84,7 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 - Browser reply polling uses a tiny `data/feed-meta.json` marker every five minutes while visible/online; full JSON is fetched only when changed or when the marker is unavailable. Explicit refresh still fetches feed.json. SW v9 adds the separate diagram renderer to the offline shell.
 - Feed atomic writes produce both JSON and marker. The local loop publishes and recovers only these two generated paths; cached outbox and publication-before-Issue-resolution guarantees remain. RSS automation stages the marker too. Do not add marker generation without preserving both writers and recovery.
 - Published-size snapshot after refresh `2942e1b`: **742,395 bytes total published files**, **610,839-byte feed**, roughly **97,926 bytes gzip** (estimate only). This is roughly 163,709 uncompressed complete-feed transfers per 100 decimal GB, excluding other traffic. Static checks do not measure actual monthly bandwidth or accumulated remote Git history.
+- October 25 size snapshot after refresh `dc885e2`: **827,193 bytes total published files**, **696,083-byte feed**, about **120,076 bytes gzip**. All file/feed/site budgets pass.
 - No hosted video or copied image library was added. Diagrams remain inline vector markup; imported publisher images load lazily from their original hosts and Reddit embeds remain on demand.
 
 ## AI generation, questions, and desktop automation
@@ -136,14 +137,15 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 
 ## Last published state and regression lessons
 
-- Last feature commit: **`98dc01c`**, followed by automatic feed refresh **`2942e1b`**. Earlier feature/fix releases: `4fb5f41`, `6abd389` and `0b88953`.
-- Pages deployments succeeded: https://github.com/floogle11/scrollforge/actions/runs/40166162971 and the post-refresh deployment https://github.com/floogle11/scrollforge/actions/runs/40166188075.
-- Independent GitHub checks for the current feature release succeeded: https://github.com/floogle11/scrollforge/actions/runs/40166162923. Earlier release's checks passed 69 tests: https://github.com/floogle11/scrollforge/actions/runs/40162194551.
+- Last feature commit: **`93ac88a`**, followed by automatic feed refresh **`dc885e2`**. Earlier releases: `98dc01c`, `4fb5f41`, `6abd389` and `0b88953`.
+- October 25 Pages deployments succeeded: https://github.com/floogle11/scrollforge/actions/runs/40216856179 and the post-refresh deployment https://github.com/floogle11/scrollforge/actions/runs/40216886871.
+- Independent GitHub checks for this feature release succeeded: https://github.com/floogle11/scrollforge/actions/runs/40216856160. Local full-suite run passed 132 tests; one additional generation-contract test and focused final checks also passed. GitHub checks include the added test (133 total).
+- Latest verified live snapshot (`last_updated` **2026-10-25T17:31:25Z**): **867 posts**, **452 quizzes**, **60 added questions**, and **20 topic posts**. Live mobile checks verified exact integration-by-parts answers, rendered KaTeX, function-specific plots, quiz feedback/retry, no horizontal overflow and no JavaScript errors. Feed/marker timestamps and byte counts match. All 2,164 bank math expressions also rendered without KaTeX errors in local browser verification.
 - The first expansion run exposed issues on Linux Chromium that local Windows checks had missed. They were fixed and the successful final run supersedes that failure.
 - **Short final posts need scroll space below them.** `.feed-end` has `min-height: calc(100svh - 160px)` so `scrollIntoView({block:'start'})` can align a final short post under the sticky header. Do not remove this without preserving that behavior; a tall-viewport regression test covers it.
 - **Read-tracking is asynchronous.** Clearing seen storage immediately before reload races IntersectionObserver. Saved-answer tests now reload and explicitly reopen engineering review, matching intended product behavior.
 - A real-data mobile preview verified rendered KaTeX math, the illustrated multiple-choice layout, Mammoth filtering, official Reddit iframe creation, no horizontal overflow, and no JavaScript errors.
 - Verified published content snapshot (`last_updated` **2026-10-25T04:27:03Z**): **541 posts**, **200 quizzes**, **20 topic posts**, **75 hockey posts**, including **57 Mammoth**, **7 Avalanche**, and **41 drama posts**. Counts overlap and change as sources refresh/expire.
-- Latest live snapshot (`last_updated` **2026-10-25T05:37:00Z**) has **730 posts**, **392 quizzes**, and **20 topic posts**. The automatic refresh and both deployments passed. A real live mobile browser verified saved preference-button state, Calc III subject filtering, quiz feedback, rendered math, no horizontal overflow, and no JavaScript errors. Published feed and marker timestamps/byte counts match.
+- Prior October 24 live snapshot (`last_updated` **2026-10-25T05:37:00Z**) had **730 posts**, **392 quizzes**, and **20 topic posts**. Its automatic refresh and both deployments passed. A real live mobile browser verified saved preference-button state, Calc III subject filtering, quiz feedback, rendered math, no horizontal overflow, and no JavaScript errors. Published feed and marker timestamps/byte counts matched.
 - Latest local verification: **126 tests passed**, with real mobile/desktop Chromium checks, 48 new independent calculation references, subject rendering/filtering, local preference reversal/reset/persistence, unchanged-marker request avoidance, feed budget rejection and feed/marker publication recovery. Offline pipeline dry run, JS syntax and diff whitespace checks also passed.
 - The user explicitly requested deployment of this follow-up. It is published and verified; no deployment step remains outstanding.
