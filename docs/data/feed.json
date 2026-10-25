@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-25T04:23:05Z",
+  "last_updated": "2026-10-25T04:27:03Z",
   "calendar_mode": "BASELINE",
   "active_exam_course": null,
   "cards": [
@@ -5628,6 +5628,18 @@
       "topic": "The largest of the three Mohr circles"
     },
     {
+      "id": "rss_guardian_us_aaced49e3dec2a44c2",
+      "created_at": "2026-10-25T04:12:28Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Brewers erase four-run deficit to stun Rays and take 2-0 World Series lead",
+      "body_markdown": "Milwaukee rally from 4-0 down to win 5-4 in Game 2 Frelick homers before Pratt delivers go-ahead single Rays undone by defensive mistakes in seventh inning Sal Frelick tied the score with his first home run in three months, Cooper Pratt hit a go-ahead single in the seventh inning and the Milwaukee Brewers stunned the Tampa Bay Rays 5-4 on Saturday night for a 2-0 World Series lead by overcoming a four-run deficit for the second time in the postseason. Tampa Bay, who won the AL pennant by forcing opponents into mistakes, committed one error, made two other misplays that could have been…",
+      "solution_markdown": null,
+      "source_url": "https://www.theguardian.com/sport/2026/oct/25/milwaukee-brewers-tampa-bay-rays-world-series-game-two-comeback",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
       "id": "rss_espn_nhl_f31536770e03b31654",
       "created_at": "2026-10-25T04:02:33Z",
       "category": "SPORTS",
@@ -6253,7 +6265,7 @@
       "category": "NEWS",
       "course_tag": null,
       "title": "Almost 1,000 arrested as clashes follow another day of mass protests across France",
-      "body_markdown": "Officials have so far managed to avoid a repeat of last weekend's rioting and looting as hundreds of thousands took part in demonstrations.",
+      "body_markdown": "Hundreds of thousands took part in demonstrations in France, with protests also taking place in other European countries.",
       "solution_markdown": null,
       "source_url": "https://www.bbc.co.uk/news/articles/c95ynd587ynzo?at_medium=RSS&at_campaign=rss",
       "parent_card_id": null,
@@ -6421,7 +6433,7 @@
       "category": "NEWS",
       "course_tag": null,
       "title": "Fireworks and tear gas as protesters and riot police clash in Paris",
-      "body_markdown": "Europe correspondent Nick Beake reports from Paris where mostly peaceful protests turned into unrest after nightfall.",
+      "body_markdown": "The BBC's Europe correspondent reports from Paris where mostly peaceful protests turned into unrest after nightfall.",
       "solution_markdown": null,
       "source_url": "https://www.bbc.co.uk/news/videos/cm89zqw9lx1do?at_medium=RSS&at_campaign=rss",
       "parent_card_id": null,
