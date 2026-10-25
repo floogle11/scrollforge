@@ -135,6 +135,9 @@ def _generation_due(state: dict[str, Any], now: datetime) -> bool:
     return len(recent) < 2 and (last is None or now - last >= MIN_GENERATION_GAP)
 
 
+FEED_FILES = {"docs/data/feed.json", "docs/data/feed-meta.json"}
+
+
 def _pull_latest(root: Path) -> None:
     owned_clone = root.name == "checkout" and root.parent.name == "local-agent" and root.parent.parent.name == ".cache"
     git = _resolve_cli("GIT_BIN", "git")
@@ -148,13 +151,19 @@ def _pull_latest(root: Path) -> None:
     if status:
         changed = [line[3:] for line in status if len(line) >= 4]
         has_outbox = (root / ".cache/local-agent/outbox.json").is_file()
-        if changed != ["docs/data/feed.json"] or not has_outbox or not owned_clone:
+        if not set(changed).issubset(FEED_FILES) or not has_outbox or not owned_clone:
             raise RuntimeError("isolated checkout has uncommitted work; refusing to overwrite it")
         # A crash between writing feed.json and committing it is recoverable:
         # the batch was atomically cached first, and only this owned clone's feed
         # path may be restored. Any unrelated working changes still stop here.
-        _run([git, "restore", "--source=HEAD", "--staged", "--worktree", "--", "docs/data/feed.json"],
-             cwd=root, timeout=60)
+        tracked = []
+        for line in status:
+            if line.startswith("?? "):
+                (root / line[3:]).unlink()  # Known generated path in the owned clone only.
+            else:
+                tracked.append(line[3:])
+        if tracked:
+            _run([git, "restore", "--source=HEAD", "--staged", "--worktree", "--", *tracked], cwd=root, timeout=60)
         status = _run([git, "status", "--porcelain"], cwd=root).stdout.splitlines()
         if status:
             raise RuntimeError("isolated checkout still has uncommitted work after feed recovery")
@@ -162,7 +171,7 @@ def _pull_latest(root: Path) -> None:
         merge_base = _run([git, "merge-base", upstream, "HEAD"], cwd=root).stdout.strip()
         paths = _run([git, "diff", "--name-only", f"{merge_base}..HEAD"], cwd=root).stdout.splitlines()
         messages = _run([git, "log", "--format=%s", f"{upstream}..HEAD"], cwd=root).stdout.splitlines()
-        if (not owned_clone or paths != ["docs/data/feed.json"] or not messages
+        if (not owned_clone or not paths or not set(paths).issubset(FEED_FILES) or not messages
                 or any(message != "Update ScrollForge feed" for message in messages)
                 or not (root / ".cache/local-agent/outbox.json").is_file()):
             raise RuntimeError("diverged local history is not a recoverable cached feed publication")
@@ -177,12 +186,13 @@ def _pull_latest(root: Path) -> None:
 def _push_feed(root: Path) -> None:
     git = _resolve_cli("GIT_BIN", "git")
     status = _run([git, "status", "--porcelain"], cwd=root).stdout.splitlines()
-    if any(not line.endswith("docs/data/feed.json") for line in status):
+    if any(line[3:] not in FEED_FILES for line in status):
         raise RuntimeError("isolated checkout contains unexpected changes")
-    _run([git, "add", "--", "docs/data/feed.json"], cwd=root)
+    paths = sorted(path for path in FEED_FILES if (root / path).is_file())
+    _run([git, "add", "--", *paths], cwd=root)
     staged = _run([git, "diff", "--cached", "--name-only"], cwd=root).stdout.splitlines()
-    if staged != ["docs/data/feed.json"]:
-        raise RuntimeError("refusing to publish files outside docs/data/feed.json")
+    if "docs/data/feed.json" not in staged or not set(staged).issubset(FEED_FILES):
+        raise RuntimeError("refusing to publish files outside the feed and its version marker")
     _run([git, "commit", "-m", "Update ScrollForge feed"], cwd=root, timeout=60)
     _run([git, "push"], cwd=root, timeout=120)
 

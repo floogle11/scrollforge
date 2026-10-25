@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-25T04:27:03Z",
+  "last_updated": "2026-10-25T05:13:48Z",
   "calendar_mode": "BASELINE",
   "active_exam_course": null,
   "cards": [
@@ -1704,6 +1704,1730 @@
       "topic": "Replace a planar pin correctly"
     },
     {
+      "id": "study_physics2_potential_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Potential energy per charge",
+      "body_markdown": "A 5 C positive charge moves through a potential increase of 4 V. Find its change in electric potential energy. Choose the closest value.",
+      "solution_markdown": "$\\Delta U=q\\Delta V$. A positive charge gains potential energy when potential increases.\nThe result is **20 J**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "40 J",
+          "20 J",
+          "10 J",
+          "80 J"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "field",
+      "diagram_labels": [
+        "q = 5 C",
+        "ΔV = +4 V"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_potential_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Potential energy per charge",
+      "body_markdown": "A 4 C positive charge moves through a potential increase of 3 V. Find its change in electric potential energy. Choose the closest value.",
+      "solution_markdown": "$\\Delta U=q\\Delta V$. A positive charge gains potential energy when potential increases.\nThe result is **12 J**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "12 J",
+          "48 J",
+          "6 J",
+          "24 J"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "field",
+      "diagram_labels": [
+        "q = 4 C",
+        "ΔV = +3 V"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_potential_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Potential energy per charge",
+      "body_markdown": "A 3 C positive charge moves through a potential increase of 2 V. Find its change in electric potential energy. Choose the closest value.",
+      "solution_markdown": "$\\Delta U=q\\Delta V$. A positive charge gains potential energy when potential increases.\nThe result is **6 J**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3 J",
+          "12 J",
+          "6 J",
+          "24 J"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "field",
+      "diagram_labels": [
+        "q = 3 C",
+        "ΔV = +2 V"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_potential_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Potential energy per charge",
+      "body_markdown": "A 2 C positive charge moves through a potential increase of 1 V. Find its change in electric potential energy. Choose the closest value.",
+      "solution_markdown": "$\\Delta U=q\\Delta V$. A positive charge gains potential energy when potential increases.\nThe result is **2 J**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4 J",
+          "1 J",
+          "2 J",
+          "8 J"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "field",
+      "diagram_labels": [
+        "q = 2 C",
+        "ΔV = +1 V"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_ohm_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Current through one resistor",
+      "body_markdown": "An ideal 30 V battery drives one 12 Ω resistor. Neglect wire resistance. Find current. Choose the closest value.",
+      "solution_markdown": "$I=V/R$ by Ohm's law. The full battery voltage appears across the only resistor.\nThe result is **2.5 A**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "5 A",
+          "2.5 A",
+          "10 A",
+          "1.25 A"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "resistor",
+      "diagram_labels": [
+        "V = 30 V",
+        "R = 12 Ω"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_ohm_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Current through one resistor",
+      "body_markdown": "An ideal 24 V battery drives one 9 Ω resistor. Neglect wire resistance. Find current. Choose the closest value.",
+      "solution_markdown": "$I=V/R$ by Ohm's law. The full battery voltage appears across the only resistor.\nThe result is **2.667 A**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2.667 A",
+          "5.333 A",
+          "10.67 A",
+          "1.333 A"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "resistor",
+      "diagram_labels": [
+        "V = 24 V",
+        "R = 9 Ω"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_ohm_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Current through one resistor",
+      "body_markdown": "An ideal 18 V battery drives one 6 Ω resistor. Neglect wire resistance. Find current. Choose the closest value.",
+      "solution_markdown": "$I=V/R$ by Ohm's law. The full battery voltage appears across the only resistor.\nThe result is **3 A**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "1.5 A",
+          "12 A",
+          "3 A",
+          "6 A"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "resistor",
+      "diagram_labels": [
+        "V = 18 V",
+        "R = 6 Ω"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_ohm_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Current through one resistor",
+      "body_markdown": "An ideal 12 V battery drives one 3 Ω resistor. Neglect wire resistance. Find current. Choose the closest value.",
+      "solution_markdown": "$I=V/R$ by Ohm's law. The full battery voltage appears across the only resistor.\nThe result is **4 A**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "8 A",
+          "4 A",
+          "16 A",
+          "2 A"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "resistor",
+      "diagram_labels": [
+        "V = 12 V",
+        "R = 3 Ω"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_magnetic_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Magnetic force at a right angle",
+      "body_markdown": "A straight 4 m wire carries 5 A perpendicular to a uniform 0.4 T magnetic field. Find magnetic force magnitude. Choose the closest value.",
+      "solution_markdown": "$F=ILB\\sin\\theta$. Perpendicular means $\\theta=90°$ and the sine is one.\nThe result is **8 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "8 N",
+          "32 N",
+          "16 N",
+          "4 N"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "magnetic",
+      "diagram_labels": [
+        "B is into the page",
+        "Current is to the right"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_magnetic_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Magnetic force at a right angle",
+      "body_markdown": "A straight 3 m wire carries 4 A perpendicular to a uniform 0.4 T magnetic field. Find magnetic force magnitude. Choose the closest value.",
+      "solution_markdown": "$F=ILB\\sin\\theta$. Perpendicular means $\\theta=90°$ and the sine is one.\nThe result is **4.8 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2.4 N",
+          "9.6 N",
+          "4.8 N",
+          "19.2 N"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "magnetic",
+      "diagram_labels": [
+        "B is into the page",
+        "Current is to the right"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_magnetic_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Magnetic force at a right angle",
+      "body_markdown": "A straight 2 m wire carries 3 A perpendicular to a uniform 0.4 T magnetic field. Find magnetic force magnitude. Choose the closest value.",
+      "solution_markdown": "$F=ILB\\sin\\theta$. Perpendicular means $\\theta=90°$ and the sine is one.\nThe result is **2.4 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2.4 N",
+          "4.8 N",
+          "1.2 N",
+          "9.6 N"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "magnetic",
+      "diagram_labels": [
+        "B is into the page",
+        "Current is to the right"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_magnetic_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Magnetic force at a right angle",
+      "body_markdown": "A straight 1 m wire carries 2 A perpendicular to a uniform 0.4 T magnetic field. Find magnetic force magnitude. Choose the closest value.",
+      "solution_markdown": "$F=ILB\\sin\\theta$. Perpendicular means $\\theta=90°$ and the sine is one.\nThe result is **0.8 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "1.6 N",
+          "3.2 N",
+          "0.8 N",
+          "0.4 N"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "magnetic",
+      "diagram_labels": [
+        "B is into the page",
+        "Current is to the right"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_lens_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "An image from the thin-lens equation",
+      "body_markdown": "A converging thin lens has focal length 25 cm. A real object is 75 cm from the lens. Find the positive image distance. Choose the closest value.",
+      "solution_markdown": "$1/f=1/d_o+1/d_i$, so $d_i=fd_o/(d_o-f)$. Both object and real image distances are positive here.\nThe result is **37.5 cm**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "37.5 cm",
+          "75 cm",
+          "18.75 cm",
+          "150 cm"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "lens",
+      "diagram_labels": [
+        "f = 25 cm",
+        "Object distance = 75 cm"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_lens_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "An image from the thin-lens equation",
+      "body_markdown": "A converging thin lens has focal length 20 cm. A real object is 60 cm from the lens. Find the positive image distance. Choose the closest value.",
+      "solution_markdown": "$1/f=1/d_o+1/d_i$, so $d_i=fd_o/(d_o-f)$. Both object and real image distances are positive here.\nThe result is **30 cm**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "15 cm",
+          "120 cm",
+          "30 cm",
+          "60 cm"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "lens",
+      "diagram_labels": [
+        "f = 20 cm",
+        "Object distance = 60 cm"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_lens_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "An image from the thin-lens equation",
+      "body_markdown": "A converging thin lens has focal length 15 cm. A real object is 45 cm from the lens. Find the positive image distance. Choose the closest value.",
+      "solution_markdown": "$1/f=1/d_o+1/d_i$, so $d_i=fd_o/(d_o-f)$. Both object and real image distances are positive here.\nThe result is **22.5 cm**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "90 cm",
+          "22.5 cm",
+          "45 cm",
+          "11.25 cm"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "lens",
+      "diagram_labels": [
+        "f = 15 cm",
+        "Object distance = 45 cm"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_lens_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "An image from the thin-lens equation",
+      "body_markdown": "A converging thin lens has focal length 10 cm. A real object is 30 cm from the lens. Find the positive image distance. Choose the closest value.",
+      "solution_markdown": "$1/f=1/d_o+1/d_i$, so $d_i=fd_o/(d_o-f)$. Both object and real image distances are positive here.\nThe result is **15 cm**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "7.5 cm",
+          "15 cm",
+          "30 cm",
+          "60 cm"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "lens",
+      "diagram_labels": [
+        "f = 10 cm",
+        "Object distance = 30 cm"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_field_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Force from a uniform electric field",
+      "body_markdown": "A positive 5 µC charge is in a uniform 2000 N/C electric field. Find electric force magnitude. Choose the closest value.",
+      "solution_markdown": "$|F|=|q|E$. A positive charge accelerates along the field.\nThe result is **0.01 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.02 N",
+          "0.01 N",
+          "0.005 N",
+          "0.04 N"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "field",
+      "diagram_labels": [
+        "Uniform E = 2000 N/C"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_field_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Force from a uniform electric field",
+      "body_markdown": "A positive 4 µC charge is in a uniform 2000 N/C electric field. Find electric force magnitude. Choose the closest value.",
+      "solution_markdown": "$|F|=|q|E$. A positive charge accelerates along the field.\nThe result is **0.008 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.008 N",
+          "0.032 N",
+          "0.016 N",
+          "0.004 N"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "field",
+      "diagram_labels": [
+        "Uniform E = 2000 N/C"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_field_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Force from a uniform electric field",
+      "body_markdown": "A positive 3 µC charge is in a uniform 2000 N/C electric field. Find electric force magnitude. Choose the closest value.",
+      "solution_markdown": "$|F|=|q|E$. A positive charge accelerates along the field.\nThe result is **0.006 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.006 N",
+          "0.024 N",
+          "0.012 N",
+          "0.003 N"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "field",
+      "diagram_labels": [
+        "Uniform E = 2000 N/C"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_field_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Force from a uniform electric field",
+      "body_markdown": "A positive 2 µC charge is in a uniform 2000 N/C electric field. Find electric force magnitude. Choose the closest value.",
+      "solution_markdown": "$|F|=|q|E$. A positive charge accelerates along the field.\nThe result is **0.004 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.008 N",
+          "0.002 N",
+          "0.016 N",
+          "0.004 N"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "field",
+      "diagram_labels": [
+        "Uniform E = 2000 N/C"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_faraday_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Changing flux creates an emf",
+      "body_markdown": "Flux per turn through a 50-turn coil changes uniformly from zero to 0.04 Wb in 0.5 s. Find induced emf magnitude. Choose the closest value.",
+      "solution_markdown": "$|\\mathcal E|=N|\\Delta\\Phi/\\Delta t|$. Flux is per turn, so multiply by the turn count.\nThe result is **4 V**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "8 V",
+          "4 V",
+          "2 V",
+          "16 V"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "magnetic",
+      "diagram_labels": [
+        "N = 50",
+        "Uniform flux change"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_faraday_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Changing flux creates an emf",
+      "body_markdown": "Flux per turn through a 40-turn coil changes uniformly from zero to 0.03 Wb in 0.5 s. Find induced emf magnitude. Choose the closest value.",
+      "solution_markdown": "$|\\mathcal E|=N|\\Delta\\Phi/\\Delta t|$. Flux is per turn, so multiply by the turn count.\nThe result is **2.4 V**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4.8 V",
+          "9.6 V",
+          "2.4 V",
+          "1.2 V"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "magnetic",
+      "diagram_labels": [
+        "N = 40",
+        "Uniform flux change"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_faraday_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Changing flux creates an emf",
+      "body_markdown": "Flux per turn through a 30-turn coil changes uniformly from zero to 0.02 Wb in 0.5 s. Find induced emf magnitude. Choose the closest value.",
+      "solution_markdown": "$|\\mathcal E|=N|\\Delta\\Phi/\\Delta t|$. Flux is per turn, so multiply by the turn count.\nThe result is **1.2 V**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2.4 V",
+          "4.8 V",
+          "0.6 V",
+          "1.2 V"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "magnetic",
+      "diagram_labels": [
+        "N = 30",
+        "Uniform flux change"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_faraday_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Changing flux creates an emf",
+      "body_markdown": "Flux per turn through a 20-turn coil changes uniformly from zero to 0.01 Wb in 0.5 s. Find induced emf magnitude. Choose the closest value.",
+      "solution_markdown": "$|\\mathcal E|=N|\\Delta\\Phi/\\Delta t|$. Flux is per turn, so multiply by the turn count.\nThe result is **0.4 V**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.8 V",
+          "0.4 V",
+          "1.6 V",
+          "0.2 V"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "magnetic",
+      "diagram_labels": [
+        "N = 20",
+        "Uniform flux change"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_coulomb_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Force between two point charges",
+      "body_markdown": "Two positive point charges of 5 µC each are separated by 4 m in vacuum. Using k=8.988×10⁹ N·m²/C², find force magnitude. Choose the closest value.",
+      "solution_markdown": "$F=k|q_1q_2|/r^2$. Convert each microcoulomb to 10⁻⁶ C. Like charges repel.\nThe result is **0.01404 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.007022 N",
+          "0.01404 N",
+          "0.05617 N",
+          "0.02809 N"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "charges",
+      "diagram_labels": [
+        "q₁ = q₂ = 5 µC",
+        "Separation = 4 m"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_coulomb_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Force between two point charges",
+      "body_markdown": "Two positive point charges of 4 µC each are separated by 3 m in vacuum. Using k=8.988×10⁹ N·m²/C², find force magnitude. Choose the closest value.",
+      "solution_markdown": "$F=k|q_1q_2|/r^2$. Convert each microcoulomb to 10⁻⁶ C. Like charges repel.\nThe result is **0.01598 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.03196 N",
+          "0.007989 N",
+          "0.06391 N",
+          "0.01598 N"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "charges",
+      "diagram_labels": [
+        "q₁ = q₂ = 4 µC",
+        "Separation = 3 m"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_coulomb_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Force between two point charges",
+      "body_markdown": "Two positive point charges of 3 µC each are separated by 2 m in vacuum. Using k=8.988×10⁹ N·m²/C², find force magnitude. Choose the closest value.",
+      "solution_markdown": "$F=k|q_1q_2|/r^2$. Convert each microcoulomb to 10⁻⁶ C. Like charges repel.\nThe result is **0.02022 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.08089 N",
+          "0.01011 N",
+          "0.02022 N",
+          "0.04045 N"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "charges",
+      "diagram_labels": [
+        "q₁ = q₂ = 3 µC",
+        "Separation = 2 m"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_coulomb_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Force between two point charges",
+      "body_markdown": "Two positive point charges of 2 µC each are separated by 1 m in vacuum. Using k=8.988×10⁹ N·m²/C², find force magnitude. Choose the closest value.",
+      "solution_markdown": "$F=k|q_1q_2|/r^2$. Convert each microcoulomb to 10⁻⁶ C. Like charges repel.\nThe result is **0.03595 N**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.01798 N",
+          "0.0719 N",
+          "0.1438 N",
+          "0.03595 N"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "charges",
+      "diagram_labels": [
+        "q₁ = q₂ = 2 µC",
+        "Separation = 1 m"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_capacitor_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Energy stored in a capacitor",
+      "body_markdown": "A 5 µF capacitor has 40 V across it. Find stored energy in millijoules. Choose the closest value.",
+      "solution_markdown": "$U=CV^2/2$. Convert µF to F, then joules to millijoules.\nThe result is **4 mJ**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "16 mJ",
+          "8 mJ",
+          "2 mJ",
+          "4 mJ"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "capacitor",
+      "diagram_labels": [
+        "C = 5 µF",
+        "V = 40 V"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_capacitor_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Energy stored in a capacitor",
+      "body_markdown": "A 4 µF capacitor has 30 V across it. Find stored energy in millijoules. Choose the closest value.",
+      "solution_markdown": "$U=CV^2/2$. Convert µF to F, then joules to millijoules.\nThe result is **1.8 mJ**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3.6 mJ",
+          "1.8 mJ",
+          "7.2 mJ",
+          "0.9 mJ"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "capacitor",
+      "diagram_labels": [
+        "C = 4 µF",
+        "V = 30 V"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_capacitor_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Energy stored in a capacitor",
+      "body_markdown": "A 3 µF capacitor has 20 V across it. Find stored energy in millijoules. Choose the closest value.",
+      "solution_markdown": "$U=CV^2/2$. Convert µF to F, then joules to millijoules.\nThe result is **0.6 mJ**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2.4 mJ",
+          "0.6 mJ",
+          "1.2 mJ",
+          "0.3 mJ"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "capacitor",
+      "diagram_labels": [
+        "C = 3 µF",
+        "V = 20 V"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics2_capacitor_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-II",
+      "title": "Energy stored in a capacitor",
+      "body_markdown": "A 2 µF capacitor has 10 V across it. Find stored energy in millijoules. Choose the closest value.",
+      "solution_markdown": "$U=CV^2/2$. Convert µF to F, then joules to millijoules.\nThe result is **0.1 mJ**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.05 mJ",
+          "0.2 mJ",
+          "0.4 mJ",
+          "0.1 mJ"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "capacitor",
+      "diagram_labels": [
+        "C = 2 µF",
+        "V = 10 V"
+      ],
+      "topic": "PHYS-II"
+    },
+    {
+      "id": "study_physics1_wave_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Frequency times wavelength",
+      "body_markdown": "A traveling wave has frequency 25 Hz and wavelength 4 m. Find wave speed. Choose the closest value.",
+      "solution_markdown": "$v=f\\lambda$. Frequency counts cycles per second; wavelength is length per cycle.\nThe result is **100 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "200 m/s",
+          "50 m/s",
+          "100 m/s",
+          "400 m/s"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "wave",
+      "diagram_labels": [
+        "f = 25 Hz",
+        "λ = 4 m"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_wave_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Frequency times wavelength",
+      "body_markdown": "A traveling wave has frequency 20 Hz and wavelength 3 m. Find wave speed. Choose the closest value.",
+      "solution_markdown": "$v=f\\lambda$. Frequency counts cycles per second; wavelength is length per cycle.\nThe result is **60 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "30 m/s",
+          "240 m/s",
+          "120 m/s",
+          "60 m/s"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "wave",
+      "diagram_labels": [
+        "f = 20 Hz",
+        "λ = 3 m"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_wave_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Frequency times wavelength",
+      "body_markdown": "A traveling wave has frequency 15 Hz and wavelength 2 m. Find wave speed. Choose the closest value.",
+      "solution_markdown": "$v=f\\lambda$. Frequency counts cycles per second; wavelength is length per cycle.\nThe result is **30 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "30 m/s",
+          "60 m/s",
+          "15 m/s",
+          "120 m/s"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "wave",
+      "diagram_labels": [
+        "f = 15 Hz",
+        "λ = 2 m"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_wave_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Frequency times wavelength",
+      "body_markdown": "A traveling wave has frequency 10 Hz and wavelength 1 m. Find wave speed. Choose the closest value.",
+      "solution_markdown": "$v=f\\lambda$. Frequency counts cycles per second; wavelength is length per cycle.\nThe result is **10 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "20 m/s",
+          "40 m/s",
+          "10 m/s",
+          "5 m/s"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "wave",
+      "diagram_labels": [
+        "f = 10 Hz",
+        "λ = 1 m"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_velocity_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Constant acceleration changes velocity",
+      "body_markdown": "A cart starts at 4 m/s and accelerates at 5 m/s² for 3 s. Find its final velocity. Choose the closest value.",
+      "solution_markdown": "$v=v_0+at$ for constant acceleration. All supplied directions are positive.\nThe result is **19 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "38 m/s",
+          "9.5 m/s",
+          "76 m/s",
+          "19 m/s"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "motion",
+      "diagram_labels": [
+        "a = 5 m/s²",
+        "t = 3 s"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_velocity_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Constant acceleration changes velocity",
+      "body_markdown": "A cart starts at 3 m/s and accelerates at 4 m/s² for 3 s. Find its final velocity. Choose the closest value.",
+      "solution_markdown": "$v=v_0+at$ for constant acceleration. All supplied directions are positive.\nThe result is **15 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "15 m/s",
+          "30 m/s",
+          "60 m/s",
+          "7.5 m/s"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "motion",
+      "diagram_labels": [
+        "a = 4 m/s²",
+        "t = 3 s"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_velocity_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Constant acceleration changes velocity",
+      "body_markdown": "A cart starts at 2 m/s and accelerates at 3 m/s² for 3 s. Find its final velocity. Choose the closest value.",
+      "solution_markdown": "$v=v_0+at$ for constant acceleration. All supplied directions are positive.\nThe result is **11 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "22 m/s",
+          "5.5 m/s",
+          "11 m/s",
+          "44 m/s"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "motion",
+      "diagram_labels": [
+        "a = 3 m/s²",
+        "t = 3 s"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_velocity_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Constant acceleration changes velocity",
+      "body_markdown": "A cart starts at 1 m/s and accelerates at 2 m/s² for 3 s. Find its final velocity. Choose the closest value.",
+      "solution_markdown": "$v=v_0+at$ for constant acceleration. All supplied directions are positive.\nThe result is **7 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "14 m/s",
+          "7 m/s",
+          "3.5 m/s",
+          "28 m/s"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "motion",
+      "diagram_labels": [
+        "a = 2 m/s²",
+        "t = 3 s"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_spring_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "A spring sets the oscillation period",
+      "body_markdown": "An ideal mass-spring system has mass 5 kg and stiffness 500 N/m. Find its period. Choose the closest value.",
+      "solution_markdown": "$T=2\\pi\\sqrt{m/k}$. Here $k/m=100$ s⁻², so angular frequency is 10 rad/s.\nThe result is **0.6283 s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2.513 s",
+          "0.6283 s",
+          "0.3142 s",
+          "1.257 s"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "spring",
+      "diagram_labels": [
+        "m = 5 kg",
+        "k = 500 N/m"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_spring_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "A spring sets the oscillation period",
+      "body_markdown": "An ideal mass-spring system has mass 4 kg and stiffness 400 N/m. Find its period. Choose the closest value.",
+      "solution_markdown": "$T=2\\pi\\sqrt{m/k}$. Here $k/m=100$ s⁻², so angular frequency is 10 rad/s.\nThe result is **0.6283 s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.6283 s",
+          "1.257 s",
+          "0.3142 s",
+          "2.513 s"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "spring",
+      "diagram_labels": [
+        "m = 4 kg",
+        "k = 400 N/m"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_spring_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "A spring sets the oscillation period",
+      "body_markdown": "An ideal mass-spring system has mass 3 kg and stiffness 300 N/m. Find its period. Choose the closest value.",
+      "solution_markdown": "$T=2\\pi\\sqrt{m/k}$. Here $k/m=100$ s⁻², so angular frequency is 10 rad/s.\nThe result is **0.6283 s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.6283 s",
+          "2.513 s",
+          "0.3142 s",
+          "1.257 s"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "spring",
+      "diagram_labels": [
+        "m = 3 kg",
+        "k = 300 N/m"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_spring_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "A spring sets the oscillation period",
+      "body_markdown": "An ideal mass-spring system has mass 2 kg and stiffness 200 N/m. Find its period. Choose the closest value.",
+      "solution_markdown": "$T=2\\pi\\sqrt{m/k}$. Here $k/m=100$ s⁻², so angular frequency is 10 rad/s.\nThe result is **0.6283 s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.3142 s",
+          "1.257 s",
+          "2.513 s",
+          "0.6283 s"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "spring",
+      "diagram_labels": [
+        "m = 2 kg",
+        "k = 200 N/m"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_rotation_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Rotational kinetic energy",
+      "body_markdown": "A rotor has fixed-axis inertia 5 kg·m² and angular speed 6 rad/s. Find its rotational kinetic energy. Choose the closest value.",
+      "solution_markdown": "$K_{rot}=I\\omega^2/2$. Angular speed must be in radians per second.\nThe result is **90 J**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "90 J",
+          "180 J",
+          "360 J",
+          "45 J"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "shaft",
+      "diagram_labels": [
+        "I = 5 kg·m²",
+        "ω = 6 rad/s"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_rotation_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Rotational kinetic energy",
+      "body_markdown": "A rotor has fixed-axis inertia 4 kg·m² and angular speed 5 rad/s. Find its rotational kinetic energy. Choose the closest value.",
+      "solution_markdown": "$K_{rot}=I\\omega^2/2$. Angular speed must be in radians per second.\nThe result is **50 J**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "25 J",
+          "200 J",
+          "50 J",
+          "100 J"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "shaft",
+      "diagram_labels": [
+        "I = 4 kg·m²",
+        "ω = 5 rad/s"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_rotation_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Rotational kinetic energy",
+      "body_markdown": "A rotor has fixed-axis inertia 3 kg·m² and angular speed 4 rad/s. Find its rotational kinetic energy. Choose the closest value.",
+      "solution_markdown": "$K_{rot}=I\\omega^2/2$. Angular speed must be in radians per second.\nThe result is **24 J**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "96 J",
+          "48 J",
+          "24 J",
+          "12 J"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "shaft",
+      "diagram_labels": [
+        "I = 3 kg·m²",
+        "ω = 4 rad/s"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_rotation_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Rotational kinetic energy",
+      "body_markdown": "A rotor has fixed-axis inertia 2 kg·m² and angular speed 3 rad/s. Find its rotational kinetic energy. Choose the closest value.",
+      "solution_markdown": "$K_{rot}=I\\omega^2/2$. Angular speed must be in radians per second.\nThe result is **9 J**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "18 J",
+          "4.5 J",
+          "36 J",
+          "9 J"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "shaft",
+      "diagram_labels": [
+        "I = 2 kg·m²",
+        "ω = 3 rad/s"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_projectile_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Time to the top of the arc",
+      "body_markdown": "A projectile launches with upward velocity 39.24 m/s. Neglect air resistance and take g=9.81 m/s². Find time to maximum height. Choose the closest value.",
+      "solution_markdown": "At maximum height the vertical velocity is zero. From $v_y=v_{0y}-gt$, $t=v_{0y}/g$.\nThe result is **4 s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4 s",
+          "8 s",
+          "2 s",
+          "16 s"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "projectile",
+      "diagram_labels": [
+        "No air resistance",
+        "g = 9.81 m/s²"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_projectile_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Time to the top of the arc",
+      "body_markdown": "A projectile launches with upward velocity 29.43 m/s. Neglect air resistance and take g=9.81 m/s². Find time to maximum height. Choose the closest value.",
+      "solution_markdown": "At maximum height the vertical velocity is zero. From $v_y=v_{0y}-gt$, $t=v_{0y}/g$.\nThe result is **3 s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "6 s",
+          "1.5 s",
+          "12 s",
+          "3 s"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "projectile",
+      "diagram_labels": [
+        "No air resistance",
+        "g = 9.81 m/s²"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_projectile_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Time to the top of the arc",
+      "body_markdown": "A projectile launches with upward velocity 19.62 m/s. Neglect air resistance and take g=9.81 m/s². Find time to maximum height. Choose the closest value.",
+      "solution_markdown": "At maximum height the vertical velocity is zero. From $v_y=v_{0y}-gt$, $t=v_{0y}/g$.\nThe result is **2 s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "1 s",
+          "4 s",
+          "8 s",
+          "2 s"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "projectile",
+      "diagram_labels": [
+        "No air resistance",
+        "g = 9.81 m/s²"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_projectile_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Time to the top of the arc",
+      "body_markdown": "A projectile launches with upward velocity 9.81 m/s. Neglect air resistance and take g=9.81 m/s². Find time to maximum height. Choose the closest value.",
+      "solution_markdown": "At maximum height the vertical velocity is zero. From $v_y=v_{0y}-gt$, $t=v_{0y}/g$.\nThe result is **1 s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4 s",
+          "2 s",
+          "1 s",
+          "0.5 s"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "projectile",
+      "diagram_labels": [
+        "No air resistance",
+        "g = 9.81 m/s²"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_newton_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Net force controls acceleration",
+      "body_markdown": "A 5 kg cart has a 30 N force right and a 10 N force left. Find acceleration to the right. Choose the closest value.",
+      "solution_markdown": "Net force is $30-10=20$ N. Divide by the 5 kg mass using Newton's second law.\nThe result is **4 m/s²**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "16 m/s²",
+          "8 m/s²",
+          "2 m/s²",
+          "4 m/s²"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "forces",
+      "diagram_labels": [
+        "Right force = 30 N",
+        "Left force = 10 N"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_newton_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Net force controls acceleration",
+      "body_markdown": "A 4 kg cart has a 24 N force right and a 8 N force left. Find acceleration to the right. Choose the closest value.",
+      "solution_markdown": "Net force is $24-8=16$ N. Divide by the 4 kg mass using Newton's second law.\nThe result is **4 m/s²**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2 m/s²",
+          "4 m/s²",
+          "16 m/s²",
+          "8 m/s²"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "forces",
+      "diagram_labels": [
+        "Right force = 24 N",
+        "Left force = 8 N"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_newton_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Net force controls acceleration",
+      "body_markdown": "A 3 kg cart has a 18 N force right and a 6 N force left. Find acceleration to the right. Choose the closest value.",
+      "solution_markdown": "Net force is $18-6=12$ N. Divide by the 3 kg mass using Newton's second law.\nThe result is **4 m/s²**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "8 m/s²",
+          "16 m/s²",
+          "4 m/s²",
+          "2 m/s²"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "forces",
+      "diagram_labels": [
+        "Right force = 18 N",
+        "Left force = 6 N"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_newton_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Net force controls acceleration",
+      "body_markdown": "A 2 kg cart has a 12 N force right and a 4 N force left. Find acceleration to the right. Choose the closest value.",
+      "solution_markdown": "Net force is $12-4=8$ N. Divide by the 2 kg mass using Newton's second law.\nThe result is **4 m/s²**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2 m/s²",
+          "8 m/s²",
+          "16 m/s²",
+          "4 m/s²"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "forces",
+      "diagram_labels": [
+        "Right force = 12 N",
+        "Left force = 4 N"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_momentum_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Two carts stick together",
+      "body_markdown": "A 5 kg cart moving at 6 m/s strikes an identical stationary cart and sticks to it. With negligible external impulse, find their shared speed. Choose the closest value.",
+      "solution_markdown": "Momentum conservation gives $(5)(6)=(2\\times 5)v$. Kinetic energy is not conserved in this collision.\nThe result is **3 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "12 m/s",
+          "6 m/s",
+          "3 m/s",
+          "1.5 m/s"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "motion",
+      "diagram_labels": [
+        "Equal masses",
+        "Perfectly inelastic collision"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_momentum_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Two carts stick together",
+      "body_markdown": "A 4 kg cart moving at 6 m/s strikes an identical stationary cart and sticks to it. With negligible external impulse, find their shared speed. Choose the closest value.",
+      "solution_markdown": "Momentum conservation gives $(4)(6)=(2\\times 4)v$. Kinetic energy is not conserved in this collision.\nThe result is **3 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "6 m/s",
+          "12 m/s",
+          "3 m/s",
+          "1.5 m/s"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "motion",
+      "diagram_labels": [
+        "Equal masses",
+        "Perfectly inelastic collision"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_momentum_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Two carts stick together",
+      "body_markdown": "A 3 kg cart moving at 6 m/s strikes an identical stationary cart and sticks to it. With negligible external impulse, find their shared speed. Choose the closest value.",
+      "solution_markdown": "Momentum conservation gives $(3)(6)=(2\\times 3)v$. Kinetic energy is not conserved in this collision.\nThe result is **3 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "12 m/s",
+          "6 m/s",
+          "3 m/s",
+          "1.5 m/s"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "motion",
+      "diagram_labels": [
+        "Equal masses",
+        "Perfectly inelastic collision"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_momentum_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "Two carts stick together",
+      "body_markdown": "A 2 kg cart moving at 6 m/s strikes an identical stationary cart and sticks to it. With negligible external impulse, find their shared speed. Choose the closest value.",
+      "solution_markdown": "Momentum conservation gives $(2)(6)=(2\\times 2)v$. Kinetic energy is not conserved in this collision.\nThe result is **3 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "1.5 m/s",
+          "3 m/s",
+          "6 m/s",
+          "12 m/s"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "motion",
+      "diagram_labels": [
+        "Equal masses",
+        "Perfectly inelastic collision"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_energy_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "A drop converts potential energy",
+      "body_markdown": "A mass falls from rest through 5 m. Neglect drag and use g=9.81 m/s². Find speed after the drop. Choose the closest value.",
+      "solution_markdown": "$mgh=mv^2/2$, so $v=\\sqrt{2gh}$. Mass cancels.\nThe result is **9.905 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "9.905 m/s",
+          "4.952 m/s",
+          "39.62 m/s",
+          "19.81 m/s"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "falling",
+      "diagram_labels": [
+        "Drop = 5 m",
+        "Initial speed = 0"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_energy_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "A drop converts potential energy",
+      "body_markdown": "A mass falls from rest through 4 m. Neglect drag and use g=9.81 m/s². Find speed after the drop. Choose the closest value.",
+      "solution_markdown": "$mgh=mv^2/2$, so $v=\\sqrt{2gh}$. Mass cancels.\nThe result is **8.859 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "17.72 m/s",
+          "35.44 m/s",
+          "4.429 m/s",
+          "8.859 m/s"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "falling",
+      "diagram_labels": [
+        "Drop = 4 m",
+        "Initial speed = 0"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_energy_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "A drop converts potential energy",
+      "body_markdown": "A mass falls from rest through 3 m. Neglect drag and use g=9.81 m/s². Find speed after the drop. Choose the closest value.",
+      "solution_markdown": "$mgh=mv^2/2$, so $v=\\sqrt{2gh}$. Mass cancels.\nThe result is **7.672 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "15.34 m/s",
+          "3.836 m/s",
+          "7.672 m/s",
+          "30.69 m/s"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "falling",
+      "diagram_labels": [
+        "Drop = 3 m",
+        "Initial speed = 0"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
+      "id": "study_physics1_energy_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "PHYS-I",
+      "title": "A drop converts potential energy",
+      "body_markdown": "A mass falls from rest through 2 m. Neglect drag and use g=9.81 m/s². Find speed after the drop. Choose the closest value.",
+      "solution_markdown": "$mgh=mv^2/2$, so $v=\\sqrt{2gh}$. Mass cancels.\nThe result is **6.264 m/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3.132 m/s",
+          "6.264 m/s",
+          "25.06 m/s",
+          "12.53 m/s"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "falling",
+      "diagram_labels": [
+        "Drop = 2 m",
+        "Initial speed = 0"
+      ],
+      "topic": "PHYS-I"
+    },
+    {
       "id": "study_period_3",
       "created_at": "2026-10-25T00:00:00Z",
       "category": "CHALLENGE_CURRENT",
@@ -2050,6 +3774,426 @@
         "Rigid and insulated"
       ],
       "topic": "Insulated does not mean no energy change"
+    },
+    {
+      "id": "study_ode_roots_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Find the faster exponential decay",
+      "body_markdown": "The ODE is $y''+11y'+30y=0$. What is the magnitude of its more negative characteristic root? Choose the closest value.",
+      "solution_markdown": "The characteristic polynomial factors as $(r+5)(r+6)$. Roots are -5 and -6.\nThe result is **6**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "6",
+          "12",
+          "3",
+          "24"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Constant-coefficient second-order ODE"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_roots_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Find the faster exponential decay",
+      "body_markdown": "The ODE is $y''+9y'+20y=0$. What is the magnitude of its more negative characteristic root? Choose the closest value.",
+      "solution_markdown": "The characteristic polynomial factors as $(r+4)(r+5)$. Roots are -4 and -5.\nThe result is **5**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "10",
+          "2.5",
+          "5",
+          "20"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Constant-coefficient second-order ODE"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_roots_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Find the faster exponential decay",
+      "body_markdown": "The ODE is $y''+7y'+12y=0$. What is the magnitude of its more negative characteristic root? Choose the closest value.",
+      "solution_markdown": "The characteristic polynomial factors as $(r+3)(r+4)$. Roots are -3 and -4.\nThe result is **4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "8",
+          "16",
+          "2",
+          "4"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Constant-coefficient second-order ODE"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_roots_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Find the faster exponential decay",
+      "body_markdown": "The ODE is $y''+5y'+6y=0$. What is the magnitude of its more negative characteristic root? Choose the closest value.",
+      "solution_markdown": "The characteristic polynomial factors as $(r+2)(r+3)$. Roots are -2 and -3.\nThe result is **3**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "12",
+          "6",
+          "3",
+          "1.5"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Constant-coefficient second-order ODE"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_ivp_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Integrate a simple initial-value problem",
+      "body_markdown": "Given $y'=10t$ and $y(0)=4$, find $y(2)$. Choose the closest value.",
+      "solution_markdown": "Integrate to $y=5t^2+C$. The initial value gives $C=4$, then substitute t=2.\nThe result is **24**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "24",
+          "12",
+          "96",
+          "48"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "y(0) = 4"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_ivp_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Integrate a simple initial-value problem",
+      "body_markdown": "Given $y'=8t$ and $y(0)=3$, find $y(2)$. Choose the closest value.",
+      "solution_markdown": "Integrate to $y=4t^2+C$. The initial value gives $C=3$, then substitute t=2.\nThe result is **19**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "38",
+          "9.5",
+          "76",
+          "19"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "y(0) = 3"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_ivp_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Integrate a simple initial-value problem",
+      "body_markdown": "Given $y'=6t$ and $y(0)=2$, find $y(2)$. Choose the closest value.",
+      "solution_markdown": "Integrate to $y=3t^2+C$. The initial value gives $C=2$, then substitute t=2.\nThe result is **14**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "14",
+          "56",
+          "28",
+          "7"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "y(0) = 2"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_ivp_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Integrate a simple initial-value problem",
+      "body_markdown": "Given $y'=4t$ and $y(0)=1$, find $y(2)$. Choose the closest value.",
+      "solution_markdown": "Integrate to $y=2t^2+C$. The initial value gives $C=1$, then substitute t=2.\nThe result is **9**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4.5",
+          "36",
+          "9",
+          "18"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "y(0) = 1"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_forcing_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "A constant forcing reaches equilibrium",
+      "body_markdown": "For $y'+5y=60$, what is the equilibrium value of y? Choose the closest value.",
+      "solution_markdown": "At equilibrium $y'=0$. Solve $5y=60$. The positive coefficient also makes this equilibrium stable.\nThe result is **12**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "6",
+          "12",
+          "48",
+          "24"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Set the derivative to zero"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_forcing_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "A constant forcing reaches equilibrium",
+      "body_markdown": "For $y'+4y=36$, what is the equilibrium value of y? Choose the closest value.",
+      "solution_markdown": "At equilibrium $y'=0$. Solve $4y=36$. The positive coefficient also makes this equilibrium stable.\nThe result is **9**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "36",
+          "9",
+          "18",
+          "4.5"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Set the derivative to zero"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_forcing_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "A constant forcing reaches equilibrium",
+      "body_markdown": "For $y'+3y=18$, what is the equilibrium value of y? Choose the closest value.",
+      "solution_markdown": "At equilibrium $y'=0$. Solve $3y=18$. The positive coefficient also makes this equilibrium stable.\nThe result is **6**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3",
+          "12",
+          "6",
+          "24"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Set the derivative to zero"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_forcing_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "A constant forcing reaches equilibrium",
+      "body_markdown": "For $y'+2y=6$, what is the equilibrium value of y? Choose the closest value.",
+      "solution_markdown": "At equilibrium $y'=0$. Solve $2y=6$. The positive coefficient also makes this equilibrium stable.\nThe result is **3**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "1.5",
+          "12",
+          "6",
+          "3"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Set the derivative to zero"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_decay_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Solve a first-order decay IVP",
+      "body_markdown": "Solve $y'=-5y$, $y(0)=40$. What is $y(1)$? Choose the closest value.",
+      "solution_markdown": "Separate variables to get $y=Ce^{-5t}$. The initial value sets $C=40$; evaluate at t=1.\nThe result is **0.2695**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.1348",
+          "0.2695",
+          "1.078",
+          "0.539"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Decay rate = 5",
+        "y(0) = 40"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_decay_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Solve a first-order decay IVP",
+      "body_markdown": "Solve $y'=-4y$, $y(0)=30$. What is $y(1)$? Choose the closest value.",
+      "solution_markdown": "Separate variables to get $y=Ce^{-4t}$. The initial value sets $C=30$; evaluate at t=1.\nThe result is **0.5495**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.5495",
+          "0.2747",
+          "1.099",
+          "2.198"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Decay rate = 4",
+        "y(0) = 30"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_decay_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Solve a first-order decay IVP",
+      "body_markdown": "Solve $y'=-3y$, $y(0)=20$. What is $y(1)$? Choose the closest value.",
+      "solution_markdown": "Separate variables to get $y=Ce^{-3t}$. The initial value sets $C=20$; evaluate at t=1.\nThe result is **0.9957**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3.983",
+          "1.991",
+          "0.4979",
+          "0.9957"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Decay rate = 3",
+        "y(0) = 20"
+      ],
+      "topic": "DIFF-EQ"
+    },
+    {
+      "id": "study_ode_decay_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "DIFF-EQ",
+      "title": "Solve a first-order decay IVP",
+      "body_markdown": "Solve $y'=-2y$, $y(0)=10$. What is $y(1)$? Choose the closest value.",
+      "solution_markdown": "Separate variables to get $y=Ce^{-2t}$. The initial value sets $C=10$; evaluate at t=1.\nThe result is **1.353**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.6767",
+          "1.353",
+          "5.413",
+          "2.707"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "decay",
+      "diagram_labels": [
+        "Decay rate = 2",
+        "y(0) = 10"
+      ],
+      "topic": "DIFF-EQ"
     },
     {
       "id": "study_note_zero_state",
@@ -2870,6 +5014,422 @@
         "ΔT = 10 K"
       ],
       "topic": "Warm up a mass of water"
+    },
+    {
+      "id": "study_linear_system_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "Solve two simultaneous equations",
+      "body_markdown": "Solve $x+y=9$ and $x-y=1$. What is x? Choose the closest value.",
+      "solution_markdown": "Add the equations to eliminate y: $2x=10$. Divide by two.\nThe result is **5**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2.5",
+          "5",
+          "10",
+          "20"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "Eliminate y by addition"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_system_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "Solve two simultaneous equations",
+      "body_markdown": "Solve $x+y=7$ and $x-y=1$. What is x? Choose the closest value.",
+      "solution_markdown": "Add the equations to eliminate y: $2x=8$. Divide by two.\nThe result is **4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4",
+          "16",
+          "8",
+          "2"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "Eliminate y by addition"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_system_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "Solve two simultaneous equations",
+      "body_markdown": "Solve $x+y=5$ and $x-y=1$. What is x? Choose the closest value.",
+      "solution_markdown": "Add the equations to eliminate y: $2x=6$. Divide by two.\nThe result is **3**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3",
+          "6",
+          "12",
+          "1.5"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "Eliminate y by addition"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_system_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "Solve two simultaneous equations",
+      "body_markdown": "Solve $x+y=3$ and $x-y=1$. What is x? Choose the closest value.",
+      "solution_markdown": "Add the equations to eliminate y: $2x=4$. Divide by two.\nThe result is **2**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2",
+          "4",
+          "8",
+          "1"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "Eliminate y by addition"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_projection_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "The size of a vector projection",
+      "body_markdown": "Find the magnitude of the orthogonal projection of $(5,4)$ onto the x-axis. Choose the closest value.",
+      "solution_markdown": "The unit axis vector is $(1,0)$. The projection is $(5,0)$, with magnitude 5.\nThe result is **5**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "20",
+          "10",
+          "2.5",
+          "5"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes2d",
+      "diagram_labels": [
+        "Projection onto x-axis"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_projection_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "The size of a vector projection",
+      "body_markdown": "Find the magnitude of the orthogonal projection of $(4,3)$ onto the x-axis. Choose the closest value.",
+      "solution_markdown": "The unit axis vector is $(1,0)$. The projection is $(4,0)$, with magnitude 4.\nThe result is **4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4",
+          "16",
+          "2",
+          "8"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "axes2d",
+      "diagram_labels": [
+        "Projection onto x-axis"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_projection_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "The size of a vector projection",
+      "body_markdown": "Find the magnitude of the orthogonal projection of $(3,2)$ onto the x-axis. Choose the closest value.",
+      "solution_markdown": "The unit axis vector is $(1,0)$. The projection is $(3,0)$, with magnitude 3.\nThe result is **3**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3",
+          "12",
+          "1.5",
+          "6"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "axes2d",
+      "diagram_labels": [
+        "Projection onto x-axis"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_projection_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "The size of a vector projection",
+      "body_markdown": "Find the magnitude of the orthogonal projection of $(2,1)$ onto the x-axis. Choose the closest value.",
+      "solution_markdown": "The unit axis vector is $(1,0)$. The projection is $(2,0)$, with magnitude 2.\nThe result is **2**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "1",
+          "4",
+          "2",
+          "8"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "axes2d",
+      "diagram_labels": [
+        "Projection onto x-axis"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_eigen_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "Read an eigenvalue from a triangular matrix",
+      "body_markdown": "The matrix is $A=\\begin{pmatrix}5&1\\\\0&7\\end{pmatrix}$. What is its larger eigenvalue? Choose the closest value.",
+      "solution_markdown": "A triangular matrix's eigenvalues are its diagonal entries, 5 and 7.\nThe result is **7**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "28",
+          "14",
+          "7",
+          "3.5"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "Upper triangular matrix"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_eigen_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "Read an eigenvalue from a triangular matrix",
+      "body_markdown": "The matrix is $A=\\begin{pmatrix}4&1\\\\0&6\\end{pmatrix}$. What is its larger eigenvalue? Choose the closest value.",
+      "solution_markdown": "A triangular matrix's eigenvalues are its diagonal entries, 4 and 6.\nThe result is **6**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "12",
+          "6",
+          "24",
+          "3"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "Upper triangular matrix"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_eigen_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "Read an eigenvalue from a triangular matrix",
+      "body_markdown": "The matrix is $A=\\begin{pmatrix}3&1\\\\0&5\\end{pmatrix}$. What is its larger eigenvalue? Choose the closest value.",
+      "solution_markdown": "A triangular matrix's eigenvalues are its diagonal entries, 3 and 5.\nThe result is **5**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "20",
+          "2.5",
+          "5",
+          "10"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "Upper triangular matrix"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_eigen_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "Read an eigenvalue from a triangular matrix",
+      "body_markdown": "The matrix is $A=\\begin{pmatrix}2&1\\\\0&4\\end{pmatrix}$. What is its larger eigenvalue? Choose the closest value.",
+      "solution_markdown": "A triangular matrix's eigenvalues are its diagonal entries, 2 and 4.\nThe result is **4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "8",
+          "4",
+          "16",
+          "2"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "Upper triangular matrix"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_det_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "A two-by-two determinant",
+      "body_markdown": "Find the determinant of $\\begin{pmatrix}5&1\\\\2&6\\end{pmatrix}$. Choose the closest value.",
+      "solution_markdown": "For a 2×2 matrix, determinant is $ad-bc=5(6)-1(2)$.\nThe result is **28**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "28",
+          "14",
+          "56",
+          "112"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "2 × 2 determinant"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_det_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "A two-by-two determinant",
+      "body_markdown": "Find the determinant of $\\begin{pmatrix}4&1\\\\2&5\\end{pmatrix}$. Choose the closest value.",
+      "solution_markdown": "For a 2×2 matrix, determinant is $ad-bc=4(5)-1(2)$.\nThe result is **18**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "36",
+          "72",
+          "18",
+          "9"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "2 × 2 determinant"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_det_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "A two-by-two determinant",
+      "body_markdown": "Find the determinant of $\\begin{pmatrix}3&1\\\\2&4\\end{pmatrix}$. Choose the closest value.",
+      "solution_markdown": "For a 2×2 matrix, determinant is $ad-bc=3(4)-1(2)$.\nThe result is **10**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "40",
+          "10",
+          "5",
+          "20"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "2 × 2 determinant"
+      ],
+      "topic": "LINEAR-ALG"
+    },
+    {
+      "id": "study_linear_det_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "LINEAR-ALG",
+      "title": "A two-by-two determinant",
+      "body_markdown": "Find the determinant of $\\begin{pmatrix}2&1\\\\2&3\\end{pmatrix}$. Choose the closest value.",
+      "solution_markdown": "For a 2×2 matrix, determinant is $ad-bc=2(3)-1(2)$.\nThe result is **4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "16",
+          "8",
+          "2",
+          "4"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "matrix",
+      "diagram_labels": [
+        "2 × 2 determinant"
+      ],
+      "topic": "LINEAR-ALG"
     },
     {
       "id": "study_laminar_scaling_3",
@@ -4922,6 +7482,2546 @@
         "Cold = 300 K"
       ],
       "topic": "The efficiency ceiling"
+    },
+    {
+      "id": "study_calc3_triple_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A constant density in a box",
+      "body_markdown": "A box has $0\\leq x\\leq 5$, $0\\leq y\\leq 4$, $0\\leq z\\leq 2$ m and uniform density 3 kg/m³. Find its mass. Choose the closest value.",
+      "solution_markdown": "$m=\\iiint\\rho dV$. Constant density times volume is $3(5)(4)(2)$.\nThe result is **120 kg**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "240 kg",
+          "120 kg",
+          "480 kg",
+          "60 kg"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Uniform density = 3 kg/m³"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_triple_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A constant density in a box",
+      "body_markdown": "A box has $0\\leq x\\leq 4$, $0\\leq y\\leq 3$, $0\\leq z\\leq 2$ m and uniform density 3 kg/m³. Find its mass. Choose the closest value.",
+      "solution_markdown": "$m=\\iiint\\rho dV$. Constant density times volume is $3(4)(3)(2)$.\nThe result is **72 kg**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "36 kg",
+          "288 kg",
+          "144 kg",
+          "72 kg"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Uniform density = 3 kg/m³"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_triple_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A constant density in a box",
+      "body_markdown": "A box has $0\\leq x\\leq 3$, $0\\leq y\\leq 2$, $0\\leq z\\leq 2$ m and uniform density 3 kg/m³. Find its mass. Choose the closest value.",
+      "solution_markdown": "$m=\\iiint\\rho dV$. Constant density times volume is $3(3)(2)(2)$.\nThe result is **36 kg**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "18 kg",
+          "36 kg",
+          "144 kg",
+          "72 kg"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Uniform density = 3 kg/m³"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_triple_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A constant density in a box",
+      "body_markdown": "A box has $0\\leq x\\leq 2$, $0\\leq y\\leq 1$, $0\\leq z\\leq 2$ m and uniform density 3 kg/m³. Find its mass. Choose the closest value.",
+      "solution_markdown": "$m=\\iiint\\rho dV$. Constant density times volume is $3(2)(1)(2)$.\nThe result is **12 kg**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "24 kg",
+          "12 kg",
+          "6 kg",
+          "48 kg"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Uniform density = 3 kg/m³"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_partial_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Hold the other variable fixed",
+      "body_markdown": "For $f(x,y)=x^2y+5y^2$, find $f_x(2,4)$. Choose the closest value.",
+      "solution_markdown": "Treat y as constant: $f_x=2xy$. At $(2,4)$ this becomes $4(4)$.\nThe result is **16**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "8",
+          "32",
+          "64",
+          "16"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Partial derivative with respect to x"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_partial_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Hold the other variable fixed",
+      "body_markdown": "For $f(x,y)=x^2y+4y^2$, find $f_x(2,3)$. Choose the closest value.",
+      "solution_markdown": "Treat y as constant: $f_x=2xy$. At $(2,3)$ this becomes $4(3)$.\nThe result is **12**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "24",
+          "6",
+          "48",
+          "12"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Partial derivative with respect to x"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_partial_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Hold the other variable fixed",
+      "body_markdown": "For $f(x,y)=x^2y+3y^2$, find $f_x(2,2)$. Choose the closest value.",
+      "solution_markdown": "Treat y as constant: $f_x=2xy$. At $(2,2)$ this becomes $4(2)$.\nThe result is **8**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "8",
+          "32",
+          "4",
+          "16"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Partial derivative with respect to x"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_partial_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Hold the other variable fixed",
+      "body_markdown": "For $f(x,y)=x^2y+2y^2$, find $f_x(2,1)$. Choose the closest value.",
+      "solution_markdown": "Treat y as constant: $f_x=2xy$. At $(2,1)$ this becomes $4(1)$.\nThe result is **4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2",
+          "8",
+          "16",
+          "4"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Partial derivative with respect to x"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_line_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A conservative field saves an integral",
+      "body_markdown": "Find $\\int_C\\nabla(x^2+y^2)\\cdot d\\mathbf r$ from $(0,0)$ to $(5,4)$ along any smooth path. Choose the closest value.",
+      "solution_markdown": "The gradient field has potential $f=x^2+y^2$. The integral is $f(5,4)-f(0,0)$.\nThe result is **41**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "82",
+          "20.5",
+          "164",
+          "41"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Gradient field",
+        "Only endpoints matter"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_line_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A conservative field saves an integral",
+      "body_markdown": "Find $\\int_C\\nabla(x^2+y^2)\\cdot d\\mathbf r$ from $(0,0)$ to $(4,3)$ along any smooth path. Choose the closest value.",
+      "solution_markdown": "The gradient field has potential $f=x^2+y^2$. The integral is $f(4,3)-f(0,0)$.\nThe result is **25**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "25",
+          "50",
+          "100",
+          "12.5"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Gradient field",
+        "Only endpoints matter"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_line_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A conservative field saves an integral",
+      "body_markdown": "Find $\\int_C\\nabla(x^2+y^2)\\cdot d\\mathbf r$ from $(0,0)$ to $(3,2)$ along any smooth path. Choose the closest value.",
+      "solution_markdown": "The gradient field has potential $f=x^2+y^2$. The integral is $f(3,2)-f(0,0)$.\nThe result is **13**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "52",
+          "6.5",
+          "13",
+          "26"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Gradient field",
+        "Only endpoints matter"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_line_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A conservative field saves an integral",
+      "body_markdown": "Find $\\int_C\\nabla(x^2+y^2)\\cdot d\\mathbf r$ from $(0,0)$ to $(2,1)$ along any smooth path. Choose the closest value.",
+      "solution_markdown": "The gradient field has potential $f=x^2+y^2$. The integral is $f(2,1)-f(0,0)$.\nThe result is **5**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2.5",
+          "5",
+          "20",
+          "10"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Gradient field",
+        "Only endpoints matter"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_gradient_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "How steep is the fastest ascent?",
+      "body_markdown": "For $f(x,y)=x^2+y^2$, find $|\\nabla f(5,4)|$. Choose the closest value.",
+      "solution_markdown": "$\\nabla f=(2x,2y)$. Its magnitude at the point is $2\\sqrt{5^2+4^2}$.\nThe result is **12.81**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "12.81",
+          "6.403",
+          "51.22",
+          "25.61"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Point: (5, 4)"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_gradient_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "How steep is the fastest ascent?",
+      "body_markdown": "For $f(x,y)=x^2+y^2$, find $|\\nabla f(4,3)|$. Choose the closest value.",
+      "solution_markdown": "$\\nabla f=(2x,2y)$. Its magnitude at the point is $2\\sqrt{4^2+3^2}$.\nThe result is **10**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "5",
+          "10",
+          "40",
+          "20"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Point: (4, 3)"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_gradient_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "How steep is the fastest ascent?",
+      "body_markdown": "For $f(x,y)=x^2+y^2$, find $|\\nabla f(3,2)|$. Choose the closest value.",
+      "solution_markdown": "$\\nabla f=(2x,2y)$. Its magnitude at the point is $2\\sqrt{3^2+2^2}$.\nThe result is **7.211**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3.606",
+          "28.84",
+          "7.211",
+          "14.42"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Point: (3, 2)"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_gradient_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "How steep is the fastest ascent?",
+      "body_markdown": "For $f(x,y)=x^2+y^2$, find $|\\nabla f(2,1)|$. Choose the closest value.",
+      "solution_markdown": "$\\nabla f=(2x,2y)$. Its magnitude at the point is $2\\sqrt{2^2+1^2}$.\nThe result is **4.472**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2.236",
+          "17.89",
+          "8.944",
+          "4.472"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Point: (2, 1)"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_double_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Integrate over a rectangle",
+      "body_markdown": "Evaluate $\\int_0^5\\int_0^4(x+y)\\,dy\\,dx$. Choose the closest value.",
+      "solution_markdown": "The inner integral is $4x+4^2/2$. Integrate this in x from zero to 5.\nThe result is **90**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "180",
+          "90",
+          "360",
+          "45"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "rectangle",
+      "diagram_labels": [
+        "0 ≤ x ≤ 5",
+        "0 ≤ y ≤ 4"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_double_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Integrate over a rectangle",
+      "body_markdown": "Evaluate $\\int_0^4\\int_0^3(x+y)\\,dy\\,dx$. Choose the closest value.",
+      "solution_markdown": "The inner integral is $3x+3^2/2$. Integrate this in x from zero to 4.\nThe result is **42**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "21",
+          "42",
+          "168",
+          "84"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "rectangle",
+      "diagram_labels": [
+        "0 ≤ x ≤ 4",
+        "0 ≤ y ≤ 3"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_double_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Integrate over a rectangle",
+      "body_markdown": "Evaluate $\\int_0^3\\int_0^2(x+y)\\,dy\\,dx$. Choose the closest value.",
+      "solution_markdown": "The inner integral is $2x+2^2/2$. Integrate this in x from zero to 3.\nThe result is **15**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "30",
+          "60",
+          "7.5",
+          "15"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "rectangle",
+      "diagram_labels": [
+        "0 ≤ x ≤ 3",
+        "0 ≤ y ≤ 2"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_double_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Integrate over a rectangle",
+      "body_markdown": "Evaluate $\\int_0^2\\int_0^1(x+y)\\,dy\\,dx$. Choose the closest value.",
+      "solution_markdown": "The inner integral is $1x+1^2/2$. Integrate this in x from zero to 2.\nThe result is **3**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "1.5",
+          "12",
+          "6",
+          "3"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "rectangle",
+      "diagram_labels": [
+        "0 ≤ x ≤ 2",
+        "0 ≤ y ≤ 1"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_divergence_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A local measure of outward flow",
+      "body_markdown": "For $\\mathbf F=(5x,4y,2z)$, find $\\nabla\\cdot\\mathbf F$. Choose the closest value.",
+      "solution_markdown": "Add the matching component derivatives: $\\partial F_x/\\partial x+\\partial F_y/\\partial y+\\partial F_z/\\partial z=5+4+2$.\nThe result is **11**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "44",
+          "5.5",
+          "22",
+          "11"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Divergence: sum of component derivatives"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_divergence_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A local measure of outward flow",
+      "body_markdown": "For $\\mathbf F=(4x,3y,2z)$, find $\\nabla\\cdot\\mathbf F$. Choose the closest value.",
+      "solution_markdown": "Add the matching component derivatives: $\\partial F_x/\\partial x+\\partial F_y/\\partial y+\\partial F_z/\\partial z=4+3+2$.\nThe result is **9**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4.5",
+          "18",
+          "36",
+          "9"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Divergence: sum of component derivatives"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_divergence_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A local measure of outward flow",
+      "body_markdown": "For $\\mathbf F=(3x,2y,2z)$, find $\\nabla\\cdot\\mathbf F$. Choose the closest value.",
+      "solution_markdown": "Add the matching component derivatives: $\\partial F_x/\\partial x+\\partial F_y/\\partial y+\\partial F_z/\\partial z=3+2+2$.\nThe result is **7**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "14",
+          "28",
+          "3.5",
+          "7"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Divergence: sum of component derivatives"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_divergence_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A local measure of outward flow",
+      "body_markdown": "For $\\mathbf F=(2x,1y,2z)$, find $\\nabla\\cdot\\mathbf F$. Choose the closest value.",
+      "solution_markdown": "Add the matching component derivatives: $\\partial F_x/\\partial x+\\partial F_y/\\partial y+\\partial F_z/\\partial z=2+1+2$.\nThe result is **5**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "20",
+          "10",
+          "5",
+          "2.5"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Divergence: sum of component derivatives"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_direction_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Direction must be a unit vector",
+      "body_markdown": "For $f(x,y)=x^2+y^2$, find the directional derivative at $(5,4)$ along the unit vector $(3/5,4/5)$. Choose the closest value.",
+      "solution_markdown": "$D_{u}f=\\nabla f\\cdot u$. Dot $(2x,2y)$ with the supplied unit vector.\nThe result is **12.4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "24.8",
+          "49.6",
+          "6.2",
+          "12.4"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Direction u = (3/5, 4/5)"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_direction_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Direction must be a unit vector",
+      "body_markdown": "For $f(x,y)=x^2+y^2$, find the directional derivative at $(4,3)$ along the unit vector $(3/5,4/5)$. Choose the closest value.",
+      "solution_markdown": "$D_{u}f=\\nabla f\\cdot u$. Dot $(2x,2y)$ with the supplied unit vector.\nThe result is **9.6**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "38.4",
+          "4.8",
+          "19.2",
+          "9.6"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Direction u = (3/5, 4/5)"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_direction_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Direction must be a unit vector",
+      "body_markdown": "For $f(x,y)=x^2+y^2$, find the directional derivative at $(3,2)$ along the unit vector $(3/5,4/5)$. Choose the closest value.",
+      "solution_markdown": "$D_{u}f=\\nabla f\\cdot u$. Dot $(2x,2y)$ with the supplied unit vector.\nThe result is **6.8**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3.4",
+          "13.6",
+          "27.2",
+          "6.8"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Direction u = (3/5, 4/5)"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_direction_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "Direction must be a unit vector",
+      "body_markdown": "For $f(x,y)=x^2+y^2$, find the directional derivative at $(2,1)$ along the unit vector $(3/5,4/5)$. Choose the closest value.",
+      "solution_markdown": "$D_{u}f=\\nabla f\\cdot u$. Dot $(2x,2y)$ with the supplied unit vector.\nThe result is **4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2",
+          "8",
+          "4",
+          "16"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Direction u = (3/5, 4/5)"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_curl_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A rotational vector field",
+      "body_markdown": "For $\\mathbf F=(-5y,5x,0)$, find the z component of $\\nabla\\times\\mathbf F$. Choose the closest value.",
+      "solution_markdown": "The z component is $\\partial F_y/\\partial x-\\partial F_x/\\partial y=5-(-5)$.\nThe result is **10**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "10",
+          "5",
+          "40",
+          "20"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Curl about the z-axis"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_curl_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A rotational vector field",
+      "body_markdown": "For $\\mathbf F=(-4y,4x,0)$, find the z component of $\\nabla\\times\\mathbf F$. Choose the closest value.",
+      "solution_markdown": "The z component is $\\partial F_y/\\partial x-\\partial F_x/\\partial y=4-(-4)$.\nThe result is **8**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "32",
+          "8",
+          "16",
+          "4"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Curl about the z-axis"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_curl_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A rotational vector field",
+      "body_markdown": "For $\\mathbf F=(-3y,3x,0)$, find the z component of $\\nabla\\times\\mathbf F$. Choose the closest value.",
+      "solution_markdown": "The z component is $\\partial F_y/\\partial x-\\partial F_x/\\partial y=3-(-3)$.\nThe result is **6**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "24",
+          "3",
+          "6",
+          "12"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Curl about the z-axis"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc3_curl_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-III",
+      "title": "A rotational vector field",
+      "body_markdown": "For $\\mathbf F=(-2y,2x,0)$, find the z component of $\\nabla\\times\\mathbf F$. Choose the closest value.",
+      "solution_markdown": "The z component is $\\partial F_y/\\partial x-\\partial F_x/\\partial y=2-(-2)$.\nThe result is **4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "2",
+          "4",
+          "8",
+          "16"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "axes3d",
+      "diagram_labels": [
+        "Curl about the z-axis"
+      ],
+      "topic": "CALC-III"
+    },
+    {
+      "id": "study_calc2_taylor_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "A local exponential approximation",
+      "body_markdown": "Use the degree-two Maclaurin polynomial of $e^x$ to approximate $e^{0.4}$. Choose the closest value.",
+      "solution_markdown": "$P_2(x)=1+x+x^2/2$. Substitute the requested x; this is an approximation, not the exact exponential.\nThe result is **1.48**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.74",
+          "2.96",
+          "1.48",
+          "5.92"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "series",
+      "diagram_labels": [
+        "Degree 2",
+        "x = 0.4"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_taylor_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "A local exponential approximation",
+      "body_markdown": "Use the degree-two Maclaurin polynomial of $e^x$ to approximate $e^{0.3}$. Choose the closest value.",
+      "solution_markdown": "$P_2(x)=1+x+x^2/2$. Substitute the requested x; this is an approximation, not the exact exponential.\nThe result is **1.345**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.6725",
+          "5.38",
+          "1.345",
+          "2.69"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "series",
+      "diagram_labels": [
+        "Degree 2",
+        "x = 0.3"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_taylor_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "A local exponential approximation",
+      "body_markdown": "Use the degree-two Maclaurin polynomial of $e^x$ to approximate $e^{0.2}$. Choose the closest value.",
+      "solution_markdown": "$P_2(x)=1+x+x^2/2$. Substitute the requested x; this is an approximation, not the exact exponential.\nThe result is **1.22**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4.88",
+          "1.22",
+          "2.44",
+          "0.61"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "series",
+      "diagram_labels": [
+        "Degree 2",
+        "x = 0.2"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_taylor_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "A local exponential approximation",
+      "body_markdown": "Use the degree-two Maclaurin polynomial of $e^x$ to approximate $e^{0.1}$. Choose the closest value.",
+      "solution_markdown": "$P_2(x)=1+x+x^2/2$. Substitute the requested x; this is an approximation, not the exact exponential.\nThe result is **1.105**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.5525",
+          "2.21",
+          "1.105",
+          "4.42"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "series",
+      "diagram_labels": [
+        "Degree 2",
+        "x = 0.1"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_substitution_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Spot the substitution",
+      "body_markdown": "Evaluate $\\int_0^1 10x e^{5x^2}\\,dx$. Choose the closest value.",
+      "solution_markdown": "Set $u=5x^2$, so $du=10x\\,dx$. The new bounds are zero and 5, giving $e^5-1$.\nThe result is **147.4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "589.7",
+          "73.71",
+          "147.4",
+          "294.8"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Use u = a x²"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_substitution_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Spot the substitution",
+      "body_markdown": "Evaluate $\\int_0^1 8x e^{4x^2}\\,dx$. Choose the closest value.",
+      "solution_markdown": "Set $u=4x^2$, so $du=8x\\,dx$. The new bounds are zero and 4, giving $e^4-1$.\nThe result is **53.6**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "107.2",
+          "26.8",
+          "53.6",
+          "214.4"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Use u = a x²"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_substitution_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Spot the substitution",
+      "body_markdown": "Evaluate $\\int_0^1 6x e^{3x^2}\\,dx$. Choose the closest value.",
+      "solution_markdown": "Set $u=3x^2$, so $du=6x\\,dx$. The new bounds are zero and 3, giving $e^3-1$.\nThe result is **19.09**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "19.09",
+          "76.34",
+          "38.17",
+          "9.543"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Use u = a x²"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_substitution_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Spot the substitution",
+      "body_markdown": "Evaluate $\\int_0^1 4x e^{2x^2}\\,dx$. Choose the closest value.",
+      "solution_markdown": "Set $u=2x^2$, so $du=4x\\,dx$. The new bounds are zero and 2, giving $e^2-1$.\nThe result is **6.389**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "12.78",
+          "25.56",
+          "6.389",
+          "3.195"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Use u = a x²"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_polar_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Area in polar coordinates",
+      "body_markdown": "Find the area inside the polar curve $r=5$ for $0\\leq\\theta\\leq\\pi/2$. Choose the closest value.",
+      "solution_markdown": "Use $A=\\tfrac12\\int r^2 d\\theta$. A quarter circle gives $A=\\pi 5^2/4$.\nThe result is **19.63 units²**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "9.817 units²",
+          "78.54 units²",
+          "19.63 units²",
+          "39.27 units²"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "polar",
+      "diagram_labels": [
+        "Radius = 5",
+        "First quadrant"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_polar_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Area in polar coordinates",
+      "body_markdown": "Find the area inside the polar curve $r=4$ for $0\\leq\\theta\\leq\\pi/2$. Choose the closest value.",
+      "solution_markdown": "Use $A=\\tfrac12\\int r^2 d\\theta$. A quarter circle gives $A=\\pi 4^2/4$.\nThe result is **12.57 units²**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "25.13 units²",
+          "50.27 units²",
+          "12.57 units²",
+          "6.283 units²"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "polar",
+      "diagram_labels": [
+        "Radius = 4",
+        "First quadrant"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_polar_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Area in polar coordinates",
+      "body_markdown": "Find the area inside the polar curve $r=3$ for $0\\leq\\theta\\leq\\pi/2$. Choose the closest value.",
+      "solution_markdown": "Use $A=\\tfrac12\\int r^2 d\\theta$. A quarter circle gives $A=\\pi 3^2/4$.\nThe result is **7.069 units²**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3.534 units²",
+          "14.14 units²",
+          "7.069 units²",
+          "28.27 units²"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "polar",
+      "diagram_labels": [
+        "Radius = 3",
+        "First quadrant"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_polar_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Area in polar coordinates",
+      "body_markdown": "Find the area inside the polar curve $r=2$ for $0\\leq\\theta\\leq\\pi/2$. Choose the closest value.",
+      "solution_markdown": "Use $A=\\tfrac12\\int r^2 d\\theta$. A quarter circle gives $A=\\pi 2^2/4$.\nThe result is **3.142 units²**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "12.57 units²",
+          "3.142 units²",
+          "6.283 units²",
+          "1.571 units²"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "polar",
+      "diagram_labels": [
+        "Radius = 2",
+        "First quadrant"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_parts_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "One integration by parts",
+      "body_markdown": "Evaluate $\\int_0^5 x e^x\\,dx$. Choose the closest value.",
+      "solution_markdown": "Choose $u=x$, $dv=e^x dx$. An antiderivative is $(x-1)e^x$; subtract its lower-bound value of -1.\nThe result is **594.7**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "297.3",
+          "1189",
+          "2379",
+          "594.7"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Integration by parts"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_parts_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "One integration by parts",
+      "body_markdown": "Evaluate $\\int_0^4 x e^x\\,dx$. Choose the closest value.",
+      "solution_markdown": "Choose $u=x$, $dv=e^x dx$. An antiderivative is $(x-1)e^x$; subtract its lower-bound value of -1.\nThe result is **164.8**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "82.4",
+          "329.6",
+          "659.2",
+          "164.8"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Integration by parts"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_parts_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "One integration by parts",
+      "body_markdown": "Evaluate $\\int_0^3 x e^x\\,dx$. Choose the closest value.",
+      "solution_markdown": "Choose $u=x$, $dv=e^x dx$. An antiderivative is $(x-1)e^x$; subtract its lower-bound value of -1.\nThe result is **41.17**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "164.7",
+          "20.59",
+          "82.34",
+          "41.17"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Integration by parts"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_parts_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "One integration by parts",
+      "body_markdown": "Evaluate $\\int_0^2 x e^x\\,dx$. Choose the closest value.",
+      "solution_markdown": "Choose $u=x$, $dv=e^x dx$. An antiderivative is $(x-1)e^x$; subtract its lower-bound value of -1.\nThe result is **8.389**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "8.389",
+          "33.56",
+          "16.78",
+          "4.195"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Integration by parts"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_partial_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Split a rational integrand",
+      "body_markdown": "Evaluate $\\int_1^5 [1/(x(x+1))]\\,dx$. Choose the closest value.",
+      "solution_markdown": "$1/[x(x+1)]=1/x-1/(x+1)$. Evaluate $\\ln x-\\ln(x+1)$ at both positive bounds.\nThe result is **0.5108**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.2554",
+          "2.043",
+          "1.022",
+          "0.5108"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Partial fractions",
+        "Bounds: 1 to 5"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_partial_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Split a rational integrand",
+      "body_markdown": "Evaluate $\\int_1^4 [1/(x(x+1))]\\,dx$. Choose the closest value.",
+      "solution_markdown": "$1/[x(x+1)]=1/x-1/(x+1)$. Evaluate $\\ln x-\\ln(x+1)$ at both positive bounds.\nThe result is **0.47**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.47",
+          "0.235",
+          "0.94",
+          "1.88"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Partial fractions",
+        "Bounds: 1 to 4"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_partial_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Split a rational integrand",
+      "body_markdown": "Evaluate $\\int_1^3 [1/(x(x+1))]\\,dx$. Choose the closest value.",
+      "solution_markdown": "$1/[x(x+1)]=1/x-1/(x+1)$. Evaluate $\\ln x-\\ln(x+1)$ at both positive bounds.\nThe result is **0.4055**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.2027",
+          "0.8109",
+          "0.4055",
+          "1.622"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Partial fractions",
+        "Bounds: 1 to 3"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_partial_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Split a rational integrand",
+      "body_markdown": "Evaluate $\\int_1^2 [1/(x(x+1))]\\,dx$. Choose the closest value.",
+      "solution_markdown": "$1/[x(x+1)]=1/x-1/(x+1)$. Evaluate $\\ln x-\\ln(x+1)$ at both positive bounds.\nThe result is **0.2877**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.1438",
+          "1.151",
+          "0.2877",
+          "0.5754"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Partial fractions",
+        "Bounds: 1 to 2"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_improper_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Does the tail converge?",
+      "body_markdown": "Evaluate $\\int_1^\\infty x^{-6}\\,dx$. Choose the closest value.",
+      "solution_markdown": "Since 6>1, the p-integral converges. The antiderivative $x^{1-6}/(1-6)$ vanishes at infinity.\nThe result is **0.2**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.2",
+          "0.1",
+          "0.4",
+          "0.8"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "p = 6 > 1"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_improper_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Does the tail converge?",
+      "body_markdown": "Evaluate $\\int_1^\\infty x^{-5}\\,dx$. Choose the closest value.",
+      "solution_markdown": "Since 5>1, the p-integral converges. The antiderivative $x^{1-5}/(1-5)$ vanishes at infinity.\nThe result is **0.25**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "1",
+          "0.125",
+          "0.25",
+          "0.5"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "p = 5 > 1"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_improper_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Does the tail converge?",
+      "body_markdown": "Evaluate $\\int_1^\\infty x^{-4}\\,dx$. Choose the closest value.",
+      "solution_markdown": "Since 4>1, the p-integral converges. The antiderivative $x^{1-4}/(1-4)$ vanishes at infinity.\nThe result is **0.3333**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.1667",
+          "0.3333",
+          "1.333",
+          "0.6667"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "p = 4 > 1"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_improper_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Does the tail converge?",
+      "body_markdown": "Evaluate $\\int_1^\\infty x^{-3}\\,dx$. Choose the closest value.",
+      "solution_markdown": "Since 3>1, the p-integral converges. The antiderivative $x^{1-3}/(1-3)$ vanishes at infinity.\nThe result is **0.5**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.25",
+          "2",
+          "0.5",
+          "1"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "p = 3 > 1"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_geometric_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "An infinite geometric sum",
+      "body_markdown": "Find $\\sum_{k=0}^\\infty (1/5)^k$. Choose the closest value.",
+      "solution_markdown": "The common ratio is $r=1/5$ with $|r|<1$. Starting at k=0 gives $1/(1-r)$.\nThe result is **1.25**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "5",
+          "2.5",
+          "1.25",
+          "0.625"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "series",
+      "diagram_labels": [
+        "Ratio r = 1/5",
+        "First term = 1"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_geometric_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "An infinite geometric sum",
+      "body_markdown": "Find $\\sum_{k=0}^\\infty (1/4)^k$. Choose the closest value.",
+      "solution_markdown": "The common ratio is $r=1/4$ with $|r|<1$. Starting at k=0 gives $1/(1-r)$.\nThe result is **1.333**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "1.333",
+          "0.6667",
+          "2.667",
+          "5.333"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "series",
+      "diagram_labels": [
+        "Ratio r = 1/4",
+        "First term = 1"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_geometric_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "An infinite geometric sum",
+      "body_markdown": "Find $\\sum_{k=0}^\\infty (1/3)^k$. Choose the closest value.",
+      "solution_markdown": "The common ratio is $r=1/3$ with $|r|<1$. Starting at k=0 gives $1/(1-r)$.\nThe result is **1.5**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "0.75",
+          "6",
+          "3",
+          "1.5"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "series",
+      "diagram_labels": [
+        "Ratio r = 1/3",
+        "First term = 1"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_geometric_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "An infinite geometric sum",
+      "body_markdown": "Find $\\sum_{k=0}^\\infty (1/2)^k$. Choose the closest value.",
+      "solution_markdown": "The common ratio is $r=1/2$ with $|r|<1$. Starting at k=0 gives $1/(1-r)$.\nThe result is **2**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4",
+          "1",
+          "8",
+          "2"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "series",
+      "diagram_labels": [
+        "Ratio r = 1/2",
+        "First term = 1"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_disk_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Rotate a region into a solid",
+      "body_markdown": "Rotate the region below $y=x$ and above the x-axis, from $x=0$ to $x=5$, about the x-axis. Find the volume. Choose the closest value.",
+      "solution_markdown": "Disks have radius x. Thus $V=\\pi\\int_0^5x^2 dx=\\pi(5^3)/3$.\nThe result is **130.9 units³**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "130.9 units³",
+          "261.8 units³",
+          "65.45 units³",
+          "523.6 units³"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "revolution",
+      "diagram_labels": [
+        "Axis of rotation: x",
+        "Bounds: 0 to 5"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_disk_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Rotate a region into a solid",
+      "body_markdown": "Rotate the region below $y=x$ and above the x-axis, from $x=0$ to $x=4$, about the x-axis. Find the volume. Choose the closest value.",
+      "solution_markdown": "Disks have radius x. Thus $V=\\pi\\int_0^4x^2 dx=\\pi(4^3)/3$.\nThe result is **67.02 units³**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "67.02 units³",
+          "33.51 units³",
+          "268.1 units³",
+          "134 units³"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "revolution",
+      "diagram_labels": [
+        "Axis of rotation: x",
+        "Bounds: 0 to 4"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_disk_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Rotate a region into a solid",
+      "body_markdown": "Rotate the region below $y=x$ and above the x-axis, from $x=0$ to $x=3$, about the x-axis. Find the volume. Choose the closest value.",
+      "solution_markdown": "Disks have radius x. Thus $V=\\pi\\int_0^3x^2 dx=\\pi(3^3)/3$.\nThe result is **28.27 units³**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "56.55 units³",
+          "28.27 units³",
+          "14.14 units³",
+          "113.1 units³"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "revolution",
+      "diagram_labels": [
+        "Axis of rotation: x",
+        "Bounds: 0 to 3"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc2_disk_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-II",
+      "title": "Rotate a region into a solid",
+      "body_markdown": "Rotate the region below $y=x$ and above the x-axis, from $x=0$ to $x=2$, about the x-axis. Find the volume. Choose the closest value.",
+      "solution_markdown": "Disks have radius x. Thus $V=\\pi\\int_0^2x^2 dx=\\pi(2^3)/3$.\nThe result is **8.378 units³**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "33.51 units³",
+          "16.76 units³",
+          "8.378 units³",
+          "4.189 units³"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "revolution",
+      "diagram_labels": [
+        "Axis of rotation: x",
+        "Bounds: 0 to 2"
+      ],
+      "topic": "CALC-II"
+    },
+    {
+      "id": "study_calc1_related_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "An expanding circle",
+      "body_markdown": "A circle's radius is 5 m and grows at 4 m/s. Find its instantaneous area growth rate. Choose the closest value.",
+      "solution_markdown": "$A=\\pi r^2$ implies $dA/dt=2\\pi r\\,dr/dt$. Insert the instantaneous radius and radial rate.\nThe result is **125.7 m²/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "62.83 m²/s",
+          "125.7 m²/s",
+          "251.3 m²/s",
+          "502.7 m²/s"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "circle",
+      "diagram_labels": [
+        "r = 5 m",
+        "dr/dt = 4 m/s"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_related_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "An expanding circle",
+      "body_markdown": "A circle's radius is 4 m and grows at 3 m/s. Find its instantaneous area growth rate. Choose the closest value.",
+      "solution_markdown": "$A=\\pi r^2$ implies $dA/dt=2\\pi r\\,dr/dt$. Insert the instantaneous radius and radial rate.\nThe result is **75.4 m²/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "301.6 m²/s",
+          "75.4 m²/s",
+          "150.8 m²/s",
+          "37.7 m²/s"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "circle",
+      "diagram_labels": [
+        "r = 4 m",
+        "dr/dt = 3 m/s"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_related_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "An expanding circle",
+      "body_markdown": "A circle's radius is 3 m and grows at 2 m/s. Find its instantaneous area growth rate. Choose the closest value.",
+      "solution_markdown": "$A=\\pi r^2$ implies $dA/dt=2\\pi r\\,dr/dt$. Insert the instantaneous radius and radial rate.\nThe result is **37.7 m²/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "75.4 m²/s",
+          "18.85 m²/s",
+          "150.8 m²/s",
+          "37.7 m²/s"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "circle",
+      "diagram_labels": [
+        "r = 3 m",
+        "dr/dt = 2 m/s"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_related_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "An expanding circle",
+      "body_markdown": "A circle's radius is 2 m and grows at 1 m/s. Find its instantaneous area growth rate. Choose the closest value.",
+      "solution_markdown": "$A=\\pi r^2$ implies $dA/dt=2\\pi r\\,dr/dt$. Insert the instantaneous radius and radial rate.\nThe result is **12.57 m²/s**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "25.13 m²/s",
+          "12.57 m²/s",
+          "50.27 m²/s",
+          "6.283 m²/s"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "circle",
+      "diagram_labels": [
+        "r = 2 m",
+        "dr/dt = 1 m/s"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_product_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Two changing factors",
+      "body_markdown": "For $f(x)=x^2 e^{5x}$, find $f'(1)$. Choose the closest value.",
+      "solution_markdown": "Product and chain rules give $f'(x)=e^{5x}(2x+5x^2)$. Evaluate at one.\nThe result is **1039**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "519.4",
+          "2078",
+          "4156",
+          "1039"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "Product rule and chain rule"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_product_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Two changing factors",
+      "body_markdown": "For $f(x)=x^2 e^{4x}$, find $f'(1)$. Choose the closest value.",
+      "solution_markdown": "Product and chain rules give $f'(x)=e^{4x}(2x+4x^2)$. Evaluate at one.\nThe result is **327.6**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "655.2",
+          "327.6",
+          "1310",
+          "163.8"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "Product rule and chain rule"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_product_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Two changing factors",
+      "body_markdown": "For $f(x)=x^2 e^{3x}$, find $f'(1)$. Choose the closest value.",
+      "solution_markdown": "Product and chain rules give $f'(x)=e^{3x}(2x+3x^2)$. Evaluate at one.\nThe result is **100.4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "200.9",
+          "401.7",
+          "50.21",
+          "100.4"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "Product rule and chain rule"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_product_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Two changing factors",
+      "body_markdown": "For $f(x)=x^2 e^{2x}$, find $f'(1)$. Choose the closest value.",
+      "solution_markdown": "Product and chain rules give $f'(x)=e^{2x}(2x+2x^2)$. Evaluate at one.\nThe result is **29.56**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "14.78",
+          "59.11",
+          "118.2",
+          "29.56"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "Product rule and chain rule"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_power_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Slope from the power rule",
+      "body_markdown": "For $f(x)=x^6$, find $f'(2)$. Choose the closest value.",
+      "solution_markdown": "The power rule gives $f'(x)=6x^{5}$. Substitute $x=2$.\nThe result is **192**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "96",
+          "768",
+          "192",
+          "384"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "f(x) = x^6",
+        "Evaluate at x = 2"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_power_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Slope from the power rule",
+      "body_markdown": "For $f(x)=x^5$, find $f'(2)$. Choose the closest value.",
+      "solution_markdown": "The power rule gives $f'(x)=5x^{4}$. Substitute $x=2$.\nThe result is **80**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "160",
+          "80",
+          "40",
+          "320"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "f(x) = x^5",
+        "Evaluate at x = 2"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_power_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Slope from the power rule",
+      "body_markdown": "For $f(x)=x^4$, find $f'(2)$. Choose the closest value.",
+      "solution_markdown": "The power rule gives $f'(x)=4x^{3}$. Substitute $x=2$.\nThe result is **32**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "64",
+          "128",
+          "32",
+          "16"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "f(x) = x^4",
+        "Evaluate at x = 2"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_power_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Slope from the power rule",
+      "body_markdown": "For $f(x)=x^3$, find $f'(2)$. Choose the closest value.",
+      "solution_markdown": "The power rule gives $f'(x)=3x^{2}$. Substitute $x=2$.\nThe result is **12**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "24",
+          "12",
+          "6",
+          "48"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "f(x) = x^3",
+        "Evaluate at x = 2"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_optimize_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "A fixed perimeter, the largest area",
+      "body_markdown": "A rectangle has perimeter 40 m. What width maximizes its area? Choose the closest value.",
+      "solution_markdown": "Write $A(w)=w(20-w)$. Its derivative is $20-2w$, and $A''=-2<0$.\nThe result is **10 m**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "5 m",
+          "40 m",
+          "10 m",
+          "20 m"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "rectangle",
+      "diagram_labels": [
+        "Perimeter = 40 m"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_optimize_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "A fixed perimeter, the largest area",
+      "body_markdown": "A rectangle has perimeter 32 m. What width maximizes its area? Choose the closest value.",
+      "solution_markdown": "Write $A(w)=w(16-w)$. Its derivative is $16-2w$, and $A''=-2<0$.\nThe result is **8 m**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4 m",
+          "8 m",
+          "16 m",
+          "32 m"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "rectangle",
+      "diagram_labels": [
+        "Perimeter = 32 m"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_optimize_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "A fixed perimeter, the largest area",
+      "body_markdown": "A rectangle has perimeter 24 m. What width maximizes its area? Choose the closest value.",
+      "solution_markdown": "Write $A(w)=w(12-w)$. Its derivative is $12-2w$, and $A''=-2<0$.\nThe result is **6 m**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "6 m",
+          "3 m",
+          "24 m",
+          "12 m"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "rectangle",
+      "diagram_labels": [
+        "Perimeter = 24 m"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_optimize_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "A fixed perimeter, the largest area",
+      "body_markdown": "A rectangle has perimeter 16 m. What width maximizes its area? Choose the closest value.",
+      "solution_markdown": "Write $A(w)=w(8-w)$. Its derivative is $8-2w$, and $A''=-2<0$.\nThe result is **4 m**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4 m",
+          "16 m",
+          "2 m",
+          "8 m"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "rectangle",
+      "diagram_labels": [
+        "Perimeter = 16 m"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_limit_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "A removable discontinuity",
+      "body_markdown": "Find $\\lim_{x\\to 5}(x^2-25)/(x-5)$. Choose the closest value.",
+      "solution_markdown": "Factor $x^2-25=(x-5)(x+5)$. Cancel away from $x=5$, then take the limit.\nThe result is **10**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "5",
+          "20",
+          "10",
+          "40"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "limit",
+      "diagram_labels": [
+        "Approach x = 5"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_limit_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "A removable discontinuity",
+      "body_markdown": "Find $\\lim_{x\\to 4}(x^2-16)/(x-4)$. Choose the closest value.",
+      "solution_markdown": "Factor $x^2-16=(x-4)(x+4)$. Cancel away from $x=4$, then take the limit.\nThe result is **8**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "32",
+          "8",
+          "4",
+          "16"
+        ],
+        "correct_index": 1
+      },
+      "diagram": "limit",
+      "diagram_labels": [
+        "Approach x = 4"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_limit_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "A removable discontinuity",
+      "body_markdown": "Find $\\lim_{x\\to 3}(x^2-9)/(x-3)$. Choose the closest value.",
+      "solution_markdown": "Factor $x^2-9=(x-3)(x+3)$. Cancel away from $x=3$, then take the limit.\nThe result is **6**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "6",
+          "12",
+          "3",
+          "24"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "limit",
+      "diagram_labels": [
+        "Approach x = 3"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_limit_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "A removable discontinuity",
+      "body_markdown": "Find $\\lim_{x\\to 2}(x^2-4)/(x-2)$. Choose the closest value.",
+      "solution_markdown": "Factor $x^2-4=(x-2)(x+2)$. Cancel away from $x=2$, then take the limit.\nThe result is **4**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "16",
+          "8",
+          "4",
+          "2"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "limit",
+      "diagram_labels": [
+        "Approach x = 2"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_integral_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Accumulation under a parabola",
+      "body_markdown": "Evaluate $\\int_0^5 x^2\\,dx$. Choose the closest value.",
+      "solution_markdown": "An antiderivative is $x^3/3$. Evaluate at 5 and subtract the value at zero.\nThe result is **41.67**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "83.33",
+          "20.83",
+          "166.7",
+          "41.67"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "area",
+      "diagram_labels": [
+        "Bounds: 0 to 5",
+        "Integrand: x²"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_integral_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Accumulation under a parabola",
+      "body_markdown": "Evaluate $\\int_0^4 x^2\\,dx$. Choose the closest value.",
+      "solution_markdown": "An antiderivative is $x^3/3$. Evaluate at 4 and subtract the value at zero.\nThe result is **21.33**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "42.67",
+          "10.67",
+          "85.33",
+          "21.33"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "area",
+      "diagram_labels": [
+        "Bounds: 0 to 4",
+        "Integrand: x²"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_integral_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Accumulation under a parabola",
+      "body_markdown": "Evaluate $\\int_0^3 x^2\\,dx$. Choose the closest value.",
+      "solution_markdown": "An antiderivative is $x^3/3$. Evaluate at 3 and subtract the value at zero.\nThe result is **9**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "4.5",
+          "18",
+          "36",
+          "9"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "area",
+      "diagram_labels": [
+        "Bounds: 0 to 3",
+        "Integrand: x²"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_integral_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Accumulation under a parabola",
+      "body_markdown": "Evaluate $\\int_0^2 x^2\\,dx$. Choose the closest value.",
+      "solution_markdown": "An antiderivative is $x^3/3$. Evaluate at 2 and subtract the value at zero.\nThe result is **2.667**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "10.67",
+          "1.333",
+          "2.667",
+          "5.333"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "area",
+      "diagram_labels": [
+        "Bounds: 0 to 2",
+        "Integrand: x²"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_ftc_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "The upper limit moves too",
+      "body_markdown": "Let $F(x)=\\int_0^{x^2}(t+5)\\,dt$. Find $F'(1)$. Choose the closest value.",
+      "solution_markdown": "FTC plus chain rule gives $F'(x)=(x^2+5)(2x)$. Evaluate at one.\nThe result is **12**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "6",
+          "24",
+          "12",
+          "48"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Moving upper limit: x²"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_ftc_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "The upper limit moves too",
+      "body_markdown": "Let $F(x)=\\int_0^{x^2}(t+4)\\,dt$. Find $F'(1)$. Choose the closest value.",
+      "solution_markdown": "FTC plus chain rule gives $F'(x)=(x^2+4)(2x)$. Evaluate at one.\nThe result is **10**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "20",
+          "40",
+          "5",
+          "10"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Moving upper limit: x²"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_ftc_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "The upper limit moves too",
+      "body_markdown": "Let $F(x)=\\int_0^{x^2}(t+3)\\,dt$. Find $F'(1)$. Choose the closest value.",
+      "solution_markdown": "FTC plus chain rule gives $F'(x)=(x^2+3)(2x)$. Evaluate at one.\nThe result is **8**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "32",
+          "4",
+          "16",
+          "8"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Moving upper limit: x²"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_ftc_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "The upper limit moves too",
+      "body_markdown": "Let $F(x)=\\int_0^{x^2}(t+2)\\,dt$. Find $F'(1)$. Choose the closest value.",
+      "solution_markdown": "FTC plus chain rule gives $F'(x)=(x^2+2)(2x)$. Evaluate at one.\nThe result is **6**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "12",
+          "24",
+          "6",
+          "3"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "integral",
+      "diagram_labels": [
+        "Moving upper limit: x²"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_chain_3",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Remember the inner derivative",
+      "body_markdown": "For $f(x)=(5x+1)^3$, find $f'(0)$. Choose the closest value.",
+      "solution_markdown": "Chain rule: $f'(x)=15(5x+1)^2$. At zero the squared factor is one.\nThe result is **15**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "7.5",
+          "60",
+          "15",
+          "30"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "Chain rule",
+        "Evaluate at x = 0"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_chain_2",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Remember the inner derivative",
+      "body_markdown": "For $f(x)=(4x+1)^3$, find $f'(0)$. Choose the closest value.",
+      "solution_markdown": "Chain rule: $f'(x)=12(4x+1)^2$. At zero the squared factor is one.\nThe result is **12**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "24",
+          "48",
+          "12",
+          "6"
+        ],
+        "correct_index": 2
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "Chain rule",
+        "Evaluate at x = 0"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_chain_1",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Remember the inner derivative",
+      "body_markdown": "For $f(x)=(3x+1)^3$, find $f'(0)$. Choose the closest value.",
+      "solution_markdown": "Chain rule: $f'(x)=9(3x+1)^2$. At zero the squared factor is one.\nThe result is **9**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "9",
+          "36",
+          "4.5",
+          "18"
+        ],
+        "correct_index": 0
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "Chain rule",
+        "Evaluate at x = 0"
+      ],
+      "topic": "CALC-I"
+    },
+    {
+      "id": "study_calc1_chain_0",
+      "created_at": "2026-10-25T00:00:00Z",
+      "category": "CHALLENGE_PAST",
+      "course_tag": "CALC-I",
+      "title": "Remember the inner derivative",
+      "body_markdown": "For $f(x)=(2x+1)^3$, find $f'(0)$. Choose the closest value.",
+      "solution_markdown": "Chain rule: $f'(x)=6(2x+1)^2$. At zero the squared factor is one.\nThe result is **6**. Check the units before choosing.",
+      "source_url": null,
+      "parent_card_id": null,
+      "comments": [],
+      "quiz": {
+        "options": [
+          "3",
+          "24",
+          "12",
+          "6"
+        ],
+        "correct_index": 3
+      },
+      "diagram": "tangent",
+      "diagram_labels": [
+        "Chain rule",
+        "Evaluate at x = 0"
+      ],
+      "topic": "CALC-I"
     },
     {
       "id": "study_bending_stress_3",
@@ -9216,34 +14316,6 @@
       "body_markdown": "Whoever did this to a little kid is the worst human being on the planet. If you know them call them out publicly and shame them.",
       "solution_markdown": null,
       "source_url": "https://www.reddit.com/r/Utah_Hockey/comments/1x8uvtm/if_this_is_you_youre_a_piece_of_shit/",
-      "parent_card_id": null,
-      "comments": [],
-      "sport": "hockey",
-      "team": "Utah Mammoth"
-    },
-    {
-      "id": "rss_reddit_utahhockey_ab05e79ce01063f17d",
-      "created_at": "2026-10-18T04:42:26Z",
-      "category": "SPORTS",
-      "course_tag": null,
-      "title": "Post-Game Thread: The Edmonton Oilers subdued the Utah Mammoth 6-2 - 17 Oct 2026",
-      "body_markdown": "Open the original Reddit post to see its media and discussion.",
-      "solution_markdown": null,
-      "source_url": "https://www.reddit.com/r/Utah_Hockey/comments/1x8u9oe/postgame_thread_the_edmonton_oilers_subdued_the/",
-      "parent_card_id": null,
-      "comments": [],
-      "sport": "hockey",
-      "team": "Utah Mammoth"
-    },
-    {
-      "id": "rss_reddit_utahhockey_8d9d435fd85a18965a",
-      "created_at": "2026-10-18T04:29:26Z",
-      "category": "SPORTS",
-      "course_tag": null,
-      "title": "Marino refuses to be victim of a shutout, and then Sergachev flops it over Jarry to get 2 quick goals for the Mammoth",
-      "body_markdown": "Marino refuses to be victim of a shutout, and then Sergachev flops it over Jarry to get 2 quick goals for the Mammoth",
-      "solution_markdown": null,
-      "source_url": "https://www.reddit.com/r/Utah_Hockey/comments/1x8u1o2/marino_refuses_to_be_victim_of_a_shutout_and_then/",
       "parent_card_id": null,
       "comments": [],
       "sport": "hockey",

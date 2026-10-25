@@ -195,7 +195,7 @@
             "rectangle",
             "parallel_springs",
             "series_springs",
-            "member"
+            "member", "axes2d", "axes3d", "tangent", "limit", "area", "integral", "series", "circle", "polar", "revolution", "matrix", "decay", "motion", "falling", "projectile", "forces", "wave", "charges", "field", "resistor", "capacitor", "magnetic", "lens"
           ]
         }
       }

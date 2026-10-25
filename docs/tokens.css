@@ -222,4 +222,12 @@ button:disabled { opacity: .5; cursor: wait; }
   .team-picks button { font-size: 10px; }
 }
 .post-image { display: block; width: 100%; max-height: 380px; object-fit: cover; border-radius: 12px; margin-top: 14px; background: var(--surface); }
+.preference-button { border: 1px solid #354149; border-radius: 20px; padding: 7px 10px; background: #192127; color: var(--muted); font-size: 11px; min-height: 34px; }
+.preference-button:hover, .preference-button[aria-pressed="true"] { color: #c6def0; border-color: #8bbfff; background: #263b49; }
+.preference-button[data-preference="-1"][aria-pressed="true"] { color: #f0b9bf; border-color: #d17e87; background: #3b2327; }
+.preference-hint { color: var(--muted); font-size: 11px; padding: 0 16px; line-height: 1.6; }
+.study-filter { margin: 12px 16px; color: var(--muted); font-size: 12px; }
+.study-filter select { margin-left: 8px; background: var(--surface); color: var(--text); border: 1px solid #354149; border-radius: 8px; padding: 7px; }
+.preference-settings { border-bottom: 1px solid var(--line); margin-bottom: 16px; padding-bottom: 12px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.preference-settings h3 { color: var(--text); margin-bottom: 4px; }
 @media (max-width: 540px) { .topic-tabs button { padding: 7px 8px; } }

@@ -141,12 +141,21 @@ def merge_feed(existing: dict[str, Any], *, new_cards: list[dict[str, Any]],
 def atomic_write(path: Path, value: dict[str, Any]) -> None:
     """Write a schema-validated JSON value via same-directory atomic replace."""
     validate_feed(value)
+    payload = (json.dumps(value, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    if len(payload) > 5 * 1024 * 1024:
+        raise ValueError("Feed exceeds the 5 MiB publication budget; existing feed is preserved")
+    _atomic_bytes(path, payload)
+    if path.name == "feed.json":
+        marker = {"last_updated": value["last_updated"], "bytes": len(payload)}
+        _atomic_bytes(path.with_name("feed-meta.json"), (json.dumps(marker) + "\n").encode("utf-8"))
+
+
+def _atomic_bytes(path: Path, payload: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
     try:
-        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as handle:
-            json.dump(value, handle, ensure_ascii=False, indent=2)
-            handle.write("\n")
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(payload)
             handle.flush()
             os.fsync(handle.fileno())
         os.replace(temp_name, path)

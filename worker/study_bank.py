@@ -11,10 +11,11 @@ import json
 import math
 import random
 from pathlib import Path
+from .foundations_bank import COURSES as FOUNDATION_COURSES, extend_bank
 
 STAMP = "2026-10-25T00:00:00Z"
 COURSES = {"fluids": "ME-3310", "thermo": "ENGR-2300", "statics": "ME-2010",
-           "design": "ME-3140", "dynamics": "ME-3010"}
+           "design": "ME-3140", "dynamics": "ME-3010", **FOUNDATION_COURSES}
 
 
 def _number(value: float) -> str:
@@ -31,11 +32,11 @@ def build_bank() -> list[dict]:
         rng = random.Random(hashlib.sha256(key.encode()).hexdigest())
         rng.shuffle(options)
         cards.append({"id": "study_" + key, "created_at": STAMP,
-                      "category": "CHALLENGE_PAST" if course == "statics" else "CHALLENGE_CURRENT",
+                      "category": "CHALLENGE_PAST" if course == "statics" or course in FOUNDATION_COURSES else "CHALLENGE_CURRENT",
                       "course_tag": COURSES[course], "title": title, "body_markdown": body,
                       "solution_markdown": solution, "source_url": None, "parent_card_id": None,
                       "comments": [], "quiz": {"options": options, "correct_index": options.index(str(answer))},
-                      "diagram": diagram, "diagram_labels": list(labels), "topic": topic or title})
+                      "diagram": diagram, "diagram_labels": list(labels), "topic": topic or (COURSES[course] if course in FOUNDATION_COURSES else title)})
 
     def numeric(key, course, title, body, value, unit, solution, diagram, labels=()):
         correct = f"{_number(value)} {unit}".strip()
@@ -289,6 +290,7 @@ def build_bank() -> list[dict]:
                       "course_tag": COURSES[course], "title": title, "body_markdown": body,
                       "solution_markdown": None, "source_url": None, "parent_card_id": None,
                       "comments": [], "diagram": diagram, "topic": title})
+    extend_bank(add, numeric)
     return cards
 
 

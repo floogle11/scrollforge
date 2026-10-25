@@ -260,6 +260,109 @@ def test_mixer_keeps_challenges_uses_evergreen_spacers_and_never_repeats_news(br
         context.close()
 
 
+def test_mixer_spaces_topics_and_learns_recurring_interests(browser, site_url):
+    context, page = _page(browser, site_url, feed=_fixture_feed())
+    try:
+        result = page.evaluate("""() => {
+          const sf = ScrollForge, now = Date.now();
+          const nasa = {id:'nasa',category:'NEWS',title:'NASA telescope explores Mars',source_url:'https://nasa.gov/one'};
+          const moreSpace = {...nasa,id:'other',title:'An astronaut enters orbit',source_url:'https://another.test/two'};
+          const politics = {...nasa,id:'politics',title:'Congress debates an election',source_url:'https://other.test/politics'};
+          const votes = Object.fromEntries([0,1,2,3,4].map(i => ['v'+i,{value:1,at:now,features:sf.interestFeatures(nasa)}]));
+          const profile = sf.preferenceProfile(votes,now);
+          const faded = sf.preferenceProfile(votes,now+180*86400000);
+          const negative = sf.preferenceProfile({n:{value:-1,at:now,features:sf.interestFeatures(nasa)}},now);
+          const cards = Array.from({length:120},(_,i)=>({id:'p'+i,category:['NEWS','SPORTS','STORY'][i%3],title:'Post '+i,source_url:'https://source'+(i%5)+'.test/p'+i}));
+          const outputs = Array.from({length:8},()=>sf.interleaveCards(cards));
+          return {
+            recurring: sf.preferenceWeight(moreSpace,profile)>sf.preferenceWeight(politics,profile),
+            fades: sf.preferenceWeight(moreSpace,profile)>sf.preferenceWeight(moreSpace,faded),
+            negative: sf.preferenceWeight(moreSpace,negative)<1,
+            exploration: sf.preferenceWeight(moreSpace,negative)>0,
+            varied: new Set(outputs.map(a=>a.slice(0,10).map(c=>c.id).join(','))).size,
+            adjacent:outputs.some(out=>out.some((c,i)=>i<50 && i>0 && c.category===out[i-1].category)),
+            unique:outputs.every(out=>new Set(out.map(c=>c.id)).size===cards.length && out.length===cards.length)
+          };
+        }""")
+        assert result == {"recurring": True, "fades": True, "negative": True, "exploration": True,
+                          "varied": 8, "adjacent": False, "unique": True}
+    finally:
+        context.close()
+
+
+@pytest.mark.parametrize('viewport', [{'width':390,'height':844}, {'width':1440,'height':1000}])
+def test_preferences_are_reversible_local_and_preserve_mounted_posts(browser, site_url, viewport):
+    feed = _fixture_feed()
+    # Enough unseen content for preference updates to re-rank later pages.
+    feed['cards'] += [{**feed['cards'][1], 'id':f'extra-{i}', 'source_url':f'https://example.test/{i}'} for i in range(80)]
+    context, page = _page(browser, site_url, viewport=viewport, feed=feed)
+    try:
+        node = page.locator('.feed-card').first
+        card_id = node.get_attribute('data-card-id')
+        node.evaluate('(node) => { window.__kept = node; }')
+        node.locator('.comment-toggle').click()
+        node.locator('textarea').fill('Keep this draft')
+        before = page.evaluate('scrollY')
+        node.locator('[data-preference="1"]').click()
+        assert node.locator('[data-preference="1"]').get_attribute('aria-pressed') == 'true'
+        assert page.evaluate('window.__kept.isConnected')
+        assert node.locator('textarea').input_value() == 'Keep this draft'
+        assert abs(page.evaluate('scrollY')-before) < 10
+        assert len(page.evaluate("JSON.parse(localStorage.getItem('scrollforge.preferences.v1'))")) == 1
+        node.locator('[data-preference="-1"]').click()
+        assert node.locator('[data-preference="1"]').get_attribute('aria-pressed') == 'false'
+        assert node.locator('[data-preference="-1"]').get_attribute('aria-pressed') == 'true'
+        node.locator('[data-preference="-1"]').click()
+        assert page.evaluate("JSON.parse(localStorage.getItem('scrollforge.preferences.v1'))") == {}
+        node.locator('[data-preference="1"]').click()
+        page.reload(wait_until='domcontentloaded')
+        page.locator('.feed-card').first.wait_for()
+        assert card_id in page.evaluate("JSON.parse(localStorage.getItem('scrollforge.preferences.v1'))")
+        page.locator('#settingsButton').click()
+        assert page.locator('#preferenceSummary').inner_text().startswith('More ')
+        page.locator('#resetPreferences').click()
+        assert page.evaluate("JSON.parse(localStorage.getItem('scrollforge.preferences.v1'))") == {}
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    finally:
+        context.close()
+
+
+def test_unchanged_version_marker_avoids_full_archive_poll(browser, site_url):
+    feed = _fixture_feed()
+    context, page = _page(browser, site_url, feed=feed)
+    try:
+        page.route('**/data/feed-meta.json', lambda route: route.fulfill(json={'last_updated':feed['last_updated']}))
+        requests = []
+        page.on('request', lambda request: requests.append(request.url))
+        assert page.evaluate('async () => await ScrollForge.refreshReplies()')
+        assert any(url.endswith('/feed-meta.json') for url in requests)
+        assert not any(url.endswith('/feed.json') for url in requests)
+    finally:
+        context.close()
+
+
+def test_foundation_subjects_render_diagrams_quizzes_and_filter(browser, site_url):
+    from worker.study_bank import build_bank
+    courses = ['CALC-I','CALC-II','CALC-III','LINEAR-ALG','DIFF-EQ','PHYS-I','PHYS-II']
+    feed = _fixture_feed()
+    feed['cards'] = [card for card in build_bank() if card['course_tag'] in courses]
+    context, page = _page(browser, site_url, feed=feed)
+    try:
+        page.locator('.topic-tabs [data-topic="engineering"]').click()
+        for course in courses:
+            page.locator('#studyCourse').select_option(course)
+            nodes = page.locator('.feed-card:visible')
+            assert nodes.count() >= 16
+            assert all(label == course for label in nodes.locator('.card-course').all_text_contents())
+            assert nodes.locator('.study-visual svg').count() == nodes.count()
+            assert nodes.locator('.quiz').count() == nodes.count()
+        page.locator('.feed-card:visible').first.locator('[data-answer]').first.click()
+        assert 'worked answer' in page.locator('.feed-card:visible').first.locator('.quiz-feedback').inner_text()
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    finally:
+        context.close()
+
+
 @pytest.mark.parametrize("viewport", [{"width": 390, "height": 844}, {"width": 1440, "height": 1000}], ids=["mobile", "desktop"])
 def test_seeded_scrolling_feed_screenshot(browser, site_url, viewport):
     context, page = _page(browser, site_url, viewport)

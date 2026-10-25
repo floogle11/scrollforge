@@ -1,4 +1,4 @@
-const VERSION = 'scrollforge-shell-v7';
+const VERSION = 'scrollforge-shell-v8';
 const SHELL = ['./', './index.html', './tokens.css', './app.js', './manifest.json', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './data/feed.json'];
 const KATEX_FONTS = [
   'KaTeX_AMS-Regular', 'KaTeX_Caligraphic-Bold', 'KaTeX_Caligraphic-Regular',
@@ -36,7 +36,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (url.hostname === 'api.github.com') return;
   if (url.origin === self.location.origin) {
-    if (url.pathname.endsWith('/data/feed.json')) {
+    if (url.pathname.endsWith('/data/feed.json') || url.pathname.endsWith('/data/feed-meta.json')) {
       event.respondWith((async () => {
         const cache = await caches.open(VERSION);
         try {

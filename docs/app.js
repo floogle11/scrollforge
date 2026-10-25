@@ -37,8 +37,58 @@
       ids.add(card.id); if (source) sources.add(source); return true;
     });
   }
-  // News and stories are consumed once. Only evergreen engineering notes may act as a repeat spacer.
-  function interleaveCards(cards, seenIds = [], mode = 'BASELINE', boundaryCards = []) {
+  // Explicit, reversible signals only. Reading a post is not treated as approval.
+  function interestFeatures(card) {
+    const features = ['category:' + card.category];
+    for (const key of ['sport', 'team', 'course_tag']) if (card[key]) features.push(key + ':' + card[key]);
+    const text = [card.title, card.topic, String(card.body_markdown || '').slice(0, 600)].join(' ').toLowerCase();
+    if (card.category === 'SPORTS') {
+      if (/\bbroncos\b/.test(text)) features.push('team:Denver Broncos');
+      if (/\bmammoth\b/.test(text)) features.push('team:Utah Mammoth');
+      if (/\b(avalanche|avs)\b/.test(text)) features.push('team:Colorado Avalanche');
+    }
+    const topics = {
+      space: /\b(nasa|space|astronaut|orbit|galaxy|lunar|mars|telescope)\b/,
+      technology: /\b(technology|software|artificial intelligence|openai|robot|robots|cybersecurity|semiconductor)\b/,
+      science: /\b(science|scientist|scientists|discovery|research|fossil|quantum)\b/,
+      history: /\b(history|historic|ancient|archaeology|archaeologist|medieval)\b/,
+      politics: /\b(election|congress|senate|president|politics|parliament)\b/,
+      economy: /\b(economy|inflation|stocks|market|tariff|tariffs|interest rates)\b/,
+      climate: /\b(climate|warming|renewable|emissions|hurricane|wildfire)\b/,
+      drama: /\b(drama|aita|aitah|pettyrevenge|relationship|relationships)\b/,
+      football: /\b(nfl|broncos|football|touchdown|quarterback)\b/,
+      hockey: /\b(nhl|hockey|mammoth|avalanche|puck)\b/
+    };
+    for (const [topic, pattern] of Object.entries(topics)) if (pattern.test(text)) features.push('topic:' + topic);
+    // Bank topics are stable subject labels; title-length topics are intentionally ignored.
+    if (card.topic && card.topic.length <= 32) features.push('topic:' + card.topic.toLowerCase());
+    try {
+      const url = new URL(card.source_url);
+      const subreddit = /(^|\.)reddit\.com$/.test(url.hostname) && url.pathname.match(/^\/r\/([^/]+)/i);
+      features.push('source:' + (subreddit ? 'r/' + subreddit[1].toLowerCase() : url.hostname.replace(/^www\./, '')));
+    } catch (_) {}
+    return [...new Set(features)];
+  }
+  function preferenceProfile(votes, now = Date.now()) {
+    const profile = Object.create(null);
+    for (const vote of Object.values(votes || {})) {
+      if (!vote || ![1, -1].includes(vote.value) || !Array.isArray(vote.features) || !Number.isFinite(vote.at)) continue;
+      const decay = Math.pow(0.5, Math.max(0, now - vote.at) / (45 * 86400000));
+      for (const feature of vote.features.slice(0, 16)) if (typeof feature === 'string') profile[feature] = (profile[feature] || 0) + vote.value * decay;
+    }
+    return profile;
+  }
+  function preferenceWeight(card, profile = {}) {
+    let score = 0;
+    for (const feature of interestFeatures(card)) {
+      const strength = feature.startsWith('category:') ? 0.12 : feature.startsWith('source:') ? 0.25 : 0.65;
+      score += Math.tanh((profile[feature] || 0) / 3) * strength;
+    }
+    // Keep discovery alive, even after strong preferences.
+    return 0.25 + 0.75 * Math.exp(Math.max(-1.4, Math.min(1.4, score)));
+  }
+  // News and stories are consumed once. Evergreen notes can space a review-only tail.
+  function interleaveCards(cards, seenIds = [], mode = 'BASELINE', boundaryCards = [], profile = {}) {
     const seen = new Set(seenIds);
     const weightSets = {
       BASELINE: { sports: 25, hockey: 20, news: 25, story: 11, drama: 4, current: 10, past: 5 },
@@ -51,30 +101,42 @@
       card.category === 'CHALLENGE_CURRENT' || card.category === 'DEEP_CUT' ? 'current' : card.category === 'CHALLENGE_PAST' ? 'past' : card.topic === 'drama' ? 'drama' : 'story';
     const unique = cards.filter((card, i) => card && card.id && cards.findIndex(item => item.id === card.id) === i);
     const pools = {sports: [], hockey: [], news: [], story: [], drama: [], current: [], past: []};
-    for (const card of shuffle(unique.filter(card => !seen.has(card.id)))) pools[typeOf(card)].push(card);
+    const ranked = unique.filter(card => !seen.has(card.id)).map(card => ({card, rank: -Math.log(Math.max(Number.EPSILON, Math.random())) / preferenceWeight(card, profile)})).sort((a, b) => a.rank - b.rank);
+    for (const {card} of ranked) pools[typeOf(card)].push(card);
     const spacers = shuffle(unique.filter(card => card.category === 'DEEP_CUT'));
     const mixed = [];
     let spacerCursor = 0, run = 0;
     const prior = Array.isArray(boundaryCards) ? boundaryCards : [boundaryCards].filter(Boolean);
+    const history = prior.slice(-3);
+    const group = card => challenge(card) || card.category === 'DEEP_CUT' ? 'study' : typeOf(card);
+    const poolWeights = Object.fromEntries(Object.entries(pools).map(([key, pool]) => [key, weights[key] * (pool.length ? pool.reduce((sum, card) => sum + preferenceWeight(card, profile), 0) / pool.length : 1)]));
+    const push = card => { mixed.push(card); history.push(card); if (history.length > 3) history.shift(); run = challenge(card) ? run + 1 : 0; };
     for (let i = prior.length - 1; i >= 0 && challenge(prior[i]); i--) run++;
     while (Object.values(pools).some(pool => pool.length)) {
       if (run >= 2) {
         const leisure = [pools.sports, pools.hockey, pools.news, pools.story, pools.drama].find(pool => pool.length) || [];
         if (leisure.length || spacers.length) {
-          mixed.push(leisure.length ? leisure.shift() : spacers[spacerCursor++ % spacers.length]);
+          push(leisure.length ? leisure.shift() : spacers[spacerCursor++ % spacers.length]);
           run = 0; continue;
         }
       }
-      const active = Object.keys(pools).filter(key => pools[key].length);
-      const total = active.reduce((sum, key) => sum + weights[key], 0);
+      let active = Object.keys(pools).filter(key => pools[key].length);
+      const last = history[history.length - 1];
+      const alternatives = active.filter(key => group(pools[key][0]) !== (last && group(last)));
+      if (alternatives.length) active = alternatives;
+      const total = active.reduce((sum, key) => sum + poolWeights[key], 0);
       let roll = Math.random() * (total || active.length), selected = active[0];
-      for (const key of active) { roll -= total ? weights[key] : 1; if (roll < 0) { selected = key; break; } }
-      const card = pools[selected].shift(); mixed.push(card); run = challenge(card) ? run + 1 : 0;
+      for (const key of active) { roll -= total ? poolWeights[key] : 1; if (roll < 0) { selected = key; break; } }
+      // Avoid adjacent publishers, teams, courses, and recognized subjects when inventory allows.
+      const recent = last ? new Set(interestFeatures(last).filter(f => !f.startsWith('category:') && !f.startsWith('sport:'))) : new Set();
+      const index = pools[selected].findIndex(card => !interestFeatures(card).some(f => recent.has(f)));
+      const card = pools[selected].splice(index < 0 ? 0 : index, 1)[0]; push(card);
     }
     return mixed;
   }
-  if (typeof window !== 'undefined') window.ScrollForge = {interleaveCards, eligibleCards, freshCard};
-  if (typeof module !== 'undefined' && module.exports) { module.exports = {interleaveCards, eligibleCards, freshCard}; return; }
+  const publicFunctions = {interleaveCards, eligibleCards, freshCard, interestFeatures, preferenceProfile, preferenceWeight};
+  if (typeof window !== 'undefined') window.ScrollForge = publicFunctions;
+  if (typeof module !== 'undefined' && module.exports) { module.exports = publicFunctions; return; }
 
   let feed = null;
   let ordered = [];
@@ -87,6 +149,10 @@
   let activeTopic = 'all';
   let tailObserver = null;
   const PAGE_SIZE = 24;
+  const VOTES_KEY = 'scrollforge.preferences.v1';
+  let votes = readStore(VOTES_KEY, {});
+  if (!votes || typeof votes !== 'object' || Array.isArray(votes)) votes = {};
+  votes = Object.fromEntries(Object.entries(votes).filter(([, vote]) => vote && [1, -1].includes(vote.value) && Array.isArray(vote.features) && Number.isFinite(vote.at)).sort((a, b) => b[1].at - a[1].at).slice(0, 500));
   const savedAnswers = readStore(KEYS.answers, {});
   const localPending = readStore(KEYS.pending, {});
   const readIds = new Set(readStore(KEYS.read, []));
@@ -204,6 +270,29 @@
   }
   function diagramTemplate(card) {
     const drawings = {
+      axes2d: ['Coordinate axes', '<path d="M100 160h350m-12-8 12 8-12 8M100 160V35m-8 12 8-12 8 12"/><text x="455" y="180">x</text><text x="80" y="35">y</text>'],
+      axes3d: ['Multivariable coordinates (schematic)', '<path d="M235 120h220m-12-8 12 8-12 8M235 120 115 185m8-15-8 15 17-1M235 120V25m-8 12 8-12 8 12"/><text x="465" y="125">x</text><text x="95" y="198">y</text><text x="215" y="25">z</text>'],
+      tangent: ['A curve and a local tangent (schematic)', '<path d="M70 175h400M90 185V25"/><path d="M110 165Q280 160 400 35" stroke="#8bbfff"/><path d="m200 180 180-132" stroke="#e9c88e"/><circle cx="300" cy="107" r="5" fill="#e9c88e"/><text x="390" y="80">Tangent</text>'],
+      limit: ['Approach a missing point from either side (schematic)', '<path d="M80 170h400M100 185V30M150 145 390 55"/><circle cx="270" cy="100" r="7" fill="#17242b" stroke="#e9c88e"/><path d="m190 115 35-13m-13-3 13 3-8 10m115-45-35 13m8-10-8 10 13 3" stroke="#8bbfff"/><text x="270" y="192" text-anchor="middle">x → a</text>'],
+      area: ['Accumulation under a parabola (schematic)', '<path d="M110 175Q260 175 390 40V175Z" fill="#244c63" stroke="#8bbfff"/><path d="M80 175h390M110 190V25"/><text x="245" y="150">Area</text><text x="390" y="195">Upper bound</text>'],
+      integral: ['Evaluate an antiderivative at the bounds', '<text x="270" y="85" text-anchor="middle" style="font-size:24px">∫ₐᵇ f(x) dx = F(b) − F(a)</text><path d="M120 135h300M120 125v20m300-20v20"/><text x="120" y="170">a</text><text x="420" y="170">b</text>'],
+      series: ['A sequence of terms can form a sum (schematic)', '<path d="M80 165h390"/><rect x="110" y="40" width="50" height="125" fill="#244c63"/><rect x="195" y="90" width="50" height="75" fill="#244c63"/><rect x="280" y="120" width="50" height="45" fill="#244c63"/><text x="375" y="155">…</text><text x="270" y="195" text-anchor="middle">Term index k</text>'],
+      circle: ['Radius and circular area', '<circle cx="270" cy="105" r="75" stroke="#8bbfff"/><path d="M270 105h75" stroke="#e9c88e"/><circle cx="270" cy="105" r="3"/><text x="305" y="95">r</text>'],
+      polar: ['A quarter circle in polar coordinates', '<path d="M155 170V35A135 135 0 0 1 290 170Z" fill="#244c63" stroke="#8bbfff"/><path d="M120 170h260M155 190V20M155 170l95-95"/><text x="215" y="108">r</text><text x="180" y="160">θ</text>'],
+      revolution: ['Disks along the axis of rotation (schematic)', '<path d="M110 105 395 35v140Z" stroke="#8bbfff"/><ellipse cx="395" cy="105" rx="18" ry="70"/><ellipse cx="300" cy="105" rx="12" ry="47" stroke="#e9c88e"/><path d="M70 105h400" stroke-dasharray="6 6"/><text x="450" y="130">x</text><text x="300" y="185">Disk</text>'],
+      matrix: ['Rows and columns of a two-by-two matrix', '<path d="M190 35h-20v140h20m160-140h20v140h-20"/><text x="230" y="85">a</text><text x="310" y="85">b</text><text x="230" y="145">c</text><text x="310" y="145">d</text>'],
+      decay: ['A stable response approaches equilibrium (schematic)', '<path d="M85 170h380M105 185V25"/><path d="M110 40Q180 160 430 160" stroke="#8bbfff"/><path d="M110 160h330" stroke-dasharray="6 6"/><text x="430" y="195">Time</text><text x="290" y="145">Equilibrium</text>'],
+      motion: ['Translational motion (schematic)', '<path d="M65 160h420"/><rect x="150" y="95" width="95" height="50" rx="5"/><circle cx="170" cy="150" r="10"/><circle cx="225" cy="150" r="10"/><path d="M275 110h130m-12-8 12 8-12 8" stroke="#8bbfff"/><text x="310" y="90">Velocity</text>'],
+      falling: ['A mass falls through a height h', '<path d="M110 180h320"/><circle cx="240" cy="45" r="17"/><circle cx="240" cy="155" r="17" stroke-dasharray="4 4"/><path d="M240 70v45m-8-12 8 12 8-12M340 45v110m-7-100 7-10 7 10m-14 90 7 10 7-10" stroke="#8bbfff"/><text x="355" y="105">h</text><text x="265" y="100">g</text>'],
+      projectile: ['Projectile arc without air resistance', '<path d="M75 175h400M95 185V25"/><path d="M110 170Q270-95 430 170" stroke="#8bbfff" stroke-dasharray="7 5"/><path d="M110 170 155 100m-14 7 14-7-1 15M370 45v40m-8-12 8 12 8-12" stroke="#e9c88e"/><text x="385" y="65">g</text><text x="235" y="35">vᵧ = 0</text>'],
+      forces: ['Opposing forces on a cart', '<rect x="225" y="70" width="90" height="75"/><path d="M225 105H100m12-8-12 8 12 8M315 105h140m-12-8 12 8-12 8" stroke="#8bbfff"/><text x="115" y="80">Left force</text><text x="360" y="80">Right force</text>'],
+      wave: ['Wavelength on a traveling wave (schematic)', '<path d="M70 110h400"/><path d="M70 110q50-100 100 0t100 0t100 0t100 0" stroke="#8bbfff"/><path d="M120 35h200m-200-7v14m200-14v14" stroke="#e9c88e"/><text x="220" y="25" text-anchor="middle">λ</text>'],
+      charges: ['Two positive point charges repel', '<circle cx="180" cy="105" r="25"/><circle cx="360" cy="105" r="25"/><text x="180" y="110" text-anchor="middle">+</text><text x="360" y="110" text-anchor="middle">+</text><path d="M155 105H80m12-8-12 8 12 8M385 105h75m-12-8 12 8-12 8M180 170h180" stroke="#8bbfff"/><text x="270" y="192" text-anchor="middle">Separation r</text>'],
+      field: ['Uniform electric field', '<path d="M100 55h340m-12-8 12 8-12 8M100 105h340m-12-8 12 8-12 8M100 155h340m-12-8 12 8-12 8" stroke="#8bbfff"/><circle cx="250" cy="105" r="20" fill="#17242b"/><text x="250" y="110" text-anchor="middle">+q</text><text x="460" y="110">E</text>'],
+      resistor: ['One resistor connected to an ideal battery', '<path d="M110 85V45h180l10-14 15 28 15-28 15 28 10-14h75v120H110v-45M85 85h50m-38 35h26"/><text x="295" y="95">R</text><text x="145" y="110">V</text>'],
+      capacitor: ['Two plates store opposite charges', '<path d="M90 105h155m50 0h155M245 40v130m50-130v130" stroke="#8bbfff"/><text x="215" y="65">+</text><text x="310" y="65">−</text><text x="270" y="195" text-anchor="middle">Potential difference V</text>'],
+      magnetic: ['Magnetic field into the page (schematic)', '<path d="m160 50 16 16m0-16-16 16m90-16 16 16m0-16-16 16m90-16 16 16m0-16-16 16m-196 90 16 16m0-16-16 16m90-16 16 16m0-16-16 16m90-16 16 16m0-16-16 16" stroke="#8bbfff"/><path d="M100 105h340m-12-8 12 8-12 8"/><text x="210" y="192">× = B into page</text>'],
+      lens: ['Converging lens and optical axis (schematic)', '<path d="M60 105h420"/><ellipse cx="270" cy="105" rx="14" ry="80" stroke="#8bbfff"/><path d="M120 105V40m-8 12 8-12 8 12M120 40h150l150 65M120 40l300 130" stroke="#e9c88e"/><circle cx="370" cy="105" r="4"/><text x="365" y="130">F</text><text x="95" y="155">Object</text>'],
       pipe: ['Pipe flow', '<path d="M55 65h180l80 30h175M55 145h180l80-30h175"/><path d="M85 105h90m-12-9 12 9-12 9M350 105h100m-12-9 12 9-12 9" stroke="#8bbfff"/><path d="M220 68v74m-6-65 6-9 6 9m-12 56 6 9 6-9" stroke="#e9c88e"/>'],
       pump: ['Pump and pipe system', '<path d="M45 85h165m80 0h210M45 125h165m80 0h210"/><circle cx="250" cy="105" r="45"/><path d="m230 80 45 25-45 25Z" fill="#8bbfff" stroke="#8bbfff"/><path d="M365 45v40m-8-10 8 10 8-10M365 125v40m-8-10 8 10 8-10" stroke="#e9c88e"/>'],
       tank: ['Control volume and energy transfers', '<rect x="155" y="48" width="230" height="120" rx="12"/><path d="M165 111q25-12 50 0t50 0t50 0t60 0M70 80h70m-12-8 12 8-12 8M400 130h70m-12-8 12 8-12 8" stroke="#8bbfff"/><path d="M220 30v-7m30 7v-7m30 7v-7m30 7v-7"/>'],
@@ -282,6 +371,8 @@
       '<h2 class="card-title">' + (source ? '<a href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">' + esc(title) + '</a>' : esc(title)) + '</h2><span class="category-chip">' + esc(label) + '</span><div class="card-body">' + bodyContent + '</div>' +
       (safeUrl(card.image_url) ? '<img class="post-image" src="' + esc(safeUrl(card.image_url)) + '" alt="' + esc(title) + '" loading="lazy" referrerpolicy="no-referrer">' : '') + diagramTemplate(card) + quizTemplate(card) +
       '<div class="card-footer">' +
+      '<button class="preference-button" type="button" data-preference="1" aria-pressed="' + (votes[card.id]?.value === 1) + '" title="Favor related topics, teams, subjects and sources">↑ More like this</button>' +
+      '<button class="preference-button" type="button" data-preference="-1" aria-pressed="' + (votes[card.id]?.value === -1) + '" title="See fewer related posts">↓ Less like this</button>' +
       '<button class="comment-toggle" type="button" aria-expanded="false"><svg class="ui-icon" aria-hidden="true"><use href="#icon-comment"/></svg> Comments <span class="reply-count">' + comments.length + (codexReplies ? ' · ' + codexReplies + ' replies' : '') + '</span></button>' +
       (card.solution_markdown ? '<button class="solution-toggle" type="button" aria-expanded="' + answered + '">' + (answered ? 'Hide answer' : 'Reveal answer') + '</button>' : '') +
       (redditEmbedUrl(source) ? '<button class="reddit-toggle" type="button" aria-expanded="false">Show Reddit post</button>' : '') +
@@ -357,7 +448,7 @@
     const ids = new Set();
     const cards = ordered.filter(card => {
       if (ids.has(card.id)) return false; ids.add(card.id);
-      return matchesTopic(card) && [card.title, card.body_markdown, communityLabel(card), card.course_tag || '', card.topic || '', card.team || ''].join(' ').toLocaleLowerCase().includes(query);
+      return matchesTopic(card) && (activeTopic !== 'engineering' || !$('#studyCourse').value || card.course_tag === $('#studyCourse').value) && [card.title, card.body_markdown, communityLabel(card), card.course_tag || '', card.topic || '', card.team || ''].join(' ').toLocaleLowerCase().includes(query);
     });
     if ($('#feedSort').value === 'new') cards.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
     return cards;
@@ -400,6 +491,7 @@
     hydrateMath($('#cardStage')); observeCards(); updateTail();
     const titles = {all: 'Home', sports: 'NFL & Broncos', hockey: 'Hockey', mammoth: 'Utah Mammoth', avalanche: 'Colorado Avalanche', news: 'News', stories: 'Stories & discoveries', drama: 'Reddit drama', engineering: 'Engineering'};
     $('#feedTitle').textContent = titles[activeTopic];
+    $('#studyFilter').hidden = activeTopic !== 'engineering';
     $$('[data-topic]').forEach(button => {
       const selected = button.dataset.topic === activeTopic;
       button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected));
@@ -419,7 +511,7 @@
   function reviewEngineering() {
     if (!feed) return;
     activeTopic = 'engineering'; $('#feedSearch').value = '';
-    ordered = interleaveCards(feed.cards.filter(card => challenge(card) || card.category === 'DEEP_CUT'), [], feed.calendar_mode || 'BASELINE');
+    ordered = interleaveCards(feed.cards.filter(card => challenge(card) || card.category === 'DEEP_CUT'), [], feed.calendar_mode || 'BASELINE', [], preferenceProfile(votes));
     cursor = 0; renderFeed(); $('#cardStage').scrollIntoView({block: 'start'});
   }
   function setNetwork(mode, message) {
@@ -445,7 +537,7 @@
     const seen = readStore(KEYS.seen, []);
     const seenSources = new Set(readStore(KEYS.seenSources, []));
     for (const card of feed.cards) if (seenSources.has(sourceKey(card))) seen.push(card.id);
-    ordered = interleaveCards(eligibleCards(feed.cards), seen, feed.calendar_mode || 'BASELINE');
+    ordered = interleaveCards(eligibleCards(feed.cards), seen, feed.calendar_mode || 'BASELINE', [], preferenceProfile(votes));
     cursor = 0;
     $('#feedMode').textContent = 'Your daily mix';
     const available = eligibleCards(feed.cards);
@@ -472,6 +564,11 @@
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
     try {
+      // Most polls transfer only this tiny version marker, rather than the full archive.
+      try {
+        const marker = await fetch('./data/feed-meta.json', {cache: 'no-cache', signal: controller.signal});
+        if (marker.ok && (await marker.json()).last_updated === feed.last_updated) return true;
+      } catch (_) { if (controller.signal.aborted) return false; }
       const response = await fetch('./data/feed.json', {cache: 'no-cache', signal: controller.signal});
       if (!response.ok) return false;
       const next = await response.json();
@@ -510,7 +607,7 @@
     if (replyPollTimer !== null) { clearInterval(replyPollTimer); replyPollTimer = null; }
     if (document.hidden || !navigator.onLine) return;
     if (refreshNow) void refreshReplies();
-    replyPollTimer = setInterval(refreshReplies, 60000);
+    replyPollTimer = setInterval(refreshReplies, 300000);
   }
   window.ScrollForge.refreshReplies = refreshReplies;
   function renderInbox() {
@@ -566,6 +663,7 @@
     settingsReturnFocus = document.activeElement;
     $('#repoSlug').value = repoGuess(); $('#repoToken').value = localStorage.getItem(KEYS.token) || '';
     $('#settingsFeedback').textContent = '';
+    updatePreferenceSummary();
     $('#appShell').inert = true;
     $('#scrim').hidden = false; $('#settingsModal').hidden = false; $('#settingsModal').setAttribute('aria-hidden', 'false');
     $('#repoSlug').focus();
@@ -637,6 +735,7 @@
   $('#feedSearch').addEventListener('input', () => { if (feed) applyFilters(); });
   $('#feedSort').addEventListener('change', () => { if (feed) { applyFilters(); window.scrollTo({top: 0}); } });
   $('#settingsButton').addEventListener('click', openSettings);
+  $('#studyCourse').addEventListener('change', applyFilters);
   $('#newSignalsButton').addEventListener('click', () => loadFeed().then(() => window.scrollTo({top: 0})));
   $('#inboxButton').addEventListener('click', openInbox);
   $('#scrim').addEventListener('click', closePanel);
@@ -650,8 +749,48 @@
     $('#settingsFeedback').textContent = 'CONFIGURATION SAVED ON THIS DEVICE.';
   });
   $('#clearSettings').addEventListener('click', () => { localStorage.removeItem(KEYS.repo); localStorage.removeItem(KEYS.token); $('#repoSlug').value = ''; $('#repoToken').value = ''; $('#settingsFeedback').textContent = 'SAVED CONFIGURATION CLEARED.'; });
+  function updatePreferenceSummary() {
+    const profile = preferenceProfile(votes);
+    const trends = Object.entries(profile).filter(([, score]) => Math.abs(score) >= 0.1).sort((a, b) => Number(a[0].startsWith('category:')) - Number(b[0].startsWith('category:')) || Math.abs(b[1]) - Math.abs(a[1])).slice(0, 8);
+    $('#preferenceSummary').textContent = trends.length ? trends.map(([key, score]) => {
+      const label = key.slice(key.indexOf(':') + 1);
+      return (score > 0 ? 'More ' : 'Less ') + (key.startsWith('category:') ? categories[label]?.[0] || label : label);
+    }).join(' · ') : 'No preferences yet. Use the arrows on posts to shape your mix.';
+  }
+  function remixRemaining() {
+    if (!feed) return;
+    const nodes = $$('.feed-card', $('#cardStage'));
+    const mounted = new Set(nodes.map(node => node.dataset.cardId));
+    const activeId = ordered[cursor]?.id;
+    const kept = ordered.filter(card => mounted.has(card.id));
+    ordered = kept.concat(interleaveCards(ordered.filter(card => !mounted.has(card.id)), [], feed.calendar_mode || 'BASELINE', kept.slice(-3), preferenceProfile(votes)));
+    const indices = new Map(ordered.map((card, index) => [card.id, index]));
+    for (const node of nodes) node.dataset.cardIndex = indices.get(node.dataset.cardId);
+    cursor = indices.get(activeId) ?? 0;
+    updateTail();
+  }
+  $('#resetPreferences').addEventListener('click', () => {
+    votes = {}; writeStore(VOTES_KEY, votes);
+    $$('.preference-button').forEach(button => button.setAttribute('aria-pressed', 'false'));
+    remixRemaining(); updatePreferenceSummary();
+    $('#preferenceStatus').textContent = 'Preferences reset. Upcoming posts use the default mix.';
+  });
   $('#inboxList').addEventListener('click', event => { const button = event.target.closest('.inbox-item'); if (button) openThread(button.dataset.cardId, button.dataset.commentId); });
   $('#cardStage').addEventListener('click', event => {
+    const preference = event.target.closest('[data-preference]');
+    if (preference) {
+      const node = preference.closest('.feed-card');
+      const card = ordered[Number(node.dataset.cardIndex)];
+      const value = Number(preference.dataset.preference);
+      if (votes[card.id]?.value === value) delete votes[card.id];
+      else votes[card.id] = {value, features: interestFeatures(card), at: Date.now()};
+      votes = Object.fromEntries(Object.entries(votes).sort((a, b) => b[1].at - a[1].at).slice(0, 500));
+      writeStore(VOTES_KEY, votes);
+      $$('[data-preference]', node).forEach(button => button.setAttribute('aria-pressed', String(votes[card.id]?.value === Number(button.dataset.preference))));
+      remixRemaining();
+      $('#preferenceStatus').textContent = votes[card.id] ? 'Saved. Upcoming posts will reflect your interests.' : 'Preference removed.';
+      return;
+    }
     const reddit = event.target.closest('.reddit-toggle');
     if (reddit) { toggleReddit(reddit); return; }
     const answer = event.target.closest('[data-answer]');

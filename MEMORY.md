@@ -1,0 +1,144 @@
+# ScrollForge conversation memory
+
+Last recorded: **2026-10-24, America/Denver** (deployment and CI timestamps extend into **2026-10-25 UTC**).
+
+This file is the handoff for future conversations. Read it together with `CHANGELOG.md` and `README.md`. Counts and deployment identifiers below are dated snapshots; inspect the current repository and feed before treating them as live values.
+
+**Latest work is local, not deployed:** the October 24 follow-up adds feed diversity, browser-local preference learning, foundational math/physics practice, and publication budgets. The last published commit/deployment evidence below still describes the earlier release. Do not imply these new features are already live.
+
+## User intent and preferences
+
+- The user wants the feeling of scrolling Reddit, with a little review or class content woven between interesting posts.
+- They explicitly loved the deployed Reddit-style redesign: "It looks amazing. Just what I want honestly." Preserve that visual direction when extending the site.
+- They disliked the earlier oversized cards, artificial post presentation, limited inventory, and feed dominated by school material.
+- They want a large, varied pool and automatic loading as they scroll. Do not satisfy this by replaying already-read headlines or inventing news.
+- Main interests: NFL and Broncos, general/world/US/technology news, hockey, **Utah Mammoth (favorite team)**, **Colorado Avalanche**, discoveries/history/space, and occasional Reddit drama stories.
+- School material should include useful illustrations, more topics, short explanations, and multiple-choice questions. Four to eight choices were requested; the starter questions use four and the format supports up to eight.
+- They welcomed importing real Reddit posts so AI does not have to write the entire feed.
+- Earlier feature releases and the final navigation fix were published and verified. The latest follow-up requested better randomization, learning from likes/dislikes and recurring interests, Calc I–III/linear algebra/differential equations/Physics I–II, and attention to GitHub hosting limits.
+- Keep the feed leisure-first; the expanded bank should not turn Home into a coursework dashboard. New default sampling weights remain 85% leisure / 15% review before diversity and personalization adjustments.
+
+## Current product
+
+- Public site: **https://floogle11.github.io/scrollforge/**.
+- GitHub repository: **floogle11/scrollforge**, branch **main**.
+- Static HTML, CSS, JavaScript, and JSON served from `docs/` on GitHub Pages. There is no frontend build step or application server.
+- Dark Reddit-style layout: sticky header, search, compact posts, source attribution, rounded action buttons, desktop topic sidebar and community rail, mobile topic tabs, favorite-team chips.
+- Topics: home, NFL, hockey, Mammoth, Avalanche, news, stories, drama, and engineering. Sort by mixed "For you" order or newest.
+- Local implementation: For you avoids consecutive broad groups when alternatives remain, then seeks a different publisher/team/subject inside a group. Shuffled weighted selection still varies each visit. Exhausting diverse inventory can leave a single-category tail.
+- Local implementation: each post has **More like this / Less like this**, with toggle-to-undo and switchable signals. Recognized topics, favorite teams, course tags, publishers and subreddits contribute to future ranking. Repeated signals strengthen trends; half-life is 45 days. Weights retain exploration. Reading alone does not imply approval.
+- Preferences use `scrollforge.preferences.v1` in browser local storage, capped at 500 signals. Settings summarizes learned interests and resets them separately from repository credentials. No votes leave the device; no cloud database, analytics or per-vote publication exists. Only unmounted posts are remixed after voting so mounted DOM, scroll, drafts and answers remain intact. New sorting stays chronological.
+- Engineering now has a subject selector for all twelve course tags. Foundation tags are descriptive labels, not claimed university catalog numbers.
+- The feed mounts **24 posts per batch**, appends more near the bottom through IntersectionObserver, and offers a load-more fallback. A caught-up state remains when available content is exhausted; the inventory is large, not mathematically infinite.
+- Existing post DOM is preserved when loading more or filtering. Search finds matching posts that have not yet been mounted. Answers, expanded sections, drafts, and reading position must survive routine interactions.
+- Keyboard: `j/k` next/previous post, Space reveals a challenge solution, `c` opens comments. Native wheel and touch scrolling remain native.
+- "Show Reddit post" opens an on-demand original-post preview using `https://embed.reddit.com/`. The original Reddit link stays available if the embed fails. There are no invented Reddit votes or comment counts.
+- Reddit iframes use a restricted sandbox. Resize messages are accepted only from the embed origin and the matching iframe window, with bounded heights. Imported text is escaped/sanitized.
+- Browser local storage tracks read posts and source URLs, read replies, pending comments, selected quiz answers, repository settings, and the optional Issues token. Quiz answers include an options signature so edited questions do not reuse incompatible selections.
+
+## Content and review bank
+
+- `worker/study_bank.py` with `worker/foundations_bank.py` builds **392 illustrated multiple-choice questions plus 20 short illustrated topic posts** locally. The new foundation bank adds **192 questions: 48 concepts with four calculated variants each**, rather than 192 entirely different concepts. The original 200 questions remain.
+- Numerical answers are calculated reproducibly; answer order is deterministically shuffled. Each quiz has one correct option, immediate feedback, retry, and a worked answer. The answer persists on that device.
+- All challenge posts in the final published snapshot, including the older questions, have a supported diagram.
+- Illustrations are original inline vector schematics rendered by `diagramTemplate()` in `docs/app.js`, with accessible descriptions and givens. They are not copied textbook figures or externally generated bitmap assets.
+- Diagrams distinguish physical setups such as heat engine vs refrigerator, series vs parallel springs, distributed beam loads, principal-stress circles, and two-force members. Preserve that consistency when adding questions.
+- Courses represented:
+
+| Course | Subject | Current classification |
+| --- | --- | --- |
+| ME-3310 | Fluid Mechanics | Current |
+| ENGR-2300 | Thermodynamics | Current |
+| ME-3140 | Machine Design | Current |
+| ME-3010 | System Dynamics | Current |
+| ME-2010 | Statics | Foundational/past |
+| CALC-I, CALC-II, CALC-III | Calculus I, II, III; 32 questions each | Foundational/past |
+| LINEAR-ALG | Linear algebra; 16 questions | Foundational/past |
+| DIFF-EQ | Differential equations; 16 questions | Foundational/past |
+| PHYS-I, PHYS-II | Mechanics/waves and electricity/magnetism/optics; 32 questions each | Foundational/past |
+
+- `notes raw/` is the private, ignored local library. It contains coursework folders including Mechatronics (ME-3050), but that folder had no content at inspection. Do not imply that the new bank covers mechatronics or publish private library files.
+- `notes_raw/` is the committed input to the deterministic slicer. It contains the original sample notes and `Review_Topics.md`, an original outline supporting machine-design and system-dynamics generation. The last index had eight chunks from two source files; it is not a complete index of the private library.
+- Regenerate/merge the original review bank with `python -m worker.study_bank`. IDs are stable; existing conversations are preserved. This command updates the feed locally and does not itself deploy.
+
+## Feed sources, balance, and retention
+
+- `worker/ingest_rss.py`: independent public-source ingestion, up to 50 entries per source, bounded concurrency, sanitized excerpts of at most 600 characters, original publication dates, stable IDs, and source-failure isolation.
+- Sources include ESPN NFL/NHL, Broncos, BBC, NPR, The Guardian, NASA, Smithsonian, and multiple Reddit news, football, hockey, discovery, and drama communities.
+- **Utah's official NHL site path is `/utah/`**, not `/mammoth/`. Its active Reddit community `r/Utah_Hockey` successfully supplied posts. `r/UtahMammoth` was configured but rate-limited during verification.
+- `worker/ingest_nhl.py` imports official Mammoth and Avalanche article headlines, short descriptions, dates, and image metadata. It handles NHL's escaped JSON publication metadata; no full article bodies are copied.
+- ESPN team identifiers verified in this session: Utah **129764**, Colorado **17**. Team-specific ESPN feeds can include unrelated league articles, so the importer checks team keywords before applying team labels.
+- Reddit feeds often return 429/403. Several drama communities were unavailable during initial import; **r/pettyrevenge** supplied real drama posts. This is an external source limitation, not a reason to fabricate content or retry aggressively. Publisher/team sources keep the feed useful when Reddit fails.
+- GitHub Actions refreshes public sources **every three hours**, independently of the desktop and without model generation.
+- Refresh intake targets: up to **180 sports**, **180 news**, and **100 story** posts, selected across source buckets.
+- Default browser mixer weights when all pools are available: football 25%, hockey 20%, news 25%, other stories 11%, drama 4%, current review 10%, past review 5%. These are selection weights; once pools empty, remaining categories can have a larger share.
+- Browser exam profiles differ from baseline. Backend calendar weights guide generation quotas separately; do not assume the frontend and backend tables are identical.
+- Sports/news expire after seven days from publication; stories after 30 days. Engineering is evergreen. Unknown publication dates are skipped, and fetching an article again does not make it new.
+- Canonical source URLs and stable IDs prevent tracking links or edited titles from resurfacing read stories. Seen headlines are not recycled at the end. Explicit engineering review can revisit school material.
+- Archive cap: **1,500 posts**. Queued question parents and the original `study_` bank receive priority; other posts are ordered by activity. Preserve comments and parent identities when merging.
+
+## Hosting/data budgets (implemented locally, October 24 follow-up)
+
+- Verified GitHub documentation: published Pages site maximum 1 GB, source repository recommended 1 GB, soft bandwidth 100 GB/month. The usual 10-builds/hour soft limit does not apply to custom Actions publishing: https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits.
+- Project checks deliberately restrict **feed.json and each published file to 5 MiB; total docs/ to 20 MiB**. `scripts/check_pages_budget.py` runs in CI, content refresh and Pages deployment. Oversized atomic feed writes fail before replacing existing data; the script checks marker consistency too.
+- Browser reply polling now uses a tiny `data/feed-meta.json` marker every five minutes while visible/online; full JSON is fetched only when changed or when the marker is unavailable. Explicit refresh still fetches feed.json. SW v8 supports offline marker/feed caching.
+- Feed atomic writes produce both JSON and marker. The local loop publishes and recovers only these two generated paths; cached outbox and publication-before-Issue-resolution guarantees remain. RSS automation stages the marker too. Do not add marker generation without preserving both writers and recovery.
+- Local size snapshot: **743,030 bytes total published files**, **611,474-byte feed**, roughly **98,076 bytes gzip** (estimate only). This is roughly 163,539 uncompressed complete-feed transfers per 100 decimal GB, excluding other traffic. Static checks do not measure actual monthly bandwidth or accumulated remote Git history. Local Git object storage at inspection was about 617 KiB.
+- No hosted video or copied image library was added. Diagrams remain inline vector markup; imported publisher images load lazily from their original hosts and Reddit embeds remain on demand.
+
+## AI generation, questions, and desktop automation
+
+- Generation uses the local **Codex CLI with the user's saved ChatGPT login**. It is not a GPU/offline model, and it does not use an OpenAI API key or SDK. Do not restore the old API-based master-spec design without a new request.
+- Default configured generator model at this handoff: `gpt-6-luna`; environment overrides exist. This is project configuration, not a recommendation to change the conversation model.
+- Practical batch guidance given to the user: **20–30 carefully checked AI-written questions per prompt**. Implemented recurring cap: **20 cards per batch**, at most twice per day, with a **300-second** model timeout. This is a chosen quality/usage bound, not a hard model capability limit.
+- Model prompts use supplied note context, ask for 4–8 plausible choices and a supported diagram, constrain course tags/categories, and discourage repeated recent titles. Generated challenges require concise solutions and a question body of at most 75 words.
+- `contracts/feed_schema.json` and `contracts/llm_output_schema.json` describe the formats. Python also rejects a correct-answer index outside the actual option array. Legacy non-quiz posts remain supported.
+- Windows scheduled task: **ScrollForge Local Codex Loop**. It checks every five minutes while the user is logged in, prioritizes pending questions, and makes no model call for an idle check.
+- The worker owns an isolated checkout at `.cache/local-agent/checkout`; private state and cached publication outbox live under `.cache/`. Do not casually reset this checkout or delete its state: the outbox supports crash and push-race recovery.
+- Browser comments create `pending-codex` GitHub Issues. Optional browser credentials stay on that device. Desktop credentials come from the existing `gh` login, independently.
+- Replies are validated, merged into `feed.json`, and pushed before the worker posts answers to and closes represented Issues. Preserve this publication ordering and retry behavior.
+
+## Important files
+
+| Path | Purpose |
+| --- | --- |
+| `docs/index.html` | Page shell, topic navigation, dialogs |
+| `docs/tokens.css` | Approved design, responsive layout, quizzes and diagrams |
+| `docs/app.js` | Mixing, pagination, search/filtering, diagrams, quizzes, embeds, comments/inbox |
+| `docs/sw.js` | Offline shell/feed/marker caching; local v8, last deployed v7 |
+| `docs/data/feed.json` | Live content and conversations; also written by automation |
+| `docs/data/feed-meta.json` | Tiny update marker, generated together with feed.json |
+| `docs/data/notes_index.json` | Committed, sliced note context |
+| `worker/study_bank.py` | Reproducible review bank and merge command |
+| `worker/foundations_bank.py` | 192 original calculated math/physics variants |
+| `scripts/check_pages_budget.py` | Published-file/feed/site budgets and marker validation |
+| `worker/ingest_rss.py`, `worker/ingest_nhl.py` | Public source importers |
+| `worker/run_pipeline.py`, `worker/retention.py` | Validation, merging, publication, expiry/deduplication |
+| `worker/generate_batch.py`, `worker/local_loop.py` | Local AI generation and durable question/reply loop |
+| `.github/workflows/` | Checks, content refresh, GitHub Pages deployment |
+| `tests/test_browser.py`, `tests/test_study_bank.py` | Browser behavior and review-bank checks |
+
+## Development and deployment notes
+
+- Workspace: `C:\Users\user\Documents\MISC\scrollforge`, PowerShell, existing `.venv`.
+- Use `.venv/Scripts/python.exe` for this Windows checkout. `git` and `gh` were not on PATH; installed executables were `C:/Program Files/Git/cmd/git.exe` and `C:/Program Files/GitHub CLI/gh.exe`.
+- Useful checks: `python -m pytest -q tests`, `python -m worker.run_pipeline --dry-run`, `git diff --check`. Dry run must remain offline and must not overwrite its input feed.
+- Serve `docs/` with a static server for previews. Browser tests exercise a `/scrollforge/` subpath and use installed Chrome or Playwright Chromium. Do not assume the Playwright headless-shell executable is installed merely because Chromium is available.
+- PowerShell/legacy console encodings can corrupt non-ASCII text piped into Python. Prefer `apply_patch` for Unicode source edits and use explicit UTF-8 for file I/O. The pipeline's CLI JSON output uses ASCII escapes to avoid Windows console failures; stored feed JSON remains UTF-8.
+- Pushes changing `docs/**` on `main` trigger Pages. The content refresh may create a second feed commit and subsequent deployment. Before pushing, fetch and merge automated feed updates without discarding local content or conversations. Never force-push to bypass this race.
+- Bump the service-worker shell version when changing cached assets so installed/offline clients receive the change.
+- Public source network access, Git metadata writes, and deployment required tool-level sandbox escalation in this session. No credentials were printed or committed.
+- Original `scrollforge_master_spec.md` and duplicate orchestration plan describe an earlier design. The current code, README, memory, and change log reflect the deployed implementation.
+
+## Last published state and regression lessons
+
+- Last feature/fix commit: **`4fb5f41`**. Earlier feature releases: `6abd389` and `0b88953`.
+- Pages deployment succeeded: https://github.com/floogle11/scrollforge/actions/runs/40162194635.
+- Final independent GitHub checks succeeded, including **69 tests**: https://github.com/floogle11/scrollforge/actions/runs/40162194551.
+- The first expansion run exposed issues on Linux Chromium that local Windows checks had missed. They were fixed and the successful final run supersedes that failure.
+- **Short final posts need scroll space below them.** `.feed-end` has `min-height: calc(100svh - 160px)` so `scrollIntoView({block:'start'})` can align a final short post under the sticky header. Do not remove this without preserving that behavior; a tall-viewport regression test covers it.
+- **Read-tracking is asynchronous.** Clearing seen storage immediately before reload races IntersectionObserver. Saved-answer tests now reload and explicitly reopen engineering review, matching intended product behavior.
+- A real-data mobile preview verified rendered KaTeX math, the illustrated multiple-choice layout, Mammoth filtering, official Reddit iframe creation, no horizontal overflow, and no JavaScript errors.
+- Verified published content snapshot (`last_updated` **2026-10-25T04:27:03Z**): **541 posts**, **200 quizzes**, **20 topic posts**, **75 hockey posts**, including **57 Mammoth**, **7 Avalanche**, and **41 drama posts**. Counts overlap and change as sources refresh/expire.
+- The later local follow-up has not been committed or deployed. Its regenerated feed snapshot (`2026-10-25T05:13:48Z`) has **731 posts**, **392 quizzes**, and **20 topic posts**; freshness pruning removed two older unthreaded items while merging the 192 new questions. Preserve pre-existing continuity documentation and the README continuity link when reviewing/staging changes.
+- Latest local verification: **126 tests passed**, with real mobile/desktop Chromium checks, 48 new independent calculation references, subject rendering/filtering, local preference reversal/reset/persistence, unchanged-marker request avoidance, feed budget rejection and feed/marker publication recovery. Offline pipeline dry run, JS syntax and diff whitespace checks also passed. This evidence does not supersede the last published deployment evidence above.

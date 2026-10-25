@@ -35,6 +35,8 @@ jobs:
           ref: main
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Check Pages data budgets
+        run: python scripts/check_pages_budget.py
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:

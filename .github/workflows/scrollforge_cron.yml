@@ -51,9 +51,10 @@ jobs:
         id: publish
         shell: bash
         run: |
+          python scripts/check_pages_budget.py
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data/feed.json docs/data/notes_index.json
+          git add docs/data/feed.json docs/data/feed-meta.json docs/data/notes_index.json
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0

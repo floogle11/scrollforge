@@ -19,6 +19,8 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-dev.txt
       - run: python -m pip install -r requirements-dev.txt
+      - name: Check Pages data budgets
+        run: python scripts/check_pages_budget.py
       - run: python -m playwright install --with-deps chromium
       - name: Run offline integration and worker checks
         run: python -m pytest -q tests --ignore=tests/test_browser.py

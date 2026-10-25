@@ -196,9 +196,10 @@ def _git_race_repos(tmp_path):
     _git(git, seed, "config", "user.email", "scrollforge-test@example.invalid")
     (seed / "docs/data").mkdir(parents=True)
     (seed / "docs/data/feed.json").write_text("{\"version\": 1}\n", encoding="utf-8")
+    (seed / "docs/data/feed-meta.json").write_text("{\"version\": 1}\n", encoding="utf-8")
     (seed / "README.md").write_text("base\n", encoding="utf-8")
     (seed / ".gitignore").write_text(".cache/\n", encoding="utf-8")
-    _git(git, seed, "add", "--", "docs/data/feed.json", "README.md", ".gitignore")
+    _git(git, seed, "add", "--", "docs/data/feed.json", "docs/data/feed-meta.json", "README.md", ".gitignore")
     _git(git, seed, "commit", "-m", "Initial content")
     _git(git, seed, "branch", "-M", "main")
     _git(git, seed, "push", "-u", "origin", "main")
@@ -220,7 +221,8 @@ def test_git_fast_forward_race_recovers_cached_feed_commit(tmp_path, monkeypatch
     (local / ".cache/local-agent").mkdir(parents=True)
     (local / ".cache/local-agent/outbox.json").write_text('{"output": {"new_cards": []}}', encoding="utf-8")
     (local / "docs/data/feed.json").write_text("{\"local_agent_batch\": true}\n", encoding="utf-8")
-    _git(git, local, "add", "--", "docs/data/feed.json")
+    (local / "docs/data/feed-meta.json").write_text("{\"local_agent_batch\": true}\n", encoding="utf-8")
+    _git(git, local, "add", "--", "docs/data/feed.json", "docs/data/feed-meta.json")
     _git(git, local, "commit", "-m", "Update ScrollForge feed")
 
     (other / "README.md").write_text("remote RSS update\n", encoding="utf-8")
@@ -231,6 +233,7 @@ def test_git_fast_forward_race_recovers_cached_feed_commit(tmp_path, monkeypatch
     assert _git(git, local, "rev-parse", "HEAD") == latest
     assert (local / "README.md").read_text(encoding="utf-8") == "remote RSS update\n"
     assert (local / "docs/data/feed.json").read_text(encoding="utf-8") == "{\"version\": 1}\n"
+    assert (local / "docs/data/feed-meta.json").read_text(encoding="utf-8") == "{\"version\": 1}\n"
     assert (local / ".cache/local-agent/outbox.json").is_file()
 
 
@@ -240,6 +243,7 @@ def test_precommit_feed_crash_restores_only_cached_feed_path(tmp_path, monkeypat
     (local / ".cache/local-agent").mkdir(parents=True)
     (local / ".cache/local-agent/outbox.json").write_text('{"output": {"new_cards": []}}', encoding="utf-8")
     (local / "docs/data/feed.json").write_text("{\"partial_write\": true}\n", encoding="utf-8")
+    (local / "docs/data/feed-meta.json").write_text("{\"partial_write\": true}\n", encoding="utf-8")
     local_loop._pull_latest(local)
     assert (local / "docs/data/feed.json").read_text(encoding="utf-8") == "{\"version\": 1}\n"
     assert (local / ".cache/local-agent/outbox.json").is_file()

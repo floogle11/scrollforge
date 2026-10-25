@@ -64,6 +64,8 @@
         <label class="sort-control"><span class="sr-only">Sort posts</span><select id="feedSort"><option value="mixed">For you</option><option value="new">New</option></select></label>
       </div>
       <div class="team-picks" aria-label="Favorite teams"><span>Following</span><button type="button" data-topic="mammoth">Utah Mammoth</button><button type="button" data-topic="avalanche">Colorado Avalanche</button></div>
+      <p class="preference-hint">Shape your mix with ↑ More / ↓ Less on posts. <span id="preferenceStatus" role="status" aria-live="polite"></span></p>
+      <label class="study-filter" id="studyFilter" hidden>Practice subject <select id="studyCourse"><option value="">All subjects</option><option>CALC-I</option><option>CALC-II</option><option>CALC-III</option><option>LINEAR-ALG</option><option>DIFF-EQ</option><option>PHYS-I</option><option>PHYS-II</option><option>ME-3310</option><option>ENGR-2300</option><option>ME-3140</option><option>ME-3010</option><option>ME-2010</option></select></label>
 
       <section class="card-stage" id="cardStage" aria-label="Scrolling card feed">
         <div class="loading-card"><span class="loader-mark">sf</span><p>Finding your next read…</p><span class="loading-line"></span></div>
@@ -98,6 +100,7 @@
   <section class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-hidden="true" hidden>
     <div class="modal-head"><div><div class="eyebrow">LOCAL CONFIGURATION</div><h2 id="settingsTitle">Settings</h2></div><button class="close-button" data-close-panel aria-label="Close settings">×</button></div>
     <p class="panel-intro">Questions are queued in GitHub and answered by the Codex loop on your computer.</p>
+    <div class="preference-settings"><h3>Your feed preferences</h3><p>Arrows learn recurring topics, teams, courses and sources. Saved only in this browser; older signals gradually fade. Discovery stays in the mix.</p><p id="preferenceSummary"></p><button class="text-button" id="resetPreferences" type="button">Reset feed preferences</button></div>
     <form id="settingsForm" class="settings-form">
       <label for="repoSlug">Repository <span>OWNER / REPO</span></label>
       <input id="repoSlug" name="repoSlug" type="text" placeholder="owner/repository" autocomplete="off" spellcheck="false" required pattern="[^/\s]+/[^/\s]+">
