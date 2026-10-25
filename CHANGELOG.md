@@ -2,6 +2,18 @@
 
 Dates below use America/Denver. The evening releases on October 24, 2026 correspond to October 25 UTC. Automated feed-refresh commits are omitted except where needed to explain deployment state.
 
+## 2026-10-25 — Mental-review choices, corrected diagrams and 60 new questions
+
+Prepared and locally verified; deployment evidence is recorded after publication.
+
+- Replaced decimal exponentials, logarithms, π-based results and difficult roots with exact choices. The integration-by-parts example now offers `e² + 1`, `e² − 1`, `2e²`, and `3e² − 1`; evaluating the lower bound correctly selects `e² + 1`. Foundation distractors reflect chain-rule, sign, boundary, arithmetic and setup mistakes. Estimation questions retain approximations.
+- Added 60 distinct questions, five for each of twelve subjects, bringing the reproducible bank to 452 quizzes and 20 topic posts. Topics include implicit differentiation, telescoping series, Green's theorem, rank/nullity, forced IVPs, friction, Gauss's law, buoyancy, entropy, tipping, buckling and damped frequency. Stable IDs and merge behavior preserve conversations.
+- Replaced generic artwork with 42 reviewed diagram types in `docs/diagrams.js`. Actual integrands and bounds drive shaded plots. Corrected forces, beam supports, spring/damper distinctions, tank boundaries, lens rays, and coil/collision setups. Unrelated figures are omitted. Readable labels and accessible captions remain within the SVG canvas on mobile and desktop.
+- Updated recurring generation guidance to preserve exact mental-math expressions, check equivalent answers, and use a diagram only when the setup matches. A quiz and worked solution remain required; an image is optional.
+- Saved-answer signatures now include question text and the correct index as well as options, preventing stale feedback after content corrections. Bumped the offline shell to v9 and cached the separate diagram renderer.
+- Local validation: 132 tests passed, including all 368 numerical variants, equivalent-distractor checks, exact integration choices, all figure labels fitting their canvases, saved-answer invalidation and existing feed/browser/worker behavior. A real mobile preview rendered 2,164 math expressions with no KaTeX errors and no page errors. Reviewed figure galleries; JavaScript syntax and publication budgets passed.
+- Merged automatic refreshes through `fd9ef07` without losing either existing conversation comment. Prepublication snapshot: 848 posts, 452 quizzes; feed 684,070 bytes and total published files 816,018 bytes, within the 5 MiB feed and 20 MiB site budgets. Counts change with public-source refreshes.
+
 ## 2026-10-24 — Feed diversity, learned interests, foundational review and hosting budgets
 
 Feature commit **`98dc01c`**, followed by automatic feed refresh **`2942e1b`**. Both Pages deployments succeeded; live mobile verification passed. Earlier published release evidence remains below for history.

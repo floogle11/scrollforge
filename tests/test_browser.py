@@ -354,11 +354,73 @@ def test_foundation_subjects_render_diagrams_quizzes_and_filter(browser, site_ur
             nodes = page.locator('.feed-card:visible')
             assert nodes.count() >= 16
             assert all(label == course for label in nodes.locator('.card-course').all_text_contents())
-            assert nodes.locator('.study-visual svg').count() == nodes.count()
+            # Illustrations are optional: do not force unrelated artwork onto
+            # symbolic algebra, vector calculus or conceptual questions.
+            assert nodes.locator('.study-visual svg').count() <= nodes.count()
             assert nodes.locator('.quiz').count() == nodes.count()
         page.locator('.feed-card:visible').first.locator('[data-answer]').first.click()
         assert 'worked answer' in page.locator('.feed-card:visible').first.locator('.quiz-feedback').inner_text()
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    finally:
+        context.close()
+
+
+@pytest.mark.parametrize('viewport', [{'width':390,'height':844}, {'width':1440,'height':1000}])
+def test_review_figures_are_renderable_labeled_and_fit_the_canvas(browser, site_url, viewport):
+    from worker.study_bank import build_bank
+    cards = [c for c in build_bank() if c.get('diagram')]
+    context, page = _page(browser, site_url, viewport=viewport, feed=_fixture_feed())
+    try:
+        result = page.evaluate('''cards => {
+          const host=document.createElement('div'); document.body.append(host);
+          const failures=[];
+          for (const card of cards) {
+            host.innerHTML=ScrollForgeDiagrams.render(card);
+            const svg=host.querySelector('svg');
+            if (!svg || !svg.getAttribute('aria-label')) {failures.push(card.id+': missing figure');continue;}
+            for (const text of svg.querySelectorAll('text')) {
+              const b=text.getBBox();
+              if (b.x < 0 || b.y < 0 || b.x+b.width > 480 || b.y+b.height > 240) failures.push(card.id+': clipped '+text.textContent);
+            }
+          }
+          host.remove(); return failures;
+        }''', cards)
+        assert result == []
+        assert page.evaluate("ScrollForgeDiagrams.render({diagram:'tangent'})") == ''
+        assert page.evaluate("ScrollForgeDiagrams.render({diagram:'plot',diagram_data:{}})") == ''
+        # The integration-by-parts plot must start at y=0, curve upward and end
+        # at x=2. This catches decorative curves or incorrect area endpoints.
+        plot = next(c for c in cards if c['id']=='study_calc2_parts_0')
+        page.evaluate("card => document.querySelector('.card-body').insertAdjacentHTML('afterend', ScrollForgeDiagrams.render(card))", plot)
+        curve = page.locator('.diagram-curve').get_attribute('d')
+        assert curve.startswith('M60.000 185.000')
+        assert curve.endswith('L405.000 60.000')
+        assert 'from 0 to 2' in page.locator('[data-diagram="plot"] svg').get_attribute('aria-label')
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    finally:
+        context.close()
+
+
+def test_saved_answer_resets_when_question_or_correct_answer_changes(browser, site_url):
+    from worker.study_bank import build_bank
+    feed = _fixture_feed()
+    question = next(c for c in build_bank() if c['id']=='study_calc2_parts_0')
+    feed['cards'] = [question]
+    context, page = _page(browser, site_url, feed=feed)
+    try:
+        page.locator('[data-answer]').first.click()
+        assert page.locator('.quiz-option:disabled').count() == 4
+        question['quiz']['correct_index'] = (question['quiz']['correct_index']+1)%4
+        page.reload()
+        page.locator('.review-engineering').click()
+        page.locator('.quiz-option:not(:disabled)').first.wait_for()
+        assert page.locator('.quiz-option:not(:disabled)').count() == 4
+        page.locator('[data-answer]').first.click()
+        question['body_markdown'] += ' Use exact form.'
+        page.reload()
+        page.locator('.review-engineering').click()
+        page.locator('.quiz-option:not(:disabled)').first.wait_for()
+        assert page.locator('.quiz-option:not(:disabled)').count() == 4
     finally:
         context.close()
 

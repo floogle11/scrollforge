@@ -1,5 +1,7 @@
 from collections import Counter
 from copy import deepcopy
+import math
+import re
 import pytest
 
 from worker.study_bank import build_bank
@@ -11,19 +13,20 @@ from worker.ingest_rss import normalize_entry
 def test_bank_is_diverse_reproducible_and_contract_valid():
     cards = build_bank()
     assert cards == build_bank()
-    assert len(cards) == 412
-    assert sum(bool(card.get('quiz')) for card in cards) == 392
+    assert len(cards) == 472
+    assert sum(bool(card.get('quiz')) for card in cards) == 452
     assert len({card['id'] for card in cards}) == len(cards)
     assert len({card['body_markdown'] for card in cards}) == len(cards)
     counts = Counter(card['course_tag'] for card in cards)
     assert set(counts) == {'ME-3310', 'ENGR-2300', 'ME-3140', 'ME-3010', 'ME-2010', 'CALC-I', 'CALC-II', 'CALC-III', 'LINEAR-ALG', 'DIFF-EQ', 'PHYS-I', 'PHYS-II'}
     assert min(counts.values()) >= 16
     for course in ['CALC-I', 'CALC-II', 'CALC-III', 'PHYS-I', 'PHYS-II']:
-        assert counts[course] == 32
+        assert counts[course] == 37
     validate_feed({'last_updated': '2026-10-25T00:00:00Z', 'calendar_mode': 'BASELINE',
                    'active_exam_course': None, 'cards': cards})
     for card in cards:
-        assert card['diagram']
+        if card['diagram'] == 'plot':
+            assert card['diagram_data']['lower'] < card['diagram_data']['upper']
         if not card.get('quiz'):
             assert card['category'] == 'DEEP_CUT'
             continue
@@ -92,7 +95,84 @@ def test_bank_is_diverse_reproducible_and_contract_valid():
 def test_numeric_answers_against_independent_reference_values(identity, answer):
     card = next(card for card in build_bank() if card['id'] == identity)
     quiz = card['quiz']
-    assert quiz['options'][quiz['correct_index']] == answer
+    actual = quiz['options'][quiz['correct_index']]
+    assert math_value(actual) == pytest.approx(float(answer.split()[0]), rel=0.0005)
+    if actual.startswith('$'):
+        assert actual.split('$')[-1].strip() == ' '.join(answer.split()[1:])
+    else:
+        assert actual == answer
+
+
+def math_value(option):
+    """Evaluate the bank's small numeric TeX subset, only in these tests.
+
+    Independent rounded reference values above remain unchanged. This parser
+    lets them check exact expressions as well as the old decimal answers.
+    """
+    if not option.startswith('$'):
+        return float(option.split()[0])
+    expression = option.split('$')[1]
+    expression = expression.replace(r'\left', '').replace(r'\right', '').replace(r'\,', '')
+    expression = expression.replace(r'\pi', 'pi').replace(r'\ln', 'log').replace(r'\infty', 'inf')
+    previous = None
+    while previous != expression:
+        previous = expression
+        expression = re.sub(r'\\sqrt\{([^{}]+)\}', r'sqrt(\1)', expression)
+        expression = re.sub(r'\\frac\{([^{}]+)\}\{([^{}]+)\}', r'((\1)/(\2))', expression)
+        expression = re.sub(r'\^\{([^{}]+)\}', r'**(\1)', expression)
+    expression = re.sub(r'\^(\d+)', r'**\1', expression)
+    expression = re.sub(r'(?<=[0-9)])(?=pi|e|sqrt|log|\()', '*', expression)
+    # Input is repository-authored test data, never a feed/user expression.
+    return float(eval(expression, {'__builtins__': {}}, dict(pi=math.pi, e=math.e, sqrt=math.sqrt, log=math.log, inf=math.inf)))
+
+
+def test_exact_choices_have_no_equivalent_numeric_distractors():
+    from worker.review_choices import choices
+    seen = []
+    def check(key, course, title, body, value, unit, *unused):
+        options, exact = choices(key, value, unit)
+        values = [math_value(option) for option in options]
+        assert values[0] == pytest.approx(value, rel=0.0005), key
+        for i, left in enumerate(values):
+            assert not any(math.isclose(left, right, rel_tol=1e-10, abs_tol=1e-10) for right in values[i+1:]), (key, options)
+        seen.append(key)
+    # Re-run every numerical template with its original formula, independently
+    # of the choice recipes. Includes every variant, not only v=0.
+    import worker.study_bank as bank
+    from unittest.mock import patch
+    def audited_choices(key, value, unit):
+        check(key, None, None, None, value, unit)
+        return choices(key, value, unit)
+    with patch.object(bank, 'choices', audited_choices):
+        bank.build_bank()
+    assert len(seen) == 368
+
+
+def test_exponential_integrals_use_exact_answers_and_boundary_errors():
+    cards = {card['id']: card for card in build_bank()}
+    assert set(cards['study_calc2_parts_0']['quiz']['options']) == {'$e^{2}+1$', '$e^{2}-1$', '$2e^{2}$', '$3e^{2}-1$'}
+    assert '$e^{2}-1$' in cards['study_calc2_substitution_0']['quiz']['options']
+    assert 'closest' not in cards['study_calc2_parts_0']['body_markdown']
+    for key in ('calc1_product', 'calc1_related', 'calc2_parts', 'calc2_partial', 'calc2_disk', 'calc2_polar', 'ode_decay', 'physics1_energy', 'physics1_spring'):
+        for v in range(4):
+            options = cards[f'study_{key}_{v}']['quiz']['options']
+            assert all(option.startswith('$') for option in options)
+
+
+def test_diagrams_match_setups_and_plots_have_actual_bounds():
+    cards = {card['id']: card for card in build_bank()}
+    expected = {'natural_frequency_0':'spring_undamped', 'physics1_spring_0':'spring_undamped',
+                'damper_force_0':'damper', 'hydrostatic_0':'open_tank', 'ideal_gas_du_0':'sealed_tank',
+                'physics1_momentum_0':'collision', 'physics2_faraday_0':'coil', 'newton_0':None,
+                'roller_reaction':None, 'calc1_product_0':None, 'linear_system_0':None}
+    for key, diagram in expected.items():
+        assert cards['study_'+key]['diagram'] == diagram
+    for v in range(4):
+        data = cards[f'study_calc2_parts_{v}']['diagram_data']
+        assert (data['function'],data['lower'],data['upper']) == ('parts',0,v+2)
+    added = [c for c in cards.values() if c['id'].startswith('study_extra_')]
+    assert len(added) == 60
+    assert set(Counter(c['course_tag'] for c in added).values()) == {5}
 
 
 def test_out_of_range_correct_answer_is_rejected():
@@ -101,6 +181,18 @@ def test_out_of_range_correct_answer_is_rejected():
     with pytest.raises(ValueError, match='outside'):
         validate_feed({'last_updated': '2026-10-25T00:00:00Z', 'calendar_mode': 'BASELINE',
                        'active_exam_course': None, 'cards': [card]})
+
+
+def test_generated_challenges_can_omit_a_misleading_illustration():
+    from worker.generate_batch import validate_output
+    card = next(card for card in build_bank() if card['id']=='study_extra_log_parts')
+    card.pop('topic')
+    card.pop('diagram_labels')
+    assert card['diagram'] is None
+    validate_output({'comment_replies':[], 'new_cards':[card]})
+    card['quiz'] = None
+    with pytest.raises(ValueError, match='must include a quiz'):
+        validate_output({'comment_replies':[], 'new_cards':[card]})
 
 
 def test_nhl_metadata_uses_publication_time_and_short_description():

@@ -7,19 +7,16 @@ textbook pages, lecture figures, or private student files are published.
 from __future__ import annotations
 
 import hashlib
-import json
 import math
 import random
-from pathlib import Path
 from .foundations_bank import COURSES as FOUNDATION_COURSES, extend_bank
+from .review_choices import choices
+from .review_diagrams import attach_diagram
+from .extra_review_bank import extend_review
 
 STAMP = "2026-10-25T00:00:00Z"
 COURSES = {"fluids": "ME-3310", "thermo": "ENGR-2300", "statics": "ME-2010",
            "design": "ME-3140", "dynamics": "ME-3010", **FOUNDATION_COURSES}
-
-
-def _number(value: float) -> str:
-    return f"{value:.4g}"
 
 
 def build_bank() -> list[dict]:
@@ -39,10 +36,10 @@ def build_bank() -> list[dict]:
                       "diagram": diagram, "diagram_labels": list(labels), "topic": topic or (COURSES[course] if course in FOUNDATION_COURSES else title)})
 
     def numeric(key, course, title, body, value, unit, solution, diagram, labels=()):
-        correct = f"{_number(value)} {unit}".strip()
-        distractors = [f"{_number(value * factor)} {unit}".strip() for factor in (0.5, 2, 4)]
-        add(key, course, title, body + " Choose the closest value.", correct, distractors,
-            solution + f"\nThe result is **{correct}**. Check the units before choosing.", diagram, labels)
+        options, exact = choices(key, value, unit)
+        suffix = "" if exact else " Choose the closest value."
+        add(key, course, title, body + suffix, options[0], options[1:],
+            solution + f"\nThe result is {options[0]}.", diagram, labels)
 
     for v in range(4):
         # Fluids: continuity, similitude, energy balances, and pipe losses.
@@ -291,6 +288,9 @@ def build_bank() -> list[dict]:
                       "solution_markdown": None, "source_url": None, "parent_card_id": None,
                       "comments": [], "diagram": diagram, "topic": title})
     extend_bank(add, numeric)
+    extend_review(add)
+    for card in cards:
+        attach_diagram(card)
     return cards
 
 
@@ -300,7 +300,7 @@ def main():
     cards = build_bank()
     merged = merge_feed(feed, new_cards=cards, replies=[], issues=[], calendar=feed)
     atomic_write(FEED_PATH, merged)
-    print(f"Merged {len(cards)} illustrated review posts into {len(merged['cards'])} posts.")
+    print(f"Merged {len(cards)} review posts into {len(merged['cards'])} posts.")
 
 
 if __name__ == "__main__":

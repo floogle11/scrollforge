@@ -189,7 +189,40 @@
             "rectangle",
             "parallel_springs",
             "series_springs",
-            "member", "axes2d", "axes3d", "tangent", "limit", "area", "integral", "series", "circle", "polar", "revolution", "matrix", "decay", "motion", "falling", "projectile", "forces", "wave", "charges", "field", "resistor", "capacitor", "magnetic", "lens"
+            "member",
+            "axes2d",
+            "axes3d",
+            "tangent",
+            "limit",
+            "area",
+            "integral",
+            "series",
+            "circle",
+            "polar",
+            "revolution",
+            "matrix",
+            "decay",
+            "motion",
+            "falling",
+            "projectile",
+            "forces",
+            "wave",
+            "charges",
+            "field",
+            "resistor",
+            "capacitor",
+            "magnetic",
+            "lens",
+            "plot",
+            "open_tank",
+            "sealed_tank",
+            "energy_balance",
+            "lever",
+            "spring_undamped",
+            "damper",
+            "collision",
+            "coil",
+            "incline"
           ]
         },
         "diagram_labels": {
@@ -217,6 +250,47 @@
         "image_url": {
           "type": "string",
           "pattern": "^https://"
+        },
+        "diagram_data": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "function",
+            "lower",
+            "upper",
+            "coefficient",
+            "label"
+          ],
+          "properties": {
+            "function": {
+              "enum": [
+                "square",
+                "parts",
+                "substitution",
+                "rational"
+              ]
+            },
+            "lower": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10
+            },
+            "upper": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 10
+            },
+            "coefficient": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 5
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            }
+          }
         }
       }
     },

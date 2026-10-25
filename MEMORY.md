@@ -1,10 +1,10 @@
 # ScrollForge conversation memory
 
-Last recorded: **2026-10-24, America/Denver** (deployment and CI timestamps extend into **2026-10-25 UTC**).
+Last recorded: **2026-10-25, America/Denver**.
 
 This file is the handoff for future conversations. Read it together with `CHANGELOG.md` and `README.md`. Counts and deployment identifiers below are dated snapshots; inspect the current repository and feed before treating them as live values.
 
-**Latest follow-up is deployed:** commit `98dc01c` adds feed diversity, browser-local preference learning, foundational math/physics practice, and publication budgets. Automatic feed refresh `2942e1b` followed it. Both Pages deployments succeeded and the live mobile site was verified on October 24 (October 25 UTC).
+**October 25 update prepared and locally verified:** exact mental-review answer choices, reviewed diagrams and 60 new questions bring the bank to 452 quizzes plus 20 topic posts. Publication evidence will be recorded after pushing. Prior deployed feature `98dc01c` added feed diversity, browser-local preferences, foundational review and publication budgets; automatic refreshes continued through `fd9ef07` before this update.
 
 ## User intent and preferences
 
@@ -14,6 +14,7 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 - They want a large, varied pool and automatic loading as they scroll. Do not satisfy this by replaying already-read headlines or inventing news.
 - Main interests: NFL and Broncos, general/world/US/technology news, hockey, **Utah Mammoth (favorite team)**, **Colorado Avalanche**, discoveries/history/space, and occasional Reddit drama stories.
 - School material should include useful illustrations, more topics, short explanations, and multiple-choice questions. Four to eight choices were requested; the starter questions use four and the format supports up to eight.
+- October 25 feedback: questions should be solvable mentally without evaluating decimal exponentials or other transcendental constants. Keep expressions such as `e² + 1`, `ln(4/3)`, `π/5`, fractions and radicals exact. Distractors should represent plausible mistakes. Misleading diagrams made the user misinterpret questions: use accurate, labeled figures only when they match the stated setup, and omit unrelated artwork.
 - They welcomed importing real Reddit posts so AI does not have to write the entire feed.
 - Earlier feature releases and the final navigation fix were published and verified. The latest follow-up requested better randomization, learning from likes/dislikes and recurring interests, Calc I–III/linear algebra/differential equations/Physics I–II, and attention to GitHub hosting limits.
 - Keep the feed leisure-first; the expanded bank should not turn Home into a coursework dashboard. New default sampling weights remain 85% leisure / 15% review before diversity and personalization adjustments.
@@ -34,15 +35,14 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 - Keyboard: `j/k` next/previous post, Space reveals a challenge solution, `c` opens comments. Native wheel and touch scrolling remain native.
 - "Show Reddit post" opens an on-demand original-post preview using `https://embed.reddit.com/`. The original Reddit link stays available if the embed fails. There are no invented Reddit votes or comment counts.
 - Reddit iframes use a restricted sandbox. Resize messages are accepted only from the embed origin and the matching iframe window, with bounded heights. Imported text is escaped/sanitized.
-- Browser local storage tracks read posts and source URLs, read replies, pending comments, selected quiz answers, repository settings, and the optional Issues token. Quiz answers include an options signature so edited questions do not reuse incompatible selections.
+- Browser local storage tracks read posts and source URLs, read replies, pending comments, selected quiz answers, repository settings, and the optional Issues token. Quiz signatures now include the body, options and correct index so edited questions cannot reuse incompatible selections. Older options-only answer records expire once.
 
 ## Content and review bank
 
-- `worker/study_bank.py` with `worker/foundations_bank.py` reproducibly builds the published bank of **392 illustrated multiple-choice questions plus 20 short illustrated topic posts**. The new foundation bank adds **192 questions: 48 concepts with four calculated variants each**, rather than 192 entirely different concepts. The original 200 questions remain.
-- Numerical answers are calculated reproducibly; answer order is deterministically shuffled. Each quiz has one correct option, immediate feedback, retry, and a worked answer. The answer persists on that device.
-- All challenge posts in the final published snapshot, including the older questions, have a supported diagram.
-- Illustrations are original inline vector schematics rendered by `diagramTemplate()` in `docs/app.js`, with accessible descriptions and givens. They are not copied textbook figures or externally generated bitmap assets.
-- Diagrams distinguish physical setups such as heat engine vs refrigerator, series vs parallel springs, distributed beam loads, principal-stress circles, and two-force members. Preserve that consistency when adding questions.
+- `worker/study_bank.py` with `worker/foundations_bank.py` and `worker/extra_review_bank.py` reproducibly builds **452 multiple-choice questions plus 20 short topic posts**. The original foundation bank has **192 questions: 48 concepts with four calculated variants each**. The original 200 engineering questions remain; October 25 adds 60 distinct questions, five per subject.
+- `worker/review_choices.py` preserves exact expressions for exponentials, logarithms, π, fractions and radicals, with misconception-based choices for foundational math and selected engineering topics. Numerical engineering approximations still use closest-value choices where applicable. All 368 original numerical variants are checked against their calculated values and for numerically equivalent distractors. Answer order remains deterministically shuffled.
+- Illustrations are optional. `worker/review_diagrams.py` assigns only matching figures; unsupported or unrelated legacy artwork is omitted. This intentionally supersedes the earlier requirement that every challenge have an image.
+- `docs/diagrams.js` renders 42 reviewed vector types with readable labels, accessible descriptions and captioned givens. Integral plots sample the actual integrand over the given bounds; physical figures distinguish open/sealed tanks, damped/undamped springs, separate dampers, pin/roller supports, collision carts and coils. Lens rays intersect at the correct real image. Figures are original inline vectors, not copied textbook images or generated bitmaps.
 - Courses represented:
 
 | Course | Subject | Current classification |
@@ -52,10 +52,10 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 | ME-3140 | Machine Design | Current |
 | ME-3010 | System Dynamics | Current |
 | ME-2010 | Statics | Foundational/past |
-| CALC-I, CALC-II, CALC-III | Calculus I, II, III; 32 questions each | Foundational/past |
-| LINEAR-ALG | Linear algebra; 16 questions | Foundational/past |
-| DIFF-EQ | Differential equations; 16 questions | Foundational/past |
-| PHYS-I, PHYS-II | Mechanics/waves and electricity/magnetism/optics; 32 questions each | Foundational/past |
+| CALC-I, CALC-II, CALC-III | Calculus I, II, III; 37 questions each | Foundational/past |
+| LINEAR-ALG | Linear algebra; 21 questions | Foundational/past |
+| DIFF-EQ | Differential equations; 21 questions | Foundational/past |
+| PHYS-I, PHYS-II | Mechanics/waves and electricity/magnetism/optics; 37 questions each | Foundational/past |
 
 - `notes raw/` is the private, ignored local library. It contains coursework folders including Mechatronics (ME-3050), but that folder had no content at inspection. Do not imply that the new bank covers mechatronics or publish private library files.
 - `notes_raw/` is the committed input to the deterministic slicer. It contains the original sample notes and `Review_Topics.md`, an original outline supporting machine-design and system-dynamics generation. The last index had eight chunks from two source files; it is not a complete index of the private library.
@@ -81,7 +81,7 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 
 - Verified GitHub documentation: published Pages site maximum 1 GB, source repository recommended 1 GB, soft bandwidth 100 GB/month. The usual 10-builds/hour soft limit does not apply to custom Actions publishing: https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits.
 - Project checks deliberately restrict **feed.json and each published file to 5 MiB; total docs/ to 20 MiB**. `scripts/check_pages_budget.py` runs in CI, content refresh and Pages deployment. Oversized atomic feed writes fail before replacing existing data; the script checks marker consistency too.
-- Browser reply polling now uses a tiny `data/feed-meta.json` marker every five minutes while visible/online; full JSON is fetched only when changed or when the marker is unavailable. Explicit refresh still fetches feed.json. SW v8 supports offline marker/feed caching.
+- Browser reply polling uses a tiny `data/feed-meta.json` marker every five minutes while visible/online; full JSON is fetched only when changed or when the marker is unavailable. Explicit refresh still fetches feed.json. SW v9 adds the separate diagram renderer to the offline shell.
 - Feed atomic writes produce both JSON and marker. The local loop publishes and recovers only these two generated paths; cached outbox and publication-before-Issue-resolution guarantees remain. RSS automation stages the marker too. Do not add marker generation without preserving both writers and recovery.
 - Published-size snapshot after refresh `2942e1b`: **742,395 bytes total published files**, **610,839-byte feed**, roughly **97,926 bytes gzip** (estimate only). This is roughly 163,709 uncompressed complete-feed transfers per 100 decimal GB, excluding other traffic. Static checks do not measure actual monthly bandwidth or accumulated remote Git history.
 - No hosted video or copied image library was added. Diagrams remain inline vector markup; imported publisher images load lazily from their original hosts and Reddit embeds remain on demand.
@@ -91,7 +91,7 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 - Generation uses the local **Codex CLI with the user's saved ChatGPT login**. It is not a GPU/offline model, and it does not use an OpenAI API key or SDK. Do not restore the old API-based master-spec design without a new request.
 - Default configured generator model at this handoff: `gpt-6-luna`; environment overrides exist. This is project configuration, not a recommendation to change the conversation model.
 - Practical batch guidance given to the user: **20–30 carefully checked AI-written questions per prompt**. Implemented recurring cap: **20 cards per batch**, at most twice per day, with a **300-second** model timeout. This is a chosen quality/usage bound, not a hard model capability limit.
-- Model prompts use supplied note context, ask for 4–8 plausible choices and a supported diagram, constrain course tags/categories, and discourage repeated recent titles. Generated challenges require concise solutions and a question body of at most 75 words.
+- Model prompts use supplied note context, ask for 4–8 plausible choices, constrain course tags/categories, and discourage repeated recent titles. Mental-review guidance requests exact expressions and common-error distractors. Diagrams may be null; choose one only when its documented geometry and assumptions match. Generated challenges require concise solutions and a question body of at most 75 words.
 - `contracts/feed_schema.json` and `contracts/llm_output_schema.json` describe the formats. Python also rejects a correct-answer index outside the actual option array. Legacy non-quiz posts remain supported.
 - Windows scheduled task: **ScrollForge Local Codex Loop**. It checks every five minutes while the user is logged in, prioritizes pending questions, and makes no model call for an idle check.
 - The worker owns an isolated checkout at `.cache/local-agent/checkout`; private state and cached publication outbox live under `.cache/`. Do not casually reset this checkout or delete its state: the outbox supports crash and push-race recovery.
@@ -105,12 +105,16 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 | `docs/index.html` | Page shell, topic navigation, dialogs |
 | `docs/tokens.css` | Approved design, responsive layout, quizzes and diagrams |
 | `docs/app.js` | Mixing, pagination, search/filtering, diagrams, quizzes, embeds, comments/inbox |
-| `docs/sw.js` | Offline shell/feed/marker caching; deployed v8 |
+| `docs/sw.js` | Offline shell/feed/marker caching; v9 includes diagrams.js |
+| `docs/diagrams.js` | Reviewed SVG figures and function-specific integral plots |
 | `docs/data/feed.json` | Live content and conversations; also written by automation |
 | `docs/data/feed-meta.json` | Tiny update marker, generated together with feed.json |
 | `docs/data/notes_index.json` | Committed, sliced note context |
 | `worker/study_bank.py` | Reproducible review bank and merge command |
 | `worker/foundations_bank.py` | 192 original calculated math/physics variants |
+| `worker/review_choices.py` | Exact expressions and misconception distractors |
+| `worker/extra_review_bank.py` | 60 distinct additional questions across twelve subjects |
+| `worker/review_diagrams.py` | Question-to-figure assignments and integral plot parameters |
 | `scripts/check_pages_budget.py` | Published-file/feed/site budgets and marker validation |
 | `worker/ingest_rss.py`, `worker/ingest_nhl.py` | Public source importers |
 | `worker/run_pipeline.py`, `worker/retention.py` | Validation, merging, publication, expiry/deduplication |

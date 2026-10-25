@@ -98,8 +98,8 @@ def validate_output(result: Any) -> dict[str, Any]:
         if card["comments"]:
             raise ValueError("LLM-generated cards must start with an empty comments list")
         if card["category"].startswith("CHALLENGE"):
-            if not quiz or not card.get("diagram"):
-                raise ValueError("new challenges must include a quiz and an illustration")
+            if not quiz:
+                raise ValueError("new challenges must include a quiz")
             if len(card["body_markdown"].split()) > 75:
                 raise ValueError("challenge body exceeds 75 words")
             if not card["solution_markdown"]:
@@ -179,9 +179,19 @@ def call_model(*, notes_payload: dict[str, Any], issues: list[dict[str, Any]],
         "Generate only engineering categories CHALLENGE_CURRENT, CHALLENGE_PAST, or DEEP_CUT; "
         "never invent news headlines or sports reports. Distinguish current-course from past-course material. "
         "Each challenge must include a quiz with 4 to 8 distinct plausible options and exactly one correct_index (zero based). "
-        "Check every calculation and avoid ambiguous distractors. Use 4 options unless more are educationally useful. "
-        "Choose a diagram from pipe, pump, tank, cycle, beam, truss, stress, shaft, spring, circuit. "
-        "The diagram is a schematic, so put all numerical givens and geometry in the question text. "
+        "These are mental reviews: keep exact expressions such as $e^2+1$, $\\ln(4/3)$, $\\pi/5$ and radicals in all choices. "
+        "Do not require decimal exponentials, logarithms or trigonometric values unless approximation is the lesson. "
+        "Use simple arithmetic givens. Build distractors from specific sign, boundary, chain-rule, unit or setup errors; "
+        "check that exactly one option is mathematically correct, including equivalent expressions. "
+        "Check every calculation. Use 4 options unless more are educationally useful. "
+        "Use diagram null unless a supported figure precisely matches the question. "
+        "Safe diagram meanings: pipe=uniform diameter; beam=centered downward point load on pin/roller supports; "
+        "beam_eccentric=point load one-third of span from left; beam_udl=uniform downward load; "
+        "beam_triangular=downward load rising from zero on left; spring_undamped=mass and spring only; "
+        "spring=mass, spring and damper in parallel; damper=damper only; cycle=heat engine; fridge=heat pump; "
+        "sealed_tank=closed rigid volume; open_tank=free surface with depth; resistor=one resistor and battery; "
+        "circuit=series RC; lens=converging lens with object at three focal lengths. "
+        "Never attach an unrelated image just to fill space. Put all numerical givens and geometry in the text. "
         "Spread the batch across supported topics and avoid supplied recent titles. "
         "Follow the requested category counts exactly and leave generated cards' comments empty."
     )
