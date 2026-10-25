@@ -1,15 +1,27 @@
 {
-  "last_updated": "2026-10-25T02:59:57Z",
+  "last_updated": "2026-10-25T03:00:57Z",
   "calendar_mode": "BASELINE",
   "active_exam_course": null,
   "cards": [
+    {
+      "id": "rss_reddit_broncos_f16e6d2cb36b76ea6d",
+      "created_at": "2026-10-25T02:04:56Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Indy fan here. I confess. What would you be willing to give up for Q or Taylor?",
+      "body_markdown": "My dad is a huge Broncos fan and he seems to think one of them will be a Bronco. What is the honest pick evaluation for either one of them? We NEED picks desperately, thanks to Chris. Do you think 2 second rounders for Tayler would suffice? Or a 3rd + a player for Q? I don’t think Denver can get both. Thanks, guys.",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xeq6zj/indy_fan_here_i_confess_what_would_you_be_willing/",
+      "parent_card_id": null,
+      "comments": []
+    },
     {
       "id": "rss_guardian_us_c5eca048a670bccd74",
       "created_at": "2026-10-25T00:16:17Z",
       "category": "NEWS",
       "course_tag": null,
-      "title": "California leaders rebuke Trump administration’s push over alleged noncitizen voting",
-      "body_markdown": "Election personnel concerned directive to ‘quickly’ verify 20,000 ballots could disenfranchise citizens California’s top leaders have rebuked the Trump administration’s efforts to quash alleged noncitizen voting. Less than two weeks before the midterms, federal prosecutors called upon California election officials to verify within 48 hours a list of about 20,000 ballots belonging to suspected noncitizens. Continue reading...",
+      "title": "California leader calls attack on alleged noncitizen voting ‘weaponizing the law’",
+      "body_markdown": "State attorney general said Trump’s justice department’s directive to verify 20,000 ballots is completely improper California’s attorney general on Saturday rebuked the Trump administration’s efforts to quash alleged noncitizen voting, calling it “politicizing and weaponizing the law”. Rob Bonta, the state’s attorney general, said the justice department acted at Donald Trump’s direction. Continue reading...",
       "solution_markdown": null,
       "source_url": "https://www.theguardian.com/us-news/2026/oct/24/california-noncitizen-voting-trump-administration",
       "parent_card_id": null,
@@ -120,6 +132,18 @@
       "body_markdown": "The 1,300 survivors of sexual abuse by clergy members and lay workers have all agreed to the settlement, according to an attorney for some of the plaintiffs.",
       "solution_markdown": null,
       "source_url": "https://www.npr.org/2026/10/24/nx-s1-6015522/new-york-archdiocese-settlement-agreement",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_broncos_0a7c765f66875c26db",
+      "created_at": "2026-10-24T22:25:19Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Handicap Ticket Question",
+      "body_markdown": "My son recently broke his leg and will need to use a wheelchair to get around the stadium. We have tickets for the Raiders game in a couple of weeks, is there a way to switch the tickets to handicapped access tickets?",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xeloak/handicap_ticket_question/",
       "parent_card_id": null,
       "comments": []
     },
@@ -340,6 +364,18 @@
       "comments": []
     },
     {
+      "id": "rss_reddit_broncos_d5a13b8c8c90aa013b",
+      "created_at": "2026-10-24T20:26:26Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Opinion on Que Robinson?",
+      "body_markdown": "What do you guys think of him?",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xeixzg/opinion_on_que_robinson/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
       "id": "rss_reddit_nfl_c2a5b69b5f0ee0c68c",
       "created_at": "2026-10-24T20:01:40Z",
       "category": "SPORTS",
@@ -348,6 +384,30 @@
       "body_markdown": "Packers activated RB Josh Jacobs and he is expected to play Sunday at Detroit.",
       "solution_markdown": null,
       "source_url": "https://www.reddit.com/r/nfl/comments/1xeicss/packers_activated_rb_josh_jacobs_and_he_is/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_broncos_9664461035342a3cb3",
+      "created_at": "2026-10-24T20:00:51Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Broncos Takeover",
+      "body_markdown": "Takeover party from Scottsdale AZ Post your hype for tomorrow",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xeic07/broncos_takeover/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_broncos_c5f4c27ef34586b163",
+      "created_at": "2026-10-24T19:55:52Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "2027 Draft- Give me LaNorris Sellers and Mazeo Bennett (WR)",
+      "body_markdown": "all from South Carolina and throw in Nicholas Harbor the 6'6\" , 10.00 (flat) 100m WR. These skill players are the truth. If Bo isn't it this guy will be. Good passer with room for improvement but an absolutely devastating runner think Tebow w/ 4.4 speed",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xei7en/2027_draft_give_me_lanorris_sellers_and_mazeo/",
       "parent_card_id": null,
       "comments": []
     },
@@ -412,6 +472,18 @@
       "comments": []
     },
     {
+      "id": "rss_reddit_broncos_5c3fdd02ff98b39c2d",
+      "created_at": "2026-10-24T19:16:19Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Let’s go broncos!!!",
+      "body_markdown": "I only now noticed that beeping sound but o well I guess lol",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xeh8nm/lets_go_broncos/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
       "id": "rss_bbc_world_ebe0ff4927b5cf073e",
       "created_at": "2026-10-24T19:12:51Z",
       "category": "NEWS",
@@ -448,6 +520,30 @@
       "comments": []
     },
     {
+      "id": "rss_reddit_broncos_7467e08f4fbe2757c9",
+      "created_at": "2026-10-24T17:43:40Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Missing something?",
+      "body_markdown": "Ordered a Broncos shirt off Temu. Must be a special edition for 2026? You know, looks pretty awesome but there’s no “O”? Let’s go Broncs! Whoop the Cards! Looking forward to Bo and the boys showing us something special this week",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xeewsz/missing_something/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_broncos_2d9dbd746ee96fead9",
+      "created_at": "2026-10-24T17:25:13Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Q- a 2 part- What injury do you think the Broncos failed to manage",
+      "body_markdown": "and not just recently but in our history. A- to me its easy. Brian Griese was our QB and we coming on, on a night game against the Raiders, he separated his throwing shoulder, Incredibly the Broncos training staff gave him a pain killing injection at halftime to finish the game! Griese was never the same after that. That was not a good look for the Broncos medical staff allowing the player to want to go back and assuring him no further damage could occur. :( Part B- who all thinks Griese would have been our answer at QB? I do, before that injury he showed great promise and imo- (obviously…",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xeegkg/q_a_2_part_what_injury_do_you_think_the_broncos/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
       "id": "rss_reddit_nfl_d71d9e29034742a85c",
       "created_at": "2026-10-24T17:19:31Z",
       "category": "SPORTS",
@@ -468,6 +564,18 @@
       "body_markdown": "Nathan Gregory says the loss of childhood sweetheart Leanne \"is unimaginable for our family\".",
       "solution_markdown": null,
       "source_url": "https://www.bbc.co.uk/news/articles/cm86z5n0yvy6o?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_broncos_fa9345ab0d583815a8",
+      "created_at": "2026-10-24T16:29:53Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Sunday’s Fit",
+      "body_markdown": "Sunday’s Fit",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xed2us/sundays_fit/",
       "parent_card_id": null,
       "comments": []
     },
@@ -617,6 +725,18 @@
       "body_markdown": "**Original fictional Reddit-style sample narrative; not a real post.** A student team's test stand gave readings ten times smaller than expected. They checked the sensors, then the wiring, then discovered one teammate had changed a display scale while cleaning up the interface. The useful lesson was to log units and configuration alongside every run.",
       "solution_markdown": null,
       "source_url": null,
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_broncos_6d5ad93752d959de4d",
+      "created_at": "2026-10-24T15:47:42Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "[Chase Daniel] Bo Nix Is NOT The Problem - Broncos QB Film Breakdown",
+      "body_markdown": "[Chase Daniel] Bo Nix Is NOT The Problem - Broncos QB Film Breakdown",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xec0wt/chase_daniel_bo_nix_is_not_the_problem_broncos_qb/",
       "parent_card_id": null,
       "comments": []
     },
@@ -825,6 +945,18 @@
       "comments": []
     },
     {
+      "id": "rss_reddit_broncos_3228fef587039c4019",
+      "created_at": "2026-10-24T10:27:13Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "[Broncos] HC Sean Payton on the importance of stacking wins",
+      "body_markdown": "[Broncos] HC Sean Payton on the importance of stacking wins",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xe56n1/broncos_hc_sean_payton_on_the_importance_of/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
       "id": "rss_npr_df26ea1b6274e05ba0",
       "created_at": "2026-10-24T10:00:00Z",
       "category": "NEWS",
@@ -893,6 +1025,30 @@
       "body_markdown": "Taiz, a city in southwestern Yemen, faces a severe water crisis as Houthi rebels backed by Iran tighten their encirclement. The city has struggled with water issues for over a decade, but the situation has worsened in recent weeks.",
       "solution_markdown": null,
       "source_url": "https://www.npr.org/2026/10/24/g-s1-149729/drinking-water-supplies-dwindle-in-yemeni-city-besieged-by-houthi-rebels",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_broncos_7bc3bc579740e43753",
+      "created_at": "2026-10-24T06:00:58Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Wild Whinnying Weekends",
+      "body_markdown": "What are you up to for the weekend, Broncos Country?",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xe0uod/wild_whinnying_weekends/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_broncos_b00cd8fc46ca044223",
+      "created_at": "2026-10-24T04:44:12Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Ja'Quan McMillian on 'The Matchup with Chris Harris Jr. & Emmanuel Sanders'",
+      "body_markdown": "Ja'Quan McMillian on 'The Matchup with Chris Harris Jr. & Emmanuel Sanders'",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xdzhzt/jaquan_mcmillian_on_the_matchup_with_chris_harris/",
       "parent_card_id": null,
       "comments": []
     },
@@ -977,6 +1133,18 @@
       "body_markdown": "NASA’s Neil Gehrels Swift Observatory has ended its science mission now that the spacecraft is orbiting less than 171 miles (275 kilometers) above Earth’s surface. The greater atmospheric drag at this height prevents the satellite’s telescopes from steadily gazing at their astronomical targets. Swift conducted its final observation on Oct. 20. It is expected to [...]",
       "solution_markdown": null,
       "source_url": "https://science.nasa.gov/missions/swift/nasas-swift-mission-ends/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_broncos_95b524c4feed711239",
+      "created_at": "2026-10-23T21:12:59Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Friday's #DENvsAZ injury report:",
+      "body_markdown": "Friday's #DENvsAZ injury report:",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xdq8zf/fridays_denvsaz_injury_report/",
       "parent_card_id": null,
       "comments": []
     },
@@ -1097,6 +1265,18 @@
       "body_markdown": "The images from the Smithsonian Magazine Photo Contest archives will have you packing your bags for the mountains of the American Southwest",
       "solution_markdown": null,
       "source_url": "https://www.smithsonianmag.com/travel/these-15-photos-perfectly-capture-the-beautiful-red-rocks-of-sedona-arizona-180989728/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_broncos_ec77b7870d94b732a7",
+      "created_at": "2026-10-23T12:48:14Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "[KOSMIDER] Do the Broncos’ walk-off field goal attempts make you nervous? Try being on the sideline",
+      "body_markdown": "The Broncos have won five games on walk-off field goals since the start of last season, more than any team in the league. Wil Lutz has delivered in the biggest moments, but that doesn't mean his teammates can bring themselves to watch. Read for free.",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xdd366/kosmider_do_the_broncos_walkoff_field_goal/",
       "parent_card_id": null,
       "comments": []
     },
