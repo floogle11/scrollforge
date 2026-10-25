@@ -142,6 +142,18 @@ def test_keyboard_moves_the_viewport_and_reveals_active_card(browser, site_url):
         context.close()
 
 
+def test_short_last_post_can_align_below_sticky_header(browser, site_url):
+    context, page = _page(browser, site_url, {'width': 390, 'height': 1200}, _fixture_feed())
+    try:
+        for card in page.locator('.feed-card').all():
+            identity = card.get_attribute('data-card-id')
+            card.evaluate("node => node.scrollIntoView({block:'start'})")
+            page.wait_for_function("id => document.querySelector('.feed-card[data-active]').dataset.cardId === id", arg=identity)
+            assert card.evaluate('node => node.getBoundingClientRect().top') >= 100
+    finally:
+        context.close()
+
+
 @pytest.mark.parametrize("viewport", [{"width": 390, "height": 844}, {"width": 1440, "height": 1000}], ids=["mobile", "desktop"])
 def test_comments_preserve_other_cards_drafts_and_scroll(browser, site_url, viewport):
     context, page = _page(browser, site_url, viewport, _fixture_feed())
@@ -410,8 +422,10 @@ def test_illustrated_quiz_feedback_retry_and_saved_answer(browser, site_url, vie
         page.locator('.topic-tabs [data-topic="sports"]').click()
         page.locator('.topic-tabs [data-topic="engineering"]').click()
         assert 'Correct.' in card.locator('.quiz-feedback').inner_text()
-        page.evaluate("localStorage.removeItem('scrollforge.seen_card_ids'); localStorage.removeItem('scrollforge.seen_source_urls')")
         page.reload(wait_until='domcontentloaded')
+        # Read questions are intentionally absent from the fresh feed; reopen
+        # the review bank rather than racing the read-tracking observer.
+        page.locator('.review-engineering').click()
         card.locator('.quiz-feedback').wait_for()
         assert 'Correct.' in card.locator('.quiz-feedback').inner_text()
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')

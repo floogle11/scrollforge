@@ -109,6 +109,7 @@ button:disabled { opacity: .5; cursor: wait; }
 .comment-feedback { grid-column: 1/-1; color: var(--muted); font-size: 11px; min-height: 14px; }
 .comment-feedback.error { color: #ff9d91; } .comment-feedback.success { color: var(--green); }
 .feed-end, .loading-card, .empty-card { padding: 32px 12px; }
+.feed-end { min-height: calc(100svh - 160px); }
 .feed-end h2 { font-size: 23px; margin: 8px 0; }
 .feed-end p, .empty-card p { color: var(--muted); font-size: 13px; }
 .end-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
