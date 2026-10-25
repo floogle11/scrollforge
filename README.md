@@ -1,6 +1,6 @@
 # ScrollForge
 
-Open **https://floogle11.github.io/scrollforge/**. The site is a native scrolling feed of engineering challenges, Broncos/NFL headlines, and stories. GitHub Pages serves plain HTML/CSS/JavaScript; no build or server is required.
+Open **https://floogle11.github.io/scrollforge/**. The site is a compact, Reddit-style feed of Broncos/NFL headlines, world and US news, stories, and engineering challenges. GitHub Pages serves plain HTML/CSS/JavaScript; no build or server is required. Use the topic tabs, search, and For you / New sorting to browse. Filtering preserves open answers and comment drafts.
 
 ## Reading and questions
 
@@ -18,7 +18,9 @@ The task operates in an isolated checkout under `.cache/local-agent/checkout`, k
 
 For manual operation, run `scripts/run_local_loop.ps1`. `scripts/install_local_loop.ps1` installs the current-user scheduled task without a password. Both use this checkout's `.venv`, Git, GitHub CLI, and the installed Codex CLI. The installer is intended to be run once; the task handles subsequent checks. The repository contains no credentials.
 
-GitHub Actions independently fetches RSS at **00:00 and 12:00 UTC**, preserving fresh headlines even when the desktop is off. It does not generate challenges or answer questions. Optional `ICS_CALENDAR_URL` enables exam weighting. New Markdown, text, and PDF notes belong in `notes_raw/`; the deterministic slicer indexes them without using Codex. The existing local `notes raw/` library is ignored by Git and is not published.
+GitHub Actions independently fetches RSS **every three hours**, preserving fresh headlines even when the desktop is off. Sources include ESPN, the Broncos, BBC, NPR, The Guardian, NASA, Smithsonian, and public Reddit feeds for NFL, Broncos, news, world news, history, space, and stories. Reddit sometimes rate-limits feeds; each source can fail independently, with publisher feeds keeping the mix stocked. Only short excerpts are imported, with links to the original article or Reddit discussion. Each refresh keeps up to 40 NFL posts, 40 news posts, and 20 stories, selected across sources. The default mixing weights favor headlines and stories (85%) over coursework (15%) while both pools have unread posts; remaining posts are still available after a pool runs out.
+
+RSS refresh does not generate challenges or answer questions. Optional `ICS_CALENDAR_URL` enables exam weighting. New Markdown, text, and PDF notes belong in `notes_raw/`; the deterministic slicer indexes them without using Codex. The existing local `notes raw/` library is ignored by Git and is not published.
 
 ## Content lifecycle
 

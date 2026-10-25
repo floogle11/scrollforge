@@ -66,4 +66,5 @@ END:VCALENDAR"""
 def test_largest_remainder_targets_sum_to_total():
     counts = target_card_counts(total=11)
     assert sum(counts.values()) == 11
-    assert counts["current_coursework"] == 3
+    assert counts["current_coursework"] == 1
+    assert counts["sports_news"] == 7

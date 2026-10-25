@@ -200,7 +200,7 @@ def test_review_recycles_engineering_only_and_never_clears_seen_headlines(browse
         page.locator(".review-engineering").click()
         categories = page.locator(".feed-card .category-chip").all_inner_texts()
         assert categories
-        assert all("CHALLENGE" in category or "ENGINEERING" in category for category in categories)
+        assert all("CHALLENGE" in category.upper() or "ENGINEERING" in category.upper() for category in categories)
         assert "sports-fresh" in page.evaluate("JSON.parse(localStorage.getItem('scrollforge.seen_card_ids'))")
         assert page.locator('[data-card-id="sports-fresh"]').count() == 0
         page.reload(wait_until="domcontentloaded")
@@ -341,5 +341,46 @@ def test_reply_poll_updates_inbox_without_replacing_cards_or_drafts(browser, sit
         assert page.evaluate("window.__pollXss || 0") == 0
         context.set_offline(True)
         assert page.evaluate("async () => await ScrollForge.refreshReplies()") is False
+    finally:
+        context.close()
+
+
+@pytest.mark.parametrize("viewport", [{"width": 390, "height": 844}, {"width": 1440, "height": 1000}], ids=["mobile", "desktop"])
+def test_topics_search_and_sort_preserve_post_state(browser, site_url, viewport):
+    feed = _fixture_feed()
+    # Include fresh general news independently from NFL and old archived news.
+    import copy
+    headline = copy.deepcopy(feed["cards"][1])
+    headline.update(id="fresh-news", category="NEWS", title="A new world headline",
+                    source_url="https://example.test/world-news")
+    feed["cards"].append(headline)
+    context, page = _page(browser, site_url, viewport, feed)
+    try:
+        card = page.locator('.feed-card[data-card-id="challenge-one"]')
+        card.locator(".solution-toggle").click()
+        card.locator(".comment-toggle").click()
+        card.locator("textarea").fill("Keep this draft across topic changes")
+        page.evaluate("window.__draftCard = document.querySelector('[data-card-id=challenge-one]')")
+        page.locator('.topic-tabs [data-topic="news"]').click()
+        assert page.locator(".feed-card:visible").count() == 1
+        assert page.locator(".feed-card:visible").get_attribute("data-card-id") == "fresh-news"
+        page.locator('.topic-tabs [data-topic="sports"]').click()
+        assert page.locator(".feed-card:visible").count() == 1
+        assert page.locator(".feed-card:visible").get_attribute("data-card-id") == "sports-fresh"
+        page.locator('.topic-tabs [data-topic="all"]').click()
+        page.locator("#feedSearch").fill("Continuity")
+        assert page.locator(".feed-card:visible").count() == 1
+        assert card.is_visible()
+        page.locator("#feedSearch").fill("no posts match this text")
+        assert page.locator(".feed-card:visible").count() == 0
+        assert page.locator("#filterEmpty").is_visible()
+        page.locator("#feedSearch").fill("")
+        page.locator("#feedSort").select_option("new")
+        stamps = page.locator(".feed-card:visible time").evaluate_all("nodes => nodes.map(node => Date.parse(node.dateTime))")
+        assert stamps == sorted(stamps, reverse=True)
+        assert card.locator("textarea").input_value() == "Keep this draft across topic changes"
+        assert card.locator(".solution-panel").is_visible()
+        assert page.evaluate("window.__draftCard === document.querySelector('[data-card-id=challenge-one]')")
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     finally:
         context.close()

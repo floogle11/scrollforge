@@ -1,4 +1,4 @@
-const VERSION = 'scrollforge-shell-v4';
+const VERSION = 'scrollforge-shell-v5';
 const SHELL = ['./', './index.html', './tokens.css', './app.js', './manifest.json', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './data/feed.json'];
 const KATEX_FONTS = [
   'KaTeX_AMS-Regular', 'KaTeX_Caligraphic-Bold', 'KaTeX_Caligraphic-Regular',

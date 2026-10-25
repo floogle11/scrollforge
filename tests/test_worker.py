@@ -36,6 +36,43 @@ def test_ingestion_isolates_source_failures(monkeypatch):
     assert result["sources"]["ok"]["count"] == 1
 
 
+def test_reddit_atom_excerpt_omits_boilerplate_and_bounds_content():
+    card = ingest_rss.normalize_entry({
+        "title": "A league update", "published": "Sat, 24 Oct 2026 10:00:00 GMT",
+        "link": "https://www.reddit.com/r/nfl/comments/example/update/",
+        "content": [{"value": "<p>Actual discussion.</p> submitted by <a>/u/example</a> [link] [comments]"}],
+    }, {"name": "reddit_nfl", "category": "SPORTS"})
+    assert card["body_markdown"] == "Actual discussion."
+    assert card["category"] == "SPORTS"
+    long = ingest_rss.normalize_entry({
+        "title": "Long article", "published": "Sat, 24 Oct 2026 10:00:00 GMT", "summary": "An excerpt. " * 500,
+    }, {"name": "publisher", "category": "NEWS"})
+    assert len(long["body_markdown"]) <= 600
+    assert long["body_markdown"].endswith("…")
+
+
+def test_refresh_stocks_nfl_and_news_separately_and_skips_expired_items(monkeypatch, tmp_path):
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    cards = []
+    for category in ["SPORTS", "NEWS", "STORY"]:
+        for index in range(55):
+            # Expired entries lead each source; they must not consume its quota.
+            stamp = now - timedelta(days=90 if index < 5 else 0)
+            cards.append({"id": f"rss_{category}_{index}", "created_at": stamp.isoformat(),
+                          "category": category, "course_tag": None, "title": f"{category} {index}",
+                          "body_markdown": "An excerpt", "solution_markdown": None,
+                          "source_url": f"https://example.test/{category}/{index}",
+                          "parent_card_id": None, "comments": []})
+    monkeypatch.setattr(run_pipeline, "ingest_all", lambda: {"cards": cards, "sources": {}})
+    monkeypatch.setattr(run_pipeline, "get_calendar_state", lambda: {"calendar_mode": "BASELINE"})
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    result = run_pipeline.run(feed_path=tmp_path / "feed.json")
+    from collections import Counter
+    assert Counter(card["category"] for card in result["cards"]) == {"SPORTS": 40, "NEWS": 40, "STORY": 20}
+    assert all(int(card["id"].rsplit("_", 1)[1]) >= 5 for card in result["cards"])
+
+
 def test_one_codex_cli_turn_uses_schema_and_strips_api_keys(monkeypatch):
     calls = []
     monkeypatch.setenv("OPENAI_API_KEY", "must-not-leak")

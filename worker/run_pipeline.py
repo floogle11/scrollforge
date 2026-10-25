@@ -18,12 +18,12 @@ from pathlib import Path
 from typing import Any
 
 try:  # Support both `python -m worker.run_pipeline` and script invocation.
-    from .calendar_weights import get_calendar_state, target_card_counts
+    from .calendar_weights import get_calendar_state
     from .generate_batch import generate_batch, _github_headers
     from .ingest_rss import ingest_all
     from .retention import retain_cards
 except ImportError:  # pragma: no cover - exercised by command-line workflow
-    from calendar_weights import get_calendar_state, target_card_counts
+    from calendar_weights import get_calendar_state
     from generate_batch import generate_batch, _github_headers
     from ingest_rss import ingest_all
     from retention import retain_cards
@@ -198,13 +198,13 @@ def run(*, feed_path: str | Path = FEED_PATH, dry_run: bool = False,
         except Exception:
             print("Pending-question check unavailable; retaining existing cards this run", file=sys.stderr)
             issues = [{"card_id": card["id"]} for card in existing["cards"]]
-    counts = target_card_counts(calendar.get("weights"))
-    sports_quota = counts["sports_news"]
-    story_quota = counts["reddit_stories"]
-    sports_cards = select_rss_mix([card for card in rss["cards"]
-                                   if card["category"] in {"SPORTS", "NEWS"}], sports_quota)
-    story_cards = select_rss_mix([card for card in rss["cards"] if card["category"] == "STORY"], story_quota)
-    feed = merge_feed(existing, new_cards=sports_cards + story_cards + result["new_cards"],
+    # Stock the feed independently of study-generation targets. Previously only
+    # 3–4 headlines survived each refresh, often all from sports sources.
+    fresh_rss = retain_cards(rss["cards"])
+    sports_cards = select_rss_mix([card for card in fresh_rss if card["category"] == "SPORTS"], 40)
+    news_cards = select_rss_mix([card for card in fresh_rss if card["category"] == "NEWS"], 40)
+    story_cards = select_rss_mix([card for card in fresh_rss if card["category"] == "STORY"], 20)
+    feed = merge_feed(existing, new_cards=sports_cards + news_cards + story_cards + result["new_cards"],
                       replies=result["comment_replies"], issues=issues, calendar=calendar)
     atomic_write(Path(output_path) if output_path else feed_path, feed)
     return feed
@@ -301,7 +301,8 @@ def main(argv: list[str] | None = None) -> int:
         result = resolve_only(feed_path=args.feed)
     else:
         result = run(feed_path=args.feed, dry_run=args.dry_run, output_path=args.output, generator=args.generator)
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    # ASCII escapes keep CLI output valid JSON on Windows legacy consoles too.
+    print(json.dumps(result, ensure_ascii=True, indent=2))
     return 0
 
 

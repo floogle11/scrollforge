@@ -2,8 +2,8 @@
   'use strict';
   const KEYS = { seen: 'scrollforge.seen_card_ids', seenSources: 'scrollforge.seen_source_urls', read: 'scrollforge.read_comment_ids', repo: 'scrollforge.repo_slug', token: 'scrollforge.github_token', pending: 'scrollforge.pending_comments' };
   const categories = {
-    SPORTS: ['SPORTS / NFL', '#FB4F14'], NEWS: ['NEWS / SIGNAL', '#FB4F14'], STORY: ['FIELD STORY', '#38BDF8'],
-    CHALLENGE_CURRENT: ['CURRENT CHALLENGE', '#E5A93C'], CHALLENGE_PAST: ['PAST CHALLENGE', '#E5A93C'], DEEP_CUT: ['ENGINEERING DEEP CUT', '#38BDF8']
+    SPORTS: ['NFL', '#ffac85'], NEWS: ['News', '#8bbfff'], STORY: ['Story', '#d7b0f3'],
+    CHALLENGE_CURRENT: ['Current challenge', '#e9c88e'], CHALLENGE_PAST: ['Practice challenge', '#e9c88e'], DEEP_CUT: ['Engineering', '#c9d98c']
   };
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -41,16 +41,16 @@
   function interleaveCards(cards, seenIds = [], mode = 'BASELINE', boundaryCards = []) {
     const seen = new Set(seenIds);
     const weightSets = {
-      BASELINE: { sports: 30, story: 20, current: 30, past: 20 },
-      EXAM_WINDOW: { sports: 20, story: 15, current: 55, past: 10 },
-      CRUNCH_WINDOW: { sports: 25, story: 15, current: 55, past: 5 },
-      EXAM_DAY: { sports: 50, story: 35, current: 15, past: 0 }
+      BASELINE: { sports: 35, news: 30, story: 20, current: 10, past: 5 },
+      EXAM_WINDOW: { sports: 25, news: 25, story: 15, current: 30, past: 5 },
+      CRUNCH_WINDOW: { sports: 25, news: 25, story: 15, current: 30, past: 5 },
+      EXAM_DAY: { sports: 35, news: 30, story: 20, current: 15, past: 0 }
     };
     const weights = weightSets[mode] || weightSets.BASELINE;
-    const typeOf = card => card.category === 'SPORTS' || card.category === 'NEWS' ? 'sports' :
+    const typeOf = card => card.category === 'SPORTS' ? 'sports' : card.category === 'NEWS' ? 'news' :
       card.category === 'CHALLENGE_CURRENT' ? 'current' : card.category === 'CHALLENGE_PAST' ? 'past' : 'story';
     const unique = cards.filter((card, i) => card && card.id && cards.findIndex(item => item.id === card.id) === i);
-    const pools = {sports: [], story: [], current: [], past: []};
+    const pools = {sports: [], news: [], story: [], current: [], past: []};
     for (const card of shuffle(unique.filter(card => !seen.has(card.id)))) pools[typeOf(card)].push(card);
     const spacers = shuffle(unique.filter(card => card.category === 'DEEP_CUT'));
     const mixed = [];
@@ -59,7 +59,7 @@
     for (let i = prior.length - 1; i >= 0 && challenge(prior[i]); i--) run++;
     while (Object.values(pools).some(pool => pool.length)) {
       if (run >= 2) {
-        const leisure = pools.sports.length ? pools.sports : pools.story;
+        const leisure = pools.sports.length ? pools.sports : pools.news.length ? pools.news : pools.story;
         if (leisure.length || spacers.length) {
           mixed.push(leisure.length ? leisure.shift() : spacers[spacerCursor++ % spacers.length]);
           run = 0; continue;
@@ -84,6 +84,7 @@
   let replyPollTimer = null;
   let replyPollInFlight = false;
   let settingsReturnFocus = null;
+  let activeTopic = 'all';
   const localPending = readStore(KEYS.pending, {});
   const readIds = new Set(readStore(KEYS.read, []));
 
@@ -137,8 +138,26 @@
   }
   function dateLabel(value) {
     const date = new Date(value);
-    if (Number.isNaN(+date)) return 'FIELD NOTE';
-    return new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' }).format(date).toUpperCase();
+    if (Number.isNaN(+date)) return 'Field note';
+    const hours = Math.max(0, Math.floor((Date.now() - date) / 3600000));
+    if (hours < 1) return 'Just now';
+    if (hours < 24) return hours + 'h ago';
+    if (hours < 168) return Math.floor(hours / 24) + 'd ago';
+    return new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' }).format(date);
+  }
+  function communityLabel(card) {
+    const names = {broncos: 'Denver Broncos', nfl: 'NFL.com', espn_nfl: 'ESPN', bbc_world: 'BBC News',
+      bbc_technology: 'BBC Technology', npr: 'NPR', guardian_us: 'The Guardian', nasa: 'NASA', smithsonian: 'Smithsonian Magazine'};
+    const match = String(card.id).match(/^rss_(.+)_[^_]+$/);
+    const source = safeUrl(card.source_url);
+    if (source) {
+      const url = new URL(source);
+      const subreddit = /(^|\.)reddit\.com$/.test(url.hostname) && url.pathname.match(/^\/r\/([^/]+)/i);
+      if (subreddit) return 'r/' + subreddit[1];
+      if (match && names[match[1]]) return names[match[1]];
+      return url.hostname.replace(/^www\./, '');
+    }
+    return card.course_tag || (card.category === 'DEEP_CUT' ? 'Engineering' : card.category === 'STORY' ? 'Stories' : 'Your study notes');
   }
   function getComments(card) {
     const combined = Array.isArray(card.comments) ? card.comments.slice() : [];
@@ -174,19 +193,23 @@
     const bodyText = String(card.body_markdown || '').trim();
     const bodyTokens = bodyText.split(/\s+/).filter(Boolean);
     const bodyWords = bodyTokens.length;
-    const bodyContent = bodyWords > 75
-      ? '<div class="body-preview">' + renderMarkdown(bodyTokens.slice(0, 75).join(' ')) + '…</div><div class="body-full" hidden>' + renderMarkdown(bodyText) + '</div><button type="button" class="body-expand" data-expand-label="' + (card.category === 'STORY' ? '＋ EXPAND STORY' : '＋ READ FULL SIGNAL') + '" data-collapse-label="' + (card.category === 'STORY' ? '− COLLAPSE STORY' : '− COLLAPSE SIGNAL') + '">' + (card.category === 'STORY' ? '＋ EXPAND STORY' : '＋ READ FULL SIGNAL') + '</button>'
+    const bodyContent = bodyWords > 55
+      ? '<div class="body-preview">' + renderMarkdown(bodyTokens.slice(0, 55).join(' ')) + '…</div><div class="body-full" hidden>' + renderMarkdown(bodyText) + '</div><button type="button" class="body-expand" data-expand-label="Read more" data-collapse-label="Show less">Read more</button>'
       : renderMarkdown(bodyText);
+    const community = communityLabel(card);
     return '<article class="feed-card" tabindex="-1" data-card-index="' + index + '" data-card-id="' + esc(card.id) + '" style="--accent:' + accent + '">' +
-      '<div class="card-topline"><span class="category-chip">' + label + '</span><span class="card-course">' + esc(card.course_tag || 'OPEN CHANNEL') + '</span><span class="card-time">' + esc(dateLabel(card.created_at)) + '</span></div>' +
+      '<div class="card-topline"><span class="community-avatar" aria-hidden="true">' + esc(community.replace(/^r\//, '').charAt(0).toUpperCase()) + '</span>' +
+      (source ? '<a class="community-name" href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">' + esc(community) + '</a>' : '<span class="community-name">' + esc(community) + '</span>') +
+      '<span aria-hidden="true">·</span><time class="card-time" datetime="' + esc(card.created_at) + '">' + esc(dateLabel(card.created_at)) + '</time><span class="card-course">' + esc(card.course_tag || '') + '</span></div>' +
       (sample ? '<div class="sample-marker">SAMPLE FEED · DEMONSTRATION CARD</div>' : '') +
-      '<h2 class="card-title">' + esc(title) + '</h2><div class="card-body">' + bodyContent + '</div>' +
-      '<div class="card-footer">' + (source ? '<a class="source-link" href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">↗ OPEN SOURCE</a>' : '<span class="source-missing">FIELD SIGNAL</span>') +
-      (card.solution_markdown ? '<button class="solution-toggle" type="button" aria-expanded="false">＋ REVEAL SOLUTION</button>' : '') +
-      '<button class="comment-toggle" type="button" aria-expanded="false">↳ THREAD <span class="reply-count">' + comments.length + (codexReplies ? ' · ' + codexReplies + ' REPLIES' : '') + '</span></button>' +
+      '<h2 class="card-title">' + (source ? '<a href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">' + esc(title) + '</a>' : esc(title)) + '</h2><span class="category-chip">' + label + '</span><div class="card-body">' + bodyContent + '</div>' +
+      '<div class="card-footer">' +
+      '<button class="comment-toggle" type="button" aria-expanded="false"><svg class="ui-icon" aria-hidden="true"><use href="#icon-comment"/></svg> Comments <span class="reply-count">' + comments.length + (codexReplies ? ' · ' + codexReplies + ' replies' : '') + '</span></button>' +
+      (card.solution_markdown ? '<button class="solution-toggle" type="button" aria-expanded="false">Reveal answer</button>' : '') +
+      (source ? '<a class="source-link" href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">' + (community.startsWith('r/') ? 'View on Reddit ↗' : 'Read article ↗') + '</a>' : '') +
       (sample ? '<span class="sample-label">SAMPLE</span>' : '') + '</div>' +
-      (card.solution_markdown ? '<section class="solution-panel"><div class="solution-label">SOLUTION / CHECK YOUR MODEL</div><div class="solution-content">' + renderMarkdown(card.solution_markdown) + '</div></section>' : '') +
-      '<section class="card-comments"><div class="comment-list">' + (comments.length ? comments.map(renderComment).join('') : '<div class="source-missing">No comments yet. Open the channel with a question.</div>') + '</div>' +
+      (card.solution_markdown ? '<section class="solution-panel"><div class="solution-label">The worked answer</div><div class="solution-content">' + renderMarkdown(card.solution_markdown) + '</div></section>' : '') +
+      '<section class="card-comments"><div class="comment-list">' + (comments.length ? comments.map(renderComment).join('') : '<div class="source-missing">Start the conversation. Ask a question or add a thought.</div>') + '</div>' +
       '<form class="comment-form"><textarea name="comment" maxlength="2000" aria-label="Your comment" placeholder="Ask a follow-up or leave a note…" required></textarea><button type="submit">SEND ↗</button><div class="comment-feedback" role="status"></div></form></section>' +
       '<span hidden data-word-count="' + bodyWords + '"></span></article>';
   }
@@ -197,9 +220,9 @@
       '<button class="solution-toggle review-engineering" type="button">REVIEW ENGINEERING</button></div></section>';
   }
   function syncPosition() {
-    const nodes = $$('.feed-card', $('#cardStage'));
+    const nodes = $$('.feed-card', $('#cardStage')).filter(node => !node.hidden);
     if (!nodes.length) { $('#cardPosition').textContent = '00 / 00'; $('#progressBar').style.width = '100%'; return; }
-    const target = Math.min(window.innerHeight * .45, 350);
+    const target = $('.topbar').getBoundingClientRect().bottom + 30;
     let closest = null, distance = Infinity;
     for (const node of nodes) {
       const rect = node.getBoundingClientRect();
@@ -208,8 +231,9 @@
     }
     if (closest) cursor = Number(closest.dataset.cardIndex);
     for (const node of nodes) node.toggleAttribute('data-active', Number(node.dataset.cardIndex) === cursor);
-    $('#cardPosition').textContent = String(cursor + 1).padStart(2, '0') + ' / ' + String(ordered.length).padStart(2, '0');
-    $('#progressBar').style.width = ((cursor + 1) / ordered.length * 100) + '%';
+    const position = nodes.findIndex(node => Number(node.dataset.cardIndex) === cursor) + 1;
+    $('#cardPosition').textContent = position + ' / ' + nodes.length;
+    $('#progressBar').style.width = (position / nodes.length * 100) + '%';
   }
   function observeCards() {
     if (viewObserver) viewObserver.disconnect();
@@ -230,19 +254,46 @@
   }
   function renderFeed() {
     const stage = $('#cardStage');
-    stage.innerHTML = ordered.map(cardTemplate).join('') + endTemplate();
-    if (!ordered.length) stage.insertAdjacentHTML('afterbegin', '<div class="empty-card"><div class="eyebrow">NO UNSEEN SIGNALS</div><p>All current cards have been viewed.</p></div>');
-    hydrateMath(stage); observeCards();
+    stage.innerHTML = ordered.map(cardTemplate).join('') + '<div class="empty-card" id="filterEmpty" hidden role="status"><p>No posts here right now. Try another topic or search.</p></div>' + endTemplate();
+    hydrateMath(stage); applyFilters(); observeCards();
+  }
+  function applyFilters() {
+    const query = $('#feedSearch').value.trim().toLocaleLowerCase();
+    const matchesTopic = card => activeTopic === 'all' ||
+      (activeTopic === 'sports' && card.category === 'SPORTS') ||
+      (activeTopic === 'news' && card.category === 'NEWS') ||
+      (activeTopic === 'stories' && card.category === 'STORY') ||
+      (activeTopic === 'engineering' && (challenge(card) || card.category === 'DEEP_CUT'));
+    const nodes = $$('.feed-card', $('#cardStage'));
+    const newest = $('#feedSort').value === 'new';
+    nodes.sort((a, b) => newest ? Date.parse(ordered[Number(b.dataset.cardIndex)].created_at) - Date.parse(ordered[Number(a.dataset.cardIndex)].created_at) || Number(a.dataset.cardIndex) - Number(b.dataset.cardIndex) : Number(a.dataset.cardIndex) - Number(b.dataset.cardIndex));
+    for (const node of nodes) {
+      const card = ordered[Number(node.dataset.cardIndex)];
+      node.hidden = !matchesTopic(card) || ![card.title, card.body_markdown, communityLabel(card), card.course_tag || ''].join(' ').toLocaleLowerCase().includes(query);
+      $('#cardStage').insertBefore(node, $('#filterEmpty'));
+    }
+    const visible = nodes.filter(node => !node.hidden);
+    $('#filterEmpty').hidden = visible.length > 0;
+    const titles = {all: 'Home', sports: 'NFL & Broncos', news: 'News', stories: 'Stories & discoveries', engineering: 'Engineering'};
+    $('#feedTitle').textContent = titles[activeTopic];
+    $$('[data-topic]').forEach(button => {
+      const selected = button.dataset.topic === activeTopic;
+      button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected));
+    });
+    syncPosition();
   }
   function activeCardElement() { return $$('.feed-card', $('#cardStage')).find(node => Number(node.dataset.cardIndex) === cursor); }
   function navigate(delta) {
-    if (!ordered.length) return;
-    cursor = Math.max(0, Math.min(ordered.length - 1, cursor + delta));
+    const visible = $$('.feed-card', $('#cardStage')).filter(node => !node.hidden);
+    if (!visible.length) return;
+    const current = visible.findIndex(node => Number(node.dataset.cardIndex) === cursor);
+    cursor = Number(visible[Math.max(0, Math.min(visible.length - 1, current + delta))].dataset.cardIndex);
     const node = activeCardElement(); if (node) node.scrollIntoView({block: 'start', behavior: 'auto'});
     syncPosition();
   }
   function reviewEngineering() {
     if (!feed) return;
+    activeTopic = 'engineering'; $('#feedSearch').value = '';
     ordered = interleaveCards(feed.cards.filter(card => challenge(card) || card.category === 'DEEP_CUT'), [], feed.calendar_mode || 'BASELINE');
     cursor = 0; renderFeed(); $('#cardStage').scrollIntoView({block: 'start'});
   }
@@ -271,7 +322,9 @@
     for (const card of feed.cards) if (seenSources.has(sourceKey(card))) seen.push(card.id);
     ordered = interleaveCards(eligibleCards(feed.cards), seen, feed.calendar_mode || 'BASELINE');
     cursor = 0;
-    $('#feedMode').textContent = String(feed.calendar_mode || 'FIELD MODE').replaceAll('_', ' ');
+    $('#feedMode').textContent = 'Your daily mix';
+    const available = eligibleCards(feed.cards);
+    $('#feedStats').innerHTML = '<div><strong>' + available.filter(card => ['SPORTS', 'NEWS'].includes(card.category)).length + '</strong>headlines</div><div><strong>' + available.filter(card => card.category === 'STORY').length + '</strong>stories</div>';
     const updated = new Date(feed.last_updated);
     $('#updatedAt').textContent = Number.isNaN(+updated) ? 'LOCAL FEED' : 'UPDATED ' + new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit' }).format(updated).toUpperCase();
     renderFeed(); updateInboxCount(); renderInbox();
@@ -355,6 +408,7 @@
       hydrateMath(node); observeCards();
     }
     closePanel();
+    node.hidden = false;
     cursor = Number(node.dataset.cardIndex);
     toggleThread($('.comment-toggle', node), true);
     node.scrollIntoView({block: 'start', behavior: 'auto'}); node.focus({preventScroll: true});
@@ -442,7 +496,7 @@
   function toggleSolution(button) {
     const panel = $('.solution-panel', button.closest('.feed-card'));
     const open = !panel.classList.contains('open'); panel.classList.toggle('open', open); button.setAttribute('aria-expanded', String(open));
-    button.textContent = open ? '− HIDE SOLUTION' : '＋ REVEAL SOLUTION'; if (open) hydrateMath(panel);
+    button.textContent = open ? 'Hide answer' : 'Reveal answer'; if (open) hydrateMath(panel);
   }
   function toggleBody(button) {
     const root = button.closest('.card-body');
@@ -452,6 +506,11 @@
     button.textContent = expanding ? button.dataset.collapseLabel : button.dataset.expandLabel;
   }
 
+  $$('[data-topic]').forEach(button => button.addEventListener('click', () => {
+    activeTopic = button.dataset.topic; applyFilters(); window.scrollTo({top: 0});
+  }));
+  $('#feedSearch').addEventListener('input', () => { if (feed) applyFilters(); });
+  $('#feedSort').addEventListener('change', () => { if (feed) { applyFilters(); window.scrollTo({top: 0}); } });
   $('#settingsButton').addEventListener('click', openSettings);
   $('#newSignalsButton').addEventListener('click', () => loadFeed().then(() => window.scrollTo({top: 0})));
   $('#inboxButton').addEventListener('click', openInbox);

@@ -12,8 +12,8 @@ from datetime import date, datetime, time, timedelta, timezone
 from typing import Any
 from urllib.parse import urlparse
 
-BASELINE_WEIGHTS = {"sports_news": 0.30, "reddit_stories": 0.20,
-                    "current_coursework": 0.30, "past_coursework": 0.20}
+BASELINE_WEIGHTS = {"sports_news": 0.65, "reddit_stories": 0.20,
+                    "current_coursework": 0.10, "past_coursework": 0.05}
 WEIGHT_TABLE = {
     "BASELINE": BASELINE_WEIGHTS,
     "EXAM_WINDOW": {"sports_news": 0.20, "reddit_stories": 0.15,

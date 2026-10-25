@@ -11,7 +11,7 @@ on:
       - 'requirements.txt'
       - '.github/workflows/scrollforge_cron.yml'
   schedule:
-    - cron: '0 0,12 * * *'
+    - cron: '0 */3 * * *'
   workflow_dispatch:
 
 permissions:

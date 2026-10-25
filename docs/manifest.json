@@ -1,12 +1,12 @@
 ﻿{
-  "name": "ScrollForge — Field Feed",
+  "name": "ScrollForge — Your daily scroll",
   "short_name": "ScrollForge",
-  "description": "A mixed feed of engineering challenges, sports, and stories.",
+  "description": "NFL, world news, good stories, and a little engineering.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#0D0F12",
-  "theme_color": "#0D0F12",
+  "background_color": "#0e1113",
+  "theme_color": "#0e1113",
   "icons": [
     { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
     { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },

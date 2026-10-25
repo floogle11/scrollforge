@@ -3,46 +3,80 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0D0F12">
-  <meta name="description" content="A mixed feed of engineering challenges, sports, and stories.">
-  <title>ScrollForge — Field Feed</title>
+  <meta name="theme-color" content="#0e1113">
+  <meta name="description" content="Your daily mix of NFL, world news, good stories, and a little engineering.">
+  <title>ScrollForge · Your daily scroll</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./apple-touch-icon.png">
   <link rel="stylesheet" href="./tokens.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
   <script defer src="./app.js"></script>
 </head>
 <body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="icon-inbox" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 13h5l1 3h4l1-3h5"/></symbol>
+    <symbol id="icon-comment" viewBox="0 0 24 24"><path d="M21 11.5a9 9 0 0 1-9 9 10 10 0 0 1-4-.8L3 21l1.3-5a9 9 0 1 1 16.7-4.5Z"/></symbol>
+  </svg>
   <div class="app-shell" id="appShell">
     <header class="topbar">
-      <a class="brand" href="./" aria-label="ScrollForge home"><span class="brand-mark">SF</span><span>SCROLLFORGE</span></a>
+      <a class="brand" href="./" aria-label="ScrollForge home"><span class="brand-mark">sf</span><span>scrollforge</span></a>
+      <label class="search-box"><svg class="ui-icon" aria-hidden="true"><use href="#icon-search"/></svg><input type="search" id="feedSearch" aria-label="Search posts" placeholder="Search ScrollForge" autocomplete="off"></label>
       <div class="top-actions">
-        <button class="icon-button inbox-trigger" id="inboxButton" type="button" aria-label="Open replies inbox"><span class="button-glyph">◉</span><span class="desktop-label">INBOX</span><span class="count-badge" id="inboxCount" hidden>0</span></button>
-        <button class="icon-button" id="settingsButton" type="button" aria-label="Settings"><span class="button-glyph">⚙</span><span class="desktop-label">SETTINGS</span></button>
+        <button class="icon-button inbox-trigger" id="inboxButton" type="button" aria-label="Open replies inbox"><svg class="ui-icon" aria-hidden="true"><use href="#icon-inbox"/></svg><span class="desktop-label">Inbox</span><span class="count-badge" id="inboxCount" hidden>0</span></button>
+        <button class="icon-button" id="settingsButton" type="button" aria-label="Settings"><span class="button-glyph">⚙</span><span class="desktop-label">Settings</span></button>
       </div>
     </header>
 
+    <nav class="sidebar" aria-label="Feed topics">
+      <button type="button" class="topic-link active" data-topic="all" aria-pressed="true"><span aria-hidden="true">⌂</span> Home</button>
+      <p class="sidebar-label">YOUR FEEDS</p>
+      <button type="button" class="topic-link" data-topic="sports" aria-pressed="false"><span class="topic-icon football" aria-hidden="true">↗</span> NFL &amp; Broncos</button>
+      <button type="button" class="topic-link" data-topic="news" aria-pressed="false"><span class="topic-icon news" aria-hidden="true">≋</span> News</button>
+      <button type="button" class="topic-link" data-topic="stories" aria-pressed="false"><span class="topic-icon stories" aria-hidden="true">✦</span> Stories &amp; discoveries</button>
+      <button type="button" class="topic-link" data-topic="engineering" aria-pressed="false"><span class="topic-icon engineering" aria-hidden="true">⚒</span> Engineering</button>
+      <div class="sidebar-note">A little less homework.<br>A lot more happening.</div>
+      <a class="sidebar-source" href="https://www.reddit.com" target="_blank" rel="noopener noreferrer">Explore Reddit ↗</a>
+    </nav>
+    <div class="content-layout">
     <main class="main-area">
       <section class="feed-heading" aria-label="Feed status">
-        <div><div class="eyebrow"><span class="live-dot"></span> FIELD FEED <span class="slash">/</span> <span id="feedMode">SYNCING</span></div><h1>Signal, mixed.</h1></div>
+        <div><div class="eyebrow"><span class="live-dot"></span> <span id="feedMode">Your daily mix</span></div><h1 id="feedTitle">Home</h1></div>
         <div class="feed-meta"><span id="cardPosition">-- / --</span><span class="meta-divider"></span><span id="updatedAt">OFFLINE READY</span></div>
       </section>
       <div class="feed-progress" aria-hidden="true"><span id="progressBar"></span></div>
+      <div class="feed-toolbar">
+        <div class="topic-tabs" aria-label="Filter posts">
+          <button type="button" data-topic="all" class="active" aria-pressed="true">All</button>
+          <button type="button" data-topic="sports" aria-pressed="false">NFL</button>
+          <button type="button" data-topic="news" aria-pressed="false">News</button>
+          <button type="button" data-topic="stories" aria-pressed="false">Stories</button>
+          <button type="button" data-topic="engineering" aria-pressed="false">School</button>
+        </div>
+        <label class="sort-control"><span class="sr-only">Sort posts</span><select id="feedSort"><option value="mixed">For you</option><option value="new">New</option></select></label>
+      </div>
 
       <section class="card-stage" id="cardStage" aria-label="Scrolling card feed">
-        <div class="loading-card"><span class="loader-mark">SF</span><p>LOADING FIELD FEED</p><span class="loading-line"></span></div>
+        <div class="loading-card"><span class="loader-mark">sf</span><p>Finding your next read…</p><span class="loading-line"></span></div>
       </section>
 
-      <p class="scroll-help">SCROLL TO EXPLORE <span>J / K move · SPACE reveals · C comments</span></p>
+      <p class="scroll-help">Make yourself at home. <span>J / K to move · Space to reveal · C to comment</span></p>
       <div class="network-status" id="networkStatus" role="status"><span class="status-led"></span><span id="networkText">CONNECTING TO FEED</span></div>
     </main>
-    <footer class="site-footer"><span>ENGINEERING <span class="muted">/</span> STORIES <span class="muted">/</span> BRONCOS</span><span class="footer-shortcut">SCROLL FREELY · J / K TO MOVE</span></footer>
+    <aside class="community-rail" aria-label="About your feed">
+      <div class="rail-banner"><span>THE DAILY SCROLL</span><strong>Stay in the loop.</strong></div>
+      <div class="rail-body"><h2>Your corner of the internet</h2><p>Football, the bigger picture, and something you didn't know you wanted to read.</p><div class="feed-stats" id="feedStats" aria-live="polite"></div><hr><h3>In the mix</h3>
+        <button type="button" class="community-link" data-topic="sports"><span class="topic-icon football">↗</span><span><strong>NFL &amp; Broncos</strong><small>Headlines, trades &amp; game day</small></span></button>
+        <button type="button" class="community-link" data-topic="news"><span class="topic-icon news">≋</span><span><strong>Around the world</strong><small>World, US &amp; technology news</small></span></button>
+        <button type="button" class="community-link" data-topic="stories"><span class="topic-icon stories">✦</span><span><strong>Down the rabbit hole</strong><small>History, space &amp; good stories</small></span></button>
+        <p class="rail-footnote">Headlines and excerpts link to their original sources. Reddit discussions open on Reddit.</p>
+      </div>
+    </aside>
+    </div>
+    <footer class="site-footer"><span>ScrollForge · A feed with a little more range.</span><span class="footer-shortcut">Keep scrolling. Stay curious.</span></footer>
   </div>
 
   <button class="new-signals" id="newSignalsButton" type="button" hidden>NEW SIGNALS - REFRESH</button>
