@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-25T05:37:00Z",
+  "last_updated": "2026-10-25T10:23:05Z",
   "calendar_mode": "BASELINE",
   "active_exam_course": null,
   "cards": [
@@ -10728,6 +10728,189 @@
       "topic": "The largest of the three Mohr circles"
     },
     {
+      "id": "rss_guardian_us_b942d843e2ac91637d",
+      "created_at": "2026-10-25T10:00:02Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "‘Talking to every single person matters’: ‘prairie populists’ canvass the rural US heartland to win in midterms",
+      "body_markdown": "Democratic and independent candidates stump the US midwest and prairie states, hoping to win over Republican strongholds In this final stretch of the US midterm elections, Democrats and independents could win back communities and towns across America’s rural heartlands through a combination of resurgent “prairie populism”, local despair over the impact of Donald Trump ’s agenda and an old-fashioned tenet of shoe-leather politics: showing up everywhere. When Dan Osborn rolled into one of the most rural counties in Nebraska earlier this month, he started walking into businesses in the tiny…",
+      "solution_markdown": null,
+      "source_url": "https://www.theguardian.com/us-news/2026/oct/25/prairie-populists-midwest-prairie-states-midterm-elections",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_npr_6dd3de05edfd5f0969",
+      "created_at": "2026-10-25T10:00:00Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "When a teen posts a selfie, how much filter is 'too much' filter?",
+      "body_markdown": "The recent Meta settlement includes a clause banning \"cosmetic procedure filters\" for teens. But defining what constitutes an extreme makeover isn't easy.",
+      "solution_markdown": null,
+      "source_url": "https://www.npr.org/2026/10/25/nx-s1-6011190/meta-facebook-settlement-beauty-filters-ai",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_guardian_us_ba5a43663cc8b06094",
+      "created_at": "2026-10-25T09:00:58Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "US seized American heir’s cellphone in violation of treaty agreement, lawyer says",
+      "body_markdown": "James ‘Fergie’ Chambers, in prison in Spain, has applied for asylum as US seeks extradition over alleged Hamas support US authorities seized wealthy activist James “Fergie” Chambers’s cellphone at some point after Spanish police arrested him in July without notifying him or his attorneys, the Guardian has learned. Chambers, a US citizen and wealthy donor to leftwing and humanitarian projects, is imprisoned in Madrid. His case is the first known instance of the US seeking to extradite a citizen over alleged support for Hamas, an accusation tied to money Chambers has donated to support…",
+      "solution_markdown": null,
+      "source_url": "https://www.theguardian.com/us-news/2026/oct/25/fbi-spain-james-fergie-chambers-cox",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_npr_a5db72f44c66b0c711",
+      "created_at": "2026-10-25T09:00:00Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Independent candidates sense a moment in the West. Democrats are hoping they're right",
+      "body_markdown": "As they look to win the Senate, Democrats are hoping that independent candidates in Nebraska and Montana can help them topple Republicans in a part of the country where their own brand is hurting.",
+      "solution_markdown": null,
+      "source_url": "https://www.npr.org/2026/10/25/nx-s1-5995460/midterms-independent-candidates-nebraska-montana",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_npr_8f2d89a260cc0f932d",
+      "created_at": "2026-10-25T09:00:00Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "In Arkansas, Democrats see an opening at the edge of the competitive midterms map",
+      "body_markdown": "In a sign of the potentially dire midterm political environment, Republicans have spent millions of dollars playing defense in Arkansas, one of the most conservative states in the country.",
+      "solution_markdown": null,
+      "source_url": "https://www.npr.org/2026/10/25/nx-s1-6009402/midterm-blue-wave-map-arkansas-democrats-cotton-shoffner-hill-jones",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_npr_3e9570f81a7b44ddd7",
+      "created_at": "2026-10-25T09:00:00Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "More dads taking paid family leave for a new baby, sometimes as much as moms are",
+      "body_markdown": "The U.S. has no national law for paid parental leave. But in states that do, more dads are using the benefit, sometimes more than moms. The change comes as Americans say having kids is unaffordable.",
+      "solution_markdown": null,
+      "source_url": "https://www.npr.org/2026/10/25/nx-s1-5977810/paid-family-bonding-leave-dads-moms-california-colorado-washington-states",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_bbc_world_ce77f1875e2035b113",
+      "created_at": "2026-10-25T09:00:00Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Musk says SpaceX restricted Ukraine's Starlink connection as service restored",
+      "body_markdown": "The tech billionaire accuses Ukraine of violating its terms of service by using the network for military activity.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/cvx28ljp8n4xo?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_bbc_world_7ea239f862ac4cbe52",
+      "created_at": "2026-10-25T08:36:47Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "'I cannot teach you integrity': How employee theft is hurting small businesses in Africa",
+      "body_markdown": "That Girl Boina's post about why she had closed her beauty parlour struck a nerve with other small business owners.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/cmz98plpjzplo?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_nasa_8c2e4976d255ac3331",
+      "created_at": "2026-10-25T08:19:48Z",
+      "category": "STORY",
+      "course_tag": null,
+      "title": "APOD: 2026 October 25 – Dark Matter in a Simulated Universe",
+      "body_markdown": "APOD Science APOD APOD: 2026 October 25 – Dark... Today’s APOD Archive Submissions Index Search Calendar RSS Education About Discuss APOD Astronomy Picture of the Day Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer. Dark Matter [...]",
+      "solution_markdown": null,
+      "source_url": "https://science.nasa.gov/image-article/apod-2026-october-25-dark-matter-in-a-simulated-universe/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_npr_bd196235495a7606b8",
+      "created_at": "2026-10-25T07:15:00Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Soldiers guard center of Milan as thousands of protesters march in cities across Europe",
+      "body_markdown": "While protests in France have claimed most international attention, large demonstrations also rocked many European cities Saturday from Milan to Rome to Madrid, Lisbon and Tirana.",
+      "solution_markdown": null,
+      "source_url": "https://www.npr.org/2026/10/25/nx-s1-6016126/thousands-of-protesters-across-europe",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_guardian_us_dc6c35daec7607e8ef",
+      "created_at": "2026-10-25T06:07:47Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Eleven sustain gunshot wounds in shooting near Florida university",
+      "body_markdown": "Police said an altercation at a homecoming party escalated into gunfire, resulting in six adults and six juveniles injured A shooting near a Florida university campus in Tallahassee has left 11 people with gunshot wounds and another person injured, authorities say. The shooting took place near the Florida Agricultural + Mechanical University’s campus on Perry Street on Saturday night, the university said, while police counted six adults and six juveniles among the injured. Continue reading...",
+      "solution_markdown": null,
+      "source_url": "https://www.theguardian.com/us-news/2026/oct/25/eleven-sustain-gunshot-wounds-in-shooting-near-florida-university",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_nhl_mammoth_5b8b8b54e74e0c2682",
+      "created_at": "2026-10-25T05:55:00Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Simashev Leads Utah to Overtime Victory with First Career Goals",
+      "body_markdown": "The Mammoth had 10 different players on the scoresheet in the resilient win",
+      "solution_markdown": null,
+      "source_url": "https://www.nhl.com/utah/news/simashev-leads-utah-to-overtime-victory-with-first-career-goals-game-story-10-24-26",
+      "parent_card_id": null,
+      "comments": [],
+      "sport": "hockey",
+      "team": "Utah Mammoth",
+      "image_url": "https://media.d3.nhle.com/image/private/t_ratio16_9-size50/prd/xirmljdotx0qeptkexee.jpg"
+    },
+    {
+      "id": "rss_bbc_world_5236fadcdd35330128",
+      "created_at": "2026-10-25T05:45:31Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Why is Ukraine so reliant on Starlink and can Europe plug the gap?",
+      "body_markdown": "Ukraine needs another satellite internet service, but a decent alternative to Elon Musk's network doesn't exist - yet.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/c65yn97xe7ypo?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_nfl_4397d9a6a205144fd0",
+      "created_at": "2026-10-25T05:24:06Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "If the Titans lose to the Browns or tie this Sunday, they will set a record for most consecutive games without back to back wins.",
+      "body_markdown": "Currently, the Titans have gone 64 consecutive games without posting consecutive wins, while the prior record holder was, oddly enough, the Cleveland Browns from November 2014 to September 2018 with 65 games. A loss or tie would guarantee the streak extends to at least two more games, guaranteeing Tennessee another trophy in terrible football.",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/nfl/comments/1xetw7v/if_the_titans_lose_to_the_browns_or_tie_this/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_bbc_world_63271e4ac55dbe1b16",
+      "created_at": "2026-10-25T05:15:52Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Israel to close West Bank crossings on election day as crackdown escalates",
+      "body_markdown": "The Israeli Defense Forces announces restrictions on the movement of Palestinian workers in the run-up to Tuesday's election.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/c6y93ylpl5p2o?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
       "id": "rss_guardian_us_aaced49e3dec2a44c2",
       "created_at": "2026-10-25T04:12:28Z",
       "category": "NEWS",
@@ -10871,6 +11054,18 @@
       "team": "Utah Mammoth"
     },
     {
+      "id": "rss_bbc_world_3073d07ec7c9cc732a",
+      "created_at": "2026-10-25T03:20:16Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Gunmen kill at least 10 villagers and loot shops in north-east Nigeria",
+      "body_markdown": "Police are searching for other casualties, with officials warning the actual death toll could rise further.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/cq1kdlm1ze7do?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
       "id": "rss_reddit_nfl_e0afc20ac54e75ba3c",
       "created_at": "2026-10-25T03:01:41Z",
       "category": "SPORTS",
@@ -10879,6 +11074,18 @@
       "body_markdown": "[Schefter] Browns and Maliek Collins reached agreement on a 2-year extension worth $30 million, including $23 million in total guarantees, per agent Drew Rosenh",
       "solution_markdown": null,
       "source_url": "https://www.reddit.com/r/nfl/comments/1xerac3/schefter_browns_and_maliek_collins_reached/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_bbc_world_c1deb1949ac0e9b087",
+      "created_at": "2026-10-25T02:27:15Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Obama attacks Trump as he campaigns for Democrats ahead of midterm elections",
+      "body_markdown": "Obama said the election was \"the last best chance to at least rein in some of the foolishness of this administration\".",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/cmj6jwe1j1gjo?at_medium=RSS&at_campaign=rss",
       "parent_card_id": null,
       "comments": []
     },
@@ -10995,6 +11202,18 @@
       "comments": []
     },
     {
+      "id": "rss_bbc_world_a29d22c21cd61fb082",
+      "created_at": "2026-10-24T23:50:02Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Voters in Brazil to choose between Lula and Bolsonaro's son",
+      "body_markdown": "Flávio Bolsonaro, the son of Brazil's imprisoned former president, is presenting a strong challenge to Lula, 80, who is seeking a fourth term in office.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/cxp8g21j4648o?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
       "id": "rss_espn_nhl_c62188ed9ce73cad07",
       "created_at": "2026-10-24T23:14:34Z",
       "category": "SPORTS",
@@ -11034,6 +11253,42 @@
       "sport": "hockey"
     },
     {
+      "id": "rss_bbc_world_6761135c6ac491280e",
+      "created_at": "2026-10-24T23:03:21Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "The bitter row over military service that could shape Israel's future",
+      "body_markdown": "The ultra-Orthodox community is resisting being drafted into the Israeli army. But will they now bring down the Netanyahu government?",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/cmvg7w0x742do?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_bbc_world_00c5a1dbf5b540a0aa",
+      "created_at": "2026-10-24T23:03:09Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Why the King's Caribbean tour could be 'biggest risk of his reign'",
+      "body_markdown": "The meticulously-planned visit takes in three countries in nine days - but is not without jeopardy.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/ckzd6gvg1r2jo?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_bbc_world_2692073abf84f93d0a",
+      "created_at": "2026-10-24T23:02:51Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "From Russian cages to Irish sanctuary: The five-year rescue journey of Bu and Tyapa",
+      "body_markdown": "For Bu and Tyapa, the five-year journey from Russia to the Irish countryside was anything but straightforward.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/cx62y9j1zyjvo?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
       "id": "rss_bbc_world_2345c5c15ce72bea6d",
       "created_at": "2026-10-24T23:02:06Z",
       "category": "NEWS",
@@ -11042,6 +11297,18 @@
       "body_markdown": "The crackdown follows the killing of two Israeli soldiers by two Palestinian gunmen on Friday - and comes just days ahead of Israel's election.",
       "solution_markdown": null,
       "source_url": "https://www.bbc.co.uk/news/articles/cqd09k1k7532o?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_bbc_world_c3cfc1db2ada9bbfb1",
+      "created_at": "2026-10-24T22:58:43Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "A shark went astray and captured Korea's heart - will she finally make it back to sea?",
+      "body_markdown": "More than a million people flocked to Busan to catch a glimpse of the female dusky shark they called Bukangi.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/c9zrdknlmpdlo?at_medium=RSS&at_campaign=rss",
       "parent_card_id": null,
       "comments": []
     },
