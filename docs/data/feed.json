@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-25T05:13:48Z",
+  "last_updated": "2026-10-25T05:37:00Z",
   "calendar_mode": "BASELINE",
   "active_exam_course": null,
   "cards": [
@@ -10924,7 +10924,7 @@
       "created_at": "2026-10-25T01:00:00Z",
       "category": "SPORTS",
       "course_tag": null,
-      "title": "FOLLOW LIVE: Tampa Bay vs Utah",
+      "title": "RECAP: Utah 5, Tampa Bay 4",
       "body_markdown": "FIRST PERIOD 2:32: TBL Penalty - Jeffrey Viel (slashing) 5:10: TBL GOAL - Jake Guentzel (OWN) 1-0 TBL 7:02: UTA GOAL - Kailer Yamamoto (unassisted) 1-1 Tie",
       "solution_markdown": null,
       "source_url": "https://www.nhl.com/utah/news/tampa-bay-vs-utah-live-blog-10-24-26",
@@ -14306,20 +14306,6 @@
       "source_url": "https://www.theguardian.com/business/2026/oct/18/small-business-owners-trump-economy",
       "parent_card_id": null,
       "comments": []
-    },
-    {
-      "id": "rss_reddit_utahhockey_4bba0a44bd6630e9e0",
-      "created_at": "2026-10-18T05:18:01Z",
-      "category": "SPORTS",
-      "course_tag": null,
-      "title": "If this is you youre a piece of shit",
-      "body_markdown": "Whoever did this to a little kid is the worst human being on the planet. If you know them call them out publicly and shame them.",
-      "solution_markdown": null,
-      "source_url": "https://www.reddit.com/r/Utah_Hockey/comments/1x8uvtm/if_this_is_you_youre_a_piece_of_shit/",
-      "parent_card_id": null,
-      "comments": [],
-      "sport": "hockey",
-      "team": "Utah Mammoth"
     },
     {
       "id": "rss_reddit_pettyrevenge_90841217cb1dbfd371",
