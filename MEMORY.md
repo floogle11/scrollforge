@@ -4,7 +4,7 @@ Last recorded: **2026-10-24, America/Denver** (deployment and CI timestamps exte
 
 This file is the handoff for future conversations. Read it together with `CHANGELOG.md` and `README.md`. Counts and deployment identifiers below are dated snapshots; inspect the current repository and feed before treating them as live values.
 
-**Latest work is local, not deployed:** the October 24 follow-up adds feed diversity, browser-local preference learning, foundational math/physics practice, and publication budgets. The last published commit/deployment evidence below still describes the earlier release. Do not imply these new features are already live.
+**Latest follow-up is deployed:** commit `98dc01c` adds feed diversity, browser-local preference learning, foundational math/physics practice, and publication budgets. Automatic feed refresh `2942e1b` followed it. Both Pages deployments succeeded and the live mobile site was verified on October 24 (October 25 UTC).
 
 ## User intent and preferences
 
@@ -25,8 +25,8 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 - Static HTML, CSS, JavaScript, and JSON served from `docs/` on GitHub Pages. There is no frontend build step or application server.
 - Dark Reddit-style layout: sticky header, search, compact posts, source attribution, rounded action buttons, desktop topic sidebar and community rail, mobile topic tabs, favorite-team chips.
 - Topics: home, NFL, hockey, Mammoth, Avalanche, news, stories, drama, and engineering. Sort by mixed "For you" order or newest.
-- Local implementation: For you avoids consecutive broad groups when alternatives remain, then seeks a different publisher/team/subject inside a group. Shuffled weighted selection still varies each visit. Exhausting diverse inventory can leave a single-category tail.
-- Local implementation: each post has **More like this / Less like this**, with toggle-to-undo and switchable signals. Recognized topics, favorite teams, course tags, publishers and subreddits contribute to future ranking. Repeated signals strengthen trends; half-life is 45 days. Weights retain exploration. Reading alone does not imply approval.
+- For you avoids consecutive broad groups when alternatives remain, then seeks a different publisher/team/subject inside a group. Shuffled weighted selection still varies each visit. Exhausting diverse inventory can leave a single-category tail.
+- Each post has **More like this / Less like this**, with toggle-to-undo and switchable signals. Recognized topics, favorite teams, course tags, publishers and subreddits contribute to future ranking. Repeated signals strengthen trends; half-life is 45 days. Weights retain exploration. Reading alone does not imply approval.
 - Preferences use `scrollforge.preferences.v1` in browser local storage, capped at 500 signals. Settings summarizes learned interests and resets them separately from repository credentials. No votes leave the device; no cloud database, analytics or per-vote publication exists. Only unmounted posts are remixed after voting so mounted DOM, scroll, drafts and answers remain intact. New sorting stays chronological.
 - Engineering now has a subject selector for all twelve course tags. Foundation tags are descriptive labels, not claimed university catalog numbers.
 - The feed mounts **24 posts per batch**, appends more near the bottom through IntersectionObserver, and offers a load-more fallback. A caught-up state remains when available content is exhausted; the inventory is large, not mathematically infinite.
@@ -38,7 +38,7 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 
 ## Content and review bank
 
-- `worker/study_bank.py` with `worker/foundations_bank.py` builds **392 illustrated multiple-choice questions plus 20 short illustrated topic posts** locally. The new foundation bank adds **192 questions: 48 concepts with four calculated variants each**, rather than 192 entirely different concepts. The original 200 questions remain.
+- `worker/study_bank.py` with `worker/foundations_bank.py` reproducibly builds the published bank of **392 illustrated multiple-choice questions plus 20 short illustrated topic posts**. The new foundation bank adds **192 questions: 48 concepts with four calculated variants each**, rather than 192 entirely different concepts. The original 200 questions remain.
 - Numerical answers are calculated reproducibly; answer order is deterministically shuffled. Each quiz has one correct option, immediate feedback, retry, and a worked answer. The answer persists on that device.
 - All challenge posts in the final published snapshot, including the older questions, have a supported diagram.
 - Illustrations are original inline vector schematics rendered by `diagramTemplate()` in `docs/app.js`, with accessible descriptions and givens. They are not copied textbook figures or externally generated bitmap assets.
@@ -77,13 +77,13 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 - Canonical source URLs and stable IDs prevent tracking links or edited titles from resurfacing read stories. Seen headlines are not recycled at the end. Explicit engineering review can revisit school material.
 - Archive cap: **1,500 posts**. Queued question parents and the original `study_` bank receive priority; other posts are ordered by activity. Preserve comments and parent identities when merging.
 
-## Hosting/data budgets (implemented locally, October 24 follow-up)
+## Hosting/data budgets (deployed October 24 follow-up)
 
 - Verified GitHub documentation: published Pages site maximum 1 GB, source repository recommended 1 GB, soft bandwidth 100 GB/month. The usual 10-builds/hour soft limit does not apply to custom Actions publishing: https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits.
 - Project checks deliberately restrict **feed.json and each published file to 5 MiB; total docs/ to 20 MiB**. `scripts/check_pages_budget.py` runs in CI, content refresh and Pages deployment. Oversized atomic feed writes fail before replacing existing data; the script checks marker consistency too.
 - Browser reply polling now uses a tiny `data/feed-meta.json` marker every five minutes while visible/online; full JSON is fetched only when changed or when the marker is unavailable. Explicit refresh still fetches feed.json. SW v8 supports offline marker/feed caching.
 - Feed atomic writes produce both JSON and marker. The local loop publishes and recovers only these two generated paths; cached outbox and publication-before-Issue-resolution guarantees remain. RSS automation stages the marker too. Do not add marker generation without preserving both writers and recovery.
-- Local size snapshot: **743,030 bytes total published files**, **611,474-byte feed**, roughly **98,076 bytes gzip** (estimate only). This is roughly 163,539 uncompressed complete-feed transfers per 100 decimal GB, excluding other traffic. Static checks do not measure actual monthly bandwidth or accumulated remote Git history. Local Git object storage at inspection was about 617 KiB.
+- Published-size snapshot after refresh `2942e1b`: **742,395 bytes total published files**, **610,839-byte feed**, roughly **97,926 bytes gzip** (estimate only). This is roughly 163,709 uncompressed complete-feed transfers per 100 decimal GB, excluding other traffic. Static checks do not measure actual monthly bandwidth or accumulated remote Git history.
 - No hosted video or copied image library was added. Diagrams remain inline vector markup; imported publisher images load lazily from their original hosts and Reddit embeds remain on demand.
 
 ## AI generation, questions, and desktop automation
@@ -105,7 +105,7 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 | `docs/index.html` | Page shell, topic navigation, dialogs |
 | `docs/tokens.css` | Approved design, responsive layout, quizzes and diagrams |
 | `docs/app.js` | Mixing, pagination, search/filtering, diagrams, quizzes, embeds, comments/inbox |
-| `docs/sw.js` | Offline shell/feed/marker caching; local v8, last deployed v7 |
+| `docs/sw.js` | Offline shell/feed/marker caching; deployed v8 |
 | `docs/data/feed.json` | Live content and conversations; also written by automation |
 | `docs/data/feed-meta.json` | Tiny update marker, generated together with feed.json |
 | `docs/data/notes_index.json` | Committed, sliced note context |
@@ -132,13 +132,14 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 
 ## Last published state and regression lessons
 
-- Last feature/fix commit: **`4fb5f41`**. Earlier feature releases: `6abd389` and `0b88953`.
-- Pages deployment succeeded: https://github.com/floogle11/scrollforge/actions/runs/40162194635.
-- Final independent GitHub checks succeeded, including **69 tests**: https://github.com/floogle11/scrollforge/actions/runs/40162194551.
+- Last feature commit: **`98dc01c`**, followed by automatic feed refresh **`2942e1b`**. Earlier feature/fix releases: `4fb5f41`, `6abd389` and `0b88953`.
+- Pages deployments succeeded: https://github.com/floogle11/scrollforge/actions/runs/40166162971 and the post-refresh deployment https://github.com/floogle11/scrollforge/actions/runs/40166188075.
+- Independent GitHub checks for the current feature release succeeded: https://github.com/floogle11/scrollforge/actions/runs/40166162923. Earlier release's checks passed 69 tests: https://github.com/floogle11/scrollforge/actions/runs/40162194551.
 - The first expansion run exposed issues on Linux Chromium that local Windows checks had missed. They were fixed and the successful final run supersedes that failure.
 - **Short final posts need scroll space below them.** `.feed-end` has `min-height: calc(100svh - 160px)` so `scrollIntoView({block:'start'})` can align a final short post under the sticky header. Do not remove this without preserving that behavior; a tall-viewport regression test covers it.
 - **Read-tracking is asynchronous.** Clearing seen storage immediately before reload races IntersectionObserver. Saved-answer tests now reload and explicitly reopen engineering review, matching intended product behavior.
 - A real-data mobile preview verified rendered KaTeX math, the illustrated multiple-choice layout, Mammoth filtering, official Reddit iframe creation, no horizontal overflow, and no JavaScript errors.
 - Verified published content snapshot (`last_updated` **2026-10-25T04:27:03Z**): **541 posts**, **200 quizzes**, **20 topic posts**, **75 hockey posts**, including **57 Mammoth**, **7 Avalanche**, and **41 drama posts**. Counts overlap and change as sources refresh/expire.
-- The later local follow-up has not been committed or deployed. Its regenerated feed snapshot (`2026-10-25T05:13:48Z`) has **731 posts**, **392 quizzes**, and **20 topic posts**; freshness pruning removed two older unthreaded items while merging the 192 new questions. Preserve pre-existing continuity documentation and the README continuity link when reviewing/staging changes.
-- Latest local verification: **126 tests passed**, with real mobile/desktop Chromium checks, 48 new independent calculation references, subject rendering/filtering, local preference reversal/reset/persistence, unchanged-marker request avoidance, feed budget rejection and feed/marker publication recovery. Offline pipeline dry run, JS syntax and diff whitespace checks also passed. This evidence does not supersede the last published deployment evidence above.
+- Latest live snapshot (`last_updated` **2026-10-25T05:37:00Z**) has **730 posts**, **392 quizzes**, and **20 topic posts**. The automatic refresh and both deployments passed. A real live mobile browser verified saved preference-button state, Calc III subject filtering, quiz feedback, rendered math, no horizontal overflow, and no JavaScript errors. Published feed and marker timestamps/byte counts match.
+- Latest local verification: **126 tests passed**, with real mobile/desktop Chromium checks, 48 new independent calculation references, subject rendering/filtering, local preference reversal/reset/persistence, unchanged-marker request avoidance, feed budget rejection and feed/marker publication recovery. Offline pipeline dry run, JS syntax and diff whitespace checks also passed.
+- The user explicitly requested deployment of this follow-up. It is published and verified; no deployment step remains outstanding.

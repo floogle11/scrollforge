@@ -2,9 +2,9 @@
 
 Dates below use America/Denver. The evening releases on October 24, 2026 correspond to October 25 UTC. Automated feed-refresh commits are omitted except where needed to explain deployment state.
 
-## 2026-10-24 — Feed diversity, learned interests, foundational review and hosting budgets (local)
+## 2026-10-24 — Feed diversity, learned interests, foundational review and hosting budgets
 
-Implemented in the working tree; not committed or deployed. Prior published release evidence below remains unchanged.
+Feature commit **`98dc01c`**, followed by automatic feed refresh **`2942e1b`**. Both Pages deployments succeeded; live mobile verification passed. Earlier published release evidence remains below for history.
 
 - Reworked For you mixing to avoid adjacent broad groups while alternatives remain, and seek different publishers, teams and subjects inside a group. Retained randomized weighting, calendar profiles, seen-source exclusion and chronological New sorting. A single-category tail remains possible after other inventory is exhausted.
 - Added More like this / Less like this to every post. Signals learn recurring recognized topics, favorite teams, courses, publishers and subreddits. Votes toggle off or switch direction; Settings summarizes trends and resets feed preferences independently of credentials. Browser-only storage retains up to 500 signals with a 45-day half-life, no backend/model calls or remote vote writes. Reading is not counted as liking. Preference weights retain exploration.
@@ -13,8 +13,10 @@ Implemented in the working tree; not committed or deployed. Prior published rele
 - Regenerated the local feed: 731 posts, including 392 quizzes. No AI generation, private-source publication or new source fetching was required.
 - Added 5 MiB feed/per-file and 20 MiB site budgets, enforced by CI, content refresh and Pages deployment. Atomic writers reject oversized feed data before replacement. Size report verifies the marker and estimates gzip/transfer capacity. GitHub's documented limits were checked against the official Pages documentation.
 - Added a tiny feed-meta.json version marker. Visible/online polling checks every five minutes and skips the full archive when unchanged; explicit refresh and marker-failure fallback remain available. Updated both RSS and desktop publication paths, including cached-outbox crash/push-race recovery, to include the marker.
-- Bumped local offline cache to scrollforge-shell-v8. Total local published data is about 0.74 MB, including a 0.61 MB feed (~0.098 MB gzip estimate). Actual monthly traffic and remote Git history are not measured by the size guard.
-- Validation: **126 tests passed locally**, including mobile/desktop preference persistence, reversal/reset, retained drafts/DOM, group diversity, trend decay, all foundation subjects/diagrams, offline feed loading, unchanged-marker transfer avoidance, independent reference answers for all 48 new numerical templates, budget rejection with original-data preservation, and desktop feed/marker crash/push-race recovery. JavaScript syntax, the offline pipeline dry run and `git diff --check` also passed. No new deployment was performed.
+- Bumped the deployed offline cache to scrollforge-shell-v8. Total published data after refresh is 742,395 bytes, including a 610,839-byte feed (~97,926 bytes gzip estimate). Actual monthly traffic and remote Git history are not measured by the size guard.
+- Validation: **126 tests passed locally**, including mobile/desktop preference persistence, reversal/reset, retained drafts/DOM, group diversity, trend decay, all foundation subjects/diagrams, offline feed loading, unchanged-marker transfer avoidance, independent reference answers for all 48 new numerical templates, budget rejection with original-data preservation, and desktop feed/marker crash/push-race recovery. JavaScript syntax, the offline pipeline dry run and `git diff --check` also passed.
+- Deployment: [feature deployment](https://github.com/floogle11/scrollforge/actions/runs/40166162971), [post-refresh deployment](https://github.com/floogle11/scrollforge/actions/runs/40166188075), and [content refresh](https://github.com/floogle11/scrollforge/actions/runs/40166162877) succeeded. Published snapshot: **730 posts, 392 quizzes and 20 topic posts**, last updated 2026-10-25T05:37:00Z. Live mobile browser checks confirmed preference controls, Calc III filtering, quiz feedback, rendered math, no horizontal overflow and no JavaScript errors; feed/marker timestamps and byte counts match.
+- [Independent GitHub checks](https://github.com/floogle11/scrollforge/actions/runs/40166162923) also succeeded for the feature commit.
 
 ## 2026-10-24 — Conversation continuity documentation
 
