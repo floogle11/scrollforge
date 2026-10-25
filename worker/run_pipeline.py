@@ -41,6 +41,10 @@ def validate_feed(feed: Any) -> dict[str, Any]:
     import jsonschema
     schema = json.loads(FEED_SCHEMA_PATH.read_text(encoding="utf-8"))
     jsonschema.validate(feed, schema, format_checker=jsonschema.FormatChecker())
+    for card in feed["cards"]:
+        quiz = card.get("quiz")
+        if quiz and quiz["correct_index"] >= len(quiz["options"]):
+            raise ValueError("quiz correct_index is outside the answer choices")
     return feed
 
 
@@ -90,7 +94,7 @@ def select_rss_mix(cards: list[dict[str, Any]], quota: int) -> list[dict[str, An
 
 def merge_feed(existing: dict[str, Any], *, new_cards: list[dict[str, Any]],
                replies: list[dict[str, Any]], issues: list[dict[str, Any]],
-               calendar: dict[str, Any], now: str | None = None, cap: int = 300) -> dict[str, Any]:
+               calendar: dict[str, Any], now: str | None = None, cap: int = 1500) -> dict[str, Any]:
     """Dedupe cards, preserve historical comments, and embed only matched replies."""
     by_id: dict[str, dict[str, Any]] = {}
     for card in list(existing.get("cards", [])) + list(new_cards):
@@ -126,7 +130,7 @@ def merge_feed(existing: dict[str, Any], *, new_cards: list[dict[str, Any]],
     protected = {issue.get("card_id") for issue in issues}
     protected.update(card.get("parent_card_id") for card in by_id.values() if card.get("parent_card_id"))
     retained = retain_cards(list(by_id.values()), now=now, protected_ids=protected)
-    cards = sorted(retained, key=lambda card: (card["id"] in protected, _activity_timestamp(card), card["created_at"], card["id"]),
+    cards = sorted(retained, key=lambda card: (card["id"] in protected, card["id"].startswith("study_"), _activity_timestamp(card), card["created_at"], card["id"]),
                    reverse=True)[:cap]
     feed = {"last_updated": now or utc_now(),
             "calendar_mode": calendar.get("calendar_mode", "BASELINE"),
@@ -201,9 +205,9 @@ def run(*, feed_path: str | Path = FEED_PATH, dry_run: bool = False,
     # Stock the feed independently of study-generation targets. Previously only
     # 3–4 headlines survived each refresh, often all from sports sources.
     fresh_rss = retain_cards(rss["cards"])
-    sports_cards = select_rss_mix([card for card in fresh_rss if card["category"] == "SPORTS"], 40)
-    news_cards = select_rss_mix([card for card in fresh_rss if card["category"] == "NEWS"], 40)
-    story_cards = select_rss_mix([card for card in fresh_rss if card["category"] == "STORY"], 20)
+    sports_cards = select_rss_mix([card for card in fresh_rss if card["category"] == "SPORTS"], 180)
+    news_cards = select_rss_mix([card for card in fresh_rss if card["category"] == "NEWS"], 180)
+    story_cards = select_rss_mix([card for card in fresh_rss if card["category"] == "STORY"], 100)
     feed = merge_feed(existing, new_cards=sports_cards + news_cards + story_cards + result["new_cards"],
                       replies=result["comment_replies"], issues=issues, calendar=calendar)
     atomic_write(Path(output_path) if output_path else feed_path, feed)

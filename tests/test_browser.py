@@ -384,3 +384,98 @@ def test_topics_search_and_sort_preserve_post_state(browser, site_url, viewport)
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     finally:
         context.close()
+
+
+@pytest.mark.parametrize("viewport", [{"width": 390, "height": 844}, {"width": 1440, "height": 1000}], ids=["mobile", "desktop"])
+def test_illustrated_quiz_feedback_retry_and_saved_answer(browser, site_url, viewport):
+    feed = _fixture_feed()
+    question = feed['cards'][0]
+    question['quiz'] = {'options': ['1 m/s', '2 m/s', '3 m/s', '4 m/s', '5 m/s', '6 m/s'], 'correct_index': 4}
+    question['diagram'] = 'pipe'
+    question['diagram_labels'] = ['Q = 0.01 m³/s', 'D = 0.05 m']
+    context, page = _page(browser, site_url, viewport, feed)
+    try:
+        card = page.locator('[data-card-id="challenge-one"]').first
+        assert card.locator('.study-visual svg').is_visible()
+        assert card.locator('.quiz-option').count() == 6
+        assert not card.locator('.solution-panel').is_visible()
+        card.locator('[data-answer="0"]').click()
+        assert 'Not quite' in card.locator('.quiz-feedback').inner_text()
+        assert card.locator('[data-answer="4"]').evaluate("el => el.classList.contains('correct')")
+        assert card.locator('.solution-panel').is_visible()
+        card.locator('.quiz-retry').click()
+        assert not card.locator('.solution-panel').is_visible()
+        card.locator('[data-answer="4"]').click()
+        assert 'Correct.' in card.locator('.quiz-feedback').inner_text()
+        page.locator('.topic-tabs [data-topic="sports"]').click()
+        page.locator('.topic-tabs [data-topic="engineering"]').click()
+        assert 'Correct.' in card.locator('.quiz-feedback').inner_text()
+        page.evaluate("localStorage.removeItem('scrollforge.seen_card_ids'); localStorage.removeItem('scrollforge.seen_source_urls')")
+        page.reload(wait_until='domcontentloaded')
+        card.locator('.quiz-feedback').wait_for()
+        assert 'Correct.' in card.locator('.quiz-feedback').inner_text()
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+        card.evaluate("node => node.scrollIntoView({block:'start'})")
+        page.screenshot(path=str(ROOT / 'test-results' / ('quiz-mobile.png' if viewport['width'] == 390 else 'quiz-desktop.png')))
+    finally:
+        context.close()
+
+
+def test_infinite_scroll_appends_without_recreating_posts_and_searches_unloaded_items(browser, site_url):
+    import copy
+    feed = _fixture_feed()
+    base = copy.deepcopy(feed['cards'][1])
+    feed['cards'] = []
+    for index in range(85):
+        post = copy.deepcopy(base)
+        post.update(id=f'headline-{index}', title=f'A distinct headline {index}',
+                    source_url=f'https://example.test/article-{index}')
+        feed['cards'].append(post)
+    context, page = _page(browser, site_url, feed=feed)
+    try:
+        assert page.locator('.feed-card').count() == 24
+        initial = page.locator('.feed-card').evaluate_all('nodes => nodes.map(node => node.dataset.cardId)')
+        page.evaluate("window.__firstPost = document.querySelector('.feed-card')")
+        page.locator('.feed-card').last.scroll_into_view_if_needed()
+        page.wait_for_function("document.querySelectorAll('.feed-card').length > 24")
+        assert page.evaluate("window.__firstPost === document.querySelector('.feed-card')")
+        assert page.locator('.feed-card').evaluate_all('nodes => nodes.slice(0,24).map(node => node.dataset.cardId)') == initial
+        ids = page.locator('.feed-card').evaluate_all('nodes => nodes.map(node => node.dataset.cardId)')
+        assert len(ids) == len(set(ids))
+        missing = next(f'headline-{index}' for index in range(85) if f'headline-{index}' not in ids)
+        page.locator('#feedSearch').fill('A distinct headline ' + missing.split('-')[1])
+        assert page.locator(f'[data-card-id="{missing}"]').is_visible()
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    finally:
+        context.close()
+
+
+def test_hockey_team_filters_and_official_reddit_preview(browser, site_url):
+    import copy
+    feed = _fixture_feed()
+    mammoth = copy.deepcopy(feed['cards'][1])
+    mammoth.update(id='mammoth-post', sport='hockey', team='Utah Mammoth', title='Mammoth game discussion',
+                   source_url='https://www.reddit.com/r/Utah_Hockey/comments/abc123/game_discussion/')
+    avalanche = copy.deepcopy(mammoth)
+    avalanche.update(id='avalanche-post', team='Colorado Avalanche', title='Avalanche preview',
+                     source_url='https://example.test/avalanche')
+    feed['cards'] += [mammoth, avalanche]
+    context, page = _page(browser, site_url, feed=feed)
+    page.route('https://embed.reddit.com/**', lambda route: route.fulfill(status=200, content_type='text/html', body='<p>Original Reddit post</p>'))
+    try:
+        page.locator('.topic-tabs [data-topic="hockey"]').click()
+        assert page.locator('.feed-card:visible').count() == 2
+        page.locator('.team-picks [data-topic="mammoth"]').click()
+        assert page.locator('.feed-card:visible').count() == 1
+        card = page.locator('[data-card-id="mammoth-post"]')
+        card.locator('.reddit-toggle').click()
+        frame = card.locator('iframe')
+        assert frame.get_attribute('src').startswith('https://embed.reddit.com/r/Utah_Hockey/comments/abc123/')
+        assert frame.get_attribute('sandbox') == 'allow-scripts allow-same-origin allow-popups'
+        assert frame.get_attribute('title') == 'Original Reddit post'
+        card.locator('.reddit-toggle').click()
+        assert not frame.is_visible()
+        page.locator('.team-picks [data-topic="avalanche"]').click()
+        assert page.locator('.feed-card:visible').get_attribute('data-card-id') == 'avalanche-post'
+    finally:
+        context.close()

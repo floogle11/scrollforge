@@ -3,40 +3,247 @@
   "title": "ScrollForge feed",
   "type": "object",
   "additionalProperties": false,
-  "required": ["last_updated", "calendar_mode", "active_exam_course", "cards"],
+  "required": [
+    "last_updated",
+    "calendar_mode",
+    "active_exam_course",
+    "cards"
+  ],
   "properties": {
-    "last_updated": {"type": "string", "format": "date-time"},
-    "calendar_mode": {"enum": ["BASELINE", "EXAM_WINDOW", "CRUNCH_WINDOW", "EXAM_DAY"]},
-    "active_exam_course": {"type": ["string", "null"]},
-    "cards": {"type": "array", "maxItems": 300, "items": {"$ref": "#/$defs/card"}}
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "calendar_mode": {
+      "enum": [
+        "BASELINE",
+        "EXAM_WINDOW",
+        "CRUNCH_WINDOW",
+        "EXAM_DAY"
+      ]
+    },
+    "active_exam_course": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cards": {
+      "type": "array",
+      "maxItems": 1500,
+      "items": {
+        "$ref": "#/$defs/card"
+      }
+    }
   },
   "$defs": {
     "comment": {
-      "type": "object", "additionalProperties": false,
-      "required": ["id", "author", "body_markdown", "created_at", "unread", "issue_number"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "author",
+        "body_markdown",
+        "created_at",
+        "unread",
+        "issue_number"
+      ],
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "author": {"enum": ["USER", "CODEX"]},
-        "body_markdown": {"type": "string", "minLength": 1},
-        "created_at": {"type": "string", "format": "date-time"},
-        "unread": {"type": "boolean"},
-        "issue_number": {"type": ["integer", "null"]}
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "author": {
+          "enum": [
+            "USER",
+            "CODEX"
+          ]
+        },
+        "body_markdown": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "unread": {
+          "type": "boolean"
+        },
+        "issue_number": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
       }
     },
     "card": {
-      "type": "object", "additionalProperties": false,
-      "required": ["id", "created_at", "category", "course_tag", "title", "body_markdown", "solution_markdown", "source_url", "parent_card_id", "comments"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "created_at",
+        "category",
+        "course_tag",
+        "title",
+        "body_markdown",
+        "solution_markdown",
+        "source_url",
+        "parent_card_id",
+        "comments"
+      ],
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "created_at": {"type": "string", "format": "date-time"},
-        "category": {"enum": ["SPORTS", "NEWS", "STORY", "CHALLENGE_CURRENT", "CHALLENGE_PAST", "DEEP_CUT"]},
-        "course_tag": {"type": ["string", "null"]},
-        "title": {"type": "string", "minLength": 1, "maxLength": 160},
-        "body_markdown": {"type": "string", "minLength": 1},
-        "solution_markdown": {"type": ["string", "null"]},
-        "source_url": {"type": ["string", "null"], "pattern": "^https?://"},
-        "parent_card_id": {"type": ["string", "null"]},
-        "comments": {"type": "array", "items": {"$ref": "#/$defs/comment"}}
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "category": {
+          "enum": [
+            "SPORTS",
+            "NEWS",
+            "STORY",
+            "CHALLENGE_CURRENT",
+            "CHALLENGE_PAST",
+            "DEEP_CUT"
+          ]
+        },
+        "course_tag": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "body_markdown": {
+          "type": "string",
+          "minLength": 1
+        },
+        "solution_markdown": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^https?://"
+        },
+        "parent_card_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/comment"
+          }
+        },
+        "quiz": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/quiz"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "diagram": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "pipe",
+            "pump",
+            "tank",
+            "cycle",
+            "beam",
+            "truss",
+            "stress",
+            "shaft",
+            "spring",
+            "circuit",
+            null,
+            "fridge",
+            "turbine",
+            "beam_eccentric",
+            "beam_udl",
+            "beam_triangular",
+            "vectors",
+            "mohr",
+            "rectangle",
+            "parallel_springs",
+            "series_springs",
+            "member"
+          ]
+        },
+        "diagram_labels": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "maxLength": 100
+          }
+        },
+        "topic": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "sport": {
+          "enum": [
+            "football",
+            "hockey"
+          ]
+        },
+        "team": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "image_url": {
+          "type": "string",
+          "pattern": "^https://"
+        }
+      }
+    },
+    "quiz": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "options",
+        "correct_index"
+      ],
+      "properties": {
+        "options": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          }
+        },
+        "correct_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        }
       }
     }
   }

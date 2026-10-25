@@ -98,7 +98,7 @@ def test_comment_only_cycle_never_requests_engineering_cards(monkeypatch, tmp_pa
     assert observed["counts_override"] == {"current_coursework": 0, "past_coursework": 0}
 
 
-def test_scheduled_generation_is_limited_to_six_cards(monkeypatch, tmp_path):
+def test_scheduled_generation_is_limited_to_twenty_cards(monkeypatch, tmp_path):
     root = _root(tmp_path)
     now = datetime(2026, 10, 24, 12, tzinfo=timezone.utc)
     _base(monkeypatch, root)
@@ -114,7 +114,7 @@ def test_scheduled_generation_is_limited_to_six_cards(monkeypatch, tmp_path):
     result = local_loop.run_cycle(root=root, now=now)
     assert result["generated_cards"] == 1
     assert observed["generate_new_cards"] is True
-    assert sum(observed["counts_override"].values()) <= 6
+    assert sum(observed["counts_override"].values()) == 20
     state = json.loads((root / ".cache/local-agent/state.json").read_text(encoding="utf-8"))
     assert len(state["generation_attempts"]) == 1
     assert "last_generation" not in state  # No feed push occurred.

@@ -178,3 +178,47 @@ button:disabled { opacity: .5; cursor: wait; }
   .new-signals { top: 122px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+/* Quick reviews and original Reddit posts within the scrolling feed. */
+.hockey { background: #173e49; color: #95d7eb; }
+.drama { background: #563842; color: #f3b0c2; }
+.team-link { padding: 7px 14px 7px 55px; font-size: 12px; color: var(--muted); }
+.team-picks { display: flex; align-items: center; gap: 7px; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 11px; color: var(--muted-dim); }
+.team-picks button { background: transparent; border: 1px solid #34464f; border-radius: 16px; color: #b5d5df; padding: 4px 9px; font-size: 11px; }
+.team-picks button:hover, .team-picks button.active { background: #20363e; border-color: #6694a3; }
+.study-visual { margin: 15px 0; background: linear-gradient(135deg, #17242b, #131b20); border: 1px solid #2d414b; border-radius: 12px; overflow: hidden; }
+.study-visual svg { display: block; width: 100%; max-height: 220px; }
+.study-visual text { font: 13px var(--sans); fill: #c4d4dc; stroke: none; }
+.study-visual figcaption { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px; background: #111a20; font-size: 10px; color: #94aebc; }
+.study-visual figcaption > span { width: 100%; margin-bottom: 2px; }
+.study-visual figcaption strong { background: #23343e; padding: 3px 7px; border-radius: 4px; font-size: 11px; color: #d4e5eb; font-weight: 500; }
+.quiz fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.quiz legend { font-size: 12px; font-weight: 650; color: var(--text); margin-bottom: 10px; }
+.quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.quiz-option { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #354149; border-radius: 9px; background: #192127; text-align: left; font-size: 13px; min-height: 45px; }
+.quiz-option:hover:not(:disabled) { background: #26343e; border-color: #8bbfff; }
+.quiz-option:disabled { opacity: 1; cursor: default; }
+.option-letter { display: grid; place-items: center; border: 1px solid #50616c; border-radius: 50%; width: 23px; height: 23px; flex: 0 0 auto; font-size: 11px; color: var(--muted); }
+.quiz-option.correct { background: #18392d; border-color: #65b793; color: #bfe9d6; }
+.quiz-option.incorrect { background: #3b2327; border-color: #d17e87; color: #f0b9bf; }
+.answer-mark { margin-left: auto; font-size: 17px; font-weight: 700; }
+.quiz-feedback { margin-top: 10px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.quiz-retry { border: 0; background: transparent; color: var(--cyan); padding: 0 5px; font-size: 11px; text-decoration: underline; }
+.reddit-toggle, .load-more { border: 0; background: #28333b; color: #c6def0; border-radius: 20px; font-size: 12px; padding: 8px 12px; min-height: 34px; }
+.reddit-toggle:hover, .load-more:hover { background: #374854; }
+.reddit-preview { border-top: 1px solid var(--line); margin-top: 15px; padding-top: 15px; }
+.reddit-preview iframe { width: 100%; border: 0; border-radius: 8px; display: block; background: var(--surface); }
+.reddit-preview p { font-size: 11px; color: var(--muted); }
+.load-more { display: block; margin: 0 auto; }
+.topic-tabs { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.topic-tabs button { flex-shrink: 0; }
+.sort-control { flex-shrink: 0; }
+@media (max-width: 540px) {
+  .quiz-options { grid-template-columns: 1fr; }
+  .quiz-option { font-size: 12px; }
+  .study-visual svg { max-height: 165px; }
+  .team-picks { padding: 9px 16px; gap: 5px; }
+  .team-picks > span { font-size: 10px; }
+  .team-picks button { font-size: 10px; }
+}
+.post-image { display: block; width: 100%; max-height: 380px; object-fit: cover; border-radius: 12px; margin-top: 14px; background: var(--surface); }
+@media (max-width: 540px) { .topic-tabs button { padding: 7px 8px; } }

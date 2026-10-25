@@ -34,7 +34,7 @@
     },
     "new_cards": {
       "type": "array",
-      "maxItems": 12,
+      "maxItems": 30,
       "items": {
         "$ref": "#/$defs/card"
       }
@@ -95,7 +95,9 @@
         "solution_markdown",
         "source_url",
         "parent_card_id",
-        "comments"
+        "comments",
+        "quiz",
+        "diagram"
       ],
       "properties": {
         "id": {
@@ -155,6 +157,72 @@
           "items": {
             "$ref": "#/$defs/comment"
           }
+        },
+        "quiz": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/quiz"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "diagram": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "pipe",
+            "pump",
+            "tank",
+            "cycle",
+            "beam",
+            "truss",
+            "stress",
+            "shaft",
+            "spring",
+            "circuit",
+            null,
+            "fridge",
+            "turbine",
+            "beam_eccentric",
+            "beam_udl",
+            "beam_triangular",
+            "vectors",
+            "mohr",
+            "rectangle",
+            "parallel_springs",
+            "series_springs",
+            "member"
+          ]
+        }
+      }
+    },
+    "quiz": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "options",
+        "correct_index"
+      ],
+      "properties": {
+        "options": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          }
+        },
+        "correct_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
         }
       }
     }

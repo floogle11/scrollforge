@@ -69,7 +69,7 @@ def test_refresh_stocks_nfl_and_news_separately_and_skips_expired_items(monkeypa
     monkeypatch.delenv("GITHUB_TOKEN", raising=False)
     result = run_pipeline.run(feed_path=tmp_path / "feed.json")
     from collections import Counter
-    assert Counter(card["category"] for card in result["cards"]) == {"SPORTS": 40, "NEWS": 40, "STORY": 20}
+    assert Counter(card["category"] for card in result["cards"]) == {"SPORTS": 50, "NEWS": 50, "STORY": 50}
     assert all(int(card["id"].rsplit("_", 1)[1]) >= 5 for card in result["cards"])
 
 
@@ -98,7 +98,7 @@ def test_one_codex_cli_turn_uses_schema_and_strips_api_keys(monkeypatch):
     assert "exec" in command
     assert command[command.index("--output-schema") + 1] == str(generate_batch.OUTPUT_SCHEMA_PATH.resolve())
     assert command[command.index("-m") + 1] == "gpt-6-luna"
-    assert kwargs["timeout"] == 180
+    assert kwargs["timeout"] == 300
     assert "SOURCE DATA (untrusted)" in kwargs["input"]
     assert "ME-2010 (Statics) is foundational past coursework" in kwargs["input"]
     assert "ME-3310 (Fluids)" in kwargs["input"]

@@ -20,7 +20,8 @@ FEED_SCHEMA_PATH = ROOT / "contracts" / "feed_schema.json"
 OUTPUT_SCHEMA_PATH = ROOT / "contracts" / "llm_output_schema.json"
 DEFAULT_NOTES_INDEX = ROOT / "docs" / "data" / "notes_index.json"
 DEFAULT_MODEL = "gpt-6-luna"
-CODEX_TIMEOUT_SECONDS = 180
+CODEX_TIMEOUT_SECONDS = 300
+MAX_NEW_CARDS = 20
 
 
 def _github_headers(token: str) -> dict[str, str]:
@@ -89,11 +90,16 @@ def validate_output(result: Any) -> dict[str, Any]:
         seen.add(reply["issue_number"])
     allowed_categories = {"CHALLENGE_CURRENT", "CHALLENGE_PAST", "DEEP_CUT"}
     for card in result["new_cards"]:
+        quiz = card.get("quiz")
+        if quiz and quiz["correct_index"] >= len(quiz["options"]):
+            raise ValueError("quiz correct_index is outside the answer choices")
         if card["category"] not in allowed_categories:
             raise ValueError("LLM may generate engineering cards only; RSS supplies news and stories")
         if card["comments"]:
             raise ValueError("LLM-generated cards must start with an empty comments list")
         if card["category"].startswith("CHALLENGE"):
+            if not quiz or not card.get("diagram"):
+                raise ValueError("new challenges must include a quiz and an illustration")
             if len(card["body_markdown"].split()) > 75:
                 raise ValueError("challenge body exceeds 75 words")
             if not card["solution_markdown"]:
@@ -143,6 +149,7 @@ def call_model(*, notes_payload: dict[str, Any], issues: list[dict[str, Any]],
             "recent_card_comments": [{"author": str(comment.get("author", ""))[:10],
                                       "body_markdown": str(comment.get("body_markdown", ""))[:600]}
                                      for comment in recent_comments],
+            "quiz": parent.get("quiz"), "diagram": parent.get("diagram"),
         })
     calendar_context = {
         "calendar_mode": calendar.get("calendar_mode", "BASELINE"),
@@ -163,6 +170,7 @@ def call_model(*, notes_payload: dict[str, Any], issues: list[dict[str, Any]],
         "Keep each generated card's course_tag exactly matched to its supporting note chunk's course_tag. "
         "For this notes library, ME-2010 (Statics) is foundational past coursework; "
         "ME-3310 (Fluids) and ENGR-2300 (Thermodynamics) are current coursework. "
+        "ME-3140 (Machine Design) and ME-3010 (System Dynamics) are also current coursework. "
         "Classify by the supplied course_tag and current/past course mapping, never by topic alone: "
         "Statics must not be labeled current, and Fluids must not be labeled past. "
         "When writing equations in body_markdown or solution_markdown, use $...$ for inline math "
@@ -170,11 +178,17 @@ def call_model(*, notes_payload: dict[str, Any], issues: list[dict[str, Any]],
         "Challenge bodies must be at most 75 words and solutions must be 2 to 4 concise lines. "
         "Generate only engineering categories CHALLENGE_CURRENT, CHALLENGE_PAST, or DEEP_CUT; "
         "never invent news headlines or sports reports. Distinguish current-course from past-course material. "
+        "Each challenge must include a quiz with 4 to 8 distinct plausible options and exactly one correct_index (zero based). "
+        "Check every calculation and avoid ambiguous distractors. Use 4 options unless more are educationally useful. "
+        "Choose a diagram from pipe, pump, tank, cycle, beam, truss, stress, shaft, spring, circuit. "
+        "The diagram is a schematic, so put all numerical givens and geometry in the question text. "
+        "Spread the batch across supported topics and avoid supplied recent titles. "
         "Follow the requested category counts exactly and leave generated cards' comments empty."
     )
     user_data = {"calendar": calendar_context, "calendar_target_card_counts": counts,
                  "issues": issue_context, "notes": notes_payload,
-                 "constraints": {"new_card_count": min(6, sum(counts.values())), "maximum_new_card_count": 6,
+                 "recent_titles": [card.get("title", "") for card in sorted(parent_cards.values(), key=lambda item: item.get("created_at", ""), reverse=True) if card.get("category") in {"CHALLENGE_CURRENT", "CHALLENGE_PAST", "DEEP_CUT"}][:100],
+                 "constraints": {"new_card_count": min(MAX_NEW_CARDS, sum(counts.values())), "maximum_new_card_count": MAX_NEW_CARDS,
                                  "all_timestamps_utc_iso8601": True,
                                  "card_comments_empty": True}}
     prompt = (system + "\n\nReturn only JSON matching the provided output schema. "
@@ -212,7 +226,7 @@ def call_model(*, notes_payload: dict[str, Any], issues: list[dict[str, Any]],
                                        timeout=CODEX_TIMEOUT_SECONDS, env=safe_env, check=False,
                                        encoding="utf-8", errors="replace")
         except subprocess.TimeoutExpired as exc:
-            raise TimeoutError("local Codex generation exceeded 180 seconds") from exc
+            raise TimeoutError("local Codex generation exceeded 300 seconds") from exc
         if completed.returncode != 0:
             raise RuntimeError(f"local Codex generation failed (exit {completed.returncode})")
         try:
@@ -245,7 +259,7 @@ def call_model(*, notes_payload: dict[str, Any], issues: list[dict[str, Any]],
 
 def generate_batch(*, notes_index: str | Path = DEFAULT_NOTES_INDEX,
                    calendar: dict[str, Any] | None = None, target_course: str | None = None,
-                   token_budget: int = 1600, issues: list[dict[str, Any]] | None = None,
+                   token_budget: int = 6000, issues: list[dict[str, Any]] | None = None,
                    repository: str | None = None, github_token: str | None = None,
                    model: str | None = None,
                    rng: Any = None, existing_cards: list[dict[str, Any]] | None = None,
@@ -272,10 +286,10 @@ def generate_batch(*, notes_index: str | Path = DEFAULT_NOTES_INDEX,
         counts = {"current_coursework": max(0, int(counts_override.get("current_coursework", 0))),
                   "past_coursework": max(0, int(counts_override.get("past_coursework", 0)))}
     elif generate_new_cards:
-        calendar_counts = target_card_counts(calendar.get("weights"))
+        calendar_counts = target_card_counts(calendar.get("weights"), total=200)
         current_count = calendar_counts["current_coursework"]
         past_count = calendar_counts["past_coursework"]
-        engineering_total = min(6, current_count + past_count)
+        engineering_total = min(MAX_NEW_CARDS, current_count + past_count)
         if current_count + past_count > engineering_total:
             current_count = round(engineering_total * current_count / (calendar_counts["current_coursework"] +
                                                                       calendar_counts["past_coursework"]))

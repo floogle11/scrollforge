@@ -35,8 +35,12 @@
       <button type="button" class="topic-link active" data-topic="all" aria-pressed="true"><span aria-hidden="true">⌂</span> Home</button>
       <p class="sidebar-label">YOUR FEEDS</p>
       <button type="button" class="topic-link" data-topic="sports" aria-pressed="false"><span class="topic-icon football" aria-hidden="true">↗</span> NFL &amp; Broncos</button>
+      <button type="button" class="topic-link" data-topic="hockey" aria-pressed="false"><span class="topic-icon hockey" aria-hidden="true">◒</span> Hockey</button>
+      <button type="button" class="topic-link team-link" data-topic="mammoth" aria-pressed="false">Utah Mammoth</button>
+      <button type="button" class="topic-link team-link" data-topic="avalanche" aria-pressed="false">Colorado Avalanche</button>
       <button type="button" class="topic-link" data-topic="news" aria-pressed="false"><span class="topic-icon news" aria-hidden="true">≋</span> News</button>
       <button type="button" class="topic-link" data-topic="stories" aria-pressed="false"><span class="topic-icon stories" aria-hidden="true">✦</span> Stories &amp; discoveries</button>
+      <button type="button" class="topic-link" data-topic="drama" aria-pressed="false"><span class="topic-icon drama" aria-hidden="true">☕</span> Reddit drama</button>
       <button type="button" class="topic-link" data-topic="engineering" aria-pressed="false"><span class="topic-icon engineering" aria-hidden="true">⚒</span> Engineering</button>
       <div class="sidebar-note">A little less homework.<br>A lot more happening.</div>
       <a class="sidebar-source" href="https://www.reddit.com" target="_blank" rel="noopener noreferrer">Explore Reddit ↗</a>
@@ -52,12 +56,14 @@
         <div class="topic-tabs" aria-label="Filter posts">
           <button type="button" data-topic="all" class="active" aria-pressed="true">All</button>
           <button type="button" data-topic="sports" aria-pressed="false">NFL</button>
+          <button type="button" data-topic="hockey" aria-pressed="false">Hockey</button>
           <button type="button" data-topic="news" aria-pressed="false">News</button>
           <button type="button" data-topic="stories" aria-pressed="false">Stories</button>
           <button type="button" data-topic="engineering" aria-pressed="false">School</button>
         </div>
         <label class="sort-control"><span class="sr-only">Sort posts</span><select id="feedSort"><option value="mixed">For you</option><option value="new">New</option></select></label>
       </div>
+      <div class="team-picks" aria-label="Favorite teams"><span>Following</span><button type="button" data-topic="mammoth">Utah Mammoth</button><button type="button" data-topic="avalanche">Colorado Avalanche</button></div>
 
       <section class="card-stage" id="cardStage" aria-label="Scrolling card feed">
         <div class="loading-card"><span class="loader-mark">sf</span><p>Finding your next read…</p><span class="loading-line"></span></div>
@@ -70,9 +76,10 @@
       <div class="rail-banner"><span>THE DAILY SCROLL</span><strong>Stay in the loop.</strong></div>
       <div class="rail-body"><h2>Your corner of the internet</h2><p>Football, the bigger picture, and something you didn't know you wanted to read.</p><div class="feed-stats" id="feedStats" aria-live="polite"></div><hr><h3>In the mix</h3>
         <button type="button" class="community-link" data-topic="sports"><span class="topic-icon football">↗</span><span><strong>NFL &amp; Broncos</strong><small>Headlines, trades &amp; game day</small></span></button>
+        <button type="button" class="community-link" data-topic="hockey"><span class="topic-icon hockey">◒</span><span><strong>On the ice</strong><small>Utah Mammoth &amp; Colorado Avalanche</small></span></button>
         <button type="button" class="community-link" data-topic="news"><span class="topic-icon news">≋</span><span><strong>Around the world</strong><small>World, US &amp; technology news</small></span></button>
         <button type="button" class="community-link" data-topic="stories"><span class="topic-icon stories">✦</span><span><strong>Down the rabbit hole</strong><small>History, space &amp; good stories</small></span></button>
-        <p class="rail-footnote">Headlines and excerpts link to their original sources. Reddit discussions open on Reddit.</p>
+        <p class="rail-footnote">A little review between the good reads. Tap a Reddit post to load the original right here.</p>
       </div>
     </aside>
     </div>

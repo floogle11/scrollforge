@@ -20,6 +20,15 @@ SOURCES = [
     {"name": "guardian_us", "url": "https://www.theguardian.com/us-news/rss", "category": "NEWS"},
     {"name": "bbc_technology", "url": "https://feeds.bbci.co.uk/news/technology/rss.xml", "category": "NEWS"},
     {"name": "reddit_nfl", "url": "https://www.reddit.com/r/nfl/hot/.rss?limit=25", "category": "SPORTS"},
+    {"name": "espn_nhl", "url": "https://www.espn.com/espn/rss/nhl/news", "category": "SPORTS", "sport": "hockey"},
+    {"name": "nhl_mammoth", "url": "https://www.nhl.com/utah/news", "format": "nhl", "category": "SPORTS", "sport": "hockey", "team": "Utah Mammoth"},
+    {"name": "nhl_avalanche", "url": "https://www.nhl.com/avalanche/news", "format": "nhl", "category": "SPORTS", "sport": "hockey", "team": "Colorado Avalanche"},
+    {"name": "espn_avalanche", "url": "https://www.espn.com/espn/rss/nhl/news?teamId=17", "category": "SPORTS", "sport": "hockey", "team": "Colorado Avalanche"},
+    {"name": "espn_mammoth", "url": "https://www.espn.com/espn/rss/nhl/news?teamId=129764", "category": "SPORTS", "sport": "hockey", "team": "Utah Mammoth"},
+    {"name": "reddit_avalanche", "url": "https://www.reddit.com/r/ColoradoAvalanche/hot/.rss?limit=50", "category": "SPORTS", "sport": "hockey", "team": "Colorado Avalanche"},
+    {"name": "reddit_mammoth", "url": "https://www.reddit.com/r/UtahMammoth/hot/.rss?limit=50", "category": "SPORTS", "sport": "hockey", "team": "Utah Mammoth"},
+    {"name": "reddit_utahhockey", "url": "https://www.reddit.com/r/Utah_Hockey/.rss?limit=50", "category": "SPORTS", "sport": "hockey", "team": "Utah Mammoth"},
+    {"name": "reddit_hockey", "url": "https://www.reddit.com/r/hockey/hot/.rss?limit=50", "category": "SPORTS", "sport": "hockey"},
     {"name": "reddit_broncos", "url": "https://www.reddit.com/r/DenverBroncos/hot/.rss?limit=25", "category": "SPORTS"},
     {"name": "reddit_news", "url": "https://www.reddit.com/r/news/hot/.rss?limit=25", "category": "NEWS"},
     {"name": "reddit_worldnews", "url": "https://www.reddit.com/r/worldnews/hot/.rss?limit=25", "category": "NEWS"},
@@ -29,6 +38,13 @@ SOURCES = [
     {"name": "smithsonian", "url": "https://www.smithsonianmag.com/rss/latest_articles/", "category": "STORY"},
     {"name": "reddit_askhistorians", "url": "https://www.reddit.com/r/AskHistorians/.rss", "category": "STORY"},
     {"name": "reddit_techsupport", "url": "https://www.reddit.com/r/talesfromtechsupport/.rss", "category": "STORY"},
+    {"name": "reddit_boru", "url": "https://www.reddit.com/r/BestofRedditorUpdates/top/.rss?t=week&limit=50", "category": "STORY", "topic": "drama"},
+    {"name": "reddit_borupdates", "url": "https://www.reddit.com/r/BORUpdates/.rss?limit=50", "category": "STORY", "topic": "drama"},
+    {"name": "reddit_aita", "url": "https://www.reddit.com/r/AmItheAsshole/.rss?limit=50", "category": "STORY", "topic": "drama"},
+    {"name": "reddit_hobbydrama", "url": "https://www.reddit.com/r/HobbyDrama/top/.rss?t=month&limit=50", "category": "STORY", "topic": "drama"},
+    {"name": "reddit_subredditdrama", "url": "https://www.reddit.com/r/SubredditDrama/.rss?limit=50", "category": "STORY", "topic": "drama"},
+    {"name": "reddit_pettyrevenge", "url": "https://www.reddit.com/r/pettyrevenge/.rss?limit=50", "category": "STORY", "topic": "drama"},
+    {"name": "reddit_maliciouscompliance", "url": "https://www.reddit.com/r/MaliciousCompliance/top/.rss?t=week&limit=50", "category": "STORY", "topic": "drama"},
 ]
 
 
@@ -52,7 +68,10 @@ def _entry_timestamp(entry: Any) -> str | None:
         if not value:
             continue
         try:
-            parsed = parsedate_to_datetime(value)
+            try:
+                parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            except ValueError:
+                parsed = parsedate_to_datetime(value)
             parsed = parsed.replace(tzinfo=timezone.utc) if parsed.tzinfo is None else parsed.astimezone(timezone.utc)
             return parsed.isoformat(timespec="seconds").replace("+00:00", "Z")
         except (TypeError, ValueError, OverflowError):
@@ -76,16 +95,22 @@ def normalize_entry(entry: Any, source: dict[str, str]) -> dict[str, Any] | None
         # Atom entries include navigation and author boilerplate after the excerpt.
         body = re.split(r"\s*submitted by\s*", body, maxsplit=1, flags=re.I)[0]
         body = re.sub(r"\[\s*(?:link|comments)\s*\]", "", body, flags=re.I).strip()
+        if "not supported on old Reddit" in body:
+            body = "Open the original Reddit post to see its media and discussion."
     # Publish a short excerpt and send readers to the original post or article.
     if len(body) > 600:
         body = body[:597].rsplit(" ", 1)[0] + "…"
     if not body:
         body = title
+    if source.get("team") and source["name"].startswith("espn_"):
+        pattern = r"\b(?:utah|mammoth)\b" if source["team"] == "Utah Mammoth" else r"\b(?:colorado|avalanche|avs)\b"
+        if not re.search(pattern, title + " " + body, re.I):
+            return None  # Team RSS can include unrelated league-wide headlines.
     identity = str(entry.get("id") or link or "")
     stable_parts = ((source["name"], identity) if identity else
                     (source["name"], str(entry.get("published") or entry.get("updated") or ""), title))
     stable = hashlib.sha256("\0".join(stable_parts).encode("utf-8")).hexdigest()[:18]
-    return {
+    card = {
         "id": f"rss_{source['name']}_{stable}",
         "created_at": published,
         "category": source["category"],
@@ -97,10 +122,17 @@ def normalize_entry(entry: Any, source: dict[str, str]) -> dict[str, Any] | None
         "parent_card_id": None,
         "comments": [],
     }
+    for field in ("sport", "team", "topic"):
+        if source.get(field):
+            card[field] = source[field]
+    image = entry.get("image_url")
+    if isinstance(image, str) and image.startswith("https://"):
+        card["image_url"] = image
+    return card
 
 
 def fetch_source(source: dict[str, str], *, timeout: float = 8,
-                 limit: int = 15) -> tuple[list[dict[str, Any]], str | None]:
+                 limit: int = 50) -> tuple[list[dict[str, Any]], str | None]:
     """Fetch one configured RSS source. Returns cards and an optional error string."""
     try:
         import feedparser
@@ -108,6 +140,11 @@ def fetch_source(source: dict[str, str], *, timeout: float = 8,
         response = requests.get(source["url"], timeout=timeout,
                                 headers={"User-Agent": "ScrollForge/1.0 (+https://github.com/floogle11/scrollforge)"})
         response.raise_for_status()
+        if source.get("format") == "nhl":
+            from .ingest_nhl import fetch_articles
+            entries = fetch_articles(source, response.text, timeout=timeout, limit=limit)
+            cards = [card for entry in entries if (card := normalize_entry(entry, source))]
+            return cards, None
         parsed = feedparser.parse(response.content)
         if getattr(parsed, "bozo", False) and not getattr(parsed, "entries", None):
             raise ValueError(str(getattr(parsed, "bozo_exception", "invalid feed"))[:180])
@@ -122,7 +159,7 @@ def fetch_source(source: dict[str, str], *, timeout: float = 8,
 
 
 def ingest_all(*, sources: list[dict[str, str]] | None = None, timeout: float = 8,
-               limit_per_source: int = 15) -> dict[str, Any]:
+               limit_per_source: int = 50) -> dict[str, Any]:
     """Fetch sources independently; one unavailable feed never drops others."""
     cards: list[dict[str, Any]] = []
     status: dict[str, dict[str, Any]] = {}

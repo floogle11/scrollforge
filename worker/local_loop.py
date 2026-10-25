@@ -31,7 +31,7 @@ STATE_PATH = ROOT / ".cache" / "local-agent" / "state.json"
 OUTBOX_PATH = ROOT / ".cache" / "local-agent" / "outbox.json"
 INTERVAL_SECONDS = 300
 MAX_ISSUES = 20
-MAX_CARDS = 6
+MAX_CARDS = 20
 MIN_GENERATION_GAP = timedelta(hours=12)
 
 
@@ -255,7 +255,7 @@ def run_cycle(*, root: Path = ROOT, dry_run: bool = False, publish: bool = False
         if questions:
             counts = {"current_coursework": 0, "past_coursework": 0}
         else:
-            targets = target_card_counts(calendar.get("weights"))
+            targets = target_card_counts(calendar.get("weights"), total=200)
             current_count, past_count = targets["current_coursework"], targets["past_coursework"]
             total = min(MAX_CARDS, current_count + past_count)
             if current_count + past_count > total:
