@@ -2,6 +2,22 @@
 
 Dates below use America/Denver. The evening releases on October 24, 2026 correspond to October 25 UTC. Automated feed-refresh commits are omitted except where needed to explain deployment state.
 
+## 2026-10-28 - Editable generation interests and Italian Game chess
+
+- Added Settings > Current interests: one topic per line, additions/removals and an empty-list pause. The editor reads/writes a public owner-authored GitHub configuration issue with the existing Issues credential. Browser-local votes remain separate; read/write failures are visible. Desktop generation reads the shared list before scheduled batches and rejects untrusted authors.
+- Italian Game study is the repository default. Added six original starter posts (three lessons, three quizzes), Chess/Interests navigation, side-to-move boards, and explicit revisiting of read interest lessons. Preserved the approved compact Reddit-style feed and mounted post state.
+- Added python-chess for position construction, structural validation, legal SAN continuations and accurate check/mate notation. Board SVG is regenerated locally and isolated in an image. Validation proves move legality, not engine-best play.
+- Reserved six slots inside the existing twenty-card/twice-daily generation budget. Retain starter lessons and the latest 54 unthreaded generated interest posts, preserving conversations and pending parents. Updated contracts and bumped offline shell to v10.
+- Local verification: all 106 worker/offline checks pass. All 37 browser/interest checks passed before the final additions; focused checks also pass for retention, revisiting read lessons, updating an existing configuration issue, and preserving drafts after failed saves. JavaScript syntax, diff whitespace and Pages budgets pass. Feed: 900,088 bytes; published files: 1,039,664 bytes.
+- Live generator verification: two bounded one-card attempts exited at the Codex service with `Incomplete response returned, reason: max_output_tokens` and zero reported tokens. No generated content was returned or published; live model generation remains unverified. Changes are local and have not been deployed. Existing October 26 launcher changes were already present in the workspace and preserved.
+
+## 2026-10-26 — Quiet desktop checks
+
+- The user reported terminal popups from the five-minute desktop check. Added `scripts/run_local_loop_hidden.vbs` and changed the installer to launch it through the GUI Windows Script Host, hiding the console before PowerShell starts. The wrapper waits for completion and propagates the worker exit code, retaining overlap protection and result reporting.
+- Updated the installed **ScrollForge Local Codex Loop** task's action after privately backing up its definition. Preserved its five-minute/logon triggers, principal, settings, isolated checkout and cached publication state. Output remains in `.cache/local-agent/run.log`.
+- Verified an offline run through the actual hidden launcher: exit code 0, 1,025 local cards inspected, zero external calls, and output appended to the existing log. Installer PowerShell syntax and `git diff --check` passed. Task action readback confirms `wscript.exe` and the existing `PT5M` interval. This is a local automation change; no website deployment is required.
+- The first automatic run using the new action started at 17:52:10 America/Denver and completed with Task Scheduler result 0. Its log reports an idle check, no pending questions, and no generated cards.
+
 ## 2026-10-25 — Mental-review choices, corrected diagrams and 60 new questions
 
 Feature commit **`93ac88a`**, followed by automatic refresh **`dc885e2`**. Both Pages deployments and independent GitHub checks succeeded; the live mobile site was verified.

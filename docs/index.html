@@ -43,6 +43,8 @@
       <button type="button" class="topic-link" data-topic="stories" aria-pressed="false"><span class="topic-icon stories" aria-hidden="true">✦</span> Stories &amp; discoveries</button>
       <button type="button" class="topic-link" data-topic="drama" aria-pressed="false"><span class="topic-icon drama" aria-hidden="true">☕</span> Reddit drama</button>
       <button type="button" class="topic-link" data-topic="engineering" aria-pressed="false"><span class="topic-icon engineering" aria-hidden="true">⚒</span> Engineering</button>
+      <button type="button" class="topic-link" data-topic="chess" aria-pressed="false">♟ Chess</button>
+      <button type="button" class="topic-link" data-topic="interests" aria-pressed="false">Your interests</button>
       <div class="sidebar-note">A little less homework.<br>A lot more happening.</div>
       <a class="sidebar-source" href="https://www.reddit.com" target="_blank" rel="noopener noreferrer">Explore Reddit ↗</a>
     </nav>
@@ -60,6 +62,8 @@
           <button type="button" data-topic="hockey" aria-pressed="false">Hockey</button>
           <button type="button" data-topic="news" aria-pressed="false">News</button>
           <button type="button" data-topic="stories" aria-pressed="false">Stories</button>
+          <button type="button" data-topic="chess" aria-pressed="false">Chess</button>
+          <button type="button" data-topic="interests" aria-pressed="false">Interests</button>
           <button type="button" data-topic="engineering" aria-pressed="false">School</button>
         </div>
         <label class="sort-control"><span class="sr-only">Sort posts</span><select id="feedSort"><option value="mixed">For you</option><option value="new">New</option></select></label>
@@ -101,6 +105,14 @@
   <section class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-hidden="true" hidden>
     <div class="modal-head"><div><div class="eyebrow">LOCAL CONFIGURATION</div><h2 id="settingsTitle">Settings</h2></div><button class="close-button" data-close-panel aria-label="Close settings">×</button></div>
     <p class="panel-intro">Questions are queued in GitHub and answered by the Codex loop on your computer.</p>
+    <form id="interestsForm" class="settings-form">
+      <h3>Current interests</h3>
+      <label for="currentInterests">What are you into right now?</label>
+      <textarea id="currentInterests" rows="4" maxlength="2000" placeholder="One interest per line"></textarea>
+      <p class="field-note">One per line, up to 12. Add a line to follow it; delete it to stop future generation. Saved in a public GitHub configuration issue using your Issues token below. The desktop generator picks these up on its next scheduled batch (up to twice daily). Existing posts stay available.</p>
+      <button type="submit" class="submit-button" id="saveInterests">Save current interests</button>
+      <div id="interestsFeedback" class="form-feedback" role="status"></div>
+    </form>
     <div class="preference-settings"><h3>Your feed preferences</h3><p>Arrows learn recurring topics, teams, courses and sources. Saved only in this browser; older signals gradually fade. Discovery stays in the mix.</p><p id="preferenceSummary"></p><button class="text-button" id="resetPreferences" type="button">Reset feed preferences</button></div>
     <form id="settingsForm" class="settings-form">
       <label for="repoSlug">Repository <span>OWNER / REPO</span></label>

@@ -231,3 +231,9 @@ button:disabled { opacity: .5; cursor: wait; }
 .preference-settings { border-bottom: 1px solid var(--line); margin-bottom: 16px; padding-bottom: 12px; font-size: 12px; line-height: 1.6; color: var(--muted); }
 .preference-settings h3 { color: var(--text); margin-bottom: 4px; }
 @media (max-width: 540px) { .topic-tabs button { padding: 7px 8px; } }
+/* Compact interest editor and responsive chess boards within the approved feed. */
+.chess-board { margin: 16px 0; max-width: 390px; }
+.chess-board img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.chess-board figcaption { margin-top: 6px; color: var(--text-muted, #a9afb4); font-size: 12px; }
+#currentInterests { width: 100%; box-sizing: border-box; resize: vertical; padding: 12px; color: inherit; background: #181c1f; border: 1px solid #40464b; border-radius: 8px; font: inherit; }
+#interestsForm { padding-bottom: 20px; border-bottom: 1px solid #343b40; }

@@ -63,4 +63,10 @@ def retain_cards(cards: list[dict], *, now: str | None = None,
             continue
         articles[key] = card
         result.append(card)
-    return result
+    # SVG boards are larger than text posts. Bound generated interest inventory
+    # independently of the archive cap, retaining starter lessons and conversations.
+    interests = [card for card in result if card["category"] == "INTEREST"
+                 and not card["id"].startswith("chess_italian_")
+                 and not card.get("comments") and card["id"] not in protected_ids]
+    keep = {card["id"] for card in sorted(interests, key=lambda c: parse_time(c["created_at"]), reverse=True)[:54]}
+    return [card for card in result if card not in interests or card["id"] in keep]

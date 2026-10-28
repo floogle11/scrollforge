@@ -658,3 +658,73 @@ def test_hockey_team_filters_and_official_reddit_preview(browser, site_url):
         assert page.locator('.feed-card:visible').get_attribute('data-card-id') == 'avalanche-post'
     finally:
         context.close()
+
+
+def test_current_interests_sync_empty_removal_and_chess_board(browser, site_url):
+    from worker.chess_content import build_bank
+    feed = _fixture_feed()
+    feed['cards'].extend(build_bank())
+    context, page = _page(browser, site_url, feed=feed)
+    saved = []
+    def github(route):
+        if route.request.method == 'GET':
+            route.fulfill(content_type='application/json', body='[]')
+        else:
+            saved.append(route.request.post_data_json)
+            route.fulfill(status=201, content_type='application/json', body=json.dumps({'number':42,'user':{'login':'owner'}}))
+    page.route('https://api.github.com/**', github)
+    page.evaluate("localStorage.setItem('scrollforge.repo_slug', 'owner/repo'); localStorage.setItem('scrollforge.github_token', 'test-token')")
+    page.locator('#settingsButton').click()
+    from playwright.sync_api import expect
+    expect(page.locator('#currentInterests')).to_be_enabled()
+    assert 'Italian Game' in page.locator('#currentInterests').input_value()
+    page.locator('#currentInterests').fill('')
+    page.locator('#saveInterests').click()
+    expect(page.locator('#interestsFeedback')).to_contain_text('paused')
+    assert json.loads(saved[0]['body'])['interests'] == []
+    page.locator('#settingsModal [data-close-panel]').click()
+    page.locator('.topic-tabs [data-topic="chess"]').click()
+    expect(page.locator('.chess-board').first).to_be_visible()
+    assert page.locator('.chess-board img').first.evaluate('(img) => img.complete && img.naturalWidth > 0')
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    page.evaluate("localStorage.setItem('scrollforge.seen_card_ids', JSON.stringify(" + json.dumps([c['id'] for c in feed['cards']]) + "))")
+    page.reload(wait_until='domcontentloaded')
+    page.locator('.topic-tabs [data-topic="chess"]').click()
+    expect(page.locator('.chess-board').first).to_be_visible()
+    context.close()
+
+
+def test_existing_interests_update_and_failed_save_preserves_draft(browser, site_url):
+    context, page = _page(browser, site_url, feed=_fixture_feed())
+    stored = {'kind':'scrollforge-interests-v1', 'interests':['Italian Game', 'Astronomy']}
+    writes = []
+    fail = [False]
+    def github(route):
+        if route.request.method == 'GET':
+            route.fulfill(content_type='application/json', body=json.dumps([
+                {'number':9, 'title':'ScrollForge current interests', 'body':json.dumps(stored)}]))
+        else:
+            writes.append((route.request.method, route.request.url, route.request.post_data_json))
+            if fail[0]:
+                route.fulfill(status=403, content_type='application/json', body='{}')
+            else:
+                stored.update(json.loads(route.request.post_data_json['body']))
+                route.fulfill(content_type='application/json', body=json.dumps({'number':9, 'user':{'login':'owner'}}))
+    page.route('https://api.github.com/**', github)
+    page.evaluate("localStorage.setItem('scrollforge.repo_slug', 'owner/repo'); localStorage.setItem('scrollforge.github_token', 'test-token')")
+    page.locator('#settingsButton').click()
+    from playwright.sync_api import expect
+    expect(page.locator('#currentInterests')).to_be_enabled()
+    assert page.locator('#currentInterests').input_value() == 'Italian Game\nAstronomy'
+    page.locator('#currentInterests').fill('Italian Game\nHistory')
+    page.locator('#saveInterests').click()
+    expect(page.locator('#interestsFeedback')).to_contain_text('Saved for')
+    assert writes[0][0] == 'PATCH' and writes[0][1].endswith('/issues/9')
+    assert stored['interests'] == ['Italian Game', 'History']
+    fail[0] = True
+    page.locator('#currentInterests').fill('Chess endgames')
+    page.locator('#saveInterests').click()
+    expect(page.locator('#interestsFeedback')).to_contain_text('403')
+    assert page.locator('#currentInterests').input_value() == 'Chess endgames'
+    assert stored['interests'] == ['Italian Game', 'History']
+    context.close()

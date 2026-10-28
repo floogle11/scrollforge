@@ -109,7 +109,8 @@
             "STORY",
             "CHALLENGE_CURRENT",
             "CHALLENGE_PAST",
-            "DEEP_CUT"
+            "DEEP_CUT",
+            "INTEREST"
           ]
         },
         "course_tag": {
@@ -291,6 +292,40 @@
               "maxLength": 80
             }
           }
+        },
+        "chess": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "fen",
+                "line"
+              ],
+              "properties": {
+                "fen": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100
+                },
+                "line": {
+                  "type": "array",
+                  "maxItems": 24,
+                  "items": {
+                    "type": "string",
+                    "maxLength": 12
+                  }
+                },
+                "svg": {
+                  "type": "string",
+                  "maxLength": 40000
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       }
     },

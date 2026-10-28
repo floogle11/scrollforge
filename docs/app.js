@@ -2,7 +2,7 @@
   'use strict';
   const KEYS = { seen: 'scrollforge.seen_card_ids', seenSources: 'scrollforge.seen_source_urls', read: 'scrollforge.read_comment_ids', repo: 'scrollforge.repo_slug', token: 'scrollforge.github_token', pending: 'scrollforge.pending_comments', answers: 'scrollforge.quiz_answers' };
   const categories = {
-    SPORTS: ['NFL', '#ffac85'], NEWS: ['News', '#8bbfff'], STORY: ['Story', '#d7b0f3'],
+    INTEREST: ['Interests', '#b7df9c'], SPORTS: ['NFL', '#ffac85'], NEWS: ['News', '#8bbfff'], STORY: ['Story', '#d7b0f3'],
     CHALLENGE_CURRENT: ['Current challenge', '#e9c88e'], CHALLENGE_PAST: ['Practice challenge', '#e9c88e'], DEEP_CUT: ['Engineering', '#c9d98c']
   };
   const $ = (selector, root = document) => root.querySelector(selector);
@@ -57,6 +57,7 @@
       climate: /\b(climate|warming|renewable|emissions|hurricane|wildfire)\b/,
       drama: /\b(drama|aita|aitah|pettyrevenge|relationship|relationships)\b/,
       football: /\b(nfl|broncos|football|touchdown|quarterback)\b/,
+      chess: /\b(chess|italian game|giuoco|knight|bishop)\b/,
       hockey: /\b(nhl|hockey|mammoth|avalanche|puck)\b/
     };
     for (const [topic, pattern] of Object.entries(topics)) if (pattern.test(text)) features.push('topic:' + topic);
@@ -91,16 +92,16 @@
   function interleaveCards(cards, seenIds = [], mode = 'BASELINE', boundaryCards = [], profile = {}) {
     const seen = new Set(seenIds);
     const weightSets = {
-      BASELINE: { sports: 25, hockey: 20, news: 25, story: 11, drama: 4, current: 10, past: 5 },
-      EXAM_WINDOW: { sports: 20, hockey: 15, news: 20, story: 10, drama: 3, current: 27, past: 5 },
-      CRUNCH_WINDOW: { sports: 20, hockey: 15, news: 20, story: 10, drama: 3, current: 27, past: 5 },
-      EXAM_DAY: { sports: 25, hockey: 20, news: 25, story: 11, drama: 4, current: 15, past: 0 }
+      BASELINE: { sports: 25, hockey: 20, news: 25, story: 11, drama: 4, current: 10, past: 5, interest: 8 },
+      EXAM_WINDOW: { sports: 20, hockey: 15, news: 20, story: 10, drama: 3, current: 27, past: 5, interest: 8 },
+      CRUNCH_WINDOW: { sports: 20, hockey: 15, news: 20, story: 10, drama: 3, current: 27, past: 5, interest: 8 },
+      EXAM_DAY: { sports: 25, hockey: 20, news: 25, story: 11, drama: 4, current: 15, past: 0, interest: 8 }
     };
     const weights = weightSets[mode] || weightSets.BASELINE;
     const typeOf = card => card.category === 'SPORTS' ? (card.sport === 'hockey' ? 'hockey' : 'sports') : card.category === 'NEWS' ? 'news' :
-      card.category === 'CHALLENGE_CURRENT' || card.category === 'DEEP_CUT' ? 'current' : card.category === 'CHALLENGE_PAST' ? 'past' : card.topic === 'drama' ? 'drama' : 'story';
+      card.category === 'CHALLENGE_CURRENT' || card.category === 'DEEP_CUT' ? 'current' : card.category === 'CHALLENGE_PAST' ? 'past' : card.category === 'INTEREST' ? 'interest' : card.topic === 'drama' ? 'drama' : 'story';
     const unique = cards.filter((card, i) => card && card.id && cards.findIndex(item => item.id === card.id) === i);
-    const pools = {sports: [], hockey: [], news: [], story: [], drama: [], current: [], past: []};
+    const pools = {sports: [], hockey: [], news: [], story: [], drama: [], current: [], past: [], interest: []};
     const ranked = unique.filter(card => !seen.has(card.id)).map(card => ({card, rank: -Math.log(Math.max(Number.EPSILON, Math.random())) / preferenceWeight(card, profile)})).sort((a, b) => a.rank - b.rank);
     for (const {card} of ranked) pools[typeOf(card)].push(card);
     const spacers = shuffle(unique.filter(card => card.category === 'DEEP_CUT'));
@@ -147,6 +148,7 @@
   let replyPollInFlight = false;
   let settingsReturnFocus = null;
   let activeTopic = 'all';
+  const interestReviewIds = new Set();
   let tailObserver = null;
   const PAGE_SIZE = 24;
   const VOTES_KEY = 'scrollforge.preferences.v1';
@@ -228,7 +230,7 @@
       if (match && names[match[1]]) return names[match[1]];
       return url.hostname.replace(/^www\./, '');
     }
-    return card.course_tag || (card.category === 'DEEP_CUT' ? 'Engineering' : card.category === 'STORY' ? 'Stories' : 'Your study notes');
+    return card.category === 'INTEREST' ? 'Your interests' : card.course_tag || (card.category === 'DEEP_CUT' ? 'Engineering' : card.category === 'STORY' ? 'Stories' : 'Your study notes');
   }
   function getComments(card) {
     const combined = Array.isArray(card.comments) ? card.comments.slice() : [];
@@ -273,6 +275,12 @@
   }
   function diagramTemplate(card) {
     return window.ScrollForgeDiagrams ? window.ScrollForgeDiagrams.render(card) : '';
+  }
+  function chessTemplate(card) {
+    if (!card.chess || typeof card.chess.svg !== 'string') return '';
+    const side = card.chess.fen.split(' ')[1] === 'b' ? 'Black' : 'White';
+    // SVG is isolated as an image; never insert model/feed markup into the page.
+    return '<figure class="chess-board"><img loading="lazy" width="390" height="390" alt="Chess position, ' + side + ' to move" src="data:image/svg+xml;charset=utf-8,' + esc(encodeURIComponent(card.chess.svg)) + '"><figcaption>' + side + ' to move · Board built with python-chess</figcaption></figure>';
   }
   function redditEmbedUrl(value) {
     try {
@@ -325,7 +333,7 @@
       '<span aria-hidden="true">·</span><time class="card-time" datetime="' + esc(card.created_at) + '">' + esc(dateLabel(card.created_at)) + '</time><span class="card-course">' + esc(card.course_tag || '') + '</span></div>' +
       (sample ? '<div class="sample-marker">SAMPLE FEED · DEMONSTRATION CARD</div>' : '') +
       '<h2 class="card-title">' + (source ? '<a href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">' + esc(title) + '</a>' : esc(title)) + '</h2><span class="category-chip">' + esc(label) + '</span><div class="card-body">' + bodyContent + '</div>' +
-      (safeUrl(card.image_url) ? '<img class="post-image" src="' + esc(safeUrl(card.image_url)) + '" alt="' + esc(title) + '" loading="lazy" referrerpolicy="no-referrer">' : '') + diagramTemplate(card) + quizTemplate(card) +
+      (safeUrl(card.image_url) ? '<img class="post-image" src="' + esc(safeUrl(card.image_url)) + '" alt="' + esc(title) + '" loading="lazy" referrerpolicy="no-referrer">' : '') + diagramTemplate(card) + chessTemplate(card) + quizTemplate(card) +
       '<div class="card-footer">' +
       '<button class="preference-button" type="button" data-preference="1" aria-pressed="' + (votes[card.id]?.value === 1) + '" title="Favor related topics, teams, subjects and sources">↑ More like this</button>' +
       '<button class="preference-button" type="button" data-preference="-1" aria-pressed="' + (votes[card.id]?.value === -1) + '" title="See fewer related posts">↓ Less like this</button>' +
@@ -397,6 +405,8 @@
       (activeTopic === 'hockey' && card.sport === 'hockey') ||
       (activeTopic === 'mammoth' && card.team === 'Utah Mammoth') ||
       (activeTopic === 'avalanche' && card.team === 'Colorado Avalanche') ||
+      (activeTopic === 'interests' && card.category === 'INTEREST') ||
+      (activeTopic === 'chess' && card.topic === 'chess') ||
       (activeTopic === 'news' && card.category === 'NEWS') ||
       (activeTopic === 'stories' && card.category === 'STORY') ||
       (activeTopic === 'drama' && card.topic === 'drama') ||
@@ -404,7 +414,7 @@
     const ids = new Set();
     const cards = ordered.filter(card => {
       if (ids.has(card.id)) return false; ids.add(card.id);
-      return matchesTopic(card) && (activeTopic !== 'engineering' || !$('#studyCourse').value || card.course_tag === $('#studyCourse').value) && [card.title, card.body_markdown, communityLabel(card), card.course_tag || '', card.topic || '', card.team || ''].join(' ').toLocaleLowerCase().includes(query);
+      return (activeTopic !== 'all' || !interestReviewIds.has(card.id)) && matchesTopic(card) && (activeTopic !== 'engineering' || !$('#studyCourse').value || card.course_tag === $('#studyCourse').value) && [card.title, card.body_markdown, communityLabel(card), card.course_tag || '', card.topic || '', card.team || ''].join(' ').toLocaleLowerCase().includes(query);
     });
     if ($('#feedSort').value === 'new') cards.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
     return cards;
@@ -445,7 +455,7 @@
     mounted.sort((a, b) => (rank.get(a.dataset.cardId) ?? Infinity) - (rank.get(b.dataset.cardId) ?? Infinity));
     for (const node of mounted) $('#cardStage').insertBefore(node, $('#filterEmpty'));
     hydrateMath($('#cardStage')); observeCards(); updateTail();
-    const titles = {all: 'Home', sports: 'NFL & Broncos', hockey: 'Hockey', mammoth: 'Utah Mammoth', avalanche: 'Colorado Avalanche', news: 'News', stories: 'Stories & discoveries', drama: 'Reddit drama', engineering: 'Engineering'};
+    const titles = {interests: 'Your interests', chess: 'Chess · Italian Game', all: 'Home', sports: 'NFL & Broncos', hockey: 'Hockey', mammoth: 'Utah Mammoth', avalanche: 'Colorado Avalanche', news: 'News', stories: 'Stories & discoveries', drama: 'Reddit drama', engineering: 'Engineering'};
     $('#feedTitle').textContent = titles[activeTopic];
     $('#studyFilter').hidden = activeTopic !== 'engineering';
     $$('[data-topic]').forEach(button => {
@@ -488,6 +498,7 @@
   function applyFeed(data) {
     if (!data || !Array.isArray(data.cards)) throw new Error('Feed format is not recognized.');
     feed = data;
+    interestReviewIds.clear();
     reconcilePendingComments(feed.cards);
     $('#newSignalsButton').hidden = true;
     const seen = readStore(KEYS.seen, []);
@@ -620,10 +631,68 @@
     $('#repoSlug').value = repoGuess(); $('#repoToken').value = localStorage.getItem(KEYS.token) || '';
     $('#settingsFeedback').textContent = '';
     updatePreferenceSummary();
+    loadCurrentInterests();
     $('#appShell').inert = true;
     $('#scrim').hidden = false; $('#settingsModal').hidden = false; $('#settingsModal').setAttribute('aria-hidden', 'false');
     $('#repoSlug').focus();
   }
+  function interestsConnection() {
+    const repo = repoGuess();
+    const token = localStorage.getItem(KEYS.token) || '';
+    return {repo, token, url: 'https://api.github.com/repos/' + repo.split('/').map(encodeURIComponent).join('/') + '/issues',
+      headers: {Accept: 'application/vnd.github+json', ...(token ? {Authorization: 'Bearer ' + token} : {}), 'Content-Type': 'application/json'}};
+  }
+  async function findInterestsIssue(connection) {
+    for (let page = 1; ; page++) {
+      const response = await fetch(connection.url + '?state=open&creator=' + encodeURIComponent(connection.repo.split('/')[0]) + '&sort=created&direction=desc&per_page=100&page=' + page, {headers: connection.headers});
+      if (!response.ok) throw new Error('Cannot load shared interests (HTTP ' + response.status + ').');
+      const issues = await response.json();
+      for (const issue of issues) {
+        if (issue.title !== 'ScrollForge current interests' || issue.pull_request) continue;
+        const payload = JSON.parse(issue.body || '{}');
+        if (payload.kind === 'scrollforge-interests-v1') {
+          if (!Array.isArray(payload.interests) || payload.interests.some(s => typeof s !== 'string')) throw new Error('Invalid shared interests.');
+          return {number: issue.number, interests: payload.interests};
+        }
+      }
+      if (issues.length < 100) return null;
+    }
+  }
+  async function loadCurrentInterests() {
+    const input = $('#currentInterests'), button = $('#saveInterests'), feedback = $('#interestsFeedback');
+    input.disabled = button.disabled = true;
+    feedback.textContent = 'Loading shared interests…';
+    try {
+      const issue = await findInterestsIssue(interestsConnection());
+      const response = issue ? null : await fetch('./data/interests.json');
+      if (response && !response.ok) throw new Error('Cannot load default interests.');
+      input.value = (issue ? issue.interests : await response.json()).join('\n');
+      feedback.textContent = 'Loaded. Changes apply to future generated posts.';
+      input.disabled = button.disabled = false;
+    } catch (error) { feedback.textContent = error.message + ' Reopen Settings to retry.'; }
+  }
+  $('#interestsForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const feedback = $('#interestsFeedback'), button = $('#saveInterests');
+    const interests = [...new Map($('#currentInterests').value.split('\n').map(s => s.trim()).filter(Boolean).map(s => [s.toLowerCase(), s])).values()];
+    if (interests.length > 12 || interests.some(s => s.length > 160)) { feedback.textContent = 'Use up to 12 interests, each at most 160 characters.'; return; }
+    const connection = interestsConnection();
+    if (!connection.token) { feedback.textContent = 'Save the repository and Issues token below, then save your interests.'; return; }
+    button.disabled = true;
+    feedback.textContent = 'Saving shared interests…';
+    try {
+      const issue = await findInterestsIssue(connection);
+      const response = await fetch(connection.url + (issue ? '/' + issue.number : ''), {
+        method: issue ? 'PATCH' : 'POST', headers: connection.headers,
+        body: JSON.stringify({title: 'ScrollForge current interests', body: JSON.stringify({kind: 'scrollforge-interests-v1', interests})})
+      });
+      if (!response.ok) throw new Error('GitHub could not save interests (HTTP ' + response.status + ').');
+      const saved = await response.json();
+      if (saved.user?.login.toLowerCase() !== connection.repo.split('/')[0].toLowerCase()) throw new Error('Use the repository owner’s token so the generator can trust this configuration.');
+      feedback.textContent = interests.length ? 'Saved for the next scheduled content batch.' : 'Saved. Interest generation is paused; existing posts remain available.';
+    } catch (error) { feedback.textContent = error.message; }
+    finally { button.disabled = false; }
+  });
   function openInbox() {
     renderInbox();
     settingsReturnFocus = document.activeElement;
@@ -686,7 +755,13 @@
   }
 
   $$('[data-topic]').forEach(button => button.addEventListener('click', () => {
-    activeTopic = button.dataset.topic; applyFilters(); window.scrollTo({top: 0});
+    activeTopic = button.dataset.topic;
+    if (feed && ['chess', 'interests'].includes(activeTopic)) {
+      for (const card of eligibleCards(feed.cards).filter(card => card.category === 'INTEREST')) {
+        if (!ordered.some(item => item.id === card.id)) { ordered.push(card); interestReviewIds.add(card.id); }
+      }
+    }
+    applyFilters(); window.scrollTo({top: 0});
   }));
   $('#feedSearch').addEventListener('input', () => { if (feed) applyFilters(); });
   $('#feedSort').addEventListener('change', () => { if (feed) { applyFilters(); window.scrollTo({top: 0}); } });
@@ -816,7 +891,7 @@
     else if (event.key === ' ') {
       event.preventDefault();
       const card = ordered[cursor];
-      const solution = card && card.solution_markdown && challenge(card) ? $('.solution-toggle', activeCardElement()) : null;
+      const solution = card && card.solution_markdown && (challenge(card) || card.category === 'INTEREST') ? $('.solution-toggle', activeCardElement()) : null;
       if (solution) toggleSolution(solution); else navigate(1);
     }
     else if (event.key === 'k' || event.key === 'ArrowUp') { event.preventDefault(); navigate(-1); }

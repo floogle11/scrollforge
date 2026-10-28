@@ -1,5 +1,5 @@
-const VERSION = 'scrollforge-shell-v9';
-const SHELL = ['./', './index.html', './tokens.css', './diagrams.js', './app.js', './manifest.json', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './data/feed.json'];
+const VERSION = 'scrollforge-shell-v10';
+const SHELL = ['./', './index.html', './tokens.css', './diagrams.js', './app.js', './manifest.json', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './data/feed.json', './data/interests.json'];
 const KATEX_FONTS = [
   'KaTeX_AMS-Regular', 'KaTeX_Caligraphic-Bold', 'KaTeX_Caligraphic-Regular',
   'KaTeX_Fraktur-Bold', 'KaTeX_Fraktur-Regular', 'KaTeX_Main-Bold',

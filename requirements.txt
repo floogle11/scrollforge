@@ -5,3 +5,4 @@ recurring-ical-events>=3.8,<4
 PyMuPDF>=1.26,<2
 requests>=2.34,<3
 jsonschema>=4.26,<5
+python-chess>=1.999,<2

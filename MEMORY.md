@@ -1,10 +1,21 @@
 # ScrollForge conversation memory
 
-Last recorded: **2026-10-25, America/Denver**.
+Last recorded: **2026-10-28, America/Denver**.
 
 This file is the handoff for future conversations. Read it together with `CHANGELOG.md` and `README.md`. Counts and deployment identifiers below are dated snapshots; inspect the current repository and feed before treating them as live values.
 
 **October 25 update deployed and verified:** feature commit `93ac88a` adds exact mental-review answer choices, reviewed diagrams and 60 new questions, bringing the bank to 452 quizzes plus 20 topic posts. Automatic refresh `dc885e2` followed it. Both Pages deployments and independent GitHub checks succeeded; a real live mobile preview verified rendered math, diagrams and quiz retry with no page errors. Prior feature `98dc01c` added feed diversity, browser-local preferences and publication budgets.
+
+## October 28 current-state update (local implementation)
+
+- User now wants editable current interests shared with automated generation and is deeply studying the Italian Game in chess. Preserve the leisure-first feed and add chess alongside it.
+- Settings > Current interests syncs an owner-authored public configuration issue titled `ScrollForge current interests`, JSON kind `scrollforge-interests-v1`, using the existing Issues token. One line per interest, maximum twelve, 160 characters each. Empty list pauses interest generation; keep the issue open. No issue means defaults in `docs/data/interests.json`; failed fetches do not restore removed interests. Do not log credentials.
+- `worker/interests.py` loads shared interests before generation. Up to six of the existing twenty slots become INTEREST cards, with no additional model call and the same twice-daily schedule. Removed interests affect subsequent batches, not existing content.
+- `worker/chess_content.py` reproducibly builds six Italian Game posts (three lessons, three quizzes). python-chess builds boards, validates FEN/SAN and check/mate notation, and regenerates SVG; the browser isolates SVG in images. This validates legality, not engine evaluations. Chess/Interests filters can revisit read posts; Home does not recycle them.
+- New INTEREST category is evergreen and separate from coursework. Retention keeps six starters plus 54 unthreaded generated interest posts; threads and pending parents remain protected. Existing publication budgets still apply. Offline shell is v10.
+- Local checks: 106 final worker/offline checks pass; browser/interest suite 37 passed before final additions, with final retention/revisit/update/error checks passing separately. Feed 900,088 bytes and site 1,039,664 bytes, within budgets.
+- Live generator smoke attempts on October 28 failed before content was returned: Codex service reported `Incomplete response returned, reason: max_output_tokens`, zero reported tokens. No live batch was verified or published; do not claim live generation success.
+- Updated python-chess dependency is installed in the workspace virtualenv also used by the existing scheduled launcher. Local feature is not yet deployed; do not describe it as live. Prior live deployment snapshots below remain historical.
 
 ## User intent and preferences
 
@@ -94,8 +105,9 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 - Practical batch guidance given to the user: **20–30 carefully checked AI-written questions per prompt**. Implemented recurring cap: **20 cards per batch**, at most twice per day, with a **300-second** model timeout. This is a chosen quality/usage bound, not a hard model capability limit.
 - Model prompts use supplied note context, ask for 4–8 plausible choices, constrain course tags/categories, and discourage repeated recent titles. Mental-review guidance requests exact expressions and common-error distractors. Diagrams may be null; choose one only when its documented geometry and assumptions match. Generated challenges require concise solutions and a question body of at most 75 words.
 - `contracts/feed_schema.json` and `contracts/llm_output_schema.json` describe the formats. Python also rejects a correct-answer index outside the actual option array. Legacy non-quiz posts remain supported.
-- Windows scheduled task: **ScrollForge Local Codex Loop**. It checks every five minutes while the user is logged in, prioritizes pending questions, and makes no model call for an idle check.
+- Windows scheduled task: **ScrollForge Local Codex Loop**. It checks every five minutes while the user is logged in, prioritizes pending questions, and makes no model call for an idle check. October 26: the user found recurring terminal popups annoying. The installed task now starts `scripts/run_local_loop_hidden.vbs` via `wscript.exe`; the installer uses the same action. The wrapper starts PowerShell hidden before its console appears, waits for completion, and propagates the exit code. The five-minute/logon triggers and other existing task settings were preserved. An offline hidden-launcher test passed with zero external calls; logs remain in `.cache/local-agent/run.log`. The previous task definition is backed up privately under `.cache/local-agent/task-before-hidden-launch.xml`.
 - The worker owns an isolated checkout at `.cache/local-agent/checkout`; private state and cached publication outbox live under `.cache/`. Do not casually reset this checkout or delete its state: the outbox supports crash and push-race recovery.
+- October 26 operational verification: the first automatic run through the hidden launcher started at 17:52:10 America/Denver and completed with Task Scheduler result 0; the log recorded an idle check with no pending questions or generated cards.
 - Browser comments create `pending-codex` GitHub Issues. Optional browser credentials stay on that device. Desktop credentials come from the existing `gh` login, independently.
 - Replies are validated, merged into `feed.json`, and pushed before the worker posts answers to and closes represented Issues. Preserve this publication ordering and retry behavior.
 
