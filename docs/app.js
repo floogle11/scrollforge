@@ -756,6 +756,7 @@
 
   $$('[data-topic]').forEach(button => button.addEventListener('click', () => {
     activeTopic = button.dataset.topic;
+    if (!feed) return; // Keep the chosen topic until the asynchronous feed load finishes.
     if (feed && ['chess', 'interests'].includes(activeTopic)) {
       for (const card of eligibleCards(feed.cards).filter(card => card.category === 'INTEREST')) {
         if (!ordered.some(item => item.id === card.id)) { ordered.push(card); interestReviewIds.add(card.id); }

@@ -728,3 +728,24 @@ def test_existing_interests_update_and_failed_save_preserves_draft(browser, site
     assert page.locator('#currentInterests').input_value() == 'Chess endgames'
     assert stored['interests'] == ['Italian Game', 'History']
     context.close()
+
+
+def test_chess_topic_selected_before_feed_finishes_loading(browser, site_url):
+    from worker.chess_content import build_bank
+    context = browser.new_context(service_workers='block')
+    page = context.new_page()
+    pending, errors = [], []
+    page.on('pageerror', lambda error: errors.append(str(error)))
+    page.route('https://cdn.jsdelivr.net/**', lambda route: route.abort())
+    page.route('**/data/feed.json', lambda route: pending.append(route))
+    page.goto(site_url, wait_until='domcontentloaded')
+    page.locator('.topic-tabs [data-topic="chess"]').click()
+    page.wait_for_function('document.querySelector("#feedTitle") !== null')
+    feed = _fixture_feed()
+    feed['cards'].extend(build_bank())
+    assert pending
+    pending[0].fulfill(content_type='application/json', body=json.dumps(feed))
+    page.locator('.chess-board').first.wait_for()
+    assert page.locator('#feedTitle').inner_text() == 'Chess · Italian Game'
+    assert not errors
+    context.close()

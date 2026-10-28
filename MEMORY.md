@@ -6,16 +6,16 @@ This file is the handoff for future conversations. Read it together with `CHANGE
 
 **October 25 update deployed and verified:** feature commit `93ac88a` adds exact mental-review answer choices, reviewed diagrams and 60 new questions, bringing the bank to 452 quizzes plus 20 topic posts. Automatic refresh `dc885e2` followed it. Both Pages deployments and independent GitHub checks succeeded; a real live mobile preview verified rendered math, diagrams and quiz retry with no page errors. Prior feature `98dc01c` added feed diversity, browser-local preferences and publication budgets.
 
-## October 28 current-state update (local implementation)
+## October 28 current-state update
 
 - User now wants editable current interests shared with automated generation and is deeply studying the Italian Game in chess. Preserve the leisure-first feed and add chess alongside it.
 - Settings > Current interests syncs an owner-authored public configuration issue titled `ScrollForge current interests`, JSON kind `scrollforge-interests-v1`, using the existing Issues token. One line per interest, maximum twelve, 160 characters each. Empty list pauses interest generation; keep the issue open. No issue means defaults in `docs/data/interests.json`; failed fetches do not restore removed interests. Do not log credentials.
 - `worker/interests.py` loads shared interests before generation. Up to six of the existing twenty slots become INTEREST cards, with no additional model call and the same twice-daily schedule. Removed interests affect subsequent batches, not existing content.
 - `worker/chess_content.py` reproducibly builds six Italian Game posts (three lessons, three quizzes). python-chess builds boards, validates FEN/SAN and check/mate notation, and regenerates SVG; the browser isolates SVG in images. This validates legality, not engine evaluations. Chess/Interests filters can revisit read posts; Home does not recycle them.
-- New INTEREST category is evergreen and separate from coursework. Retention keeps six starters plus 54 unthreaded generated interest posts; threads and pending parents remain protected. Existing publication budgets still apply. Offline shell is v10.
+- New INTEREST category is evergreen and separate from coursework. Retention keeps six starters plus 54 unthreaded generated interest posts; threads and pending parents remain protected. Existing publication budgets still apply. Offline shell is v11; early topic selection waits for the feed to load.
 - Local checks: 106 final worker/offline checks pass; browser/interest suite 37 passed before final additions, with final retention/revisit/update/error checks passing separately. Feed 900,088 bytes and site 1,039,664 bytes, within budgets.
 - Live generator smoke attempts on October 28 failed before content was returned: Codex service reported `Incomplete response returned, reason: max_output_tokens`, zero reported tokens. No live batch was verified or published; do not claim live generation success.
-- Updated python-chess dependency is installed in the workspace virtualenv also used by the existing scheduled launcher. Local feature is not yet deployed; do not describe it as live. Prior live deployment snapshots below remain historical.
+- Updated python-chess dependency is installed in the workspace virtualenv also used by the existing scheduled launcher. Feature `bfa7273`, merged with automated feed updates in `01f7dbb`, is deployed: initial Pages run `40789037369`, independent checks `40789037387`, content refresh `40789037358`, and post-refresh deployment `40789096445` all succeeded. Live mobile verification confirmed six chess posts, board images, quiz feedback and the interests editor. Follow-up validation records below distinguish the final loading-race fix from this first deployment.
 
 ## User intent and preferences
 
