@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-31T23:51:48Z",
+  "last_updated": "2026-11-01T03:12:47Z",
   "calendar_mode": "BASELINE",
   "active_exam_course": null,
   "cards": [
@@ -11954,6 +11954,102 @@
       "diagram": null,
       "diagram_labels": [],
       "topic": "The largest of the three Mohr circles"
+    },
+    {
+      "id": "rss_bbc_world_10447c1ed018e74652",
+      "created_at": "2026-11-01T01:59:57Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Shops looted as German cost of living protests turn violent",
+      "body_markdown": "Police in Frankfurt say \"violent riots\" took place in the city centre, with unrest also reported in Berlin, Hamburg and Cologne.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/cqj34gnd3n30o?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_bbc_world_36d6cd0feeb629092b",
+      "created_at": "2026-11-01T01:37:26Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "These firms you've never heard of are feeding fears the AI bubble could burst",
+      "body_markdown": "The amount of debt held by data centres is measured in the tens of billions of pounds.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/cje36degrgv5o?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_nfl_9490fae6797a2e6d1d",
+      "created_at": "2026-11-01T01:00:00Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "[Highlight] Rookie Jayden Daniels 5 Touchdown Day Vs The #1 Ranked Eagles Defense (2024)",
+      "body_markdown": "[Highlight] Rookie Jayden Daniels 5 Touchdown Day Vs The #1 Ranked Eagles Defense (2024)",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/nfl/comments/1xkq9fw/highlight_rookie_jayden_daniels_5_touchdown_day/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_bbc_world_ada532cb41714c3517",
+      "created_at": "2026-11-01T00:55:06Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "How the downfall of Serbia's Vučiċ mirrored that of Hungary's Orbán",
+      "body_markdown": "Defeat for Serbia's Aleksandar Vučiċ in last weekend's vote was a carbon copy of Viktor Orbán's fall in Hungary.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/c893z699q401o?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_nfl_a986216225dcaa7f6c",
+      "created_at": "2026-11-01T00:54:18Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "With 88 yards on Sunday, Derrick Henry will jump to No. 7 all-time in rushing yards",
+      "body_markdown": "With 88 yards on Sunday, Derrick Henry will jump to No. 7 all-time in rushing yards",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/nfl/comments/1xkq5o1/with_88_yards_on_sunday_derrick_henry_will_jump/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_reddit_nfl_80f8c1a93ed433422a",
+      "created_at": "2026-11-01T00:30:02Z",
+      "category": "SPORTS",
+      "course_tag": null,
+      "title": "Lions S Brian Branch Fined $23,882 by NFL for helmet to helmet against Tucker Kraft",
+      "body_markdown": "Lions S Brian Branch Fined $23,882 by NFL for helmet to helmet against Tucker Kraft",
+      "solution_markdown": null,
+      "source_url": "https://www.reddit.com/r/nfl/comments/1xkpp08/lions_s_brian_branch_fined_23882_by_nfl_for/",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_bbc_world_807352edb0f1143a9e",
+      "created_at": "2026-11-01T00:12:07Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "India's opposition set to hold mega rally seeking election chief's resignation",
+      "body_markdown": "It comes amid growing protests over a voter roll revision exercise feared to leave 130 million voters off rolls.",
+      "solution_markdown": null,
+      "source_url": "https://www.bbc.co.uk/news/articles/c60qk92dvlwgo?at_medium=RSS&at_campaign=rss",
+      "parent_card_id": null,
+      "comments": []
+    },
+    {
+      "id": "rss_guardian_us_144955141a12b7682e",
+      "created_at": "2026-10-31T23:58:44Z",
+      "category": "NEWS",
+      "course_tag": null,
+      "title": "Abdul El-Sayed’s campaign disinvites Haley Stevens from events to limit ‘distractions’",
+      "body_markdown": "A public spat has cast Democratic tensions in the spotlight as the close US Senate race draws to a head Abdul El-Sayed, the Democratic nominee for Michigan’s tightly fought US Senate race, has asked Democratic congresswoman Haley Stevens to stay away from his campaign events. “I don’t want any distractions,” El-Sayed told reporters after a campaign rally, according to the New York Times . “It seems as though other folks are more interested in making this race about things that it’s not about.” Continue reading...",
+      "solution_markdown": null,
+      "source_url": "https://www.theguardian.com/us-news/2026/oct/31/abdul-el-sayed-haley-stevens-disinvited-from-events",
+      "parent_card_id": null,
+      "comments": []
     },
     {
       "id": "rss_reddit_nfl_50e76869faa7dd515c",
@@ -24104,54 +24200,6 @@
       "comments": []
     },
     {
-      "id": "rss_reddit_nfl_e0afc20ac54e75ba3c",
-      "created_at": "2026-10-25T03:01:41Z",
-      "category": "SPORTS",
-      "course_tag": null,
-      "title": "[Schefter] Browns and Maliek Collins reached agreement on a 2-year extension worth $30 million, including $23 million in total guarantees, per agent Drew Rosenh",
-      "body_markdown": "[Schefter] Browns and Maliek Collins reached agreement on a 2-year extension worth $30 million, including $23 million in total guarantees, per agent Drew Rosenh",
-      "solution_markdown": null,
-      "source_url": "https://www.reddit.com/r/nfl/comments/1xerac3/schefter_browns_and_maliek_collins_reached/",
-      "parent_card_id": null,
-      "comments": []
-    },
-    {
-      "id": "rss_bbc_world_c1deb1949ac0e9b087",
-      "created_at": "2026-10-25T02:27:15Z",
-      "category": "NEWS",
-      "course_tag": null,
-      "title": "Obama attacks Trump as he campaigns for Democrats ahead of midterm elections",
-      "body_markdown": "Obama said the election was \"the last best chance to at least rein in some of the foolishness of this administration\".",
-      "solution_markdown": null,
-      "source_url": "https://www.bbc.co.uk/news/articles/cmj6jwe1j1gjo?at_medium=RSS&at_campaign=rss",
-      "parent_card_id": null,
-      "comments": []
-    },
-    {
-      "id": "rss_reddit_nfl_eb715a09e9b1005b25",
-      "created_at": "2026-10-25T02:27:08Z",
-      "category": "SPORTS",
-      "course_tag": null,
-      "title": "[Highlight] When Julio Jones scored the game winning touchdown vs the 49ers (2019)",
-      "body_markdown": "[Highlight] When Julio Jones scored the game winning touchdown vs the 49ers (2019)",
-      "solution_markdown": null,
-      "source_url": "https://www.reddit.com/r/nfl/comments/1xeqmc9/highlight_when_julio_jones_scored_the_game/",
-      "parent_card_id": null,
-      "comments": []
-    },
-    {
-      "id": "rss_reddit_broncos_f16e6d2cb36b76ea6d",
-      "created_at": "2026-10-25T02:04:56Z",
-      "category": "SPORTS",
-      "course_tag": null,
-      "title": "Indy fan here. I confess. What would you be willing to give up for Q or Taylor?",
-      "body_markdown": "My dad is a huge Broncos fan and he seems to think one of them will be a Bronco. What is the honest pick evaluation for either one of them? We NEED picks desperately, thanks to Chris. Do you think 2 second rounders for Tayler would suffice? Or a 3rd + a player for Q? I don’t think Denver can get both. Thanks, guys.",
-      "solution_markdown": null,
-      "source_url": "https://www.reddit.com/r/DenverBroncos/comments/1xeq6zj/indy_fan_here_i_confess_what_would_you_be_willing/",
-      "parent_card_id": null,
-      "comments": []
-    },
-    {
       "id": "rss_reddit_pettyrevenge_236e99a27438db842e",
       "created_at": "2026-10-25T01:26:47Z",
       "category": "STORY",
@@ -24163,69 +24211,6 @@
       "parent_card_id": null,
       "comments": [],
       "topic": "drama"
-    },
-    {
-      "id": "rss_nhl_mammoth_81c05ec403d812cbed",
-      "created_at": "2026-10-25T01:00:00Z",
-      "category": "SPORTS",
-      "course_tag": null,
-      "title": "RECAP: Utah 5, Tampa Bay 4",
-      "body_markdown": "FIRST PERIOD 2:32: TBL Penalty - Jeffrey Viel (slashing) 5:10: TBL GOAL - Jake Guentzel (OWN) 1-0 TBL 7:02: UTA GOAL - Kailer Yamamoto (unassisted) 1-1 Tie",
-      "solution_markdown": null,
-      "source_url": "https://www.nhl.com/utah/news/tampa-bay-vs-utah-live-blog-10-24-26",
-      "parent_card_id": null,
-      "comments": [],
-      "sport": "hockey",
-      "team": "Utah Mammoth",
-      "image_url": "https://media.d3.nhle.com/image/private/t_ratio16_9-size50/prd/l0rfxz31s76dlkyb2wii.jpg"
-    },
-    {
-      "id": "rss_guardian_us_c5eca048a670bccd74",
-      "created_at": "2026-10-25T00:16:17Z",
-      "category": "NEWS",
-      "course_tag": null,
-      "title": "California leader calls attack on alleged noncitizen voting ‘weaponizing the law’",
-      "body_markdown": "State attorney general said Trump’s justice department’s directive to verify 20,000 ballots is completely improper California’s attorney general on Saturday rebuked the Trump administration’s efforts to quash alleged noncitizen voting, calling it “politicizing and weaponizing the law”. Rob Bonta, the state’s attorney general, said the justice department acted at Donald Trump’s direction. Continue reading...",
-      "solution_markdown": null,
-      "source_url": "https://www.theguardian.com/us-news/2026/oct/24/california-noncitizen-voting-trump-administration",
-      "parent_card_id": null,
-      "comments": []
-    },
-    {
-      "id": "rss_guardian_us_c96857c58973f08a5d",
-      "created_at": "2026-10-25T00:14:30Z",
-      "category": "NEWS",
-      "course_tag": null,
-      "title": "Obama rallies rapturous Michigan crowd for El-Sayed: ‘He’ll finish the job we started’",
-      "body_markdown": "Former president speaks to crowd of thousands in support of Abdul El-Sayed for US Senate and Democratic ticket Barack Obama told a Detroit crowd on Saturday that Abdul El-Sayed was “fighting for change, real change, that will get money out of politics and put money in your pocket”, as he threw his weight behind the Democratic Senate candidate and the rest of the ticket on the first day of early voting in Michigan. Obama said in front of thousands of onlookers at Cass technical high school in Detroit that El-Sayed would “finish the job we started with the Affordable Care Act and guarantee…",
-      "solution_markdown": null,
-      "source_url": "https://www.theguardian.com/us-news/2026/oct/24/barack-obama-abdul-el-sayed-michigan",
-      "parent_card_id": null,
-      "comments": []
-    },
-    {
-      "id": "rss_reddit_nfl_4617ca6cd738410e38",
-      "created_at": "2026-10-25T00:03:34Z",
-      "category": "SPORTS",
-      "course_tag": null,
-      "title": "Texans activate WR Tank Dell to the active roster",
-      "body_markdown": "Texans activate WR Tank Dell to the active roster",
-      "solution_markdown": null,
-      "source_url": "https://www.reddit.com/r/nfl/comments/1xenqwg/texans_activate_wr_tank_dell_to_the_active_roster/",
-      "parent_card_id": null,
-      "comments": []
-    },
-    {
-      "id": "rss_guardian_us_80b8be3212deccb04b",
-      "created_at": "2026-10-24T23:53:19Z",
-      "category": "NEWS",
-      "course_tag": null,
-      "title": "‘Change is in the air’: Obama praises El-Sayed and attacks Trump at Michigan rally – as it happened",
-      "body_markdown": "This live blog is now closed. For more on the rally, read our full report: Obama rallies Michigan crowd for El-Sayed, saying he’s ‘fighting for real change’ Sign up for Breaking News US email Donald Trump voted in West Palm Beach, Florida today, telling reporters at the polls that he voted straight Republican on his ballot. Trump has historically mailed-in his ballot rather than voting in-person. Speaking from the polling site, Trump defended an ad from Ohio gubernatorial candidate Vivek Ramaswamy, his administration’s lawsuit seeking to block certification of the Alaska Senate race if…",
-      "solution_markdown": null,
-      "source_url": "https://www.theguardian.com/us-news/live/2026/oct/24/obama-abdul-el-sayed-midterms-rally-michigan-live-updates",
-      "parent_card_id": null,
-      "comments": []
     }
   ]
 }
